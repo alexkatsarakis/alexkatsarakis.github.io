@@ -1,0 +1,27 @@
+1)Easy first step (on a commit).
+2)Added the basic hierarchy but changed completely later :) (on a commit).
+3)Added <h1>...<h6> but not all of them ofcourse.
+4)Tried to use as much CSS3 as possible also
+  <mark> (on the header)
+  <kbd> (really I found no use for it)
+  <abbr> (on CSD also on born)
+  <blockquote> (on header)
+  <dl> (I prefered to use a better list later).
+5)Used <ol><li> on aside when I was listing my hobbies
+  <ul> on the nav for the list of links.
+6)Used <table><th><tr><td> where I rated how much I like each programming language I know
+7)Used <a> a lot for both internal links (e.g. nav) and external (e.g. footer)
+  also changed default colors on navbar.
+8)For <fig> I added a photo of me, also added alt text but didn't think that
+  <figcaption> was necessery there.
+9)For <audio> I added a clip of my favorite song on aside < 1MB as instructed
+  and added controls from attributes.
+10)For <video> I added a clip of my favorite series on aside < 1MB
+  and also added the attribute to download AFTER user click play.
+11)I liked the idea of "scaling" so I added alot of @media in order for the site
+  to look good on any size so...
+  I did changes for 5 different scenarios.
+  Also finished with the tag 'homepage-responsive' (after a lot of changes) :)
+12)Added bootstrap but didn't really found it very useful since I had most of the work 
+with CSS3 but changed the responsiveness and the alignments also i used different
+table from bootstrap.
