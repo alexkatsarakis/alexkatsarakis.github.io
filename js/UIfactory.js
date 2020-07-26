@@ -111,7 +111,7 @@ export function Square(point,w){
 export function createAndAppendCircle(c,id,parent = staticStrings.pageWrapper){
     let circle = document.createElement('div');
     circle.setAttribute('id',id);
-    circle.style.position = "relative";
+    circle.style.position = "absolute";
     circle.style.width = c.getRadius()/2 + "px";
     circle.style.height = c.getRadius()/2 + "px";
     circle.style.borderRadius = 50 + "%";
@@ -127,7 +127,7 @@ export function createAndAppendCircle(c,id,parent = staticStrings.pageWrapper){
 export function createAndAppendSquare(c,id,parent = staticStrings.pageWrapper){
     let sq = document.createElement('div');
     sq.setAttribute('id',id);
-    sq.style.position = "relative";
+    sq.style.position = "absolute";
     sq.style.width = c.getWidth() + "px";
     sq.style.height = c.getWidth() + "px";
     sq.style.left = c.getPoint().getX() + "px";

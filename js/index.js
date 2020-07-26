@@ -43,13 +43,17 @@ class IndexPage extends Page {
 
     keyPressDown = function(event){
         console.log(event);
-        if(keyMappings[event.key])
-            keyMappings[event.key]();
+        if(keyMappings[event.code])
+            keyMappings[event.code]();
     }
 
-    keyPressHandler = function(event){
-        if(keyMappings[event.key])
-            keyMappings[event.key]();
+    mouseClick = function(event){
+        console.log(event);
+        if(event.target.id === "pageWrapper"){
+            let test = new Square(new Point(event.clientX,event.clientY),20);
+            let t2 = createAndAppendSquare(test,'temp'+ Math.random()*100000);
+            t2.style.backgroundColor = "green";
+        }
     }
 
     
@@ -65,7 +69,7 @@ class IndexPage extends Page {
         let s = createAndAppendSquare(square,"mySquare");
         s.style.backgroundColor = "red";
 
-        let circle2 = new Circle(new Point(wrap.offsetWidth - 100, 200),200);
+        let circle2 = new Circle(new Point(wrap.offsetWidth - 100, 200),100);
         let c2 = createAndAppendCircle(circle2,"myCircle2");
         c2.style.backgroundColor = "white";
 
@@ -75,8 +79,8 @@ class IndexPage extends Page {
         this.anim.push(new movingAnimator(circle2.getPoint(),-5,0,circle2.getDiv(),20,200,(function(){console.log(1);})));
         this.anim.push(new movingAnimator(circle2.getPoint(),0,-5,circle2.getDiv(),200,20));
 
-        //window.onkeypress = this.keyPressHandler;
         window.onkeydown = this.keyPressDown;
+        window.onmousedown = this.mouseClick;
         this.anim.push(new tickAnimator(5000,(function(){console.log(2);})));
 
         for(let keyCode in translator.left){
@@ -109,7 +113,7 @@ class IndexPage extends Page {
                 let test = new Square(new Point(square.getPoint().getX(),square.getPoint().getY()),20);
                 let t2 = createAndAppendSquare(test,'temp'+ Math.random()*100000);
                 t2.style.backgroundColor = "green";
-                p.anim.push(new movingAnimator(test.getPoint(),0,1,test.getDiv(),20,5),(function(){t2.remove();}));
+                p.anim.push(new movingAnimator(test.getPoint(),0,5,test.getDiv(),20,100,(function(){test.getDiv().remove();})));
             });
         }
 
