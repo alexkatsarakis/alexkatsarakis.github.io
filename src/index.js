@@ -1,16 +1,14 @@
 import './utils/initialisationManager.js'
 
+import bb from './utils/blackboard.js'
+
 import {leftClick,rightClick} from './utils/mouseEvents.js'
 
-import init from '../init.js' //json
+import init from '../assets/json/init.js' //json
+import keyToAction from '../assets/json/keyToActions.js' //json
 
-var scene = new THREE.Scene();
-scene.name = "Scene";
-scene.background = new THREE.Color( 0xaaaaaa );
-var camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.5, 1000 );
-
-bb.fastSet('sceneComponents','scene',scene);
-bb.fastSet('sceneComponents','camera',camera);
+var scene = bb.fastGet('liveObjects','scene').getScene();
+var camera = bb.fastGet('liveObjects','camera').getCamera();
 
 var renderer = new THREE.WebGLRenderer();
 // renderer.domElement.style.position = "absolute";
@@ -18,20 +16,22 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth , window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-let objects = [];
+
 
 init.objects.map((item)=>{
-    let t = bb.fastGet("objects",item.category);
-    if(typeof t !== "function"){console.log("There is no category "+item.category)}
-    let it = new t({name:item.name});
-    objects.push(it);
-    if(item.color)it.setColor(item.color);
-    if(item.position)it.setPosition(item.position.x,item.position.y);
-    scene.add(it.getObject());
-    console.log(item);
+    let category = bb.fastGet("objects",item.category);
+    if(typeof category !== "function"){console.log("There is no category "+item.category)}
+    if(item.name === undefined 
+    || !bb.fastGet('liveObjects',item.meta.name)){
+        let it = new category(item.meta);
+        bb.fastSet('liveObjects',item.meta.name,it);
+        if(item.color)it.setColor(item.color);
+        if(item.position)it.setPosition(item.position.x,item.position.y);
+        scene.add(it.getObject());
+        console.log(item);
+    }
 })
 
-camera.position.z = 10;
 
 
 
@@ -40,17 +40,28 @@ renderer.domElement.addEventListener("click", leftClick, true);
 renderer.domElement.addEventListener("contextmenu", rightClick, true);
 
 document.onkeydown = function(ev) {
-    console.log(ev);
-    if(ev.key === "1"){
-        bb.fastGet('actions','changeBackground')('#ffffff');
+    // console.log(ev);
+    for(var key in keyToAction){
+        if(ev.code === key){
+            console.log(keyToAction[key]);
+            // keyToAction[key].map((action)=>bb.fastGet('actions',action)(document.getElementById("inputss").value));
+            keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
+        }
     }
 };
 
 
+
+let aliveItems = bb.getComponent('liveObjects').itemMap;
+
+bb.print();
+
 function animate() {
     requestAnimationFrame( animate );
     
-    objects.map(item => item.animate());
+    for(var it in aliveItems){
+        aliveItems[it].animate();
+    }
 
     renderer.render( scene, camera );
 }

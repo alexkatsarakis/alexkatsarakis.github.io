@@ -56,6 +56,11 @@ class Blackboard {
     this.componentMap[componentName].installItem(itemName,value);
   }
 
+  fastRemove(componentName,itemName){
+    if(this.componentMap[componentName] === undefined)return false;
+    this.componentMap[componentName].removeItem(itemName);
+  }
+
   fastSet(componentName,itemName,value){
     if(this.componentMap[componentName] === undefined)this.installComponent(componentName);
     this.componentMap[componentName].setItem(itemName,value);
@@ -78,6 +83,6 @@ class Blackboard {
 
 }
 
-const bb = new Blackboard();
+const blackboard = new Blackboard();
 
-// export default blackboard;
+export default blackboard;

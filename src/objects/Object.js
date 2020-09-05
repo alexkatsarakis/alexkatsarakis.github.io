@@ -1,14 +1,19 @@
+import bb from '../utils/blackboard.js'
+
 export default class Object {
     name
     material
     geometry 
     mesh
 
+    isMovable;
+
     constructor(_name){
         if(!_name)name = "Unnamed Object"+Math.random(5);
         this.name = _name;
-        this.material = new THREE.MeshBasicMaterial( );
-        this.material.name = _name;
+    
+        this.isMovable = true;
+
     }
 
     setColor(col){
@@ -16,6 +21,7 @@ export default class Object {
     }
 
     setPosition(x,y){
+        if(!this.isMovable)return;
         this.mesh.position.x = x;
         this.mesh.position.y = y;
     }
@@ -32,6 +38,21 @@ export default class Object {
         return this.material;
     }
 
+    move(x,y){
+        if(!this.isMovable)return;
+        this.mesh.position.x += x;
+        this.mesh.position.y += y;
+    }
+
     animate(){}
+
+    remove(){
+        console.log("removing "+this.name);
+        bb.fastRemove('liveObjects',this.name);
+        bb.fastSet('state','focusedObject',undefined);
+        let scene = bb.fastGet('liveObjects','scene').getScene();
+        let myself = scene.getObjectByName(this.name);
+        scene.remove(myself);
+    }
 
 }

@@ -1,27 +1,20 @@
+import bb from '../utils/blackboard.js'
 
 var raycaster = new THREE.Raycaster();
 var mouse = { x : 0, y : 0 };
-
-let inp = document.createElement("input");
-inp.style.position = "absolute";
-inp.style.top = "0";
-inp.id = "inputss";
-document.body.appendChild(inp);
-
-let action = "alert(name);"
 
 export function rightClick(e){
     e.preventDefault();
     mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( e.offsetY / window.innerHeight ) * 2 + 1;
 
-    raycaster.setFromCamera( mouse, bb.fastGet('sceneComponents','camera') );  
+    raycaster.setFromCamera( mouse, bb.fastGet('liveObjects','camera').getCamera() );  
 
-    var intersects = raycaster.intersectObjects( bb.fastGet('sceneComponents','scene').children );
-
-    for ( var i = 0; i < intersects.length; i++ ) {
-        let name = intersects[i].object.name;
-        intersects[i].object.userData.setAction(document.getElementById("inputss").value);    
+    var intersects = raycaster.intersectObjects( bb.fastGet('liveObjects','scene').getScene().children );
+    
+    if(intersects.length > 0){
+        console.log( intersects[0].object.name );
+        // intersects[0].object.userData.setAction(document.getElementById("inputss").value);    
     }
 }
 
@@ -30,13 +23,15 @@ export function leftClick(e){
     mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( e.offsetY / window.innerHeight ) * 2 + 1;
 
-    raycaster.setFromCamera( mouse, bb.fastGet('sceneComponents','camera') );  
+    raycaster.setFromCamera( mouse, bb.fastGet('liveObjects','camera').getCamera() );  
 
-    var intersects = raycaster.intersectObjects( bb.fastGet('sceneComponents','scene').children );
+    var intersects = raycaster.intersectObjects( bb.fastGet('liveObjects','scene').getScene().children );
     
-    for ( var i = 0; i < intersects.length; i++ ) {
-        // console.log( intersects[ i ].object.name );
-        eval(intersects[i].object.userData.getAction()); 
+    if(intersects.length > 0){
+        console.log( intersects[0].object );
+        document.getElementById("focusedText").innerHTML = intersects[0].object.name
+        bb.fastSet('state','focusedObject',intersects[0].object.name);
+        // eval(intersects[0].object.userData.getAction()); 
     }
 
 }
