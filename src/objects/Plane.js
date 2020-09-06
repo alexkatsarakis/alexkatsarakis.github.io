@@ -18,6 +18,9 @@ class Plane extends Object {
         this.mesh.name = name;
         this.mesh.userData = this;
         this.mesh.rotation.x = -1;
+
+        this.options.push("removeObject");
+
     }
 
     animate(){

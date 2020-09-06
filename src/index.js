@@ -21,7 +21,7 @@ document.body.appendChild( renderer.domElement );
 init.objects.map((item)=>{
     let category = bb.fastGet("objects",item.category);
     if(typeof category !== "function"){console.log("There is no category "+item.category)}
-    if(item.name === undefined 
+    if(item.meta.name === undefined 
     || !bb.fastGet('liveObjects',item.meta.name)){
         let it = new category(item.meta);
         bb.fastSet('liveObjects',item.meta.name,it);

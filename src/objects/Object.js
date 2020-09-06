@@ -6,6 +6,8 @@ export default class Object {
     geometry 
     mesh
 
+    options = []
+
     isMovable;
 
     constructor(_name){
@@ -36,6 +38,10 @@ export default class Object {
 
     getMaterial(){
         return this.material;
+    }
+
+    getOptions(){
+        return this.options;
     }
 
     move(x,y){

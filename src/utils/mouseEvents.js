@@ -1,5 +1,7 @@
 import bb from '../utils/blackboard.js'
 
+import focusTransition from '../transitionHandlers/focusedObject.js'
+
 var raycaster = new THREE.Raycaster();
 var mouse = { x : 0, y : 0 };
 
@@ -14,7 +16,8 @@ export function rightClick(e){
     
     if(intersects.length > 0){
         console.log( intersects[0].object.name );
-        // intersects[0].object.userData.setAction(document.getElementById("inputss").value);    
+        bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));    
+        //intersects[0].object.userData.setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));    
     }
 }
 
@@ -29,9 +32,8 @@ export function leftClick(e){
     
     if(intersects.length > 0){
         console.log( intersects[0].object );
-        document.getElementById("focusedText").innerHTML = intersects[0].object.name
-        bb.fastSet('state','focusedObject',intersects[0].object.name);
-        // eval(intersects[0].object.userData.getAction()); 
+        focusTransition(intersects[0].object.name);
+        eval(bb.fastGet('liveObjects',intersects[0].object.name).getAction()); 
     }
 
 }

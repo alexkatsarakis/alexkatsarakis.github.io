@@ -1,0 +1,68 @@
+#inputss {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: auto;
+}
+
+#focusedObjText {
+    position: absolute;
+    top: 20px;
+    font-size: 24px;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+#objMenuButton {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-image: url(../../assets/images/settings.png); /* hide.png from 'www.flaticon.com' from user Freepik */
+    background-position: center;
+    background-size: contain;
+}
+
+#objMenu {
+    position: absolute;
+    top: 100px;
+    right: 25px;
+}
+
+.objMenuButton {
+    margin: 10px;
+    color: white;
+    font-size: 16px;
+    background-color: black;
+    text-align: center;
+    height: 25px;
+    border-radius: 10px;    
+}
+
+#blocklyDiv {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 50px;
+}
+
+#hudToggle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+    background-image: url(../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
+    background-position: center;
+    background-size: contain;
+}
+
+.hudChild {
+    display: block;
+    opacity: 1;
+    transition: display 0s, opacity 1s linear;
+}

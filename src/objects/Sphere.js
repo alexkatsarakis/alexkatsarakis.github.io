@@ -16,6 +16,11 @@ class Sphere extends Object {
 
         this.mesh = new THREE.Mesh( this.geometry, this.material );
         this.mesh.name = name;
+        
+        this.options.push('move');
+        this.options.push('changeColor');
+        this.options.push("removeObject");
+
     }
 
     animate(){
