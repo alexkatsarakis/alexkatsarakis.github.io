@@ -1,11 +1,3 @@
-#inputss {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200px;
-    height: auto;
-}
-
 #focusedObjText {
     position: absolute;
     top: 20px;
@@ -13,6 +5,14 @@
     color: white;
     width: 100%;
     text-align: center;
+}
+
+#fpsCounter {
+    position: absolute;
+    color:white;
+    top:0;
+    right:20px;
+    text-align: right;
 }
 
 #objMenuButton {
@@ -40,14 +40,62 @@
     background-color: black;
     text-align: center;
     height: 25px;
-    border-radius: 10px;    
+    border-radius: 10px;   
+    cursor: pointer; 
 }
 
 #blocklyDiv {
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 50px;
+    top: 20px;
+}
+
+#playScriptButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 520px;
+    background-image: url(../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
+    background-position: center;
+    background-size: contain;
+}
+
+#saveScriptButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 70px;
+    left: 520px;
+    background-image: url(../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
+    background-position: center;
+    background-size: contain;
+}
+
+#loadScriptButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 120px;
+    left: 520px;
+    background-image: url(../../assets/images/load.png); /* save.png from 'www.flaticon.com' from user FreePik */
+    background-position: center;
+    background-size: contain;
+}
+
+#consoleArea {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    top: 540px;
+    font-size: 20px;
+    color: white;
+    background-color: rgba(255,255,255,0.1);
+    border: 0;
+    overflow: hidden;
+    outline: none;
+    resize: none;
 }
 
 #hudToggle {
@@ -62,7 +110,11 @@
 }
 
 .hudChild {
-    display: block;
-    opacity: 1;
-    transition: display 0s, opacity 1s linear;
+    visibility: visible;
+    opacity: 0.9;
+    transition: visibility 0s, opacity 1s linear;
+}
+
+.button {
+    cursor: pointer;
 }

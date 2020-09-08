@@ -1,6 +1,7 @@
 import './utils/initialisationManager.js'
 
 import bb from './utils/blackboard.js'
+import FPSCounter from './utils/fps.js'
 
 import {leftClick,rightClick} from './utils/mouseEvents.js'
 
@@ -56,13 +57,14 @@ let aliveItems = bb.getComponent('liveObjects').itemMap;
 
 bb.print();
 
-function animate() {
-    requestAnimationFrame( animate );
+
+function gameLoop() {
+    requestAnimationFrame( gameLoop );
     
+    FPSCounter();
     for(var it in aliveItems){
         aliveItems[it].animate();
     }
-
     renderer.render( scene, camera );
 }
-animate();
+gameLoop();

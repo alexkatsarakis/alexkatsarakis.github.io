@@ -15,9 +15,7 @@ export function rightClick(e){
     var intersects = raycaster.intersectObjects( bb.fastGet('liveObjects','scene').getScene().children );
     
     if(intersects.length > 0){
-        console.log( intersects[0].object.name );
-        bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));    
-        //intersects[0].object.userData.setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));    
+        bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)); 
     }
 }
 
@@ -31,7 +29,6 @@ export function leftClick(e){
     var intersects = raycaster.intersectObjects( bb.fastGet('liveObjects','scene').getScene().children );
     
     if(intersects.length > 0){
-        console.log( intersects[0].object );
         focusTransition(intersects[0].object.name);
         eval(bb.fastGet('liveObjects',intersects[0].object.name).getAction()); 
     }

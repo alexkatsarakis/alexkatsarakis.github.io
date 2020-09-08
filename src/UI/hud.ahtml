@@ -1,8 +1,17 @@
 <link rel="stylesheet" href="./src/UI/hud.css">
 
 <!-- Top Left Side -->
-<input id="inputss" class="hudChild">
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="Objects" colour="%{BKY_MATH_HUE}">
+      <block type="dropdown_obj"></block>
+      <block type="dropdown_categ"></block>
+      <block type="create_object"></block>
+      <block type="move_right"></block>
+      <block type="colour_change"></block>
+      <block type="colour_change_choose_object"></block>
+      <block type="get_object"></block>
+      <block type="console_log"></block>
+    </category>
     <category name="Logic" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -271,6 +280,7 @@
       <block type="lists_sort"></block>
     </category>
     <category name="Colour" colour="%{BKY_COLOUR_HUE}">
+      <block type="colour_change"></block>
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -313,13 +323,18 @@
     <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
 <div id="blocklyDiv" class="hudChild"></div>
+<div id="playScriptButton" class="hudChild button"></div>
+<div id="saveScriptButton" class="hudChild button"></div>
+<div id="loadScriptButton" class="hudChild button"></div>
+<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
 <div id="focusedObjText" class="hudChild"></div>
 
 <!-- Top Right Side -->
-<div id="objMenuButton" class="hudChild"></div>
+<div id="fpsCounter" class="hudChild"></div>
+<div id="objMenuButton" class="hudChild button"></div>
 <div id="objMenu" class="hudChild"></div>
 
 <!-- Bottom Right Side -->
-<div id="hudToggle"></div>
+<div id="hudToggle" class="button"></div>

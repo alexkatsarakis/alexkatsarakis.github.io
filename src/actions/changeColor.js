@@ -1,8 +1,8 @@
 import bb from '../utils/blackboard.js'
 
-function changeColor(objName){
-    let obj = bb.fastGet('liveObjects',objName);
-    if(obj)obj.setColor("#"+document.getElementById("inputss").value);
+function changeColor(obj,colour){
+    if(!obj)obj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+    if(obj)obj.setColor(colour);
 }
 
 bb.fastSet('actions','changeColor',changeColor)
