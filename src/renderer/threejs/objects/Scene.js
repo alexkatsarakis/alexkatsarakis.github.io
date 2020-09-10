@@ -1,6 +1,4 @@
-import Object from './Object.js'
-
-import bb from '../utils/blackboard.js'
+import Object from './ObjectThreeJS.js'
 
 class Scene extends Object {
     scene
@@ -21,9 +19,16 @@ class Scene extends Object {
         return this.scene;
     }
 
+    addItem(it){
+        this.scene.add(it);
+    }
+
+    remove(it){
+        this.scene.remove(it);
+    }
+
 }
 
 const sceneObj = new Scene();
 
-bb.fastSet('liveObjects','scene',sceneObj);
-bb.fastSet('objects','scene',Scene);
+export default sceneObj;

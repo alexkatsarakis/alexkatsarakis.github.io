@@ -3,23 +3,36 @@ import './utils/initialisationManager.js'
 import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
 
-import {leftClick,rightClick} from './utils/mouseEvents.js'
-
 import init from '../assets/json/init.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
-var scene = bb.fastGet('liveObjects','scene').getScene();
-var camera = bb.fastGet('liveObjects','camera').getCamera();
+let clickWrapper = document.createElement('div');
+    clickWrapper.id = "clickWrapper";
+    clickWrapper.style.width = window.innerWidth + 'px';
+    clickWrapper.style.height = window.innerHeight + 'px';
+    clickWrapper.style.opacity = 0;
+    clickWrapper.style.position = 'absolute';
+    clickWrapper.style.top = 0;
+    clickWrapper.style.left = 0;
+    document.body.appendChild(clickWrapper);
 
-var renderer = new THREE.WebGLRenderer();
-// renderer.domElement.style.position = "absolute";
-// renderer.domElement.style.left = "50%";
-renderer.setSize( window.innerWidth , window.innerHeight );
-document.body.appendChild( renderer.domElement );
+clickWrapper.addEventListener('click',(ev)=>{
+    console.log(ev.offsetX,ev.offsetY);
+    let funcs = bb.fastGet('renderer','leftClick');
+    for(var f in funcs){
+        if(funcs[f](ev))break;
+    }
+})
 
+clickWrapper.addEventListener('contextmenu',(ev) => {
+    console.log(ev.offsetX,ev.offsetY);
+    let funcs = bb.fastGet('renderer','rightClick');
+    for(var f in funcs){
+        if(funcs[f](ev))break;
+    }
+})
 
-
-init.objects.map((item)=>{
+init.objects.forEach((item)=>{
     let category = bb.fastGet("objects",item.category);
     if(typeof category !== "function"){console.log("There is no category "+item.category)}
     if(item.meta.name === undefined 
@@ -28,17 +41,10 @@ init.objects.map((item)=>{
         bb.fastSet('liveObjects',item.meta.name,it);
         if(item.color)it.setColor(item.color);
         if(item.position)it.setPosition(item.position.x,item.position.y);
-        scene.add(it.getObject());
+        it.add();
         console.log(item);
     }
 })
-
-
-
-
-
-renderer.domElement.addEventListener("click", leftClick, true);
-renderer.domElement.addEventListener("contextmenu", rightClick, true);
 
 document.onkeydown = function(ev) {
     // console.log(ev);
@@ -49,6 +55,7 @@ document.onkeydown = function(ev) {
             keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
         }
     }
+    if(localStorage.getItem(ev.key))eval(localStorage.getItem(ev.key));
 };
 
 
@@ -65,6 +72,7 @@ function gameLoop() {
     for(var it in aliveItems){
         aliveItems[it].animate();
     }
-    renderer.render( scene, camera );
+    bb.fastGet('renderer','render').forEach((it)=>it())
+    
 }
 gameLoop();

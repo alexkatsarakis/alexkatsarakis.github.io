@@ -1,9 +1,9 @@
-import Object from './Object.js'
+import ActionObject from './ActionObject.js'
 
-import bb from '../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-class Sphere extends Object {
-    action;
+class Sphere extends ActionObject {
+    
     constructor({name,texture}){
         super(name);
         this.geometry = new THREE.SphereGeometry();
@@ -27,14 +27,6 @@ class Sphere extends Object {
         // this.mesh.position.x += 0.01;
         // this.mesh.position.y += 0.01;
     }
-
-    setAction(str){
-        this.action = str;
-    }
-
-    getAction(){
-        return this.action;
-    }
 }
 
-bb.fastSet('objects','Sphere',Sphere);
+bb.fastInstall('objects','Sphere',Sphere);

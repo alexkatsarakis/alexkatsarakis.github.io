@@ -3,4 +3,5 @@ export default {
     // "Digit2": ["changeColor"],
     // "KeyD": ["move"],
     // "KeyR": ["removeObject"]
+    "KeyP": ["printBlackboard"]
 }

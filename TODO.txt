@@ -1,6 +1,6 @@
 EASY
-    Make blocks to interact between objects (like getObject with ID.... set text to.....)
-    break down file blocksinstallation.js to smaller .js files
+    - Make blocks to interact between objects (like getObject with ID.... set text to.....)
+    - Break down file blocksinstallation.js to smaller .js files
 
 HARD
     implement the events each object can offer

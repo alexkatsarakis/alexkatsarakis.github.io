@@ -6,7 +6,6 @@ function Timer(){
       let currTime = new Date().getTime();
       if(currTime > lastTime + 1000){
           lastTime = currTime;
-          // console.log("FPS: "+sinceLastCount);
           document.getElementById('fpsCounter').innerHTML = "FPS:"+sinceLastCount;
           sinceLastCount = 0;
       }else {

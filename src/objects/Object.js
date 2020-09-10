@@ -1,14 +1,12 @@
-import bb from '../utils/blackboard.js'
-
 export default class Object {
     name
-    material
-    geometry 
-    mesh
+    renderer
+
+    values = {}
 
     options = []
 
-    isMovable;
+    isMovable
 
     constructor(_name){
         if(!_name)name = "Unnamed Object"+Math.random(5);
@@ -19,46 +17,52 @@ export default class Object {
     }
 
     setColor(col){
-        this.material.color = new THREE.Color(col);
+        throw Error("setColor needs to be implemented");
     }
 
     setPosition(x,y){
-        if(!this.isMovable)return;
-        this.mesh.position.x = x;
-        this.mesh.position.y = y;
+        throw Error("setPosition needs to be implemented");
     }
-    
-    getGeometry(){
-        return this.geometry;
+
+    getPosition(){
+        throw Error("getPosition needs to be implemented");
     }
 
     getObject(){
-        return this.mesh;
-    }
-
-    getMaterial(){
-        return this.material;
+        throw Error("getObject needs to be implemented");
     }
 
     getOptions(){
         return this.options;
     }
 
-    move(x,y){
-        if(!this.isMovable)return;
-        this.mesh.position.x += x;
-        this.mesh.position.y += y;
+    getValues(){
+        return this.values;
     }
 
-    animate(){}
+    setValue(val,v){
+        this.values[val].val = v;
+        this.values[val].onChange(v);
+    }
+    
+    getValue(val){
+        return this.values[val].val;
+    }
+
+    move(x,y){
+        throw Error("move needs to be implemented");
+    }
+
+    animate(){
+        throw Error("animate needs to be implemented");
+    }
+
+    add(){
+        throw Error("add needs to be implemented");
+    }
 
     remove(){
-        console.log("removing "+this.name);
-        bb.fastRemove('liveObjects',this.name);
-        bb.fastSet('state','focusedObject',undefined);
-        let scene = bb.fastGet('liveObjects','scene').getScene();
-        let myself = scene.getObjectByName(this.name);
-        scene.remove(myself);
+        throw Error("remove needs to be implemented");
     }
 
 }

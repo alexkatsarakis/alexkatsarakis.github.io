@@ -1,10 +1,9 @@
-import Object from './Object.js'
+import ActionObject from './ActionObject.js'
 
-import bb from '../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-class Line extends Object {
+class Line extends ActionObject {
     
-    action;
     constructor({name,texture,point1,point2}){
         super(name);
         var points = [];
@@ -31,15 +30,7 @@ class Line extends Object {
         // this.mesh.rotation.y += 0.01;
     }
 
-    setAction(str){
-        this.action = str;
-    }
-
-    getAction(){
-        return this.action;
-    }
-
 }
 
 
-bb.fastSet('objects','Line',Line);
+bb.fastInstall('objects','Line',Line);

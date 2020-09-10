@@ -10,7 +10,7 @@ function createObject({category,name,colour,position}){
         bb.fastSet('liveObjects',name,it);
         if(colour)it.setColor(colour);
         if(position)it.setPosition(position.x,position.y);
-        bb.fastGet('liveObjects','scene').getScene().add(it.getObject());
+        it.add();
         logAction("Created Object ["+name+"]");
     }
 }

@@ -3,14 +3,19 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Objects" colour="%{BKY_MATH_HUE}">
+      <block type="object_field"></block>
+      <block type="value_change_choose_object"></block>
       <block type="dropdown_obj"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
-      <block type="move_right"></block>
+      <block type="move_object"></block>
       <block type="colour_change"></block>
       <block type="colour_change_choose_object"></block>
       <block type="get_object"></block>
       <block type="console_log"></block>
+    </category>
+    <category name="Helpers" colour="%{BKY_TEXTS_HUE}">
+      <block type="every_seconds_do"></block>
     </category>
     <category name="Logic" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
@@ -326,6 +331,8 @@
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
 <div id="loadScriptButton" class="hudChild button"></div>
+<div id="bindScriptToKey" class="hudChild button"></div>
+<input type="text" id="keyToBind" class="hudChild">
 <textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->

@@ -1,4 +1,7 @@
 export default {
+    "meta": {
+        "renderer": "three.js",
+    },
     "objects": [
         {
             "meta":{
@@ -6,7 +9,7 @@ export default {
                 "texture": "./assets/textures/wood.jpeg"
             },
             "category": "Box",
-            "position": {"x":0,"y":0}
+            "position": {"x":45,"y":45}
         },
         {
             "meta":{
@@ -14,7 +17,7 @@ export default {
             },
             "category": "Sphere",
             "color" : "#ffff00",
-            "position": {"x":2,"y":0}
+            "position": {"x":38,"y":45}
         },
         {
             "meta":{
@@ -22,16 +25,7 @@ export default {
             },
             "category": "Sphere",
             "color" : "#00ffff",
-            "position": {"x":0,"y":2}
-        },
-        {
-            "meta":{
-                "name": "PLAAANE",
-                "texture": "./assets/textures/blueprint.jpg"
-            },
-            "category": "Plane",
-            "color" : "#0080ff",
-            "position": {"x":0,"y":-2}
+            "position": {"x":52,"y":45}
         },
         {
             "meta":{
@@ -39,17 +33,30 @@ export default {
             },
             "category": "Sphere",
             "color" : "#00ff00",
-            "position": {"x":-2,"y":0}
+            "position": {"x":45,"y":33}
+        },
+        {
+            "meta":{
+                "name": "PLAAANE",
+                "texture": "./assets/textures/blueprint.jpg",
+                "dim":{
+                    "width": 15,
+                    "height": 10
+                },
+                "rotation":{"x":-1}
+            },
+            "category": "Plane",
+            "color" : "#0080ff",
+            "position": {"x":30,"y":70}
+        },
+        {
+            "meta":{
+                "name": "TEEEEXT",
+                defaultText: "this is a text"
+            },
+            "category": "Text",
+            "color" : "#00ff00",
+            "position": {"x":40,"y":20}
         }
-        // {
-        //     "meta":{
-        //         "name": "LLLINE",
-        //         "point1":[-5,0,0],
-        //         "point2":[11,5,0]
-        //     },
-        //     "category": "Line",
-        //     "color" : "#00ff00",
-        //     "position": {"x":-2,"y":0}
-        // }
     ]
 }
