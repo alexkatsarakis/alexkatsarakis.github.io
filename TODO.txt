@@ -1,9 +1,11 @@
 EASY
     - Make blocks to interact between objects (like getObject with ID.... set text to.....)
     - Break down file blocksinstallation.js to smaller .js files
+    - Change from px to move on drag.js
 
 HARD
     implement the events each object can offer
         - onClick
         - onCollision
         - onChange
+    Let user write html then parse it and transform elements into objects

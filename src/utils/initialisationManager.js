@@ -8,7 +8,7 @@ import '../UI/hud.js'
 import '../UI/blocksInstallation.js'
 
 import '../renderer/dom/renderer.js'
-import '../renderer/threejs/renderer.js'
+// import '../renderer/threejs/renderer.js'
 
 import '../actions/changeColor.js'
 import '../actions/moveObject.js'

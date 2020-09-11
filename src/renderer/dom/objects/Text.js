@@ -30,6 +30,14 @@ class Text extends ActionObject {
             }
         }
 
+        this.values['bold'] = {
+            val: false,
+            onChange: (newVal) => {
+                if(newVal)this.div.style.fontWeight = "bold";
+                else this.div.style.fontWeight = "normal";
+            }
+        }
+
     }
 
     animate(){

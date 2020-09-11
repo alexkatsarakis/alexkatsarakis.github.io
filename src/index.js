@@ -22,7 +22,15 @@ clickWrapper.addEventListener('click',(ev)=>{
     for(var f in funcs){
         if(funcs[f](ev))break;
     }
-})
+});
+
+clickWrapper.addEventListener('mousedown',(ev)=>{
+    console.log(ev.offsetX,ev.offsetY);
+    let funcs = bb.fastGet('renderer','mouseDown');
+    for(var f in funcs){
+        if(funcs[f](ev))break;
+    }
+});
 
 clickWrapper.addEventListener('contextmenu',(ev) => {
     console.log(ev.offsetX,ev.offsetY);

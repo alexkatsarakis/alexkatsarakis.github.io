@@ -14,9 +14,9 @@ class Sphere extends ActionObject {
         super(name);
         this.div = document.createElement('div');
         this.div.id = name;
-        let [defaultX,defaultY] = fromPercentageToPx(5,5);
-        this.div.style.width = (dim&&dim.width)?dim.width: defaultX+"px";
-        this.div.style.height = (dim&&dim.height)?dim.height: defaultX+"px";
+        let [X,Y] = fromPercentageToPx((dim&&dim.width)?dim.width:5,(dim&&dim.height)?dim.height: 5);
+        this.div.style.width = X+"px";
+        this.div.style.height = X+"px";
 
         
         if(texture){
@@ -25,7 +25,7 @@ class Sphere extends ActionObject {
             this.div.style.backgroundPosition = 'center';
         }
         this.div.style.position = "absolute";
-        this.div.style.borderRadius = "50px";
+        this.div.style.borderRadius = "1000px";
         
         this.options.push('move');
         this.options.push('changeColor');

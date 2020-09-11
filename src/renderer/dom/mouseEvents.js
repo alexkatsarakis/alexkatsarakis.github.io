@@ -1,6 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
 import focusTransition from '../../transitionHandlers/focusedObject.js'
+import dragElement from '../../transitionHandlers/drag.js';
 
 var mouse = { x : 0, y : 0 };
 
@@ -26,9 +27,17 @@ function focused(obj,x,y){
 }
 
 function rightClick(e){
-    // e.preventDefault();
+    e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    return false;
+    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    for(var it in aliveItems){
+        // console.log(aliveItems[it].getPosition());
+        if(focused(aliveItems[it],mouse.x,mouse.y)){
+            dragElement(aliveItems[it]);
+            focusTransition(it);
+            return true;
+        }
+    }
     // if(intersects.length > 0){
     //     bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)); 
     // }
@@ -38,6 +47,25 @@ if(!bb.fastGet('renderer','rightClick')){
     bb.fastSet('renderer','rightClick',[rightClick]);
 }else{
     bb.fastGet('renderer',"rightClick").push(rightClick);
+}
+
+function mouseDown(e){
+    e.preventDefault();
+    [mouse.x,mouse.y] = translator(e);
+    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    for(var it in aliveItems){
+        if(focused(aliveItems[it],mouse.x,mouse.y)){
+            dragElement(aliveItems[it].getObject(),e);
+            focusTransition(it);
+            return true;
+        }
+    }
+}
+
+if(!bb.fastGet('renderer','mouseDown')){
+    bb.fastSet('renderer','mouseDown',[mouseDown]);
+}else{
+    bb.fastGet('renderer',"mouseDown").push(mouseDown);
 }
 
 
