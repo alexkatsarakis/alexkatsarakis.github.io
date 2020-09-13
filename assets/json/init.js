@@ -39,20 +39,20 @@ export default {
             "color" : "#00ff00",
             "position": {"x":45,"y":33}
         },
-        // {
-        //     "meta":{
-        //         "name": "PLAAANE",
-        //         "texture": "./assets/textures/blueprint.jpg",
-        //         "dim":{
-        //             "width": 15,
-        //             "height": 10
-        //         },
-        //         "rotation":{"x":-1}
-        //     },
-        //     "category": "Plane",
-        //     "color" : "#0080ff",
-        //     "position": {"x":30,"y":70}
-        // },
+        {
+            "meta":{
+                "name": "PLAAANE",
+                "texture": "./assets/textures/blueprint.jpg",
+                "dim":{
+                    "width": 15,
+                    "height": 10
+                },
+                "rotation":{"x":-1}
+            },
+            "category": "Plane",
+            "color" : "#0080ff",
+            "position": {"x":30,"y":70}
+        },
         {
             "meta":{
                 "name": "TEEEEXT",

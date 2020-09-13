@@ -7,9 +7,9 @@ class Scene extends Object {
         super("scene");
         this.div = document.createElement("div");
 
-        this.div.style.backgroundImage = "url('./assets/textures/sky.jpeg')";
-        this.div.style.backgroundSize = 'cover';
-        this.div.style.backgroundPosition = 'center';
+        // this.div.style.backgroundImage = "url('./assets/textures/sky.jpeg')";
+        // this.div.style.backgroundSize = 'cover';
+        // this.div.style.backgroundPosition = 'center';
         this.div.style.position = "absolute";
         this.div.id = 'scene';
         this.div.style.width = window.innerWidth + 'px';
