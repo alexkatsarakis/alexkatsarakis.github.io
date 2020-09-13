@@ -6,6 +6,7 @@ import './objects/Scene.js'
 import './objects/Sphere.js'
 import './objects/Box.js'
 import './objects/Text.js'
+import './objects/Humanoid.js'
 
 if(!bb.fastGet('renderer','render')){
     bb.fastSet('renderer','render',[()=>{}]);

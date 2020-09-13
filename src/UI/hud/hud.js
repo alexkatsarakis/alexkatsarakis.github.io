@@ -1,4 +1,4 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
 function readTextFile(file,onFinish){
     var rawFile = new XMLHttpRequest();
@@ -11,13 +11,27 @@ function readTextFile(file,onFinish){
             {
                 var allText = rawFile.responseText;
                 document.body.insertAdjacentHTML('beforeend',allText);
+                convertHTMLtoObjects();
                 onFinish();
             }
         }
     }
     rawFile.send(null);
 }
-readTextFile('./src/UI/hud.ahtml',onHudLoaded);
+readTextFile('./src/UI/hud/hud.ahtml',onHudLoaded);
+
+function convertHTMLtoObjects(){
+    let children = [ ...document.body.children ];
+    children.map(child => {
+        if(child.attributes.getNamedItem("category")){
+            let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
+            document.body.removeChild(child);
+            let obj = new objCat({name:child.id,div:child});
+            bb.fastSet('liveObjects',child.id,obj);
+            obj.add();
+        }
+    })
+}
 
 function hudState(){
     let isVisible = true;
@@ -34,26 +48,21 @@ function hudState(){
 
 
 function onHudLoaded(){
-    let toggle = document.getElementById('hudToggle');
-    toggle.addEventListener('click',hudState());
+    document.getElementById('hudToggle').addEventListener('click',hudState());
 
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        console.log(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
-        eval(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
+        let code = bb.fastGet('scripting','currentScriptAsCode')();
+        // console.log(code);
+        eval(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        localStorage.setItem('code' ,Blockly.Xml.domToText(xml));
+        let text = bb.fastGet('scripting','currentScriptAsText')();
+        localStorage.setItem('code' ,text);
     });
 
     document.getElementById('loadScriptButton').addEventListener('click',()=>{
-        let xml = Blockly.Xml.textToDom(localStorage.getItem('code'));
-        Blockly.Xml.clearWorkspaceAndLoadFromXml(xml,Blockly.mainWorkspace);
-    });
-
-    document.getElementById('bindScriptToKey').addEventListener('click',()=>{
-        localStorage.setItem(document.getElementById('keyToBind').value ,Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
+        bb.fastGet('scripting','clearAndLoadFromText')(localStorage.getItem('code'));
     });
 
     let blocklyDiv = document.getElementById('blocklyDiv');

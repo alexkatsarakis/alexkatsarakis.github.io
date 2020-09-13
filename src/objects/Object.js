@@ -1,3 +1,5 @@
+import funcName from "../utils/logs.js"
+
 export default class Object {
     name
     renderer
@@ -13,6 +15,12 @@ export default class Object {
         this.name = _name;
     
         this.isMovable = true;
+
+        this.values['log me'] = {
+            onChange: () => {
+                funcName(this.name);
+            }
+        }
 
     }
 

@@ -1,10 +1,9 @@
-<link rel="stylesheet" href="./src/UI/hud.css">
+<link rel="stylesheet" href="./src/UI/hud/hud.css">
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Objects" colour="%{BKY_MATH_HUE}">
       <block type="object_field"></block>
-      <block type="value_change_choose_object"></block>
       <block type="dropdown_obj"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
@@ -331,15 +330,19 @@
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
 <div id="loadScriptButton" class="hudChild button"></div>
-<div id="bindScriptToKey" class="hudChild button"></div>
-<input type="text" id="keyToBind" class="hudChild">
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
+<textarea readOnly=true category="Box" id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
-<div id="focusedObjText" class="hudChild"></div>
+<div id="focusedObjText" category="Text" class="hudChild"></div>
+
+<!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
+  <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 
+      <source src="assets/test.mp4" type="video/mp4"> 
+  </video>
+</div> -->
 
 <!-- Top Right Side -->
-<div id="fpsCounter" class="hudChild"></div>
+<div id="fpsCounter" category="Text" class="hudChild"></div>
 <div id="objMenuButton" class="hudChild button"></div>
 <div id="objMenu" class="hudChild"></div>
 

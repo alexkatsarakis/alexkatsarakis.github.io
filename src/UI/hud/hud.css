@@ -3,7 +3,8 @@
     top: 20px;
     font-size: 24px;
     color: white;
-    width: 100%;
+    width: 50%;
+    left: 25%;
     text-align: center;
 }
 
@@ -12,7 +13,6 @@
     color:white;
     top:0;
     right:20px;
-    text-align: right;
 }
 
 #objMenuButton {
@@ -22,7 +22,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    background-image: url(../../assets/images/settings.png); /* hide.png from 'www.flaticon.com' from user Freepik */
+    background-image: url(../../../assets/images/settings.png); /* hide.png from 'www.flaticon.com' from user Freepik */
     background-position: center;
     background-size: contain;
 }
@@ -59,7 +59,7 @@
     height: 30px;
     top: 20px;
     left: 520px;
-    background-image: url(../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
+    background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
     background-position: center;
     background-size: contain;
 }
@@ -71,7 +71,7 @@
     height: 30px;
     top: 70px;
     left: 520px;
-    background-image: url(../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
+    background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
     background-size: contain;
 }
@@ -83,7 +83,7 @@
     height: 30px;
     top: 120px;
     left: 520px;
-    background-image: url(../../assets/images/load.png); /* save.png from 'www.flaticon.com' from user FreePik */
+    background-image: url(../../../assets/images/load.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
     background-size: contain;
 }
@@ -129,7 +129,7 @@
     height: 50px;
     bottom: 20px;
     right: 20px;
-    background-image: url(../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
+    background-image: url(../../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
     background-position: center;
     background-size: contain;
 }

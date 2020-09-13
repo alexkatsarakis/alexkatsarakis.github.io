@@ -1,0 +1,6 @@
+import './changeColor.js'
+import './moveObject.js'
+import './removeObject.js'
+import './createObject.js'
+import './printBlackboard.js'
+import './saveToFile.js'

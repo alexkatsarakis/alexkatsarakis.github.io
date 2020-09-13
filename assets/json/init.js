@@ -13,7 +13,11 @@ export default {
         },
         {
             "meta":{
-                "name": "SPHE"
+                "name": "SPHE",
+                "dim": {
+                    "width": 10,
+                    "height": 10
+                }
             },
             "category": "Sphere",
             "color" : "#ffff00",
@@ -29,9 +33,9 @@ export default {
         },
         {
             "meta":{
-                "name": "SPHEEERE3"
+                "name": "HUUUMAN"
             },
-            "category": "Sphere",
+            "category": "Humanoid",
             "color" : "#00ff00",
             "position": {"x":45,"y":33}
         },
@@ -52,11 +56,23 @@ export default {
         {
             "meta":{
                 "name": "TEEEEXT",
-                defaultText: "this is a text"
+                defaultText: "Click me, meta to granazi kai tha deite to delete :)"
             },
             "category": "Text",
             "color" : "#00ff00",
             "position": {"x":40,"y":20}
+        },
+
+        {
+            "meta":{
+                "name": "InfoForKey",
+                defaultText: "Ta panta einai antikeimena. grapste ena script me blockly \
+                kai patiste ena koympi apo to keyboard kai meta patiste ayto to key \
+                sto pliktrologio"
+            },
+            "category": "Text",
+            "color" : "#00ff00",
+            "position": {"x":80,"y":40}
         }
     ]
 }

@@ -4,11 +4,6 @@ import Object from '../../../objects/Object.js'
 
 import scene from './Scene.js'
 
-function pxToNumber(str){
-    str.substr(1,str.length-4);
-    return parseInt(str);
-}
-
 function fromPercentageToPx(x,y){
     x = x/100 * window.innerWidth;
     y = y/100 * window.innerHeight;
@@ -42,17 +37,21 @@ export default class ObjectDom extends Object{
     }
 
     move(x,y){
-        this.div.style.left = (pxToNumber(this.div.style.left)+x) +"px";
-        this.div.style.top = (pxToNumber(this.div.style.top)+y) +"px";
+        this.div.style.left = (this.div.offsetLeft+x) +"px";
+        this.div.style.top = (this.div.offsetTop+y) +"px";
     }
 
     getBoundingBox(){
         return {
-            x: pxToNumber(this.div.style.left),
-            y: pxToNumber(this.div.style.top),
-            width: pxToNumber(this.div.style.width),
-            height: pxToNumber(this.div.style.height)
+            x: (this.div.offsetLeft),
+            y: (this.div.offsetTop),
+            width: (this.div.offsetWidth),
+            height: (this.div.offsetHeight)
         }
+    }
+
+    createElement(){
+        throw Error("createElement must be implemented for every Dom object")
     }
 
     animate(){}

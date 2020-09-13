@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="./src/UI/keyboard/keyboard.css">
+
+<div id="keyboard" category="Box" class="hudChild">
+    <div class="keyboardRow">
+      <div class="keyboardKey">1</div>
+      <div class="keyboardKey">2</div>
+      <div class="keyboardKey">3</div>
+      <div class="keyboardKey">4</div>
+      <div class="keyboardKey">5</div>
+      <div class="keyboardKey">6</div>
+      <div class="keyboardKey">7</div>
+      <div class="keyboardKey">8</div>
+      <div class="keyboardKey">9</div>
+      <div class="keyboardKey">0</div>
+    </div>
+  <div class="keyboardRow">
+    <div class="keyboardKey">Q</div>
+    <div class="keyboardKey">W</div>
+    <div class="keyboardKey">E</div>
+    <div class="keyboardKey">R</div>
+    <div class="keyboardKey">T</div>
+    <div class="keyboardKey">Y</div>
+    <div class="keyboardKey">U</div>
+    <div class="keyboardKey">I</div>
+    <div class="keyboardKey">O</div>
+    <div class="keyboardKey">P</div>
+  </div>
+  <div class="keyboardRow">
+    <div class="keyboardHalfSpace"></div>
+    <div class="keyboardKey">A</div>
+    <div class="keyboardKey">S</div>
+    <div class="keyboardKey">D</div>
+    <div class="keyboardKey">F</div>
+    <div class="keyboardKey">G</div>
+    <div class="keyboardKey">H</div>
+    <div class="keyboardKey">J</div>
+    <div class="keyboardKey">K</div>
+    <div class="keyboardKey">L</div>
+    <div class="keyboardHalfSpace"></div>
+  </div>
+  <div class="keyboardRow">
+    <div class="keyboardFullSpace"></div>
+    <div class="keyboardKey">Z</div>
+    <div class="keyboardKey">X</div>
+    <div class="keyboardKey">C</div>
+    <div class="keyboardKey">V</div>
+    <div class="keyboardKey">B</div>
+    <div class="keyboardKey">N</div>
+    <div class="keyboardKey">M</div>
+    <div class="keyboardFullSpace"></div>
+    <div class="keyboardFullSpace"></div>
+  </div>
+</div>

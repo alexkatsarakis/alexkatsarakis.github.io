@@ -1,3 +1,5 @@
+import bb from '../../utils/blackboard.js'
+
 const colourPalette = {
     colour: 24,
     object: 40
@@ -122,31 +124,6 @@ Blockly.JavaScript['colour_change_choose_object'] = function(block) {
     return 'bb.fastGet("actions","changeColor")('+argument0+','+argument1 + ');';
 };
 
-Blockly.Blocks['value_change_choose_object'] = {
-    init: function() {
-        this.appendValueInput('Obj')
-            .setCheck('Object')
-            .appendField('Object');
-        this.appendValueInput('Value')
-            .setCheck('String')
-            .appendField('Value');
-        this.setColour(colourPalette.colour);
-        this.setTooltip('Change the value of the object it refers.');
-        this.setHelpUrl('none');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        return 0;
-    }
-};
-
-Blockly.JavaScript['value_change_choose_object'] = function(block) {
-    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument1 = Blockly.JavaScript.valueToCode(block, 'Value',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("actions","changeValue")('+argument0+','+argument1 + ');';
-};
-
 Blockly.Blocks['every_seconds_do'] = {
     init: function() {
         this.appendValueInput('msecs')
@@ -219,7 +196,6 @@ return 'bb.fastGet("actions","createObject")({\
 });\n';
 };
 
-import bb from '../utils/blackboard.js'
 
 Blockly.Blocks['dropdown_categ'] = {
     init: function() {
