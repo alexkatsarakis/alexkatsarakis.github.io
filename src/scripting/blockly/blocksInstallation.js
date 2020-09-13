@@ -81,7 +81,6 @@ Blockly.JavaScript['get_object'] = function(block) {
 Blockly.Blocks['console_log'] = {
     init: function() {
         this.appendValueInput('CON_LOG')
-            .setCheck('Object')
             .appendField('Log');
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object by name.');
