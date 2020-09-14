@@ -2,7 +2,6 @@ import './blocksInstallation.js'
 
 import bb from '../../utils/blackboard.js'
 
-
 bb.fastInstall('scripting','currentScriptAsText',()=>{
     return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
 });
@@ -11,12 +10,53 @@ bb.fastInstall('scripting','currentScriptAsCode',()=>{
     return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
 });
 
-bb.fastInstall('scripting','fromTextToCode',(text) => {
+bb.fastInstall('scripting','clear',()=>{
+    Blockly.mainWorkspace.clear();
+});
+
+let elem = document.createElement('div');
+elem.id = 'blocklyDiv2';
+document.body.appendChild(elem);
+let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
+
+bb.fastInstall('scripting','executeCode',(text) => {
+    eval(text);
+});
+
+bb.fastInstall('scripting','executeText',(text) => {
+    if(text === undefined 
+    || text === ""
+    || text === null)
+        return;
     text = Blockly.Xml.textToDom(text);
-    Blockly.Xml.clearWorkspaceAndLoadFromXml(text,Blockly.mainWorkspace);
-    return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
+    Blockly.Xml.clearWorkspaceAndLoadFromXml(text,test);
+    eval(Blockly.JavaScript.workspaceToCode(test));
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{
+    if(text === undefined 
+        || text === ""
+        || text === null){
+            Blockly.mainWorkspace.clear();
+            return;
+        }
     Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(text),Blockly.mainWorkspace);
+});
+
+bb.fastInstall('scripting','injectInDiv',(div)=>{
+    div.style.height = "500px";
+    div.style.width = "500px";
+    
+    Blockly.inject(div.id,{
+        toolbox: document.getElementById('toolbox'),
+        scrollbars: true,
+        zoom:
+        {controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 2,
+        minScale: 0.5,
+        scaleSpeed: 1.2,
+        pinch: true}
+    });
 });

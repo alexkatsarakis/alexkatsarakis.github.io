@@ -3,6 +3,7 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Objects" colour="%{BKY_MATH_HUE}">
+      <block type="object_event"></block>
       <block type="object_field"></block>
       <block type="dropdown_obj"></block>
       <block type="dropdown_categ"></block>
@@ -326,10 +327,11 @@
     <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
-<div id="blocklyDiv" class="hudChild"></div>
+<div id="eventsTab" class="hudChild"></div>
+<div id="languageDiv" class="hudChild"></div>
+<div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<div id="loadScriptButton" class="hudChild button"></div>
 <textarea readOnly=true category="Box" id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./src/UI/keyboard/keyboard.css">
 
-<div id="keyboard" category="Box" class="hudChild">
+<div id="keyboard" class="hudChild">
     <div class="keyboardRow">
       <div class="keyboardKey">1</div>
       <div class="keyboardKey">2</div>

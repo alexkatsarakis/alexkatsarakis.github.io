@@ -236,8 +236,10 @@ Blockly.Blocks['object_field'] = {
             .appendField("'s");
         this.appendDummyInput('values')
             .appendField('field')
-            .appendField(new Blockly.FieldDropdown([["field","field"]]), 'FIELD')
+            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD')
             .appendField('to');
+        this.appendValueInput('value')
+            .appendField('Value');
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object field.');
         this.setHelpUrl('none');
@@ -253,7 +255,7 @@ Blockly.Blocks['object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['field','field']];
+        if(toAdd.length === 0)toAdd = [['log me','log me']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -279,9 +281,60 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    console.log('bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');');
-    // return 'console.log("' + obj_val + "->"+field_val + " = " + val_val+'")';
     return 'bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');';
+};
+
+Blockly.Blocks['object_event'] = {
+    validate: function(newValue) {
+        this.getSourceBlock().updateConnections(newValue);
+        return newValue;
+    },
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('Trigger object')
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField("'s");
+        this.appendDummyInput('values')
+            .appendField('Event')
+            .appendField(new Blockly.FieldDropdown([['onClick','onClick']]), 'FIELD')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    },
+
+    updateConnections: function(newValue) {
+        let values = bb.fastGet('liveObjects',newValue).getEvents();
+        let toAdd = [];
+        
+        for(let i in values){
+            toAdd.push([i,i])
+        }
+        
+        if(toAdd.length === 0)toAdd = [['onClick','onClick']];
+        this.removeInput('values', /* no error */ true);
+        this.removeInput('value',true);
+        this.appendDummyInput('values')
+            .appendField('Event')
+            .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
+    },
+
+    getObjects(){
+        let map = bb.getComponent('liveObjects').itemMap;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['object_event'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    let field_val = block.getFieldValue('FIELD');
+    return 'bb.fastGet("liveObjects","'+obj_val+'").triggerEvent("'+field_val+'");';
 };
 
 Blockly.Blocks['dropdown_obj'] = {

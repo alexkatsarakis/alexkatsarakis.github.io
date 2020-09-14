@@ -1,8 +1,25 @@
 class BlackboardComponent{
   name;
   itemMap = {};
+  watches = {};
+
+
   constructor(name){
     this.name = name;
+  }
+
+  installWatch(itemName,cb){
+    if(this.watches[itemName] === undefined) this.watches[itemName] = [cb];
+    else this.watches[itemName].push(cb);
+  }
+
+  triggerWatch(itemName){
+    if(this.watches[itemName] === undefined)return;
+    let callbacks = this.watches[itemName];
+    delete this.watches[itemName];
+    callbacks.forEach((cb)=>{
+      cb(this.itemMap[itemName]);
+    });
   }
 
   installItem(itemName,value){
@@ -24,6 +41,7 @@ class BlackboardComponent{
 
   setItem(itemName,value){
     this.itemMap[itemName] = value; 
+    this.triggerWatch(itemName);
   }
 
   size(){
@@ -31,7 +49,7 @@ class BlackboardComponent{
   }
 
   print(){
-    console.log(this.name,this.itemMap);
+    console.log(this.name,this.itemMap,this.watches);
   }
 
 }
@@ -49,6 +67,12 @@ class Blackboard {
     if(this.componentMap[componentName] === undefined)return false;
     delete this.componentMap[componentName];
     return true;
+  }
+
+
+  installWatch(componentName,itemName,cb){
+    if(this.componentMap[componentName] === undefined)return false;
+    this.componentMap[componentName].installWatch(itemName,cb);
   }
 
   fastInstall(componentName,itemName,value){

@@ -1,10 +1,14 @@
-import funcName from "../utils/logs.js"
+import logAction from "../utils/logs.js"
+
+import bb from '../utils/blackboard.js'
 
 export default class Object {
     name
     renderer
 
     values = {}
+
+    events = {}
 
     options = []
 
@@ -17,10 +21,16 @@ export default class Object {
         this.isMovable = true;
 
         this.values['log me'] = {
+            val: this.name,
             onChange: () => {
-                funcName(this.name);
+                logAction(this.name);
             }
         }
+
+        this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
+        this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
+        this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
+        this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
 
     }
 
@@ -55,6 +65,23 @@ export default class Object {
     
     getValue(val){
         return this.values[val].val;
+    }
+
+    getEvents(){
+        return this.events;
+    }
+
+    getEvent(ev){
+        return this.events[ev];
+    }
+
+    setEvent(ev,code){
+        localStorage.setItem(this.name+"_"+ev,code);
+        this.events[ev] = code;
+    }
+
+    triggerEvent(ev){
+        bb.fastGet('scripting','executeText')(this.events[ev]);
     }
 
     move(x,y){

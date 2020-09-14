@@ -2,11 +2,12 @@
 
 import bb from './blackboard.js'
 
+bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
 import '../UI/UI.js'
 
-import '../scripting/blockly/blockly.js'
+import '../scripting/scripting.js'
 
 import '../renderer/renderer.js'
 

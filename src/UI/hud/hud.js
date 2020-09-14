@@ -34,9 +34,12 @@ function convertHTMLtoObjects(){
 }
 
 function hudState(){
-    let isVisible = true;
+    let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
+    toggleVisibility();
+    toggleVisibility();
     function toggleVisibility(){
         isVisible = !isVisible;
+        bb.fastSet('state','mode',(isVisible)?"editing":"play");
         let hudChildren = document.querySelectorAll('.hudChild');
         hudChildren.forEach(element => {
             element.style.visibility = (isVisible)?"visible":"hidden";
@@ -50,39 +53,53 @@ function hudState(){
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
 
+
+    let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         let code = bb.fastGet('scripting','currentScriptAsCode')();
-        // console.log(code);
-        eval(code);
+        bb.fastGet('scripting','executeCode')(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.fastGet('scripting','currentScriptAsText')();
-        localStorage.setItem('code' ,text);
+        bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).setEvent(tabOpen,text);
     });
 
-    document.getElementById('loadScriptButton').addEventListener('click',()=>{
-        bb.fastGet('scripting','clearAndLoadFromText')(localStorage.getItem('code'));
-    });
+    function tabInfo(obj,id){
+        return ()=>{
+            let text = bb.fastGet('liveObjects',obj).getEvent(id);
+            bb.fastGet('scripting','clearAndLoadFromText')(text);
+            tabOpen = id;
+            document.getElementById('openTab').innerHTML = tabOpen;
+        };
+    }
 
-    let blocklyDiv = document.getElementById('blocklyDiv');
-    blocklyDiv.style.height = "500px";
-    blocklyDiv.style.width = "500px";
-
-    Blockly.inject('blocklyDiv',{
-        toolbox: document.getElementById('toolbox'),
-        scrollbars: true,
-        zoom:
-         {controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 2,
-          minScale: 0.5,
-          scaleSpeed: 1.2,
-          pinch: true}
-    });
+    function onFocuseChange(objName){
+        let eventsTab = document.getElementById('eventsTab');
+        eventsTab.innerHTML = "";
+        if(objName === undefined){
+            document.getElementById('openTab').innerHTML = "";
+            bb.fastGet('scripting','clearAndLoadFromText')("");
+            bb.installWatch('state','focusedObject',onFocuseChange);
+            return;
+        }
+        tabOpen = "onClick";
+        let firstObject = true;
+        for(let i in bb.fastGet('liveObjects',objName).getEvents()){
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.addEventListener('click',tabInfo(objName,i));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+        bb.installWatch('state','focusedObject',onFocuseChange);
+    }
     
-    Blockly.JavaScript.addReservedWords('code');
+    bb.installWatch('state','focusedObject',onFocuseChange);
 
     objMenuButton.addEventListener('click',()=>{
         if(document.getElementById('objMenu'))document.getElementById('objMenu').remove();
@@ -105,4 +122,7 @@ function onHudLoaded(){
         })
         console.log(options);
     });
+
+    bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
+
 }

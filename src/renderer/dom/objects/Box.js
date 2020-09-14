@@ -17,6 +17,11 @@ class Box extends ActionObject {
 
         this.options.push('changeColor');
         this.options.push("removeObject");
+
+        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
+        this.events['test1'] = localStorage.getItem(this.name+"_test1");
+        this.events['test2'] = localStorage.getItem(this.name+"_test2");
+
     }
 
     createElement({name,texture,dim}){
@@ -34,7 +39,9 @@ class Box extends ActionObject {
     }
 
     animate(){
-        
+        this.triggerEvent('onEachFrame');
+        // this.triggerEvent('onClick');
+        // console.log("a");
     }
 
 }

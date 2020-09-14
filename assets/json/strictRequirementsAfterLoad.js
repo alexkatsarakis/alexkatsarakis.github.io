@@ -7,7 +7,9 @@ export default {
     "scripting": [
         "currentScriptAsText",
         "currentScriptAsCode",
-        "fromTextToCode",
-        "clearAndLoadFromText"
+        "executeCode",
+        "executeText",
+        "clearAndLoadFromText",
+        "injectInDiv"
     ]
 }

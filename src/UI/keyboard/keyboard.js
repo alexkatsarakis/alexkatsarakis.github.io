@@ -11,7 +11,7 @@ function readTextFile(file,onFinish){
             {
                 var allText = rawFile.responseText;
                 document.body.insertAdjacentHTML('beforeend',allText);
-                // convertHTMLtoObjects();
+                convertHTMLtoObjects();
                 onFinish();
             }
         }
