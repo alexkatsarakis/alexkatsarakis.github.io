@@ -6,30 +6,31 @@ export default {
         {
             "meta":{
                 "name": "BOOOOOX",
-                "texture": "./assets/textures/wood.jpeg"
-            },
-            "category": "Box",
-            "position": {"x":45,"y":45}
-        },
-        {
-            "meta":{
-                "name": "SPHE",
-                "dim": {
-                    "width": 10,
-                    "height": 10
+                "texture": "./assets/textures/wood.jpeg",
+                dim:{
+                    width: 2,
+                    height: 2,
+                    depth: 2
                 }
             },
-            "category": "Sphere",
-            "color" : "#ffff00",
-            "position": {"x":38,"y":45}
+            "category": "Box",
+            "position": {x:1,y:1,z:-1}
         },
         {
             "meta":{
-                "name": "SPHEEERE"
+                "name": "SPHEEERE",
+                "texture": "./assets/textures/wood.jpeg"
             },
             "category": "Sphere",
+            "position": {x:0,y:0,z:0}
+        },
+        {
+            "meta":{
+                "name": "SQUAAAARE"
+            },
+            "category": "Square",
             "color" : "#00ffff",
-            "position": {"x":52,"y":45}
+            "position": {"x":90,"y":10}
         },
         {
             "meta":{
@@ -37,42 +38,30 @@ export default {
             },
             "category": "Humanoid",
             "color" : "#00ff00",
-            "position": {"x":45,"y":33}
+            "position": {"x":80,"y":10}
         },
         {
             "meta":{
                 "name": "PLAAANE",
                 "texture": "./assets/textures/blueprint.jpg",
                 "dim":{
-                    "width": 15,
-                    "height": 10
+                    "width": 100,
+                    "height": 100
                 },
-                "rotation":{"x":-1}
+                "rotation":{"x":-1.57}
             },
             "category": "Plane",
             "color" : "#0080ff",
-            "position": {"x":30,"y":70}
+            "position": {x:0,y:0,z:0}
         },
         {
             "meta":{
                 "name": "TEEEEXT",
-                defaultText: "Click me, meta to granazi kai tha deite to delete :)"
+                defaultText: "This is a text"
             },
             "category": "Text",
             "color" : "#00ff00",
-            "position": {"x":40,"y":20}
-        },
-
-        {
-            "meta":{
-                "name": "InfoForKey",
-                defaultText: "Ta panta einai antikeimena. grapste ena script me blockly \
-                kai patiste ena koympi apo to keyboard kai meta patiste ayto to key \
-                sto pliktrologio"
-            },
-            "category": "Text",
-            "color" : "#00ff00",
-            "position": {"x":80,"y":40}
+            "position": {"x":40,"y":10}
         }
     ]
 }

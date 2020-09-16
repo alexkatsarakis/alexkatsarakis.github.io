@@ -1,8 +1,8 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Plane extends ActionObject {
+class Plane extends Object {
     
     constructor({name,texture,rotation,dim}){
         super(name);
@@ -18,15 +18,11 @@ class Plane extends ActionObject {
         this.mesh.userData = this;
         if(rotation)this.mesh.rotation.x = rotation.x;
 
-        this.options.push("removeObject");
-
     }
 
-    animate(){
-        // this.mesh.rotation.x += 0.01;
-        // this.mesh.rotation.z += 0.01;
+    getCategory(){
+        return "Plane";
     }
-
 }
 
 

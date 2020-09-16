@@ -2,6 +2,50 @@
 
 'use strict';
 
+//Alex's Messages
+Blockly.Msg["OBJECT"] = "object";
+Blockly.Msg["OBJECT_TITLE"] = "Object";
+Blockly.Msg["HELPERS_TITLE"] = "Helpers";
+Blockly.Msg["LOGIC_TITLE"] = "Logic";
+Blockly.Msg["LOOPS_TITLE"] = "Loops";
+Blockly.Msg["MATH_TITLE"] = "Math";
+Blockly.Msg["TEXT_TITLE"] = "Text";
+Blockly.Msg["LISTS_TITLE"] = "Lists";
+Blockly.Msg["COLOUR_TITLE"] = "Colour";
+Blockly.Msg["VARIABLES_TITLE"] = "Variables";
+Blockly.Msg["FUNCTIONS_TITLE"] = "Functions";
+
+Blockly.Msg["AK_SET_OBJECT"] = "set object";
+Blockly.Msg["AK_TRIGGER_OBJECT"] = "trigger object";
+Blockly.Msg["AK_OBJECT"] = "object";
+Blockly.Msg["AK_SET"] = "set";
+Blockly.Msg["AK_FIELD"] = "field";
+Blockly.Msg["AK_TO"] = "to";
+Blockly.Msg["AK_VALUE"] = "value";
+Blockly.Msg["AK_EVENT"] = "event";
+Blockly.Msg["AK_TRIGGER"] = "trigger";
+
+Blockly.Msg["AK_CATEGORY"] = "category";
+Blockly.Msg["AK_NAME"] = "name";
+Blockly.Msg["AK_AXISX"] = "X axis";
+Blockly.Msg["AK_AXISY"] = "Y axis";
+
+Blockly.Msg["AK_APOSS"] = "'s";
+
+Blockly.Msg["AK_COLOUR"] = "colour";
+Blockly.Msg["AK_MOVEX"] = "move on X";
+Blockly.Msg["AK_MOVEY"] = "move on Y";
+
+Blockly.Msg["AK_SET"] = "set";
+Blockly.Msg["AK_GET"] = "get";
+
+Blockly.Msg["AK_LOG"] = "log";
+
+Blockly.Msg["AK_EVERY"] = "every";
+Blockly.Msg["AK_MILLISECONDS"] = "milliseconds";
+Blockly.Msg["AK_DO"] = "do";
+//
+
 Blockly.Msg["ADD_COMMENT"] = "Add Comment";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";
 Blockly.Msg["CHANGE_VALUE_TITLE"] = "Change value:";

@@ -1,4 +1,4 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectDom.js'
 
 import bb from '../../../utils/blackboard.js'
 
@@ -8,17 +8,13 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Sphere extends ActionObject {
+class Circle extends Object {
     
     constructor({name,texture,dim,div}){
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
         
-        this.options.push('move');
-        this.options.push('changeColor');
-        this.options.push("removeObject");
-
     }
 
     createElement({name,texture,dim}){
@@ -38,10 +34,9 @@ class Sphere extends ActionObject {
         }
     }
 
-    animate(){
-        // this.mesh.position.x += 0.01;
-        // this.mesh.position.y += 0.01;
+    getCategory(){
+        return "Circle";
     }
 }
 
-bb.fastInstall('objects','Sphere',Sphere);
+bb.fastInstall('objects','Circle',Circle);

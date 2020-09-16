@@ -10,15 +10,10 @@ export default class Object {
 
     events = {}
 
-    options = []
-
-    isMovable
+    options = {}
 
     constructor(_name){
-        if(!_name)name = "Unnamed Object"+Math.random(5);
         this.name = _name;
-    
-        this.isMovable = true;
 
         this.values['log me'] = {
             val: this.name,
@@ -32,13 +27,16 @@ export default class Object {
         this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
         this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
 
+        this.options['isMovable'] = true;
+        this.options['isRemovable'] = true;
+
     }
 
     setColor(col){
         throw Error("setColor needs to be implemented");
     }
 
-    setPosition(x,y){
+    setPosition(x,y,z){
         throw Error("setPosition needs to be implemented");
     }
 
@@ -50,8 +48,24 @@ export default class Object {
         throw Error("getObject needs to be implemented");
     }
 
+    getCategory(){
+        throw Error("getCategory needs to be implemented");
+    }
+
+    getName(){
+        return this.name;
+    }
+
     getOptions(){
         return this.options;
+    }
+
+    getOption(opt){
+        return this.options[opt];
+    }
+
+    setOption(opt,val){
+        this.options[opt] = val;
     }
 
     getValues(){
@@ -81,6 +95,7 @@ export default class Object {
     }
 
     triggerEvent(ev){
+        if(!this.events[ev])return;
         bb.fastGet('scripting','executeText')(this.events[ev]);
     }
 
@@ -90,6 +105,10 @@ export default class Object {
 
     animate(){
         throw Error("animate needs to be implemented");
+    }
+
+    newFrame(){
+        throw Error("newFrame needs to be implemented");
     }
 
     add(){

@@ -56,6 +56,10 @@ export default class ObjectDom extends Object{
 
     animate(){}
 
+    newFrame(){
+        this.triggerEvent('onEachFrame');
+    }
+
     add(){
         scene.addItem(this.div);
     }

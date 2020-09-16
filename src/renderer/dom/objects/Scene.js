@@ -18,7 +18,7 @@ class Scene extends Object {
         document.body.appendChild(this.div);
 
 
-        this.isMovable = false;
+        this.options['isMovable'] = false;
 
     }
 
@@ -34,11 +34,12 @@ class Scene extends Object {
         this.div.removeChild(it);
     }
 
+    getCategory(){
+        return "Scene";
+    }
+
 }
 
 const sceneObj = new Scene();
 
 export default sceneObj;
-
-// bb.fastSet('liveObjects','scene',sceneObj);
-// bb.fastSet('objects','scene',Scene);

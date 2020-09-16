@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="./src/UI/objectInfo/objectInfo.css">
+
+<div id="mainInfoBox" class="hudChild">
+  <div id="objName">OBJNAME</div>
+  <div id="categInfo">
+    <div id="categName">CatName</div>
+  </div>
+  <div class="InfoBox_thinLine"></div> 
+  <div class="InfoBox_prompt">Fields Information:</div>
+  <div id="fieldsInfo">
+    
+  </div>
+  <div class="InfoBox_thinLine"></div> 
+  <div class="InfoBox_prompt">Events Information:</div>
+  <div id="eventsInfo">
+
+  </div>
+  <div class="InfoBox_thinLine"></div> 
+  <div class="InfoBox_prompt">Attributes Information:</div>
+  <div id="attributeInfo">
+
+  </div>
+</div>

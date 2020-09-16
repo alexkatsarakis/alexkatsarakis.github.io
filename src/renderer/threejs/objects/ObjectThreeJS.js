@@ -2,8 +2,6 @@ import bb from '../../../utils/blackboard.js'
 
 import Object from '../../../objects/Object.js'
 
-import translator from '../mouseEvents.js'
-
 import scene from './Scene.js'
 function fromPercentageToPx(x,y){
     x = x/100 * window.innerWidth;
@@ -24,14 +22,18 @@ export default class ObjectThreeJS extends Object{
         this.material.color = new THREE.Color(col);
     }
 
-    setPosition(x,y){
-        if(!this.isMovable)return;
-        [x,y] = fromPercentageToPx(x,y);
-        [x,y] = translator(x,y);
+    setPosition(x,y,z = 0){
+        // [x,y] = fromPercentageToPx(x,y);
+        // [x,y] = translator(x,y);
         this.mesh.position.x = x;
         this.mesh.position.y = y;
+        this.mesh.position.z = z;
     }
-    
+
+    getPosition(){
+        return this.mesh.position;
+    }
+
     getGeometry(){
         return this.geometry;
     }
@@ -44,14 +46,19 @@ export default class ObjectThreeJS extends Object{
         return this.material;
     }
 
-    move(x,y){
-        if(!this.isMovable)return;
-        [x,y] = translator(x,y);
-        this.mesh.position.x -= x;
-        this.mesh.position.y -= y;
+    move(x,y,z = 0){
+        if(!this.options['isMovable'])return;
+        // [x,y] = translator(x,y);
+        this.mesh.position.x += x;
+        this.mesh.position.y += y;
+        this.mesh.position.z += z;
     }
 
     animate(){}
+
+    newFrame(){
+        this.triggerEvent('onEachFrame');
+    }
 
     add(){
         scene.addItem(this.mesh);

@@ -101,28 +101,6 @@ function onHudLoaded(){
     
     bb.installWatch('state','focusedObject',onFocuseChange);
 
-    objMenuButton.addEventListener('click',()=>{
-        if(document.getElementById('objMenu'))document.getElementById('objMenu').remove();
-        let objMenu = document.createElement("div");
-        objMenu.id = "objMenu";
-        objMenu.classList += "hudChild";
-        document.body.appendChild(objMenu);
-
-        let focusedObj = bb.fastGet('state','focusedObject');
-        if(!focusedObj)return;
-        let options = bb.fastGet('liveObjects',focusedObj).getOptions();
-        options.map(opt=>{
-            let i = document.createElement('div');
-            i.className = "objMenuButton";
-            i.innerHTML = opt;
-            i.addEventListener('click',()=>{
-                bb.fastGet('actions',opt)(bb.fastGet('liveObjects',focusedObj));
-            })
-            objMenu.appendChild(i);
-        })
-        console.log(options);
-    });
-
     bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
 
 }

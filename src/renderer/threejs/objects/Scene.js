@@ -7,7 +7,7 @@ class Scene extends Object {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.TextureLoader().load( './assets/textures/sky.jpeg' );;
 
-        this.isMovable = false;
+        this.options['isMovable'] = false;
 
     }
 
@@ -25,6 +25,10 @@ class Scene extends Object {
 
     remove(it){
         this.scene.remove(it);
+    }
+
+    getCategory(){
+        return "Scene";
     }
 
 }
