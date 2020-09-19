@@ -1,12 +1,13 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Box extends ActionObject {
-    
+class Box extends Object {
+    goal
     constructor({name,texture,dim}){
         super(name);
-        this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,1);
+        bb.fastInstall('state','player',name);
+        this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,(dim&&dim.depth)?dim.depth:1);
         let materialInfo = {};
 
         if(texture)materialInfo.map = new THREE.TextureLoader().load( texture );
@@ -15,13 +16,21 @@ class Box extends ActionObject {
         this.mesh = new THREE.Mesh( this.geometry, this.material );
         this.mesh.name = name;
 
-        this.options.push('changeColor');
-        this.options.push("removeObject");
+        this.goal = new THREE.Object3D;
+        this.goal.position.set(0, 5, -5);
+        this.mesh.add( this.goal );
+
+        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
+
     }
 
-    animate(){
-        // this.mesh.rotation.x += 0.01;
-        // this.mesh.rotation.y += 0.01;
+    getGoal(){
+        return this.goal;
+    }
+
+
+    getCategory(){
+        return "Box";
     }
 
 }

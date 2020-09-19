@@ -2,6 +2,51 @@
 
 'use strict';
 
+//Alex's Messages
+Blockly.Msg["OBJECT_TITLE"] = "Αντικείμενο";
+Blockly.Msg["HELPERS_TITLE"] = "Βοηθητικά";
+Blockly.Msg["LOGIC_TITLE"] = "Λογική";
+Blockly.Msg["LOOPS_TITLE"] = "Επαναλήψεις";
+Blockly.Msg["MATH_TITLE"] = "Αριθμοί";
+Blockly.Msg["TEXT_TITLE"] = "Κείμενο";
+Blockly.Msg["LISTS_TITLE"] = "Λίστες";
+Blockly.Msg["COLOUR_TITLE"] = "Χρώματα";
+Blockly.Msg["VARIABLES_TITLE"] = "Μεταβλητές";
+Blockly.Msg["FUNCTIONS_TITLE"] = "Συναρτήσεις";
+
+
+Blockly.Msg["AK_SET_OBJECT"] = "θέσε του αντικειμένου";
+Blockly.Msg["AK_TRIGGER_OBJECT"] = "τρέξε του αντικειμένου";
+Blockly.Msg["AK_OBJECT"] = "αντικείμενο";
+Blockly.Msg["AK_SET"] = "θέσε";
+Blockly.Msg["AK_FIELD"] = "πεδίο";
+Blockly.Msg["AK_TO"] = "σε";
+Blockly.Msg["AK_VALUE"] = "τιμή";
+Blockly.Msg["AK_EVENT"] = "συμβάν";
+Blockly.Msg["AK_TRIGGER"] = "τρέξε";
+
+Blockly.Msg["AK_CATEGORY"] = "κατηγορία";
+Blockly.Msg["AK_NAME"] = "όνομα";
+Blockly.Msg["AK_AXISX"] = "άξονας Χ";
+Blockly.Msg["AK_AXISY"] = "άξονας Υ";
+
+Blockly.Msg["AK_APOSS"] = "το";
+
+Blockly.Msg["AK_COLOUR"] = "χρώμα";
+Blockly.Msg["AK_MOVEX"] = "μετακίνηση στον άξονα X";
+Blockly.Msg["AK_MOVEY"] = "μετακίνηση στον άξονα Y";
+
+Blockly.Msg["AK_SET"] = "θέσε";
+Blockly.Msg["AK_GET"] = "πάρε";
+
+Blockly.Msg["AK_LOG"] = "Εκτύπωσε";
+
+Blockly.Msg["AK_EVERY"] = "κάθε";
+Blockly.Msg["AK_MILLISECONDS"] = "χιλιοστά του δευτερολέπτου";
+Blockly.Msg["AK_DO"] = "κάνε";
+
+//
+
 Blockly.Msg["ADD_COMMENT"] = "Πρόσθεσε Το Σχόλιο";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Δεν μπορώ να διαγράψω την μεταβλητή '%1' διότι είναι μέρος του ορισμού της λειτουργίας '%2'";
 Blockly.Msg["CHANGE_VALUE_TITLE"] = "Άλλαξε την τιμή:";

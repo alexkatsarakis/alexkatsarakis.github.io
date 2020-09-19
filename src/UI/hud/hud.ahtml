@@ -2,7 +2,8 @@
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Objects" colour="%{BKY_MATH_HUE}">
+    <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
+      <block type="object_attr"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
       <block type="dropdown_obj"></block>
@@ -10,14 +11,16 @@
       <block type="create_object"></block>
       <block type="move_object"></block>
       <block type="colour_change"></block>
+      <block type="name_change_choose_object"></block>
       <block type="colour_change_choose_object"></block>
       <block type="get_object"></block>
       <block type="console_log"></block>
     </category>
-    <category name="Helpers" colour="%{BKY_TEXTS_HUE}">
+    <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
+      <block type="after_seconds_do"></block>
     </category>
-    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+    <category name="%{BKY_LOGIC_TITLE}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -26,7 +29,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+    <category name="%{BKY_LOOPS_TITLE}" colour="%{BKY_LOOPS_HUE}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -55,7 +58,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="Math" colour="%{BKY_MATH_HUE}">
+    <category name="%{BKY_MATH_TITLE}" colour="%{BKY_MATH_HUE}">
       <block type="math_number">
         <field name="NUM">123</field>
       </block>
@@ -156,7 +159,7 @@
         </value>
       </block>
     </category>
-    <category name="Text" colour="%{BKY_TEXTS_HUE}">
+    <category name="%{BKY_TEXT_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -233,7 +236,7 @@
         </value>
       </block>
     </category>
-    <category name="Lists" colour="%{BKY_LISTS_HUE}">
+    <category name="%{BKY_LISTS_TITLE}" colour="%{BKY_LISTS_HUE}">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -284,8 +287,7 @@
       </block>
       <block type="lists_sort"></block>
     </category>
-    <category name="Colour" colour="%{BKY_COLOUR_HUE}">
-      <block type="colour_change"></block>
+    <category name="%{BKY_COLOUR_TITLE}" colour="%{BKY_COLOUR_HUE}">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -324,15 +326,15 @@
       </block>
     </category>
     <sep></sep>
-    <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
-    <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+    <category name="%{BKY_VARIABLES_TITLE}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+    <category name="%{BKY_FUNCTIONS_TITLE}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
 <div id="eventsTab" class="hudChild"></div>
 <div id="languageDiv" class="hudChild"></div>
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true category="Box" id="consoleArea" class="hudChild"></textarea>
+<textarea readOnly=true id="consoleArea" category="Square" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
 <div id="focusedObjText" category="Text" class="hudChild"></div>
@@ -345,8 +347,6 @@
 
 <!-- Top Right Side -->
 <div id="fpsCounter" category="Text" class="hudChild"></div>
-<div id="objMenuButton" class="hudChild button"></div>
-<div id="objMenu" class="hudChild"></div>
 
 <!-- Bottom Right Side -->
 <div id="hudToggle" class="button"></div>

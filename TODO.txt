@@ -1,10 +1,10 @@
 EASY
-    - Make blocks to interact between objects (like getObject with ID.... set text to.....)
+    - Make set blocks for field,events,attributes
     - Break down file blocksinstallation.js to smaller .js files
     - Change from px to move on drag.js
+    - Create Add buttons for user created fields,events,attributes
 
 HARD
-    implement the events each object can offer
-        - onClick
-        - onCollision
-        - onChange
+    - Add divs in threejs so i can add div in 3D space 
+    - Add UI to create Items on 3d space
+    - Decouple BOX from player (info through JSON?)

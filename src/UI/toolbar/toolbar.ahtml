@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="./src/UI/toolbar/toolbar.css">
+
+<div id="toolbar" class="hudChild">
+    <div id="toolbar_actions" class="toolbar_item">
+        Actions
+    </div>
+    <div id="toolbar_actions_dropdown_button" class="toolbar_dropdown_button"></div>
+    <div id="toolbar_liveobjects" class="toolbar_item ">
+        Objects
+    </div>
+    <div id="toolbar_liveobjects_dropdown_button" class="toolbar_dropdown_button"></div>
+    <div id="toolbar_events" class="toolbar_item ">
+        Events
+    </div>
+    <div id="toolbar_events_dropdown_button" class="toolbar_dropdown_button"></div>
+</div>

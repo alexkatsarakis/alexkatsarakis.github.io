@@ -1,6 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-import logAction from '../../utils/logs.js'
+import logManager from '../../utils/logs.js'
 
 let AK = {
     getObject: (objName)=>{
@@ -12,11 +12,18 @@ let AK = {
     changeColor: (obj,color)=>{
         bb.fastGet('actions','changeColor')(obj,color);
     },
-    move: (obj,x,y)=>{
-        bb.fastGet('actions','move')(obj,x,y);
+    move: (obj,x,y,z)=>{
+        bb.fastGet('actions','move')(obj,x,y,z);
     },
     log: (whatever)=>{
-        logAction(whatever);
+        logManager.logAction(whatever);
+    },
+    triggerEvent: (obj,eventName)=>{
+        try{
+            obj.triggerEvent(eventName);
+        }catch(e){
+            logManager.logError(e);   
+        }
     }
 }
 

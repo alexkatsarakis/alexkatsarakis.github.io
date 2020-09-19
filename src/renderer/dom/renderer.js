@@ -3,8 +3,8 @@ import bb from '../../utils/blackboard.js'
 import './mouseEvents.js'
 
 import './objects/Scene.js'
-import './objects/Sphere.js'
-import './objects/Box.js'
+import './objects/Circle.js'
+import './objects/Square.js'
 import './objects/Text.js'
 import './objects/Humanoid.js'
 

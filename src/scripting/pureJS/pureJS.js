@@ -6,6 +6,7 @@ let inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
 inputArea.style.height = "100%";
 inputArea.style.resize = "none";
+inputArea.spellcheck = "false";
 
 bb.fastInstall('scripting','currentScriptAsText',()=>{
     return inputArea.value;
@@ -24,10 +25,20 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
 });
 
 bb.fastInstall('scripting','executeText',(text) => {
+    // try{
+    //     eval(text);
+    // }catch(e){
+    //     console.log(e);
+    // }
     eval(text);
 });
 
 bb.fastInstall('scripting','executeCode',(text) => {
+    // try{
+    //     eval(text);
+    // }catch(e){
+    //     console.log(e);
+    // }
     eval(text);
 });
 

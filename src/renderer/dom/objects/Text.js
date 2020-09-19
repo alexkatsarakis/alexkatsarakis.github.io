@@ -1,11 +1,13 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectDom.js'
+
+import Value from '../../../objects/Value.js'
 
 import bb from '../../../utils/blackboard.js'
 function pxToNumber(str){
     str.substr(1,str.length-4);
     return parseInt(str);
 }
-class Text extends ActionObject {
+class Text extends Object {
     
     constructor({name,texture,dim,defaultText,div}){
         super(name);
@@ -13,26 +15,20 @@ class Text extends ActionObject {
         if(div)this.div = div;
         else this.createElement({name,texture,dim,defaultText});
 
+        this.values['text'] = new Value({
+            onChange: (value) => this.div.innerHTML = value,
+            getValue: () => {return this.div.innerHTML;}
+        });
 
-        this.options.push('move')
-        this.options.push('changeColor');
-        this.options.push('removeObject');
+        this.values['colour'] = new Value({
+            onChange: (value) => this.div.style.color = value,
+            getValue: () => {return this.div.style.color;}
+        });
 
-
-        this.values['text'] = {
-            val: this.div.innerHTML,
-            onChange: (newVal) => {
-                this.div.innerHTML = newVal;
-            }
-        }
-
-        this.values['bold'] = {
-            val: false,
-            onChange: (newVal) => {
-                if(newVal)this.div.style.fontWeight = "bold";
-                else this.div.style.fontWeight = "normal";
-            }
-        }
+        this.values['bold'] = new Value({
+            value: false,
+            onChange: (newVal) => this.div.style.fontWeight = (newVal)?"bold":"normal"
+        });
 
     }
 
@@ -41,12 +37,10 @@ class Text extends ActionObject {
         this.div.id = name;
         this.div.innerHTML = (defaultText)?defaultText:name;
         this.div.style.position = "absolute";
-        // this.div.style.width = (dim&&dim.width)?dim.width: "100px";
-        // this.div.style.height = (dim&&dim.height)?dim.height: "100px";
     }
 
-    animate(){
-        
+    getCategory(){
+        return "Text";
     }
 
     setColor(col){

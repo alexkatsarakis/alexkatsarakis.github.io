@@ -2,8 +2,12 @@ export default {
     // "Digit1": ["changeColor"],
     // "Digit2": ["changeColor"],
     // "KeyD": ["move"],
-    // "KeyR": ["removeObject"]
+    "KeyW": ["moveForward"],
+    "KeyS": ["moveBackward"],
+    "KeyA": ["moveLeft"],
+    "KeyD": ["moveRight"],
     "KeyP": ["printBlackboard"],
+    // "KeyL": ["renameObject"],
     // "KeyO": ["downloadScript"],
     // "KeyI": ["loadScript"]
 }

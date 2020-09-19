@@ -11,7 +11,7 @@
 #fpsCounter {
     position: absolute;
     color:white;
-    top:0;
+    top:30px;
     right:20px;
 }
 
@@ -27,29 +27,13 @@
     background-size: contain;
 }
 
-#objMenu {
-    position: absolute;
-    top: 100px;
-    right: 25px;
-}
-
-.objMenuButton {
-    margin: 10px;
-    color: white;
-    font-size: 16px;
-    background-color: black;
-    text-align: center;
-    height: 25px;
-    border-radius: 10px;   
-    cursor: pointer; 
-}
-
 #languageDiv {
     /* visibility: hidden; */
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 40px;
+    top: 60px;
+    overflow: hidden;
 }
 
 #eventsTab {
@@ -57,7 +41,7 @@
     position: absolute;
     width: 500px;
     height: 20px;
-    top: 20px;
+    top: 40px;
     background-color: darkgray;
     overflow-x: hidden;
 }
@@ -77,14 +61,18 @@
     background-color: gray;
 }
 
+.eventTab:hover {
+    background-color: darkgray;
+}
+
 #openTab {
     position: absolute;
     color:black;
-    top: 40px;
-    left: 107px;
+    width: 100px;
+    top: 70px;
+    left: 380px;
+    text-align: right;
     font-size: 20px;
-    background-color: rgb(206, 206, 206);
-    padding: 3px;
 }
 
 #playScriptButton {

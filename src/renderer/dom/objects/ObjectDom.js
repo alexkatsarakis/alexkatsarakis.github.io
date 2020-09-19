@@ -2,6 +2,8 @@ import bb from '../../../utils/blackboard.js'
 
 import Object from '../../../objects/Object.js'
 
+import Value from '../../../objects/Value.js'
+
 import scene from './Scene.js'
 
 function fromPercentageToPx(x,y){
@@ -16,6 +18,21 @@ export default class ObjectDom extends Object{
     constructor(name){
         super(name);
         this.renderer = 'dom';
+
+        this.values['x'] = new Value({
+            onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
+            getValue: () => {return this.div.offsetLeft+"px";}
+        });
+
+        this.values['y'] = new Value({
+            onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
+            getValue: () => {return this.div.offsetTop+"px";}
+        });
+
+        this.values['colour'] = new Value({
+            onChange: (value) => this.div.style.backgroundColor = value,
+            getValue: () => {return this.div.style.backgroundColor;}
+        });
     }
 
     setColor(col){
@@ -37,6 +54,7 @@ export default class ObjectDom extends Object{
     }
 
     move(x,y){
+        if(!this.getOption('isMovable'))return;
         this.div.style.left = (this.div.offsetLeft+x) +"px";
         this.div.style.top = (this.div.offsetTop+y) +"px";
     }
@@ -56,12 +74,16 @@ export default class ObjectDom extends Object{
 
     animate(){}
 
+    newFrame(){
+        this.triggerEvent('onEachFrame');
+    }
+
     add(){
+        bb.fastSet('liveObjects',this.name,this);
         scene.addItem(this.div);
     }
 
     remove(){
-        console.log("removing "+this.name);
         bb.fastRemove('liveObjects',this.name);
         scene.remove(this.div);
     }

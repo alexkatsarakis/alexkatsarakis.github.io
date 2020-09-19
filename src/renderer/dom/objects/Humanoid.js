@@ -1,4 +1,6 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectDom.js'
+
+import Value from '../../../objects/Value.js'
 
 import bb from '../../../utils/blackboard.js'
 
@@ -8,7 +10,7 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Humanoid extends ActionObject {
+class Humanoid extends Object {
     
     constructor({name,texture,dim}){
         super(name);
@@ -91,12 +93,17 @@ class Humanoid extends ActionObject {
             this.div.style.backgroundPosition = 'center';
         }
 
-        this.options.push('changeColor');
-        this.options.push("removeObject");
+
+        this.values['colour'] = new Value({
+            onChange: (value) => this.setColor(value),
+            getValue: () => {return this.div.children[0].style.backgroundColor;}
+        });
+
     }
 
-    animate(){
-        
+
+    getCategory(){
+        return "Humanoid";
     }
 
     setColor(col){
