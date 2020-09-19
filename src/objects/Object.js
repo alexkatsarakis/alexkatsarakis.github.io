@@ -12,16 +12,6 @@ export default class Object {
 
     constructor(_name){
         this.name = _name;
-<<<<<<< HEAD
-=======
-
-        this.values['log me'] = {
-            val: this.name,
-            onChange: () => {
-                logAction(this.name);
-            }
-        }
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 
         this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
@@ -30,10 +20,7 @@ export default class Object {
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
-<<<<<<< HEAD
         this.options['isVisible'] = true;
-=======
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 
     }
 
@@ -61,7 +48,6 @@ export default class Object {
         return this.name;
     }
 
-<<<<<<< HEAD
     setName(newName){
         bb.fastRemove('liveObjects',this.name);
         if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
@@ -69,19 +55,14 @@ export default class Object {
         bb.fastSet('liveObjects',this.name);
     }
 
-=======
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     getOptions(){
         return this.options;
     }
 
-<<<<<<< HEAD
     addOption(opt){
         this.options[opt] = true;
     }
 
-=======
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     getOption(opt){
         return this.options[opt];
     }
@@ -144,11 +125,7 @@ export default class Object {
         throw Error("newFrame needs to be implemented");
     }
 
-<<<<<<< HEAD
     add(){  //Add this item on renderer
-=======
-    add(){
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
         throw Error("add needs to be implemented");
     }
 

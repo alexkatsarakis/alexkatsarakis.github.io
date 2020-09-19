@@ -86,10 +86,6 @@ Blockly.JavaScript['get_object'] = function(block) {
 Blockly.Blocks['console_log'] = {
     init: function() {
         this.appendValueInput('CON_LOG')
-<<<<<<< HEAD
-=======
-            .setCheck('Object')
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
             .appendField(Blockly.Msg.AK_LOG);
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object by name.');
@@ -227,12 +223,9 @@ Blockly.Blocks['create_object'] = {
         this.appendValueInput('PosY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_AXISY);
-<<<<<<< HEAD
         this.appendValueInput('PosZ')
             .setCheck('Number')
             .appendField('Z axis');
-=======
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
         this.setColour(colourPalette.colour);
         this.setTooltip('Create a new object with the given arguments.');
         this.setHelpUrl('none');

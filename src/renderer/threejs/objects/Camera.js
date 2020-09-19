@@ -11,7 +11,6 @@ class Camera extends Object {
 
         this.options['isMovable'] = false;
         
-<<<<<<< HEAD
         delete this.values['x'];
         delete this.values['y'];
         delete this.values['z'];
@@ -27,8 +26,6 @@ class Camera extends Object {
             }
         }
 
-=======
->>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
         this.vect = new THREE.Vector3;
     }
 
