@@ -1,7 +1,10 @@
 import bb from '../../../utils/blackboard.js'
 
 import Object from '../../../objects/Object.js'
+<<<<<<< HEAD
 import Value from '../../../objects/Value.js'
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 
 import scene from './Scene.js'
 function fromPercentageToPx(x,y){
@@ -77,6 +80,7 @@ export default class ObjectThreeJS extends Object{
 
     animate(){}
 
+<<<<<<< HEAD
     setName(newName){
         bb.fastRemove('liveObjects',this.name);
         if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
@@ -85,6 +89,8 @@ export default class ObjectThreeJS extends Object{
         bb.fastSet('liveObjects',this.name,this);
     }
 
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     newFrame(){
         this.triggerEvent('onEachFrame');
     }

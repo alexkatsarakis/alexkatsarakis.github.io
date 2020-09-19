@@ -288,6 +288,10 @@
       <block type="lists_sort"></block>
     </category>
     <category name="%{BKY_COLOUR_TITLE}" colour="%{BKY_COLOUR_HUE}">
+<<<<<<< HEAD
+=======
+      <block type="colour_change"></block>
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">

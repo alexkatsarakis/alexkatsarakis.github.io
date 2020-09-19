@@ -10,20 +10,29 @@
   <div id="fieldsInfo">
     
   </div>
+<<<<<<< HEAD
   <input type="text" id="addFieldText" class="InfoBox_inputText"></input>
   <div id="addFieldButton" class="InfoBox_addButton">+</div>
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
   <div class="InfoBox_thinLine"></div> 
   <div class="InfoBox_prompt">Events Information:</div>
   <div id="eventsInfo">
 
   </div>
+<<<<<<< HEAD
   <input type="text" id="addEventText" class="InfoBox_inputText"></input>
   <div id="addEventButton" class="InfoBox_addButton">+</div>
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
   <div class="InfoBox_thinLine"></div> 
   <div class="InfoBox_prompt">Attributes Information:</div>
   <div id="attributeInfo">
 
   </div>
+<<<<<<< HEAD
   <input type="text" id="addAttributeText" class="InfoBox_inputText"></input>
   <div id="addAttributeButton" class="InfoBox_addButton">+</div>
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 </div>

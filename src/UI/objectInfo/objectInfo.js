@@ -1,7 +1,10 @@
 import bb from '../../utils/blackboard.js'
 
+<<<<<<< HEAD
 import transition from '../../transitionHandlers/focusedObject.js'
 
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 function readTextFile(file,onFinish){
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, true);
@@ -50,11 +53,15 @@ function updateInfo(object){
     fieldsInfo.innerHTML = "";
     for(let i in obj.getValues()){
         let item = document.createElement('div');
+<<<<<<< HEAD
         item.classList += "InfoBox_item";
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
         item.innerHTML = i + " = " + obj.getValue(i);
         fieldsInfo.appendChild(item);
     }
 
+<<<<<<< HEAD
     document.getElementById('addFieldButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addFieldText').value;
         if(textValue === "")return;
@@ -67,15 +74,21 @@ function updateInfo(object){
         document.getElementById('addFieldText').value = "";
     });
 
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     let eventsInfo = document.getElementById('eventsInfo');
     eventsInfo.innerHTML = "";
     for(let i in obj.getEvents()){
         let item = document.createElement('div');
+<<<<<<< HEAD
         item.classList += "InfoBox_item";
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
         item.innerHTML = i;
         eventsInfo.appendChild(item);
     }
 
+<<<<<<< HEAD
     document.getElementById('addEventButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addEventText').value;
         if(textValue === "")return;
@@ -90,11 +103,14 @@ function updateInfo(object){
         transition(focusedObj.getName());
     });
 
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     let attributeInfo = document.getElementById('attributeInfo');
     attributeInfo.innerHTML = "";
     for(let i in obj.getOptions()){
         let item = document.createElement('div');
         item.innerHTML = i + " = " + obj.getOption(i);
+<<<<<<< HEAD
         item.classList += "InfoBox_item";
         attributeInfo.appendChild(item);
     }
@@ -111,9 +127,18 @@ function updateInfo(object){
         document.getElementById('addAttributeText').value = "";
     });
 
+=======
+        attributeInfo.appendChild(item);
+    }
+
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     bb.installWatch('state','focusedObject',updateInfo);
 }
 
 function onObjectInfoLoaded(){
+<<<<<<< HEAD
+=======
+    bb.installWatch('state','focusedObject',updateInfo);
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     updateInfo(undefined);
 }

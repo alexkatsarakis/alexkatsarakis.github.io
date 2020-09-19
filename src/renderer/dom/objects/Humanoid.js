@@ -1,6 +1,9 @@
 import Object from './ObjectDom.js'
+<<<<<<< HEAD
 
 import Value from '../../../objects/Value.js'
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 
 import bb from '../../../utils/blackboard.js'
 
@@ -93,12 +96,15 @@ class Humanoid extends Object {
             this.div.style.backgroundPosition = 'center';
         }
 
+<<<<<<< HEAD
 
         this.values['colour'] = new Value({
             onChange: (value) => this.setColor(value),
             getValue: () => {return this.div.children[0].style.backgroundColor;}
         });
 
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     }
 
 

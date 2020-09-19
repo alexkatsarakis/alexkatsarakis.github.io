@@ -69,7 +69,11 @@
     position: absolute;
     color:black;
     width: 100px;
+<<<<<<< HEAD
     top: 70px;
+=======
+    top: 50px;
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
     left: 380px;
     text-align: right;
     font-size: 20px;

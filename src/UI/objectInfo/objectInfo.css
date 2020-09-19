@@ -38,13 +38,17 @@
     height: 2px;
     background-color: darkgrey;
     margin: 10px 10px 10px 0;
+<<<<<<< HEAD
     margin-top: 25px;
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 }
 
 .InfoBox_prompt {
     color: white;
     font-size: 20px;
     padding-bottom: 2px;
+<<<<<<< HEAD
 }
 
 .InfoBox_inputText {
@@ -61,4 +65,6 @@
     cursor: pointer;
     background-color: darkgray;
     border-radius: 10px;
+=======
+>>>>>>> a5ca5a27f76984fd1fd99012c95e43c993ce6611
 }
