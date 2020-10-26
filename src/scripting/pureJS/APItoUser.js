@@ -12,8 +12,8 @@ let AK = {
     changeColor: (obj,color)=>{
         bb.fastGet('actions','changeColor')(obj,color);
     },
-    move: (obj,x,y,z)=>{
-        bb.fastGet('actions','move')(obj,x,y,z);
+    move: (obj,x,y)=>{
+        bb.fastGet('actions','move')(obj,x,y);
     },
     log: (whatever)=>{
         logManager.logAction(whatever);

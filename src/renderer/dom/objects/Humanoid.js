@@ -5,8 +5,8 @@ import Value from '../../../objects/Value.js'
 import bb from '../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
-    x = x/100 * window.innerWidth;
-    y = y/100 * window.innerHeight;
+    // x = x/100 * window.innerWidth;
+    // y = y/100 * window.innerHeight;
     return [x,y];
 }
 
@@ -14,7 +14,7 @@ class Humanoid extends Object {
     
     constructor({name,texture,dim}){
         super(name);
-        
+
         this.div = document.createElement('div');
         this.div.id = name;
         let [X,Y] = fromPercentageToPx((dim&&dim.width)?dim.width:10,(dim&&dim.height)?dim.height: 10);
@@ -95,9 +95,25 @@ class Humanoid extends Object {
 
 
         this.values['colour'] = new Value({
+            tag: "texture",
             onChange: (value) => this.setColor(value),
             getValue: () => {return this.div.children[0].style.backgroundColor;}
         });
+
+        this.values['width'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.width = value+"px";},
+            getValue: () => {return this.div.style.width.slice(0,-2);}
+        });
+
+        this.values['height'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.height = value+"px";},
+            getValue: () => {return this.div.style.height.slice(0,-2);}
+        });
+
+
+        this.div.style.transform = 'rotate(45deg)';
 
     }
 

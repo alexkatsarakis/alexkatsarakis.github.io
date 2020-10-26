@@ -4,11 +4,7 @@ import Object from '../../../objects/Object.js'
 import Value from '../../../objects/Value.js'
 
 import scene from './Scene.js'
-function fromPercentageToPx(x,y){
-    x = x/100 * window.innerWidth;
-    y = y/100 * window.innerHeight;
-    return [x,y];
-}
+
 export default class ObjectThreeJS extends Object{
     material
     geometry 
@@ -28,11 +24,6 @@ export default class ObjectThreeJS extends Object{
             getValue: () => {return this.mesh.position.y.toFixed(2);}
         });
 
-        this.values['z'] = new Value({
-            onChange: (value) => this.mesh.position.z = value,
-            getValue: () => {return this.mesh.position.z.toFixed(2);}
-        });
-
         this.values['colour'] = new Value({
             onChange: (value) => this.material.color = new THREE.Color(value),
             getValue: () => {return "#"+this.material.color.getHexString();}
@@ -43,12 +34,9 @@ export default class ObjectThreeJS extends Object{
         this.material.color = new THREE.Color(col);
     }
 
-    setPosition(x,y,z = 0){
-        // [x,y] = fromPercentageToPx(x,y);
-        // [x,y] = translator(x,y);
+    setPosition(x,y){
         this.mesh.position.x = x;
         this.mesh.position.y = y;
-        this.mesh.position.z = z;
     }
 
     getPosition(){
@@ -67,19 +55,17 @@ export default class ObjectThreeJS extends Object{
         return this.material;
     }
 
-    move(x,y,z = 0){
+    move(x,y){
         if(!this.options['isMovable'])return;
-        // [x,y] = translator(x,y);
         this.mesh.position.x += x;
         this.mesh.position.y += y;
-        this.mesh.position.z += z;
     }
 
     animate(){}
 
     setName(newName){
         bb.fastRemove('liveObjects',this.name);
-        if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
+        if(bb.fastGet('state','player') === this)bb.fastSet('state','player',this);
         this.name = newName;
         this.mesh.name = newName;
         bb.fastSet('liveObjects',this.name,this);

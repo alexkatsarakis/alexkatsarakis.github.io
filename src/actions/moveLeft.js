@@ -1,10 +1,10 @@
 import bb from '../utils/blackboard.js'
 
-function moveLeft(){
-    let funcs = bb.fastGet('renderer','moveLeft');
-    for(var f in funcs){
-        if(funcs[f]())break;
-    }
+function moveLeft(step = 0.1){
+    if(bb.fastGet('physics','force'))
+        bb.fastGet('physics','force')(bb.fastGet('state','player'),[0,0],[-step,0]);
+    else 
+        bb.fastGet('state','player').move(-step*30,0);
 }
 
-bb.fastSet('actions','moveLeft',moveLeft);
+bb.fastInstall('actions','moveLeft',moveLeft);

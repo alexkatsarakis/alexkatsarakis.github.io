@@ -1,0 +1,49 @@
+#createObjectMenu_makeBig {
+    position: absolute;
+    left:0;
+    bottom: 20px;
+    height: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: teal;
+    padding: 5px;
+    transition: bottom 1s;
+    z-index: 2;
+}
+
+#createObjectMenuWrapper {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    height: 0;
+    background-color: rgb(81, 131, 179);
+    transition: height 1s;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 5;
+}
+
+.createObjectMenu_itemWrapper {
+    width: 200px;
+    background-color: thistle;
+    margin: 0 20px 0 20px;
+    float: left;
+    overflow: hidden;
+}
+
+.createObjectMenu_objName {
+    width: 100%;
+    height: 20px;
+    /* border-bottom: 1px solid black; */
+    color:white;
+    text-align: center;
+    background-color: tomato;
+    overflow: hidden;
+}
+
+.createObjectMenu_body {
+    width: 100%;
+    height: 180px;
+    text-align: center;
+}

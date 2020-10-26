@@ -10,4 +10,4 @@ function renameObject(obj,newName){
     obj.setName(newName);
 }
 
-bb.fastSet('actions','renameObject',renameObject);
+bb.fastInstall('actions','renameObject',renameObject);

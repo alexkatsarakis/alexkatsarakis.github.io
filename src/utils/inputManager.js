@@ -16,7 +16,7 @@ class InputManager {
     getPressedKeys(){
         let keysPressed = [];
         for(let i in this.currentlyPressed){
-            keysPressed.push(i);
+                keysPressed.push(i);
         }
         return keysPressed;
     }

@@ -3,6 +3,8 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
+      <block type="remove_object"></block>
+      <block type="get_object_field"></block>
       <block type="object_attr"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
@@ -15,6 +17,10 @@
       <block type="colour_change_choose_object"></block>
       <block type="get_object"></block>
       <block type="console_log"></block>
+    </category>
+    <category name="Animations" colour="%{BKY_MATH_HUE}">
+      <block type="get_animation"></block>
+      <block type="play_animation"></block>
     </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
@@ -334,7 +340,7 @@
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true id="consoleArea" category="Square" class="hudChild"></textarea>
+<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
 <div id="focusedObjText" category="Text" class="hudChild"></div>

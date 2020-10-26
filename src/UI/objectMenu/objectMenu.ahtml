@@ -1,0 +1,5 @@
+<link rel="stylesheet" href="./src/UI/objectMenu/objectMenu.css">
+
+<div id='objectMenu_makeBig' class='hudChild'>Object Menu</div>
+<div id='objectMenuWrapper' class='hudChild'>
+</div>

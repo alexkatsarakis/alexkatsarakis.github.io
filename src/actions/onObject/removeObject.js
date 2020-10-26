@@ -16,4 +16,4 @@ function removeObject(obj){
     focusObject(undefined);
 }
 
-bb.fastSet('actions','removeObject',removeObject)
+bb.fastInstall('actions','removeObject',removeObject)

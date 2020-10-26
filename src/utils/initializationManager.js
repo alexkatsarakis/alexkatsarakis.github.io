@@ -5,13 +5,19 @@ import bb from './blackboard.js'
 bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
+import '../gameEngine/gameEngine.js'
+
 import '../UI/UI.js'
+
+import '../physics/physics.js'
 
 import '../scripting/scripting.js'
 
 import '../renderer/renderer.js'
 
 import '../actions/actions.js'
+
+import '../sound/sound.js'
 
 
 import requirements from '../../assets/json/strictRequirementsAfterLoad.js' // json

@@ -20,16 +20,28 @@ export default class ObjectDom extends Object{
         this.renderer = 'dom';
 
         this.values['x'] = new Value({
+            tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
-            getValue: () => {return this.div.offsetLeft+"px";}
+            getValue: () => {return this.div.offsetLeft;}
         });
 
         this.values['y'] = new Value({
+            tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
-            getValue: () => {return this.div.offsetTop+"px";}
+            getValue: () => {return this.div.offsetTop;}
+        });
+
+        this.values['rotation'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
+            getValue: () => {
+                let val = this.div.style.getPropertyValue("transform");
+                return (val)?val.slice(7,-4):0;
+            }
         });
 
         this.values['colour'] = new Value({
+            tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
         });
@@ -40,7 +52,7 @@ export default class ObjectDom extends Object{
     }
 
     setPosition(x,y){
-        [x,y] = fromPercentageToPx(x,y);
+        // [x,y] = fromPercentageToPx(x,y);
         this.div.style.left = x +"px";
         this.div.style.top = y +"px";
     }

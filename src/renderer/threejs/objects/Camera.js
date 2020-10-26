@@ -7,13 +7,14 @@ class Camera extends Object {
     vect
     constructor(){
         super("camera");
-        this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.5, 1000 );
+        let width = window.innerWidth/50;
+        let height = window.innerHeight/50;
+        this.camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
 
         this.options['isMovable'] = false;
-        
+
         delete this.values['x'];
         delete this.values['y'];
-        delete this.values['z'];
         delete this.values['colour'];
 
         this.values['distance'] = {
@@ -26,7 +27,6 @@ class Camera extends Object {
             }
         }
 
-        this.vect = new THREE.Vector3;
     }
 
     setColor(col){
@@ -38,10 +38,11 @@ class Camera extends Object {
     }
 
     newFrame(){
-        let obj = bb.fastGet('liveObjects',bb.fastGet('state','player'));
-        this.vect.setFromMatrixPosition(obj.getGoal().matrixWorld);
-        this.camera.position.lerp(this.vect, 0.2);
-        this.camera.lookAt(obj.getObject().position);
+        let obj = bb.fastGet('state','player').getObject();
+        this.camera.position.x = obj.position.x;
+        this.camera.position.y = obj.position.y;
+        this.camera.position.z = obj.position.z-5;
+        this.camera.lookAt(obj.position);
     }
 
 

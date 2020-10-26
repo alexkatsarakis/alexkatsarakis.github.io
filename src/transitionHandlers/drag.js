@@ -1,8 +1,8 @@
+import bb from '../utils/blackboard.js'
+
 export default function dragElement(elmnt,ev) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id)) {
-    dragMouseDown();
-  }
+  dragMouseDown();
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -22,8 +22,10 @@ export default function dragElement(elmnt,ev) {
     pos3 = e.clientX;
     pos4 = e.clientY;
 
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.move(-pos1,-pos2);
+    // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    // elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
   }
 
   function closeDragElement() {

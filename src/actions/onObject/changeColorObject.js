@@ -5,4 +5,4 @@ function changeColor(obj,colour){
     if(obj)obj.setColor(colour);
 }
 
-bb.fastSet('actions','changeColor',changeColor)
+bb.fastInstall('actions','changeColor',changeColor)

@@ -50,18 +50,17 @@ function mouseDown(e){
     var intersects = raycaster.intersectObjects( scene.getScene().children );
     
     if(intersects.length > 0){
-        // dragElement(bb.fastGet('liveObjects',intersects[0].object.name).getObject());
-        console.log("Drag only supported for divs ATM");
+        dragElement(bb.fastGet('liveObjects',intersects[0].object.name),e);
         return true;
     }
     return false;
 }
 
-// if(!bb.fastGet('renderer','mouseDown')){
-//     bb.fastSet('renderer','mouseDown',[mouseDown]);
-// }else{
-//     bb.fastGet('renderer',"mouseDown").push(mouseDown);
-// }
+if(!bb.fastGet('renderer','mouseDown')){
+    bb.fastSet('renderer','mouseDown',[mouseDown]);
+}else{
+    bb.fastGet('renderer',"mouseDown").push(mouseDown);
+}
 
 function leftClick(e){
     e.preventDefault();

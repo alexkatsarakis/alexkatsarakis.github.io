@@ -1,10 +1,12 @@
 import Object from './ObjectDom.js'
 
+import Value from '../../../objects/Value.js'
+
 import bb from '../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
-    x = x/100 * window.innerWidth;
-    y = y/100 * window.innerHeight;
+    // x = x/100 * window.innerWidth;
+    // y = y/100 * window.innerHeight;
     return [x,y];
 }
 
@@ -14,8 +16,14 @@ class Circle extends Object {
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
-        
+
+        this.values['r'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.width = value*2+"px";this.div.style.height = value*2+"px";},
+            getValue: () => {return (this.div.style.width.slice(0,-2)/2);}
+        });
     }
+
 
     createElement({name,texture,dim}){
         this.div = document.createElement('div');

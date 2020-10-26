@@ -1,67 +1,64 @@
 export default {
-    "meta": {
-        "renderer": "three.js",
-    },
     "objects": [
         {
-            "meta":{
-                "name": "BOOOOOX",
-                "texture": "./assets/textures/wood.jpeg",
-                dim:{
-                    width: 2,
-                    height: 2,
-                    depth: 2
+            meta:{
+                name: "from454ENGINE",
+                dim: {
+                    width: 60,
+                    height: 120
+                },
+                film: "mario_big_right_idle"
+            },
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:300,y:830}
+        },
+        {
+            meta:{
+                name: "coin",
+                dim: {
+                    width: 40,
+                    height: 60
+                },
+                film: "coin_spinning"
+            },
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:600,y:460}
+        },
+        {
+            meta:{
+                name: "coin2",
+                dim: {
+                    width: 40,
+                    height: 60
+                },
+                film: "coin_spinning"
+            },
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:700,y:460}
+        },
+        {
+            meta:{
+                name: "HUUUMAN",
+                dim: {
+                    width: 100,
+                    height: 100
                 }
             },
-            "category": "Box",
-            "position": {x:1,y:1,z:-1}
+            category: "Humanoid",
+            color : "#00ff00",
+            position: {x:1080,y:310}
         },
         {
-            "meta":{
-                "name": "SPHEEERE",
-                "texture": "./assets/textures/wood.jpeg"
-            },
-            "category": "Sphere",
-            "position": {x:0,y:0,z:0}
-        },
-        {
-            "meta":{
-                "name": "SQUAAAARE"
-            },
-            "category": "Square",
-            "color" : "#00ffff",
-            "position": {"x":90,"y":10}
-        },
-        {
-            "meta":{
-                "name": "HUUUMAN"
-            },
-            "category": "Humanoid",
-            "color" : "#00ff00",
-            "position": {"x":80,"y":10}
-        },
-        {
-            "meta":{
-                "name": "PLAAANE",
-                "texture": "./assets/textures/blueprint.jpg",
-                "dim":{
-                    "width": 100,
-                    "height": 100
-                },
-                "rotation":{"x":-1.57}
-            },
-            "category": "Plane",
-            "color" : "#0080ff",
-            "position": {x:0,y:0,z:0}
-        },
-        {
-            "meta":{
-                "name": "TEEEEXT",
+            meta:{
+                name: "TEEEEXT",
                 defaultText: "This is a text"
             },
-            "category": "Text",
-            "color" : "#00ff00",
-            "position": {"x":40,"y":10}
+            category: "Text",
+            color: "#00ff00",
+            position: {x:640,y:220},
         }
     ]
 }

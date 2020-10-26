@@ -2,7 +2,7 @@ import bb from '../../utils/blackboard.js'
 
 const colourPalette = {
     colour: 24,
-    object: 40
+    object: 190
 }
 
 Blockly.Blocks['colour_change'] = {
@@ -36,9 +36,6 @@ Blockly.Blocks['move_object'] = {
         this.appendValueInput('valY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_MOVEY);
-        this.appendValueInput('valZ')
-            .setCheck('Number')
-            .appendField("move on Z");
         this.setColour(colourPalette.object);
         this.setTooltip('Move an object.');
         this.setHelpUrl('none');
@@ -55,12 +52,9 @@ Blockly.JavaScript['move_object'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'valY',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    var argument3 = Blockly.JavaScript.valueToCode(block, 'valZ',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument1 = eval(argument1);
     argument2 = eval(argument2);
-    argument3 = eval(argument3);
-    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 + ','+ argument3 +');';
+    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 +');';
 };
 
 Blockly.Blocks['get_object'] = {
@@ -223,9 +217,6 @@ Blockly.Blocks['create_object'] = {
         this.appendValueInput('PosY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_AXISY);
-        this.appendValueInput('PosZ')
-            .setCheck('Number')
-            .appendField('Z axis');
         this.setColour(colourPalette.colour);
         this.setTooltip('Create a new object with the given arguments.');
         this.setHelpUrl('none');
@@ -246,14 +237,13 @@ Blockly.JavaScript['create_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument4 = Blockly.JavaScript.valueToCode(block, 'PosY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument5 = Blockly.JavaScript.valueToCode(block, 'PosZ',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
-return 'bb.fastGet("actions","createObject")({\
-"category":'+argument0+',\
-"name":'+argument1+',\
-"colour":'+argument2+',\
-"position":{"x":'+argument3+',"y":'+ argument4+',"z":'+ argument5 +'} \
-});\n';
+
+    return `bb.fastGet("actions","createObject")({
+        "category": ${argument0},
+        "name":${argument1},
+        "colour":${argument2},
+        "position":{"x":${argument3},"y":${argument4}} 
+        });`;
 };
 
 
@@ -486,4 +476,140 @@ Blockly.Blocks['dropdown_obj'] = {
 Blockly.JavaScript['dropdown_obj'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
     return 'bb.fastGet("liveObjects","' + inp_val + '")';
+};
+
+//====================================================================================
+
+Blockly.Blocks['get_object_field'] = {
+    validate: function(newValue) {
+        this.getSourceBlock().updateConnections(newValue);
+        return newValue;
+    },
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('get')
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField(Blockly.Msg.AK_APOSS);
+        this.appendDummyInput('values')
+            .appendField(Blockly.Msg.AK_FIELD)
+            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD');
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true,undefined);
+    },
+
+    updateConnections: function(newValue) {
+        let values = bb.fastGet('liveObjects',newValue).getValues();
+        let toAdd = [];
+        
+        for(let i in values){
+            toAdd.push([i,i])
+        }
+        
+        if(toAdd.length === 0)toAdd = [['log me','log me']];
+        this.removeInput('values', /* no error */ true);
+        this.removeInput('value',true);
+        this.appendDummyInput('values')
+            .appendField(Blockly.Msg.AK_FIELD)
+            .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD');
+    },
+
+    getObjects(){
+        let map = bb.getComponent('liveObjects').itemMap;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['get_object_field'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    let field_val = block.getFieldValue('FIELD');
+    return [`bb.fastGet("liveObjects","${obj_val}").getValue("${field_val}")`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Blocks['remove_object'] = {
+    init: function() {
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField("remove "+Blockly.Msg.AK_OBJECT);
+        this.setColour(colourPalette.colour);
+        this.setTooltip('remove an object with the given arguments.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['remove_object'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+
+    return `bb.fastGet("actions","removeObject")(${argument0});`;
+};
+
+
+///////////////////////////////////////////////////////////////////////
+
+Blockly.Blocks['get_animation'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'TESTF')
+            .appendField("animation");
+        this.setColour(colourPalette.object);
+        this.setOutput(true, 'Animation');
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+      },
+
+    getCategories(){
+        let map = bb.fastGet('gameEngine','animationManager')._animations;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['get_animation'] = function(block) {
+    let inp_val = block.getFieldValue('TESTF');
+    return inp_val;
+};
+
+
+Blockly.Blocks['play_animation'] = {
+    init: function() {
+        this.appendValueInput('Anim')
+            .setCheck('Animation')
+            .appendField("play animation");
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField("on "+Blockly.Msg.AK_OBJECT);
+        this.setColour(colourPalette.colour);
+        this.setTooltip('remove an object with the given arguments.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['play_animation'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Anim',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    argument0 = argument0.trim();
+    argument1 = argument1.trim();
+    return `bb.fastGet('actions','playAnimation')(
+        {
+           object: ${argument1},
+           anim: '${argument0}' 
+        });`;
 };

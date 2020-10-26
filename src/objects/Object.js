@@ -15,20 +15,33 @@ export default class Object {
 
         this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
+        this.events['onGameStart'] = localStorage.getItem(this.name+"_onGameStart");
         this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
         this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
+        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
         this.options['isVisible'] = true;
+        this.options['isSolid'] = false;
 
+    }
+
+    getPositional(){
+        let toReturn = {};
+        for(let i in this.values){
+            // if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
+
+            if(this.values[i].tag === "positional")toReturn[i]=this.getValue(i);
+        }
+        return toReturn;
     }
 
     setColor(col){
         throw Error("setColor needs to be implemented");
     }
 
-    setPosition(x,y,z){
+    setPosition(x,y){
         throw Error("setPosition needs to be implemented");
     }
 
@@ -50,7 +63,7 @@ export default class Object {
 
     setName(newName){
         bb.fastRemove('liveObjects',this.name);
-        if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
+        if(bb.fastGet('state','player') === this)bb.fastSet('state','player',this);
         this.name = newName;
         bb.fastSet('liveObjects',this.name);
     }
@@ -82,6 +95,7 @@ export default class Object {
     }
 
     setValue(val,v){
+        if(!this.values[val])return;
         this.values[val].val = v;
         if(this.values[val].onChange)this.values[val].onChange(v);
     }

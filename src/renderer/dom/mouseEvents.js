@@ -55,7 +55,7 @@ function mouseDown(e){
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             if(!aliveItems[it].getOption('isMovable'))return false;
-            dragElement(aliveItems[it].getObject(),e);
+            dragElement(aliveItems[it],e);
             return true;
         }
     }

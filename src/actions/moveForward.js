@@ -1,10 +1,11 @@
 import bb from '../utils/blackboard.js'
 
-function moveFWD(){
-    let funcs = bb.fastGet('renderer','moveFWD');
-    for(var f in funcs){
-        if(funcs[f]())break;
-    }
+function moveFWD(step = 0.1){
+    if(bb.fastGet('physics','force'))
+        bb.fastGet('physics','force')(bb.fastGet('state','player'),[0,0],[0,-step]);
+    else 
+        bb.fastGet('state','player').move(0,-step*30);
 }
 
-bb.fastSet('actions','moveForward',moveFWD);
+
+bb.fastInstall('actions','moveForward',moveFWD);
