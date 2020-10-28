@@ -1,5 +1,10 @@
 export default {
-    "objects": [
+    state:{
+        name: 'initial',
+        background_color: '#000000',
+        background: './assets/textures/sky.jpeg'
+    },
+    objects: [
         {
             meta:{
                 name: "from454ENGINE",
@@ -11,7 +16,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:300,y:830}
+            position: {x:300,y:800}
         },
         {
             meta:{

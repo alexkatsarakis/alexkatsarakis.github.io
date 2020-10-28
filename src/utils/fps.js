@@ -1,3 +1,5 @@
+import bb from './blackboard.js'
+
 function Timer(){
   let d = new Date();
   let lastTime = d.getTime();
@@ -6,11 +8,12 @@ function Timer(){
       let currTime = new Date().getTime();
       if(currTime > lastTime + 1000){
           lastTime = currTime;
-          document.getElementById('fpsCounter').innerHTML = "FPS:"+sinceLastCount;
+          bb.fastSet('state','FPS',sinceLastCount);
           sinceLastCount = 0;
       }else {
           sinceLastCount++;
       }
+      bb.fastSet('state','gameTime',currTime);
   }
 
 }

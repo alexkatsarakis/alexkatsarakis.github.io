@@ -1,3 +1,5 @@
+import './EnvironmentObject.js'
+
 import './dom/renderer.js'
 import './454GameEngine/renderer.js'
 // import './pixi/renderer.js'

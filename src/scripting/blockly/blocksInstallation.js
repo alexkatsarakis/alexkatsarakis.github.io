@@ -22,7 +22,7 @@ Blockly.Blocks['colour_change'] = {
 Blockly.JavaScript['colour_change'] = function(block) {
     var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("actions","changeColor")(undefined,'+argument0 + ');';
+    return `bb.fastGet('actions','changeColor')(undefined,${argument0});`;
 };
 
 Blockly.Blocks['move_object'] = {
@@ -54,7 +54,7 @@ Blockly.JavaScript['move_object'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument1 = eval(argument1);
     argument2 = eval(argument2);
-    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 +');';
+    return `bb.fastGet('actions','move')(${argument0},${argument1},${argument2});`;
 };
 
 Blockly.Blocks['get_object'] = {
@@ -74,7 +74,7 @@ Blockly.Blocks['get_object'] = {
 Blockly.JavaScript['get_object'] = function(block) {
     var argument0 = Blockly.JavaScript.valueToCode(block, 'Object',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("liveObjects",' + argument0 + ')';
+    return `bb.fastGet('liveObjects',${argument0})`;
 };
 
 Blockly.Blocks['console_log'] = {
@@ -119,7 +119,7 @@ Blockly.JavaScript['colour_change_choose_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.valueToCode(block, 'Colour',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("actions","changeColor")('+argument0+','+argument1 + ');';
+    return `bb.fastGet('actions','changeColor')(${argument0},${argument1});`;
 };
 
 Blockly.Blocks['name_change_choose_object'] = {
@@ -144,7 +144,7 @@ Blockly.JavaScript['name_change_choose_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.valueToCode(block, 'Name',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("actions","renameObject")('+argument0+','+argument1 + ');';
+    return `bb.fastGet('actions','renameObject')(${argument0},${argument1});`;
 };
 
 Blockly.Blocks['every_seconds_do'] = {
@@ -238,11 +238,11 @@ Blockly.JavaScript['create_object'] = function(block) {
     var argument4 = Blockly.JavaScript.valueToCode(block, 'PosY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-    return `bb.fastGet("actions","createObject")({
-        "category": ${argument0},
-        "name":${argument1},
-        "colour":${argument2},
-        "position":{"x":${argument3},"y":${argument4}} 
+    return `bb.fastGet('actions','createObject')({
+        'category': ${argument0},
+        'name':${argument1},
+        'colour':${argument2},
+        'position':{'x':${argument3},'y':${argument4}} 
         });`;
 };
 
@@ -335,7 +335,7 @@ Blockly.JavaScript['object_attr'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return 'bb.fastGet("liveObjects","'+obj_val+'").setOption("'+field_val+'",'+val_val+');';
+    return `bb.fastGet('liveObjects','${obj_val}').setOption('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_field'] = {
@@ -396,7 +396,7 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return 'bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');';
+    return `bb.fastGet('liveObjects','${obj_val}').setValue('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_event'] = {
@@ -449,7 +449,7 @@ Blockly.Blocks['object_event'] = {
 Blockly.JavaScript['object_event'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return 'bb.fastGet("liveObjects","'+obj_val+'").triggerEvent("'+field_val+'");';
+    return `bb.fastGet('liveObjects','${obj_val}').triggerEvent('${field_val}');`;
 };
 
 Blockly.Blocks['dropdown_obj'] = {
@@ -475,7 +475,7 @@ Blockly.Blocks['dropdown_obj'] = {
 
 Blockly.JavaScript['dropdown_obj'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
-    return 'bb.fastGet("liveObjects","' + inp_val + '")';
+    return `bb.fastGet('liveObjects','${inp_val}')`;
 };
 
 //====================================================================================
@@ -529,7 +529,7 @@ Blockly.Blocks['get_object_field'] = {
 Blockly.JavaScript['get_object_field'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return [`bb.fastGet("liveObjects","${obj_val}").getValue("${field_val}")`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+    return [`bb.fastGet('liveObjects','${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Blocks['remove_object'] = {
@@ -550,7 +550,7 @@ Blockly.JavaScript['remove_object'] = function(block) {
     var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-    return `bb.fastGet("actions","removeObject")(${argument0});`;
+    return `bb.fastGet('actions','removeObject')(${argument0});`;
 };
 
 
@@ -611,5 +611,58 @@ Blockly.JavaScript['play_animation'] = function(block) {
         {
            object: ${argument1},
            anim: '${argument0}' 
+        });`;
+};
+
+Blockly.Blocks['play_animation_extended'] = {
+    init: function() {
+        this.appendValueInput("Anim")
+            .setCheck("Animation")
+            .appendField("animation");
+        this.appendValueInput("Obj")
+            .setCheck("Object")
+            .appendField("object");
+        this.appendStatementInput("onStart")
+            .setCheck(null)
+            .appendField("on animation start");
+        this.appendStatementInput("onEnd")
+            .setCheck(null)
+            .appendField("on animation end");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+      }
+};
+
+Blockly.JavaScript['play_animation_extended'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Anim',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    argument0 = argument0.trim();
+    argument1 = argument1.trim();
+    var statements_onstart = Blockly.JavaScript.statementToCode(block, 'onStart');
+    var statements_onend = Blockly.JavaScript.statementToCode(block, 'onEnd');
+    
+    // const reg = /;/gi;
+    // statements_onstart = statements_onstart.replace(reg,'');
+    // statements_onend = statements_onend.replace(reg,'');
+    
+    console.log(`bb.fastGet('actions','playAnimation')(
+        {
+           object: ${argument1},
+           anim: '${argument0}',
+           onStart: ()=>eval("${statements_onstart}"),
+           onFinish: ()=>eval("${statements_onend}")
+        });`);
+
+    return `bb.fastGet('actions','playAnimation')(
+        {
+           object: ${argument1},
+           anim: '${argument0}',
+           onStart: ()=>eval("${statements_onstart}"),
+           onFinish: ()=>eval("${statements_onend}")
         });`;
 };

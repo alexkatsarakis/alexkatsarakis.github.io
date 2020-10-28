@@ -67,7 +67,7 @@ export default class Game {
      * Adds an item to render array
      * @param {Function} coll - Item to be rendered
      */
-    set collision(coll){
+    set collisions(coll){
         this._actions.collisions.push(coll);
     }
 

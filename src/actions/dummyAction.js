@@ -21,7 +21,7 @@ import logManager from '../utils/logs.js'
 
 function dummyAction(){
     bb.fastGet('sound','addSound')('aaaa','demoSound');
-    // bb.fastGet('sound','playBackground')('aaaa');
+    bb.fastGet('sound','playSound')('aaaa');
     console.log(bb.fastGet('sound','getSounds')());
 }
 

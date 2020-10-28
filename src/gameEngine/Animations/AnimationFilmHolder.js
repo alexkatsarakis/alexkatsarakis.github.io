@@ -4,6 +4,7 @@ import AnimationFilm from './AnimationFilm.js'
 
 class AnimationFilmHolder {
     _films = {}; // id -> animationFilm
+    _assetsToLoad = new Set();
 
     loadAll(){
         for(let i in json.boxes){
@@ -18,6 +19,7 @@ class AnimationFilmHolder {
                 });
                 this._films[id] = animFilm;
             }
+            this._assetsToLoad.add(item.sprite_url);
             this._films[id].append({x:item.x,y:item.y,width:item.width,height:item.height});
         }
     }
@@ -28,6 +30,10 @@ class AnimationFilmHolder {
 
     getFilm(id){
         return this._films[id];
+    }
+
+    getAssetsToLoad(){
+        return this._assetsToLoad;
     }
 
 };

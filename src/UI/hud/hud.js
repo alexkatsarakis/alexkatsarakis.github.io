@@ -101,6 +101,15 @@ function onHudLoaded(){
     
     bb.installWatch('state','focusedObject',onFocuseChange);
 
+    let fpsCounter = document.getElementById('fpsCounter');
+
+    function onFPSChange(newFPS){
+        fpsCounter.innerHTML = "FPS:"+newFPS;
+        bb.installWatch('state','FPS',onFPSChange);
+    }
+
+    bb.installWatch('state','FPS',onFPSChange);
+
     bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
 
 }

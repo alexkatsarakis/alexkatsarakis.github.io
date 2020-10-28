@@ -9,11 +9,11 @@ class Scene {
     constructor(){
         this._canvas = document.createElement('canvas');
         this._canvas.id = '454Scene';
-        this._canvas.style.width = window.innerWidth+'px';
-        this._canvas.style.height = window.innerHeight+'px';
+        this._canvas.style.width = 1920+'px';// window.innerWidth+'px';
+        this._canvas.style.height = 1080+'px';// window.innerHeight+'px';
         this._canvasCTX = this._canvas.getContext("2d");
-        this._canvasCTX.canvas.width = window.innerWidth;
-        this._canvasCTX.canvas.height = window.innerHeight;
+        this._canvasCTX.canvas.width = 1920;// window.innerWidth;
+        this._canvasCTX.canvas.height = 1080;// window.innerHeight;
         document.body.appendChild(this._canvas);
 
         this._offScreenCanvas = new OffscreenCanvas(window.innerWidth,window.innerHeight);

@@ -21,6 +21,7 @@
     <category name="Animations" colour="%{BKY_MATH_HUE}">
       <block type="get_animation"></block>
       <block type="play_animation"></block>
+      <block type="play_animation_extended"></block>
     </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
@@ -343,7 +344,8 @@
 <textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
-<div id="focusedObjText" category="Text" class="hudChild"></div>
+<!-- <div id="focusedObjText" category="Text" class="hudChild"></div> -->
+<div id="focusedObjText" class="hudChild"></div>
 
 <!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
   <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 
@@ -352,7 +354,8 @@
 </div> -->
 
 <!-- Top Right Side -->
-<div id="fpsCounter" category="Text" class="hudChild"></div>
+<!-- <div id="fpsCounter" category="Text" class="hudChild"></div> -->
+<div id="fpsCounter" class="hudChild"></div>
 
 <!-- Bottom Right Side -->
 <div id="hudToggle" class="button"></div>
