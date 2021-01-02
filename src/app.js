@@ -46,6 +46,7 @@ export default class App {
         this.initialise();
         this.load();
         this.run();
+        delete this.game;
     }
     
     get game(){

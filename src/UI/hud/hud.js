@@ -1,37 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-function readTextFile(file,onFinish){
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                document.body.insertAdjacentHTML('beforeend',allText);
-                convertHTMLtoObjects();
-                onFinish();
-            }
-        }
-    }
-    rawFile.send(null);
-}
-readTextFile('./src/UI/hud/hud.ahtml',onHudLoaded);
-
-function convertHTMLtoObjects(){
-    let children = [ ...document.body.children ];
-    children.map(child => {
-        if(child.attributes.getNamedItem("category")){
-            let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
-            document.body.removeChild(child);
-            let obj = new objCat({name:child.id,div:child});
-            bb.fastSet('liveObjects',child.id,obj);
-            obj.add();
-        }
-    })
-}
+export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
 
 function hudState(){
     let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
@@ -49,6 +18,24 @@ function hudState(){
     return toggleVisibility;
 }
 
+// function codeAnalysis(srcCode){
+//     const reg = /(AK\.)([^\(]+)\(([^\,\)]*)\)/gim;
+//     let matches = ((srcCode || '').match(reg) || []);
+//     let res = [];
+
+//     matches.forEach((match)=>{
+//         let test = match;
+//         res.push(match);
+//         while((test = test.replace(reg,'$3'))){
+//             let m = (test || '').match(reg) || [];
+//             console.log(m);
+//             if(m.length === 0)return;
+//             m.forEach(mat=>res.push(mat));
+//         }
+//     })
+//     console.log(res);
+// }
+
 
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
@@ -56,50 +43,62 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = bb.fastGet('scripting','currentScriptAsCode')();
-        bb.fastGet('scripting','executeCode')(code);
+        let code = bb.invoke('scripting','currentScriptAsCode');
+        bb.invoke('scripting','executeCode',code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.fastGet('scripting','currentScriptAsText')();
-        bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).setEvent(tabOpen,text);
+        let text = bb.invoke('scripting','currentScriptAsText');
+        bb.fastGet('state','focusedObject').setEvent(tabOpen,text);
     });
 
     function tabInfo(obj,id){
         return ()=>{
-            let text = bb.fastGet('liveObjects',obj).getEvent(id);
-            bb.fastGet('scripting','clearAndLoadFromText')(text);
+            let text = obj.getEvent(id);
+            bb.invoke('scripting','clearAndLoadFromText',text);
+            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
         };
     }
 
-    function onFocuseChange(objName){
+    let logAllActions = "";
+
+    let consoleArea = document.getElementById('consoleArea');
+    function onActionChange(newMessage){
+        consoleArea.value += '\n'+newMessage;
+        consoleArea.scrollTop = consoleArea.scrollHeight;
+        logAllActions += newMessage+'\n';
+        bb.installWatch('state','lastAction',onActionChange);
+    }
+
+    bb.installWatch('state','lastAction',onActionChange);
+
+    function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";
-        if(objName === undefined){
+        if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
-            bb.fastGet('scripting','clearAndLoadFromText')("");
-            bb.installWatch('state','focusedObject',onFocuseChange);
+            bb.invoke('scripting','clearAndLoadFromText','');
+            bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
-        tabOpen = "onClick";
         let firstObject = true;
-        for(let i in bb.fastGet('liveObjects',objName).getEvents()){
+        for(let i in obj.getEvents()){
             let elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
-            elem.addEventListener('click',tabInfo(objName,i));
+            elem.addEventListener('click',tabInfo(obj,i));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();
                 firstObject = false;
             }
         }
-        bb.installWatch('state','focusedObject',onFocuseChange);
+        bb.installWatch('state','focusedObject',onFocusChange);
     }
     
-    bb.installWatch('state','focusedObject',onFocuseChange);
+    bb.installWatch('state','focusedObject',onFocusChange);
 
     let fpsCounter = document.getElementById('fpsCounter');
 
@@ -110,6 +109,6 @@ function onHudLoaded(){
 
     bb.installWatch('state','FPS',onFPSChange);
 
-    bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
+    bb.invoke('scripting','injectInDiv',document.getElementById('languageDiv'));
 
 }

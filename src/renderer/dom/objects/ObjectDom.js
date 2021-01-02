@@ -15,8 +15,8 @@ function fromPercentageToPx(x,y){
 export default class ObjectDom extends Object{
     div
 
-    constructor(name){
-        super(name);
+    constructor(name,id){
+        super(name,id);
         this.renderer = 'dom';
 
         this.values['x'] = new Value({
@@ -91,12 +91,13 @@ export default class ObjectDom extends Object{
     }
 
     add(){
-        bb.fastSet('liveObjects',this.name,this);
+        bb.fastSet('liveObjects',this.id,this);
         scene.addItem(this.div);
     }
 
     remove(){
-        bb.fastRemove('liveObjects',this.name);
+        this.clear();
+        bb.fastRemove('liveObjects',this.id);
         scene.remove(this.div);
     }
 

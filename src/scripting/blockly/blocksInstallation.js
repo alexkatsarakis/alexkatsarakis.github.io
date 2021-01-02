@@ -5,26 +5,6 @@ const colourPalette = {
     object: 190
 }
 
-Blockly.Blocks['colour_change'] = {
-    init: function() {
-        this.appendValueInput('VALUE')
-            .setCheck('Colour')
-            .appendField(Blockly.Msg.AK_COLOUR);
-        this.setColour(colourPalette.colour);
-        this.setTooltip('Change the colour of the object it refers.');
-        this.setHelpUrl('none');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        return 0;
-    }
-};
-
-Blockly.JavaScript['colour_change'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return `bb.fastGet('actions','changeColor')(undefined,${argument0});`;
-};
-
 Blockly.Blocks['move_object'] = {
     init: function() {
         this.appendValueInput('Obj')
@@ -57,25 +37,25 @@ Blockly.JavaScript['move_object'] = function(block) {
     return `bb.fastGet('actions','move')(${argument0},${argument1},${argument2});`;
 };
 
-Blockly.Blocks['get_object'] = {
-    init: function() {
-        this.appendValueInput('Object')
-            .setCheck('String')
-            .appendField(Blockly.Msg.AK_GET)
-            .appendField(Blockly.Msg.AK_OBJECT);
-        this.setColour(colourPalette.object);
-        this.setOutput(true, 'Object');
-        this.setTooltip('Get an object by name.');
-        this.setHelpUrl('none');
-        return 0;
-    }
-};
+// Blockly.Blocks['get_object'] = {
+//     init: function() {
+//         this.appendValueInput('Object')
+//             .setCheck('String')
+//             .appendField(Blockly.Msg.AK_GET)
+//             .appendField(Blockly.Msg.AK_OBJECT);
+//         this.setColour(colourPalette.object);
+//         this.setOutput(true, 'Object');
+//         this.setTooltip('Get an object by name.');
+//         this.setHelpUrl('none');
+//         return 0;
+//     }
+// };
 
-Blockly.JavaScript['get_object'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'Object',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return `bb.fastGet('liveObjects',${argument0})`;
-};
+// Blockly.JavaScript['get_object'] = function(block) {
+//     var argument0 = Blockly.JavaScript.valueToCode(block, 'Object',
+//     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+//     return `bb.fastGet('liveObjects',${argument0})`;
+// };
 
 Blockly.Blocks['console_log'] = {
     init: function() {
@@ -287,7 +267,7 @@ Blockly.Blocks['object_attr'] = {
         this.appendDummyInput('values')
             // .appendField(Blockly.Msg.AK_FIELD)
             .appendField("attribute")
-            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD')
+            .appendField(new Blockly.FieldDropdown([["",""]]), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
             .setCheck("Boolean")
@@ -307,7 +287,7 @@ Blockly.Blocks['object_attr'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['log me','log me']];
+        if(toAdd.length === 0)toAdd = [['','']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -324,7 +304,7 @@ Blockly.Blocks['object_attr'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-                categs.push([i,i]);
+                categs.push([map[i].name,i]);
         }
         return categs;
     }
@@ -335,6 +315,7 @@ Blockly.JavaScript['object_attr'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    console.log(obj_val);
     return `bb.fastGet('liveObjects','${obj_val}').setOption('${field_val}',${val_val});`;
 };
 
@@ -351,7 +332,7 @@ Blockly.Blocks['object_field'] = {
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
             .appendField(Blockly.Msg.AK_FIELD)
-            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD')
+            .appendField(new Blockly.FieldDropdown([["x","x"]]), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
             .appendField(Blockly.Msg.AK_VALUE);
@@ -370,7 +351,7 @@ Blockly.Blocks['object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['log me','log me']];
+        if(toAdd.length === 0)toAdd = [['x','x']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -385,7 +366,7 @@ Blockly.Blocks['object_field'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-                categs.push([i,i]);
+                categs.push([map[i].name,i]);
         }
         return categs;
     }
@@ -440,7 +421,7 @@ Blockly.Blocks['object_event'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-                categs.push([i,i]);
+                categs.push([map[i].name,i]);
         }
         return categs;
     }
@@ -467,7 +448,7 @@ Blockly.Blocks['dropdown_obj'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-                categs.push([i,i]);
+                categs.push([map[i].name,i]);
         }
         return categs;
     }
@@ -520,7 +501,7 @@ Blockly.Blocks['get_object_field'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-                categs.push([i,i]);
+                categs.push([map[i].name,i]);
         }
         return categs;
     }
@@ -568,7 +549,7 @@ Blockly.Blocks['get_animation'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('gameEngine','animationManager')._animations;
+        let map = bb.fastGet('animation','getAllAnimations')();
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
@@ -650,19 +631,157 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     // statements_onstart = statements_onstart.replace(reg,'');
     // statements_onend = statements_onend.replace(reg,'');
     
-    console.log(`bb.fastGet('actions','playAnimation')(
-        {
-           object: ${argument1},
-           anim: '${argument0}',
-           onStart: ()=>eval("${statements_onstart}"),
-           onFinish: ()=>eval("${statements_onend}")
-        });`);
+    // console.log(`bb.fastGet('actions','playAnimation')(
+    //     {
+    //        object: ${argument1},
+    //        anim: '${argument0}',
+    //        onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
+    //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
+    //     })`);
 
     return `bb.fastGet('actions','playAnimation')(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>eval("${statements_onstart}"),
-           onFinish: ()=>eval("${statements_onend}")
-        });`;
+           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
+           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
+        })`;
+};
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////// SOUNDS
+
+
+Blockly.Blocks['play_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("play sound")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("once");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['play_sound'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','playSound')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop sound")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND');
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['stop_sound'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','stopSound')('${inp_val}');`;
+};
+
+Blockly.Blocks['play_background'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("play")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("as background music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['play_background'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','playBackground')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_background'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop background")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['stop_background'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','stopBackground')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_every_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop all sounds and music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      }
+};
+
+Blockly.JavaScript['stop_every_sound'] = function(block) {
+    return `bb.fastGet('sound','stopAllSounds')();`;
 };

@@ -1,29 +1,16 @@
+import bb from './blackboard.js'
+
 function logManager(){
-     function logAction(message){
-        let onDocument = document.getElementById('consoleArea');
-        if(onDocument){
-            onDocument.value += "\n"+message;
-            onDocument.scrollTop = onDocument.scrollHeight;
-        }
-        else console.log(message);
+    function logAction(message){
+        bb.fastSet('state','lastAction',message);
     }
     
     function logError(message){
-        let onDocument = document.getElementById('consoleArea');
-        if(onDocument){
-            onDocument.value += '\nError: '+message;
-            onDocument.scrollTop = onDocument.scrollHeight;
-        }
-        else console.log(message);
+        bb.fastSet('state','lastAction','Error: '+message);
     }
 
     function logWarning(message){
-        let onDocument = document.getElementById('consoleArea');
-        if(onDocument){
-            onDocument.value += '\nWarning: '+message;
-            onDocument.scrollTop = onDocument.scrollHeight;
-        }
-        else console.log(message);
+        bb.fastSet('state','lastAction','Warning: '+message);
     }
 
     return {

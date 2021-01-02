@@ -12,16 +12,22 @@
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
       <block type="move_object"></block>
-      <block type="colour_change"></block>
       <block type="name_change_choose_object"></block>
       <block type="colour_change_choose_object"></block>
-      <block type="get_object"></block>
+      <!-- <block type="get_object"></block> -->
       <block type="console_log"></block>
     </category>
     <category name="Animations" colour="%{BKY_MATH_HUE}">
       <block type="get_animation"></block>
       <block type="play_animation"></block>
       <block type="play_animation_extended"></block>
+    </category>
+    <category name="Sounds" colour="%{BKY_LOOPS_HUE}">
+      <block type="play_sound"></block>
+      <block type="stop_sound"></block>
+      <block type="play_background"></block>
+      <block type="stop_background"></block>
+      <block type="stop_every_sound"></block>
     </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>

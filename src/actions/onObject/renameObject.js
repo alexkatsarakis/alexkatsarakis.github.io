@@ -3,10 +3,7 @@ import bb from '../../utils/blackboard.js'
 import logManager from '../../utils/logs.js'
 
 function renameObject(obj,newName){
-    if(bb.fastGet('liveObjects',newName)){
-        logManager.logError("Name " + newName + " already exists");
-        return;
-    }
+    if(!obj) console.log('Didn\'t provided object on name change');
     obj.setName(newName);
 }
 

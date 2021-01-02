@@ -5,10 +5,15 @@
     height: 20px;
     font-size: 20px;
     cursor: pointer;
-    background-color: teal;
+    background-color: var(--main-buttons-background-color);
+    color: var(--main-buttons-text-color);
     padding: 5px;
     transition: bottom 1s;
     z-index: 2;
+}
+
+#objectMenu_makeBig:hover {
+    background-color: var(--main-buttons-background-color-hover);
 }
 
 #objectMenuWrapper {
@@ -17,7 +22,7 @@
     left:0;
     width: 100%;
     height: 0;
-    background-color: rgb(81, 131, 179);
+    background-color: var(--main-color);
     transition: height 1s;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -26,7 +31,6 @@
 
 .objectMenu_itemWrapper {
     width: 200px;
-    background-color: thistle;
     margin: 0 20px 0 20px;
     float: left;
     overflow: hidden;
@@ -36,9 +40,9 @@
     width: 100%;
     height: 20px;
     /* border-bottom: 1px solid black; */
-    color:white;
+    color:var(--secondary-color-text);
     text-align: center;
-    background-color: tomato;
+    background-color: var(--secondary-color);
     overflow: hidden;
 }
 
@@ -46,6 +50,7 @@
     width: 100%;
     height: 180px;
     text-align: center;
+    background-color: var(--canvas-default-bg-color);
 }
 
 #objectMenu_focus {

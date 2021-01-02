@@ -2,48 +2,17 @@ import bb from '../../utils/blackboard.js'
 
 import transition from '../../transitionHandlers/focusedObject.js'
 
-function readTextFile(file,onFinish){
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                document.body.insertAdjacentHTML('beforeend',allText);
-                convertHTMLtoObjects();
-                onFinish();
-            }
-        }
-    }
-    rawFile.send(null);
-}
-readTextFile('./src/UI/objectInfo/objectInfo.ahtml',onObjectInfoLoaded);
+export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
 
-function convertHTMLtoObjects(){
-    let children = [ ...document.body.children ];
-    children.map(child => {
-        if(child.attributes.getNamedItem("category")){
-            let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
-            document.body.removeChild(child);
-            let obj = new objCat({name:child.id,div:child});
-            bb.fastSet('liveObjects',child.id,obj);
-            obj.add();
-        }
-    })
-}
-
-function updateInfo(object){
-    if(object === undefined || bb.fastGet('state','mode') !== 'editing'){
+function updateInfo(obj){
+    if(!document.getElementById('mainInfoBox'))return;
+    if(obj === undefined || bb.fastGet('state','mode') !== 'editing'){
         document.getElementById('mainInfoBox').style.display = "none";
         bb.installWatch('state','focusedObject',updateInfo);
         return;
     }
-    let obj = bb.fastGet('liveObjects',object);
     document.getElementById('mainInfoBox').style.display = "block";
-    document.getElementById('objName').innerHTML = object;
+    document.getElementById('objName').innerHTML = obj.name;
     document.getElementById('categName').innerHTML = "("+obj.getCategory()+")";
 
     let fieldsInfo = document.getElementById('fieldsInfo');
@@ -58,7 +27,7 @@ function updateInfo(object){
     document.getElementById('addFieldButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addFieldText').value;
         if(textValue === "")return;
-        let focusedObj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+        let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addValue(textValue);
         let item = document.createElement('div');
         item.classList += "InfoBox_item";
@@ -102,7 +71,7 @@ function updateInfo(object){
     document.getElementById('addAttributeButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addAttributeText').value;
         if(textValue === "")return;
-        let focusedObj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+        let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addOption(textValue);
         let item = document.createElement('div');
         item.innerHTML = textValue + " = " + focusedObj.getOption(textValue);
@@ -115,5 +84,6 @@ function updateInfo(object){
 }
 
 function onObjectInfoLoaded(){
-    updateInfo(undefined);
+    let focObj = bb.fastGet('state','focusedObject');
+    updateInfo((focObj)?focObj:undefined);
 }

@@ -1,11 +1,16 @@
 class SoundManager {
     prefix = './assets/sounds/';
-    postfix = '.wav';
+    postfix = '.mp3';
     sounds = {};
     playingOnRepeat = {};
     playingOnce = {};
 
     restart = true;
+
+    constructor(){
+        // this.addSound('demo','demoSound');
+        this.addSound('coin_pick','coin-pick');
+    }
 
     addSound(tag,url){
         if(this.sounds[tag])throw Error('Tried to add a sound that already exists');
@@ -24,7 +29,7 @@ class SoundManager {
         delete this.sounds[tag];
     };
 
-    playSoundOnRepeat(sound='demo'){
+    playSoundOnRepeat(sound){
         if(this.playingOnRepeat[sound]){
             if(this.restart)this.sounds[sound].currentTime = 0;
             return;
@@ -34,7 +39,7 @@ class SoundManager {
         this.playingOnRepeat[sound] = this.sounds[sound];
     };
 
-    stopSoundOnRepeat(sound='demo'){
+    stopSoundOnRepeat(sound){
         if(!this.playingOnRepeat[sound])throw Error('tried to stop a sound that isn\'t playing');
 
         this.playingOnRepeat[sound].pause();
@@ -43,7 +48,7 @@ class SoundManager {
         this.sounds[sound].currentTime = 0;
     }
 
-    playSound(sound='demo'){
+    playSound(sound){
         if(!this.sounds[sound])throw Error('Tried to play a sound that doesn\'t exists');
 
         if(this.playingOnce[sound]){
@@ -58,7 +63,7 @@ class SoundManager {
         this.playingOnce[sound] = this.sounds[sound];
     }
 
-    stopSound(sound='demo'){
+    stopSound(sound){
         if(!this.playingOnce[sound])throw Error('tried to stop a sound that isn\'t playing');
 
         this.playingOnce[sound].pause();

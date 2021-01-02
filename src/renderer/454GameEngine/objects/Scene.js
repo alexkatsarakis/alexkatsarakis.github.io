@@ -16,8 +16,10 @@ class Scene {
         this._canvasCTX.canvas.height = 1080;// window.innerHeight;
         document.body.appendChild(this._canvas);
 
-        this._offScreenCanvas = new OffscreenCanvas(window.innerWidth,window.innerHeight);
+        this._offScreenCanvas = new OffscreenCanvas(1920,1080);
         this._offScreenCanvasCTX = this._offScreenCanvas.getContext('2d');
+        this._offScreenCanvasCTX.canvas.width = 1920;
+        this._offScreenCanvasCTX.canvas.height = 1080;
     }
 
     addItem(id){

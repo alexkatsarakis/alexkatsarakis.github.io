@@ -1,4 +1,4 @@
-import json from './AnimationFilmHolderJSON.js'
+import json from '../../../assets/json/AnimationFilmHolderJSON.js'
 
 import AnimationFilm from './AnimationFilm.js'
 

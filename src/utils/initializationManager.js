@@ -5,7 +5,7 @@ import bb from './blackboard.js'
 bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
-import '../gameEngine/gameEngine.js'
+import '../animations/animations.js'
 
 import '../UI/UI.js'
 
@@ -14,6 +14,8 @@ import '../physics/physics.js'
 import '../scripting/scripting.js'
 
 import '../renderer/renderer.js'
+
+import '../collisions/collisions.js'
 
 import '../actions/actions.js'
 

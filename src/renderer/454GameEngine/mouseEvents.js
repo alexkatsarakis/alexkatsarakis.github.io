@@ -13,11 +13,12 @@ function translator(ev){
 function focused(obj,x,y){
     if(obj.renderer !== '454')return false;
     let boundingBox = obj.getBoundingBox();
+    let [mapX,mapY] = obj.getMapCoords();
     // console.log(obj.name,boundingBox);
-    if(boundingBox.x < x
-    && boundingBox.x + boundingBox.width > x
-    && boundingBox.y < y
-    && boundingBox.y + boundingBox.height > y){
+    if(mapX < x
+    && mapX + boundingBox.width > x
+    && mapY < y
+    && mapY + boundingBox.height > y){
         return true;
     }
     return false;

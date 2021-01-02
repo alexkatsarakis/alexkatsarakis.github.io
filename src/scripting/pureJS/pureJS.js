@@ -1,6 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
-import AK from './APItoUser.js'
+import AK from '../../utils/API.js'
+import logManager from '../../utils/logs.js'
 
 let inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
@@ -25,21 +26,23 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
 });
 
 bb.fastInstall('scripting','executeText',(text) => {
-    // try{
-    //     eval(text);
-    // }catch(e){
-    //     console.log(e);
-    // }
-    eval(text);
+    try{
+        eval(text);
+    }catch(e){
+        logManager.logError(e);
+        console.log(e);
+    }
+    // eval(text);
 });
 
 bb.fastInstall('scripting','executeCode',(text) => {
-    // try{
-    //     eval(text);
-    // }catch(e){
-    //     console.log(e);
-    // }
-    eval(text);
+    try{
+        eval(text);
+    }catch(e){
+        logManager.logError(e);
+        console.log(e);
+    }
+    // eval(text);
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{

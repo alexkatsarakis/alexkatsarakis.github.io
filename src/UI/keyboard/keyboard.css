@@ -4,7 +4,6 @@
     top: 80%;
     width: auto;
     height: auto;
-    background-color: #101010;
 }
 
 .keyboardRow {
@@ -15,29 +14,29 @@
 .keyboardKey {
     width:50px;
     height: 30px;
-    color:white;
+    color:var(--main-color-text);
     float:left;
     text-align: center;
-    border: 1px solid black;
-    background-color: grey;
+    border: 1px solid var(--main-color-text);
+    background-color: var(--main-color);
     cursor: pointer;
 }
 
 .keyboardKey:hover {
-    background-color: darkgray;
+    background-color: var(--main-color-hover);
 }
 
 .keyboardHalfSpace {
     width:25px;
     height: 30px;
     float:left;
-    border: 1px solid hsl(0, 0%, 0%);
+    border: 1px solid var(--main-color-text);
     background-color: darkgray;
 }
 .keyboardFullSpace {
     width:50px;
     height: 30px;
     float:left;
-    border: 1px solid black;
+    border: 1px solid var(--main-color-text);
     background-color: darkgray;
 }

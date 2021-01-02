@@ -2,38 +2,7 @@ import bb from '../../utils/blackboard.js'
 
 import focusedObject from '../../transitionHandlers/focusedObject.js'
 
-function readTextFile(file,onFinish){
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                document.body.insertAdjacentHTML('beforeend',allText);
-                convertHTMLtoObjects();
-                onFinish();
-            }
-        }
-    }
-    rawFile.send(null);
-}
-readTextFile('./src/UI/toolbar/toolbar.ahtml',onToolbarLoaded);
-
-function convertHTMLtoObjects(){
-    let children = [ ...document.body.children ];
-    children.map(child => {
-        if(child.attributes.getNamedItem("category")){
-            let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
-            document.body.removeChild(child);
-            let obj = new objCat({name:child.id,div:child});
-            bb.fastSet('liveObjects',child.id,obj);
-            obj.add();
-        }
-    })
-}
+export default {name:'toolbar',link: './src/UI/toolbar/toolbar.ahtml',cb:onToolbarLoaded};
 
 function actionsDropdown(){
     let isVisible = false;
@@ -84,8 +53,9 @@ function objectsDropdown(){
 
     function getObjects(){
         let objects = [];
-        for(let object in bb.getComponent('liveObjects').itemMap){
-            objects.push(object);
+        const liveObjects = bb.getComponent('liveObjects').itemMap;
+        for(let object in liveObjects){
+            objects.push(liveObjects[object]);
         }
         return objects;
     }
@@ -99,10 +69,10 @@ function objectsDropdown(){
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
             let ddItem = document.createElement('div');
-            ddItem.id = 'toolbar_object_'+item;
+            ddItem.id = 'toolbar_object_'+item.id;
             ddItem.classList += 'toolbar_dropdown_item';
-            ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>focusedObject(item));
+            ddItem.innerHTML = item.name;
+            ddItem.addEventListener('click',()=>focusedObject(item.id));
             dropdown.appendChild(ddItem);
         });
         bb.installWatch('state','focusedObject',closeDropdown);
@@ -130,7 +100,7 @@ function eventsDropdown(){
         let events = [];
         let focused = bb.fastGet('state','focusedObject');
         if(!focused)return [];
-        for(let event in bb.fastGet('liveObjects',focused).getEvents()){
+        for(let event in focused.getEvents()){
             events.push(event);
         }
         return events;
@@ -148,7 +118,7 @@ function eventsDropdown(){
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).triggerEvent(item));
+            ddItem.addEventListener('click',()=>bb.fastGet('state','focusedObject').triggerEvent(item));
             dropdown.appendChild(ddItem);
         });
         bb.installWatch('state','focusedObject',closeDropdown);
@@ -169,6 +139,95 @@ function eventsDropdown(){
     return toggleDropdown;
 }
 
+function uisDropdown(){
+    let isVisible = false;
+
+    function getUIs(){
+        return bb.fastGet('UI','getUIs')();
+    }
+
+    function createDropdown(){
+        let UIs = getUIs();
+        let dropdown = document.createElement('div');
+        dropdown.id = 'toolbar_uis_dropdown';
+        dropdown.classList += 'toolbar_dropdown';
+        dropdown.style.left = document.getElementById('toolbar_uis').offsetLeft + 'px'; 
+        document.body.appendChild(dropdown);
+        UIs.forEach((item)=>{
+            let ddItem = document.createElement('div');
+            ddItem.id = 'toolbar_object_'+item;
+            ddItem.classList += 'toolbar_dropdown_item';
+            ddItem.innerHTML = item;
+            let itemIsVis = true;
+            ddItem.addEventListener('click',()=>{
+                bb.fastGet('UI',(itemIsVis)?'hideUI':'loadUI')(item);
+                itemIsVis = !itemIsVis;
+                // if(itemIsVis === 0){
+                //     bb.fastGet('UI','hideUI')(item);
+                //     itemIsVis = false;
+                // }else {
+                //     bb.fastGet('UI','loadUI')(item);
+                //     itemIsVis = true;
+                // }
+            });
+            dropdown.appendChild(ddItem);
+        });
+        bb.installWatch('state','focusedObject',closeDropdown);
+    }
+  
+    function closeDropdown(){
+        isVisible = false;
+        let dropdown = document.getElementById('toolbar_uis_dropdown');
+        if(dropdown)dropdown.remove();
+    }
+
+    function toggleDropdown(){
+        isVisible = !isVisible;
+        if(isVisible)createDropdown();
+        else closeDropdown();
+    }
+
+    return toggleDropdown;
+}
+
+
+function openSettings(){
+    console.log('s');
+    let back = document.createElement('div');
+    back.id = 'toolbar_overlay_back';
+    back.className = 'toolbar_overlay_back';
+    document.body.appendChild(back);
+
+    let opts = document.createElement('div');
+    opts.id = 'toolbar_options_open';
+    opts.className = 'toolbar_options_open';
+    opts.innerHTML = 'TODO SETTINGS';
+    document.body.appendChild(opts);
+
+    let mainColor = document.createElement('input');
+    mainColor.type = 'color';
+    mainColor.addEventListener('change',()=>{
+        const mainThemeColor = '--main-color';
+        document.documentElement.style.setProperty(mainThemeColor, mainColor.value);
+    });
+    opts.appendChild(mainColor);
+
+    let subColor = document.createElement('input');
+    subColor.type = 'color';
+    subColor.addEventListener('change',()=>{
+        const mainThemeColor = '--main-color-text';
+        document.documentElement.style.setProperty(mainThemeColor, subColor.value);
+    });
+    opts.appendChild(subColor);
+
+
+    back.addEventListener('click',()=>{
+        opts.remove();
+        back.remove();
+    });
+    
+
+}
 
 function onToolbarLoaded(){
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');
@@ -185,5 +244,12 @@ function onToolbarLoaded(){
     toggle = eventsDropdown();
     dropdown.addEventListener('click',toggle);
     document.getElementById('toolbar_events').addEventListener('click',toggle);
+    
+    dropdown = document.getElementById('toolbar_uis_dropdown_button');
+    toggle = uisDropdown();
+    dropdown.addEventListener('click',toggle);
+    document.getElementById('toolbar_uis').addEventListener('click',toggle);
+
+    document.getElementById('toolbar_settings').addEventListener('click',openSettings);
 
 }

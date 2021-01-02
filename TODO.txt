@@ -1,10 +1,90 @@
-EASY
-    - Make set blocks for field,events,attributes
-    - Break down file blocksinstallation.js to smaller .js files
-    - Change from px to move on drag.js
-    - Create Add buttons for user created fields,events,attributes
+-  = Title of TODO
+-> = Explanation
+=> = Problems I face 
 
-HARD
-    - Add divs in threejs so i can add div in 3D space 
-    - Add UI to create Items on 3d space
-    - Decouple BOX from player (info through JSON?)
+IDE:
+
+    - (Done) Extra UI to manipulate theme-colors!! and/or which UI built-in components I want to be able to see
+
+    - add object preview for 454engine.
+
+    - make the user able to change frame order on animation creation.
+
+
+ENGINE:
+
+    - (Done) Change all names to be IDs (objects, events, values, collisions, etc)
+
+    - Add tickAnimator (!important)
+
+    - Load manager
+
+    - invoke functions through blackboard
+
+    - Pause/start
+
+    - Add states for objects
+
+    - Create ScrollingManager and map coordinates from there.
+
+    - (Done meh) CollisionManager
+        => how am I going to show it? (pop up window for adding, lines between objects edit)
+        => who owns the code? (CollisionManager)
+        => how am Ι going to handle collision with different objects? (different scripts)
+
+    - Add Options (e.g. I want to be able to move things with my mouse while playing)
+
+FEATURES:
+
+    - introduce script information
+        -> when a script is clicked it will automatically show:
+                1) object that the script is binded to.
+                2) objects that the script is refering.
+                3) highlight objects affected by the script.
+
+    - Code even more stuff
+        -> transitionToState(X,code),transitionOutOfState(X,code)
+           (dont on collisionmanager) onCollisionWith(X,code), 
+           onAttributeChange(X,code),onAttributeRetrieval(X,code)
+           onValueChange(X,code),onValueRetrieval(X,code)
+
+    - introduce timelines
+        -> a button that when clicked it will create a different "timeline" and it will show to user what will happen
+           when the script is activated
+        => how to prevent side-effects (e.g. object removal)
+        => when is a timeline stopped? (problem when we have async calls like animations)
+
+    - Logging system
+        -> Log all actions done and show it to user in order to understand whats going on easier.
+
+    - Integrated key binding feature (in settings).
+
+    - Integrated menu system for user to END-user.
+        -> pause the game
+        -> change config (w/e coder use)
+            -> key binding
+            -> save
+            -> sound
+            -> etc
+        -> resume game
+        
+
+Extra:
+
+    - Add block for:
+        -> distance
+
+    - Starting Page includes
+        -> What animation films to include
+        -> Level of experience and start with different settings
+        -> load saved/import projects
+
+
+PROBABLY DISCARDED:
+
+    - Scale canvas ctx
+        => scaling must be done on obj values, renderer, physics engine (which creates dependency)
+        => problem with picking and scaling is not intuitive to people
+        
+    - add unique IDs to everything instead of just names
+        => this doesn't help on reload / sharing

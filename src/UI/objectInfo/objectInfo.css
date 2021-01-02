@@ -1,22 +1,27 @@
 #mainInfoBox {
     position: absolute;
     width: auto;
+    min-width: 220px;
+    height: auto;
+    max-height: 500px;
     right:0;
     top: 20%;
-    height: auto;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
     padding: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #objName {
-    color: white;
+    color: var(--main-color-text);
     font-size: 24px;
     text-align: center;
     margin: 10px;
 }
 
 #categName {
-    color: white;
+    color: var(--main-color-text);
     font-size: 20px;
     text-align: center;
 }
@@ -36,14 +41,14 @@
 .InfoBox_thinLine {
     width: 100%;
     height: 2px;
-    background-color: darkgrey;
+    background-color: var(--main-color-text);
     margin: 10px 10px 10px 0;
     margin-top: 25px;
-    color: white;
+    color: var(--main-color-text);
 }
 
 .InfoBox_prompt {
-    color: white;
+    color: var(--main-color-text);
     font-size: 20px;
     padding-bottom: 2px;
 }
@@ -56,14 +61,18 @@
 
 .InfoBox_addButton {
     text-align: center;
-    color: white;
+    color: var(--main-buttons-text-color);
     float:left;
     width: 10%;
     cursor: pointer;
-    background-color: #83282d;
-    border-radius: 10px;
+    background-color:var(--main-buttons-background-color);
+    border-radius: 100px;
+}
+
+.InfoBox_addButton:hover {
+    background-color: var(--main-buttons-background-color-hover);
 }
 
 .InfoBox_item {
-    color:white;
+    color: var(--main-color-text);
 }

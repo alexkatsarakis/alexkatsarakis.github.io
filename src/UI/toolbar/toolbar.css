@@ -3,7 +3,8 @@
     top: 0;
     width: 100%;
     height: 30px;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
 }
 
 .toolbar_item {
@@ -11,12 +12,12 @@
     padding-top: 5px;
     padding-bottom: 7px;
     margin-left: 10px;
-    color:white;
+    color: var(--main-color-text);
     cursor: pointer;
 }
 
 .toolbar_item:hover {
-    background-color: #556bd6;
+    background-color: var(--main-color-hover);
 }
 
 .toolbar_dropdown {
@@ -24,7 +25,8 @@
     top: 30px;
     width: auto;
     height: auto;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
 }
 
 .toolbar_dropdown_button {
@@ -40,14 +42,41 @@
     background-size: contain;
 }
 
+.toolbar_dropdown_button:hover {
+    background-color: var(--main-color-hover);
+}
+
 .toolbar_dropdown_item {
     height: 20px;
     padding: 5px;
-    color:white;
+    color: var(--main-color-text);
     border-bottom: 1px solid black;
     cursor: pointer;
 }
 
 .toolbar_dropdown_item:hover {
-    background-color: #556bd6;
+    background-color: var(--main-color-hover);
+}
+
+.toolbar_overlay_back {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000ab;
+    z-index: 3;
+}
+
+.toolbar_options_open {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 80%;
+    height: 80vh;
+    background-color: red;
+    z-index: 4;
+    font-size: xx-large;
+    color: white;
+    text-align: center;
 }

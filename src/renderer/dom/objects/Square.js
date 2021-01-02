@@ -12,8 +12,8 @@ function fromPercentageToPx(x,y){
 
 class Square extends Object {
     
-    constructor({name,texture,dim,div}){
-        super(name);
+    constructor({name,texture,dim,div},id){
+        super(name,id);
         
         if(div)this.div = div;
         else this.createElement({name,texture,dim});

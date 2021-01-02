@@ -12,8 +12,8 @@ function fromPercentageToPx(x,y){
 
 class Humanoid extends Object {
     
-    constructor({name,texture,dim}){
-        super(name);
+    constructor({name,texture,dim},id){
+        super(name,id);
 
         this.div = document.createElement('div');
         this.div.id = name;

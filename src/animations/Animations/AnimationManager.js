@@ -1,4 +1,4 @@
-import json from './AnimationManagerJSON.js'
+import json from '../../../assets/json/AnimationManagerJSON.js'
 
 import FrameRangeAnimation from './AnimationCategories/FrameRangeAnimation.js'
 import animationFilmHolder from './AnimationFilmHolder.js'
@@ -23,8 +23,8 @@ class AnimationManager {
         });
     }
 
-    register(anim){ // class Animation
-        this._animations[anim.id] = anim;
+    register(anim,film){ // class Animation
+        this._animations[anim.id] = {animation:anim,film:animationFilmHolder.getFilm(film)};
     }
 
     getAnimation(id){

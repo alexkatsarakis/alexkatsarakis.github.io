@@ -2,23 +2,18 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Blockly Lab</title>
+		<title>Game Lab</title>
 		<link rel="shortcut icon" href="./assets/favicon.ico"> <!-- favicon from "www.flaticon.com by user FreePik" -->
 		<link rel="stylesheet" href="./index.css">
-		<script src="./libs/blockly/blockly_compressed.js"></script>
-		<script src="./libs/blockly/blocks_compressed.js"></script>
-		<script src="./libs/blockly/javascript_compressed.js"></script>
-		<script src="./libs/blockly/msg/js/en.js"></script>
-		<!-- <script src="./libs/three.js"></script> -->
-		<script src="./libs/matter/matter.min.js"></script>
-		<script src="./libs/pixi/pixi.js"></script>
-		<script type="module" src="src/index.js"></script>
-		<!-- <script type="text/javascript">
-			// set the pyodide files URL (packages.json, pyodide.asm.data etc)
-			window.languagePluginUrl = 'https://pyodide-cdn2.iodide.io/v0.15.0/full/';
-		</script>
-		<script src="./libs/pyodide.js"></script> -->
+		<script type="module" src="./index.js"></script>
 	</head>
 	<body>
+		<div id="main-navbar">
+			<div id="main-navbar-logo">
+				<div id="main-navbar-logo-img"></div>
+				<div id="main-navbar-logo-text">Game Lab</div>
+			</div>
+		</div>
+		<input type="button" id="goToEditorBut" value="go to editor">
 	</body>
 </html>

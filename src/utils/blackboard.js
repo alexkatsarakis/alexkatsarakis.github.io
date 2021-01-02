@@ -23,19 +23,19 @@ class BlackboardComponent{
   }
 
   installItem(itemName,value){
-    if(this.itemMap[itemName] !== undefined) return false;
+    if(this.itemMap[itemName] !== undefined) return undefined;
     this.itemMap[itemName] = value;
     return true;
   }
 
   removeItem(itemName){
-    if(this.itemMap[itemName] === undefined) return false;
+    if(this.itemMap[itemName] === undefined) return undefined;
     delete this.itemMap[itemName];
     return true;
   }
 
   getItem(itemName){
-    if(this.itemMap[itemName] === undefined) return false;
+    if(this.itemMap[itemName] === undefined) return undefined;
     return this.itemMap[itemName];
   }
 
@@ -52,26 +52,31 @@ class BlackboardComponent{
     console.log(this.name,this.itemMap,this.watches);
   }
 
+  clear(){
+    this.itemMap = {};
+    this.watches = {};
+  }
+
 }
 
 class Blackboard {
   componentMap = {};
 
   installComponent(componentName){
-    if(this.componentMap[componentName] !== undefined)return false;
+    if(this.componentMap[componentName] !== undefined)return undefined;
     this.componentMap[componentName] = new BlackboardComponent(componentName);
     return true;
   }
 
   removeComponent(componentName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     delete this.componentMap[componentName];
     return true;
   }
 
 
   installWatch(componentName,itemName,cb){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     this.componentMap[componentName].installWatch(itemName,cb);
   }
 
@@ -81,7 +86,7 @@ class Blackboard {
   }
 
   fastRemove(componentName,itemName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     this.componentMap[componentName].removeItem(itemName);
   }
 
@@ -91,8 +96,16 @@ class Blackboard {
   }
 
   fastGet(componentName,itemName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     return this.componentMap[componentName].getItem(itemName);
+  }
+
+  invoke(componentName,itemName,args){
+    if(this.componentMap[componentName] === undefined)return undefined;
+    let func = this.componentMap[componentName].getItem(itemName);
+    if(typeof func === 'function'){
+      return this.componentMap[componentName].getItem(itemName)(args);
+    }
   }
 
   getComponent(componentName){
@@ -102,6 +115,16 @@ class Blackboard {
   print(){
     for(let component in this.componentMap){
       this.componentMap[component].print();
+    }
+  }
+
+  clear(){
+    for(let component in this.componentMap){
+      this.componentMap[component].clear();
+    }
+
+    for(let component in this.componentMap){
+      delete this.componentMap[component];
     }
   }
 

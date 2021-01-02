@@ -4,6 +4,8 @@ import Object from '../../../objects/Object.js'
 
 import Value from '../../../objects/Value.js'
 
+import stage from '../../EnvironmentObject.js'
+
 import scene from './Scene.js'
 
 export default class Object454 extends Object{
@@ -15,8 +17,8 @@ export default class Object454 extends Object{
     _frame;
     _animator;
 
-    constructor(name){
-        super(name);
+    constructor(name,id){
+        super(name,id);
         this.renderer = '454';
         this._rotation = 0;
 
@@ -44,6 +46,8 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
+        this._stage = stage;
+
     }
 
     setColor(col){
@@ -68,6 +72,12 @@ export default class Object454 extends Object{
         this._y += y;
         if(x !== 0 || y !== 0)
             this.triggerEvent('onMove');
+    }
+
+    getMapCoords(){
+        // return [this._x,this._y];
+        
+        return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
     }
 
     getBoundingBox(){
@@ -107,13 +117,15 @@ export default class Object454 extends Object{
     }
 
     add(){
-        bb.fastSet('liveObjects',this.name,this);
+        bb.fastSet('liveObjects',this.id,this);
         scene.addItem(this);
     }
-
+    
     remove(){
         if(this._animator !== undefined)this._animator.stop();
-        bb.fastRemove('liveObjects',this.name);
+        this._stage = undefined;
+        this.clear();
+        bb.fastRemove('liveObjects',this.id);
         scene.removeItem(this);
     }
 

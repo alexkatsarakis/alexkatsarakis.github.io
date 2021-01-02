@@ -1,3 +1,16 @@
+:root {
+	--main-color: #1d3557;
+	--main-color-hover: #457b9d;
+	--main-color-text: white;
+	--main-buttons-background-color: #3b5e6f;
+	--main-buttons-text-color: white;
+	--main-buttons-background-color-hover: #5b89a0;
+	--secondary-color: #e63946;
+	--secondary-color-hover: #a8dadc;
+	--secondary-color-text: white;
+	--canvas-default-bg-color: lightgrey;
+}
+
 body { 
 	margin: 0; 
     background-size: cover;
@@ -15,4 +28,42 @@ canvas {
 
 div { 
 	user-select: none; 
+}
+
+
+
+/**********************************/
+
+#main-navbar {
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	background-color: var(--main-color);
+}
+
+#main-navbar-logo-img {
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	height: 60px;
+	width: 60px;
+	background-image: url("./assets/favicon.ico");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+#main-navbar-logo-text {
+	color: var(--main-color-text);
+	font-size: 28px;
+	width: 190px;
+	padding-top: 26px;
+	cursor: pointer;
+	height: 54px;
+}
+
+#goToEditorBut {
+	position: absolute;
+	top: 100px;
 }

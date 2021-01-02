@@ -5,41 +5,49 @@ import App from './app.js'
 import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
 import inputManager from './utils/inputManager.js'
+import installWatches from './utils/watches.js'
 
 import init from '../assets/json/pacman.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
 
-let app = new App();
-let game = app.game;
+const app = new App();
+const game = app.game;
 
+// TODO: move this to somewhere better
 function inpHandler(key) {
+    // if(bb.fastGet('state','mode') === 'editing')return;
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
-    if(bb.fastGet('state','mode') === 'editing')return;
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 
-
-let aliveItems;
-let animatorManager;
-let animationFilmHolder;
-let animationManager;
+const aliveItems            = bb.getComponent('liveObjects').itemMap;
+const progressAllAnimations = bb.fastGet('animation', 'progress');
+const animationLoader       = bb.fastGet('animation', 'load');
+const assetsToLoad          = bb.fastGet('animation', 'requiredAssets');
+const rend                  = bb.fastGet('renderer', 'render');
+const phUpdate              = bb.fastGet('physics', 'update');
+const initialiseColl        = bb.fastGet('collisions', 'loadSaved');
+const collisionCheck        = bb.fastGet('collisions', 'checkAndInvoke');
 
 app.addInitialiseFunction(()=>{
 
-    document.body.style.backgroundColor = init.state.background_color;
+    if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
     if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
     init.objects.forEach((item)=>{
         let category = bb.fastGet('objects',item.category);
-        if(typeof category !== "function"){console.log("There is no category "+item.category)}
-        if(item.meta.name === undefined 
-        || !bb.fastGet('liveObjects',item.meta.name)){
-            if(!category)return;
-            let it = new category(item.meta);
+        if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
+        if(item.meta.name !== undefined){
+            let it = new category(item.meta,item.id);
             if(item.color)it.setColor(item.color);
             if(item.position)it.setPosition(item.position.x,item.position.y);
-            if(item.attributes)item.attributes.forEach((attr)=>it.setOption(attr,true));
+            if(item.attributes){
+                for(let a in item.attributes){
+                    if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
+                    it.setOption(a,item.attributes[a]);
+                }
+            }
             if(item.fields){
                 for(let f in item.fields){
                     it.addValue(f,item.fields[f]);
@@ -55,73 +63,45 @@ app.addInitialiseFunction(()=>{
         }
     });
 
-    aliveItems = bb.getComponent('liveObjects').itemMap;
-    animatorManager = bb.fastGet('gameEngine','animatorManager');
-    animationManager = bb.fastGet('gameEngine','animationManager');
-    animationFilmHolder = bb.fastGet('gameEngine', 'animationFilmHolder');
 });
 
 app.addLoadFunction(()=>{
-    animationFilmHolder.loadAll();
-    animationManager.loadAll();
-    animationFilmHolder.getAssetsToLoad().forEach((asset)=>{
+    animationLoader();
+    assetsToLoad().forEach((asset)=>{
         if(!bb.fastGet('assets',asset)){
             let img = new Image();
             img.src = asset;
             bb.fastInstall('assets',asset,img);
         }
     });
+    installWatches();
+    initialiseColl();
     bb.print();
 });
 
-
-
 game.render = ()=>{
-    bb.fastGet('renderer','render').forEach((it)=>it());
+    if(rend)
+        rend.forEach((it)=>it());
 };
 
 game.input = ()=>{
+    inputManager.pollKeys();
     inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
 };
 
 game.animation = ()=>{
-    animatorManager.progress(bb.fastGet('state','gameTime'));
+    progressAllAnimations(bb.fastGet('state','gameTime'));
 };
 
 game.ai = ()=>{
-
 }
 
 game.physics = ()=>{
-    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()
+    if(phUpdate)phUpdate();
 };
 
-function collided(obj1,obj2){
-    if(obj1 === obj2)return;
-    if(!obj1.getOption('isCollidable') || !obj2.getOption('isCollidable'))return;
-    // console.log(obj1,obj2);
-    let pos1 = obj1.getPositional();
-    let pos2 = obj2.getPositional();
-    // debugger;
-    if(pos1.x >= pos2.x + pos2.width || pos2.x >= pos1.x + pos1.width){
-        return false;
-    }
-
-    if(pos1.y >= pos2.y + pos2.height || pos2.y >= pos1.y + pos1.height){
-        return false;
-    }
-
-    obj1.triggerEvent('onCollision');
-    obj2.triggerEvent('onCollision');
-    console.log(obj1.name,obj2.name);
-}
-
 game.collisions = ()=>{
-    for(let i in aliveItems){
-        for(let j in aliveItems){
-            collided(aliveItems[i],aliveItems[j]);
-        }
-    }
+    collisionCheck(aliveItems);
 };
 
 game.userCode = ()=>{
@@ -135,19 +115,16 @@ game.extra = ()=>{
 };
 
 
-
-// TODO: Change this function to an appropriate file
-
-function triggerStateModeChange(e){
-    if(e === 'play'){
-        for(let i in aliveItems)
-            aliveItems[i].triggerEvent('onGameStart');
-    }
-    bb.installWatch('state','mode',triggerStateModeChange);
-}
-
-bb.installWatch('state','mode',triggerStateModeChange);
-
-
+// window.onbeforeunload = function(e) {
+//     app.game.stop();
+//     bb.fastGet('gameEngine','animationFilmHolder').cleanUp();
+//     Blockly = undefined;
+//     let objs = bb.getComponent('liveObjects').itemMap;
+//     for(let i in objs){
+//         objs[i].remove();
+//     }
+//     bb.clear();
+//     return true;
+// };
 
 app.main();

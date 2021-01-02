@@ -1,6 +1,6 @@
 import bb from '../utils/blackboard.js'
 
-function moveFWD(step = 0.1){
+function moveFWD(step = 0.3){
     if(bb.fastGet('physics','force'))
         bb.fastGet('physics','force')(bb.fastGet('state','player'),[0,0],[0,-step]);
     else 

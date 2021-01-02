@@ -9,8 +9,8 @@ class Rectangle extends Object {
     _width;
     _height;
 
-    constructor({name,dim,film}){
-        super(name);
+    constructor({name,dim,film},id){
+        super(name,id);
         
         bb.fastInstall('state','player',this);
 
@@ -29,6 +29,8 @@ class Rectangle extends Object {
             onChange: (value) => {this._height = value;},
             getValue: () => {return this._height;}
         });
+
+        this._getFilm = bb.fastGet('animation','getFilm');
     }
 
     getCategory(){
@@ -36,17 +38,22 @@ class Rectangle extends Object {
     }
 
     render(ctx){
+        if(!this.getOption('isVisible'))return;
+        
+        let [drawX,drawY] = this.getMapCoords();
+
+
         if(!this._film){
             ctx.fillStyle = this._color;
-            ctx.fillRect(this._x, this._y, this._width, this._height);
+            ctx.fillRect(drawX, drawY, this._width, this._height);
             ctx.fillStyle = "#ffffff";
         }else{
-            let info = bb.fastGet('gameEngine','animationFilmHolder').getFilm(this._film);
+            let info = this._getFilm(this._film);
             let box = info.getFrameBox(this._frame);
             let img = info.bitmap;
             ctx.drawImage(bb.fastGet('assets',img),
             box.x,box.y,box.width,box.height,
-            this._x, this._y, this._width, this._height);
+            drawX, drawY, this._width, this._height);
         }
     }
 }
