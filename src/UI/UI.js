@@ -28,6 +28,10 @@ class UIManager {
         }
     }
 
+    getLoaded(){
+        return this._UILoaded;
+    }
+
     installUI({name,link,cb},removable = true){
         if(this._UIInstalled[name])return;
         this._UIInstalled[name] = {link:link,cb:cb};
@@ -76,18 +80,18 @@ class UIManager {
         rawFile.send(null);
     }
 
-    // convertHTMLtoObjects(){
-    //     let children = [ ...document.body.children ];
-    //     children.map(child => {
-    //         if(child.attributes.getNamedItem("category")){
-    //             let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
-    //             document.body.removeChild(child);
-    //             let obj = new objCat({name:child.id,div:child});
-    //             bb.fastSet('liveObjects',child.id,obj);
-    //             obj.add();
-    //         }
-    //     })
-    // }
+    convertHTMLtoObjects(){
+        let children = [ ...document.body.children ];
+        children.map(child => {
+            if(child.attributes.getNamedItem("category")){
+                let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
+                document.body.removeChild(child);
+                let obj = new objCat({name:child.id,div:child});
+                bb.fastSet('liveObjects',child.id,obj);
+                obj.add();
+            }
+        })
+    }
 }
 
 const uiManager = new UIManager();
@@ -108,3 +112,6 @@ bb.fastInstall('UI','removeUI',(name)=>uiManager.removeUI(name));
 bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());
 bb.fastInstall('UI','hideUI',(name)=>uiManager.hideUI(name));
+bb.fastInstall('UI','getLoadedUIs',()=>uiManager.getLoaded());
+
+uiManager.convertHTMLtoObjects();

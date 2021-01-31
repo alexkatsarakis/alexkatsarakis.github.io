@@ -2,6 +2,8 @@ import bb from '../../utils/blackboard.js'
 
 import focusedObject from '../../transitionHandlers/focusedObject.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'toolbar',link: './src/UI/toolbar/toolbar.ahtml',cb:onToolbarLoaded};
 
 function actionsDropdown(){
@@ -53,7 +55,7 @@ function objectsDropdown(){
 
     function getObjects(){
         let objects = [];
-        const liveObjects = bb.getComponent('liveObjects').itemMap;
+        const liveObjects = Engine.ObjectManager.objects;
         for(let object in liveObjects){
             objects.push(liveObjects[object]);
         }
@@ -190,43 +192,18 @@ function uisDropdown(){
     return toggleDropdown;
 }
 
+import setWindow from '../settingsWindow/settingsWindow.js'
 
 function openSettings(){
-    console.log('s');
-    let back = document.createElement('div');
-    back.id = 'toolbar_overlay_back';
-    back.className = 'toolbar_overlay_back';
-    document.body.appendChild(back);
+    bb.fastGet('UI','installUI')({name:setWindow.name,link:setWindow.link,cb:setWindow.cb});
+    bb.fastGet('UI','loadUI')(setWindow.name);
+}
 
-    let opts = document.createElement('div');
-    opts.id = 'toolbar_options_open';
-    opts.className = 'toolbar_options_open';
-    opts.innerHTML = 'TODO SETTINGS';
-    document.body.appendChild(opts);
+import invWindow from '../inventoryWindow/inventoryWindow.js'
 
-    let mainColor = document.createElement('input');
-    mainColor.type = 'color';
-    mainColor.addEventListener('change',()=>{
-        const mainThemeColor = '--main-color';
-        document.documentElement.style.setProperty(mainThemeColor, mainColor.value);
-    });
-    opts.appendChild(mainColor);
-
-    let subColor = document.createElement('input');
-    subColor.type = 'color';
-    subColor.addEventListener('change',()=>{
-        const mainThemeColor = '--main-color-text';
-        document.documentElement.style.setProperty(mainThemeColor, subColor.value);
-    });
-    opts.appendChild(subColor);
-
-
-    back.addEventListener('click',()=>{
-        opts.remove();
-        back.remove();
-    });
-    
-
+function openInventory(){
+    bb.fastGet('UI','installUI')({name:invWindow.name,link:invWindow.link,cb:invWindow.cb});
+    bb.fastGet('UI','loadUI')(invWindow.name);
 }
 
 function onToolbarLoaded(){
@@ -251,5 +228,6 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_uis').addEventListener('click',toggle);
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
+    document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
 }

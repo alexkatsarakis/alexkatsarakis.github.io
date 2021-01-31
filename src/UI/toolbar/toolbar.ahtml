@@ -24,4 +24,8 @@
     <div id="toolbar_settings" class="toolbar_item ">
         Settings
     </div>
+
+    <div id="toolbar_inventory" class="toolbar_item ">
+        Inventory
+    </div>
 </div>

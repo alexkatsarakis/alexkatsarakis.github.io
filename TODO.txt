@@ -36,6 +36,11 @@ ENGINE:
 
 FEATURES:
 
+    - What's happening on an object
+        -> when I hit extra information about an object it shows me 
+            what things are currently affecting this object....
+            e.g. Animation x, script y, 
+
     - introduce script information
         -> when a script is clicked it will automatically show:
                 1) object that the script is binded to.

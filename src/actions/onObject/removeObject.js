@@ -11,7 +11,6 @@ function removeObject(obj){
     // }
 
     if(!obj) console.log('Didn\'t provided object on object remove');
-    // if(!obj)obj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
     obj.triggerEvent('onRemove');
     obj.remove();
     logManager.logAction("Removed Object ["+obj.name+"]");

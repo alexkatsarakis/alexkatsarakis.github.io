@@ -29,11 +29,7 @@ Currently Included scripting mechanisms:
 
 ##### Example:
 ```js
-bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
-...
-let code = bb.fastGet('scripting','currentScriptAsCode')();
-bb.fastGet('scripting','executeCode')(code);
-...
+
 ```
 ##### Dependencies:
 None, since the scripting mechanisms are totally isolated from all the other components and doesn't interact with any other component.
@@ -55,16 +51,10 @@ Currently Included physics mechanisms:
 
 ##### Example:
 ```js
-bb.fastGet('physics','addToWorld')(player);
-...
-bb.fastGet('physics','move')(player,{1,0});
-...
-bb.fastGet('physics','update')();
-...
+
 ```
 ##### Dependencies:
 - Dependent to Object.
-Uses: bb.fastGet('liveObjects',obj) to update position on update.
 
 
 ### Sound 
@@ -84,11 +74,7 @@ Uses: bb.fastGet('liveObjects',obj) to update position on update.
 
 ##### Example:
 ```js
-...
-bb.fastGet('sound','addSound')('tag','url');
-...
-bb.fastGet('sound','playSoundOnRepeat')('tag');
-...
+
 ```
 
 ##### Dependencies:
@@ -109,11 +95,7 @@ None, since the sound manager is totally isolated from all the other components 
 
 ##### Example:
 ```js
-...
-bb.fastGet('collisions','addSound')('id1','id2','console.log("collided")');
-...
-bb.fastGet('collisions','checkAndInvoke')([...obects]);
-...
+
 ```
 
 ##### Dependencies:

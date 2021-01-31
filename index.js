@@ -1,7 +1,40 @@
-function onPageLoaded(){
-    document.getElementById('goToEditorBut').addEventListener('click',()=>{
-        window.location.pathname = '/editor.html';
-    })
+class UIFactory {
+    constructor(){}
+
+    createElement({parent,id,classList,type,innerHtml,inputType,value}){
+        let div = document.createElement((type)?type:'div');
+
+        if(id) div.id = id;
+        if(classList) div.classList = classList;
+        if(innerHtml) div.innerText = innerHtml;
+        if(type === 'input' && inputType) div.type = inputType;
+        if(value) div.value = value;
+
+        if(parent) parent.appendChild(div);
+        return div;
+    }
 }
 
-window.onload = onPageLoaded;
+const uiFactory = new UIFactory();
+
+let games = ['Super Mario','PacMan'];
+
+let gameList = uiFactory.createElement({
+    parent: document.body,
+    id: 'gamesList',
+});
+
+games.forEach( gameName => {
+    let but = uiFactory.createElement({
+        parent: gameList,
+        id: 'goToEditorBut_'+gameName,
+        classList: 'goToEditorBut',
+        type: 'input',
+        inputType: 'button',
+        value: gameName
+    });
+
+    but.addEventListener('click',()=>{
+        window.location.pathname = '/editor.html';
+    });
+});

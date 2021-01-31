@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="./src/UI/inventoryWindow/inventoryWindow.css">
+<div id='inventory-window-background'></div>
+<div id='inventory-window'>
+  <div id='inventory-window-head'>
+    <div id='inventory-window-head-title'>Inventory</div>
+    <div id='inventory-window-head-close'>X</div>
+  </div>
+  <div id='inventory-window-tabs'>
+
+  </div>
+  <div id='inventory-window-body'>
+    
+  </div>
+</div>

@@ -8,6 +8,14 @@
   <div class="InfoBox_thinLine"></div>
   
   
+  <div class="InfoBox_prompt">States Information:</div>
+  <div class="InfoBox_prompt" id='InfoBox_currentState'></div>
+  <div id="statesInfo">
+  </div>
+  <input type="text" id="addStateText" class="InfoBox_inputText"></input>
+  <div id="addStateButton" class="InfoBox_addButton">+</div>
+  <div class="InfoBox_thinLine"></div> 
+
   <div class="InfoBox_prompt">Fields Information:</div>
   <div id="fieldsInfo">
   </div>

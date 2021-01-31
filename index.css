@@ -11,6 +11,10 @@
 	--canvas-default-bg-color: lightgrey;
 }
 
+.goog-menuitem-highlight{
+	background-color: red;
+}
+
 body { 
 	margin: 0; 
     background-size: cover;
@@ -63,7 +67,25 @@ div {
 	height: 54px;
 }
 
-#goToEditorBut {
+#gamesList {
 	position: absolute;
+	margin-top: 100px;
+	margin-left: 20px;
+	flex-direction: column;
 	top: 100px;
+	left: 20px;
+}
+
+.goToEditorBut {
+	background-color: var(--main-buttons-background-color);
+	color: var(--main-buttons-text-color);
+	text-align: center;
+	border: 0;
+	cursor: pointer;
+	width: 100px;
+	height: 100px;
+}
+
+.goToEditorBut:hover {
+	background-color: var(--main-buttons-background-color-hover);
 }

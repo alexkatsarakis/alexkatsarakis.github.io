@@ -6,6 +6,7 @@
       <block type="remove_object"></block>
       <block type="get_object_field"></block>
       <block type="object_attr"></block>
+      <block type="object_state"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
       <block type="dropdown_obj"></block>
@@ -342,6 +343,7 @@
     <category name="%{BKY_VARIABLES_TITLE}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_FUNCTIONS_TITLE}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
+<div id="infoBar" class="hudChild"></div>
 <div id="eventsTab" class="hudChild"></div>
 <div id="languageDiv" class="hudChild"></div>
 <div id="openTab" class="hudChild"></div>

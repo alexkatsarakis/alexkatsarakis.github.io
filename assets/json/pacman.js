@@ -15,6 +15,13 @@ export default {
                 },
                 film: "mario_big_right_idle"
             },
+            states: [
+                'movingLeft',
+                'movingRight'
+            ],
+            events: [
+                "increaseCounterAndShow"
+            ],
             category: "Rectangle",
             color : "#ffffff",
             position: {x:500,y:780}
@@ -84,7 +91,7 @@ export default {
             meta:{
                 name: "floor",
                 dim: {
-                    width: 1920,
+                    width: 2500,
                     height: 80
                 }
             },

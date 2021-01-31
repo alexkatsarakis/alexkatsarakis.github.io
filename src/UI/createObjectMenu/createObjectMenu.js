@@ -1,5 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'createObjectMenu',link: './src/UI/createObjectMenu/createObjectMenu.ahtml',cb:onCreateObjectMenuLoaded};
 
 
@@ -17,7 +19,7 @@ function toggleObjectMenu(){
 }
 
 function updateObjectList(){
-    let items = bb.getComponent('objects').itemMap;
+    let items = bb.fastGet('Engine','ObjectManager').constr;
     let objWrapper = document.getElementById('createObjectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){

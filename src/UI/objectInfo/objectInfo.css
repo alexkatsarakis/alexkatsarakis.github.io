@@ -26,6 +26,10 @@
     text-align: center;
 }
 
+#statesInfo {
+    margin-left: 10px;
+}
+
 #fieldsInfo {
     margin-left: 10px;
 }

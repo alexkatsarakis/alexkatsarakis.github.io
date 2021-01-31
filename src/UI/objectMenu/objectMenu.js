@@ -2,6 +2,8 @@ import bb from '../../utils/blackboard.js'
 
 import focusObject from '../../transitionHandlers/focusedObject.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'objectMenu',link: './src/UI/objectMenu/objectMenu.ahtml',cb:onObjectMenuLoaded};
 
 function toggleObjectMenu(){
@@ -18,7 +20,7 @@ function toggleObjectMenu(){
 }
 
 function updateObjectList(){
-    let items = bb.getComponent('liveObjects').itemMap;
+    let items = Engine.ObjectManager.objects;
     let objWrapper = document.getElementById('objectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
@@ -72,7 +74,7 @@ function updateObjectList(){
 
         body.onmouseenter = () => {
             let item = items[i];
-            let pos = bb.fastGet('liveObjects',item.id).getPositional();
+            let pos = Engine.ObjectManager.getObject(item.id).getPositional();
             let mark = document.createElement('div');
             mark.id = 'objectMenu_focus';
             if(pos.r){
@@ -90,7 +92,7 @@ function updateObjectList(){
             objName.id = 'objectMenu_focus_name';
         
             objName.innerText = `Name: ${item.name}\n
-                                 Category: ${bb.fastGet('liveObjects',item.id).getCategory()}\n
+                                 Category: ${Engine.ObjectManager.getObject(item.id).getCategory()}\n
                                  X: ${pos.x}px\n
                                  Y: ${pos.y}px`;
             objName.style.top = (pos.y - 120)+'px';

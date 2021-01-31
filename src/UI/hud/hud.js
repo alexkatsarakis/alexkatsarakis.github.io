@@ -40,6 +40,8 @@ function hudState(){
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
 
+    let codes;
+
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
@@ -49,12 +51,12 @@ function onHudLoaded(){
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.invoke('scripting','currentScriptAsText');
-        bb.fastGet('state','focusedObject').setEvent(tabOpen,text);
+        codes.stripped[tabOpen].set(text);
     });
 
-    function tabInfo(obj,id){
+    function tabInfo(id,cb){
         return ()=>{
-            let text = obj.getEvent(id);
+            let text = cb();
             bb.invoke('scripting','clearAndLoadFromText',text);
             // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
             tabOpen = id;
@@ -62,20 +64,19 @@ function onHudLoaded(){
         };
     }
 
-    let logAllActions = "";
-
     let consoleArea = document.getElementById('consoleArea');
     function onActionChange(newMessage){
         consoleArea.value += '\n'+newMessage;
         consoleArea.scrollTop = consoleArea.scrollHeight;
-        logAllActions += newMessage+'\n';
+        // logAllActions += newMessage+'\n';
         bb.installWatch('state','lastAction',onActionChange);
     }
 
     bb.installWatch('state','lastAction',onActionChange);
-
+    
     function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
+        let infoBar = document.getElementById('infoBar');
         eventsTab.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
@@ -84,20 +85,83 @@ function onHudLoaded(){
             return;
         }
         let firstObject = true;
-        for(let i in obj.getEvents()){
+
+        infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
+
+        codes = obj.getCodes();
+        codes.stripped = {};
+
+        let events = codes.events;
+        let states = codes.states;
+        let values = codes.values;
+
+        let eventSplit = document.createElement('div');
+        eventSplit.classList = 'tabSplitter';
+        eventSplit.innerHTML = 'Events';
+        eventsTab.appendChild(eventSplit);
+
+        for(let i in events){
+            codes.stripped[i] = events[i];
             let elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
-            elem.addEventListener('click',tabInfo(obj,i));
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,events[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();
                 firstObject = false;
             }
         }
+
+        let stateSplit = document.createElement('div');
+        stateSplit.classList = 'tabSplitter';
+        stateSplit.innerHTML = 'States';
+        eventsTab.appendChild(stateSplit);
+
+        for(let i in states){
+            stateSplit = document.createElement('div');
+            stateSplit.classList = 'tabSplitter';
+            stateSplit.innerHTML = i;
+            stateSplit.style.marginLeft = '10%';
+            eventsTab.appendChild(stateSplit);
+            for(let st in states[i]){
+                codes.stripped[st] = states[i][st];
+                let elem = document.createElement('div');
+                elem.classList = "eventTab";
+                elem.innerHTML = st;
+                elem.style.marginLeft = '20%';
+                elem.addEventListener('click',tabInfo(st,states[i][st].get));
+                eventsTab.appendChild(elem);
+                if(firstObject){
+                    elem.click();
+                    firstObject = false;
+                }
+            }
+        }
+
+        let valueSplit = document.createElement('div');
+        valueSplit.classList = 'tabSplitter';
+        valueSplit.innerHTML = 'Fields';
+        eventsTab.appendChild(valueSplit);
+
+        for(let i in values){
+            codes.stripped[i] = values[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,values[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
         bb.installWatch('state','focusedObject',onFocusChange);
     }
-    
+
     bb.installWatch('state','focusedObject',onFocusChange);
 
     let fpsCounter = document.getElementById('fpsCounter');

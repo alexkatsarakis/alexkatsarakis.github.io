@@ -1,3 +1,4 @@
+import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
 export default {name:'animationPreview',link: './src/UI/animationPreview/animationPreview.ahtml',cb:onAnimationPreviewLoaded};
@@ -198,17 +199,18 @@ function createPopUp(film){
     }
 
     function saveAnimation(){
-        if(idInput.value !== "")
-        bb.fastGet('animation','registerNewAnimation')(new FRAnimation({
-            id: idInput.value,
-            start: 0,
-            end: film.totalFrames - 1,
-            dx: Number.parseInt(dxInput.value),
-            dy: Number.parseInt(dyInput.value),
-            reps: Number.parseInt(repsInput.value),
-            delay: Number.parseInt(delaySlider.value)
-        }),film.id);
-        destroyPopUP();
+        if(idInput.value !== ""){
+            Engine.AnimationManager.registerNewAnimation(new FRAnimation({
+                id: idInput.value,
+                start: 0,
+                end: film.totalFrames - 1,
+                dx: Number.parseInt(dxInput.value),
+                dy: Number.parseInt(dyInput.value),
+                reps: Number.parseInt(repsInput.value),
+                delay: Number.parseInt(delaySlider.value)
+            }),film.id);
+            destroyPopUP();
+        }
     }
 
     dxInput.addEventListener('change',restartAnimation);
@@ -226,7 +228,7 @@ function createPopUp(film){
 let animatorsForPreview = [];
 
 function showAnimations(){
-    let items = bb.fastGet('animation','getAllFilms')();
+    let items = Engine.AnimationManager.getAllFilms();
 
     let objWrapper = document.getElementById('animationPreviewWrapper');
     objWrapper.innerHTML = '';
