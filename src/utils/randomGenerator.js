@@ -16,10 +16,7 @@ class Randomizer {
    
     }
 
-    randomNumber({min, max, length} = {min:0, max:9, length:10}){
-        min = (min)?min:0;
-        max = (max)?max:9;
-        length = (length)?length:10;
+    randomNumber({min = 0, max = 9, length = 10}){
         assert.check(min < max,'max of random number must be greater than min');
         assert.check(length > 0,'length of random number must be greater than 0');
         let accum = "";
@@ -29,12 +26,7 @@ class Randomizer {
         return Number.parseInt(accum);
     }
 
-    randomString({capital,small,number,special,length} = {capital:false,small:true,number:false,special:false,length:10}){
-        length = (length)?length:10;
-        capital = (capital)?(capital):false;
-        small = (small)?(small):false;
-        number = (number)?(number):false;
-        special = (special)?(special):false;
+    randomString({capital = false,small = false,number = false,special = false,length = 10} = {capital:false,small:true,number:false,special:false,length:10}){
         assert.check(length > 0,'length of random string must be greater than 0');
 
         let fromStringToChoose = "";
@@ -50,8 +42,7 @@ class Randomizer {
         return accum;
     }
 
-    randomHex({length} = {length:6}){
-        length = (length)?length:6;
+    randomHex({length = 6}){
         assert.check(length > 0,'length of random string must be greater than 0');
 
         let accum = "";

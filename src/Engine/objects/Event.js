@@ -7,21 +7,23 @@ class Event {
     getValue
     constructor({tag,value,onChange,getValue}){
         if(typeof tag !== 'string'
-        || (typeof onChange !== 'function' && getValue !== undefined)
+        || (typeof onChange !== 'function' && onChange !== undefined)
         || (typeof getValue !== 'function' && getValue !== undefined)){
             throw Error("Error creating value")
         }
         this.tag = tag;
         this.val = value;
-        this.onChange = (onChange)?onChange:(val)=>this.val = val;
+        this.onChange = onChange || ((val)=>{this.val = val});
         this.getValue = getValue;
     }
 }
 
-export default class EventsFunctionality {
+export default class EventsManager {
     _regEvents = {}
 
-    constructor(def){
+    _parent
+
+    constructor(def, parent){
         if(def){
             this.registerEvent('onClick',{tag: 'system'});
             this.registerEvent('onRightClick',{tag: 'system'});
@@ -30,12 +32,13 @@ export default class EventsFunctionality {
             this.registerEvent('onMove',{tag: 'system'});
             this.registerEvent('onEachFrame',{tag: 'system'});
         }
+        this._parent = parent;
     }
 
-    registerEvent(name,{tag,code}){
+    registerEvent(name,{tag = 'user',code = {}}){
         this._regEvents[name] = new Event({
-            tag: (tag)?tag: 'system',
-            value: (code) ? code : ""
+            tag: tag,
+            value: code
         });
     }
 
@@ -62,19 +65,25 @@ export default class EventsFunctionality {
         }
         event.val = code;
         if (event.onChange) 
-        event.onChange(code);
+            event.onChange(code);
         
     }
 
     removeEvent(ev){
+        if(!this._regEvents[ev])return;
         delete this._regEvents[ev];
     }
 
     triggerEvent(ev) {
-        if (!this._regEvents[ev]) 
+        if (!this._regEvents[ev] || !this._regEvents[ev].val) 
             return;
-        
-        bb.fastGet('scripting', 'executeText')(this.getEvent(ev)); // TODO
+
+        bb.fastGet('scripting', 'executeCode')(this.getEvent(ev).code,this._parent); // TODO
+    }
+
+    getEventTag(ev){
+        if(!this._regEvents[ev]) throw Error('get tag from a not registered event');
+        return this._regEvents[ev].tag;
     }
 
 }

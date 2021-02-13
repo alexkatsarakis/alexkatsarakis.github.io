@@ -9,49 +9,25 @@ export default {
     },
     animations: [
         {
+            id: "mario_big_l_idle",
+            film: "mario_big_left_idle",
+            delay: 200
+        },
+        {
+            id: "mario_big_r_idle",
+            film: "mario_big_right_idle",
+            delay: 200
+        },
+        {
             id: "mario_big_r_r",
             film: "mario_big_right_walking",
-            reps: 2,
             dx: 26,
             delay: 90
         },
         {
             id: "mario_big_r_l",
             film: "mario_big_left_walking",
-            reps: 2,
             dx: -26,
-            delay: 90
-        },
-        {
-            id: "mario_big_hj_l",
-            film: "mario_big_left_jumping",
-            reps: 2,
-            dx: -46,
-            dy: -60,
-            delay: 90
-        },
-        {
-            id: "mario_big_hj_l2",
-            film: "mario_big_left_jumping",
-            reps: 2,
-            dx: -46,
-            dy: 60,
-            delay: 90
-        },
-        {
-            id: "mario_big_hj_r",
-            film: "mario_big_right_jumping",
-            reps: 2,
-            dx: 46,
-            dy: -60,
-            delay: 90
-        },
-        {
-            id: "mario_big_hj_r2",
-            film: "mario_big_right_jumping",
-            reps: 2,
-            dx: 46,
-            dy: 60,
             delay: 90
         },
         {
@@ -72,12 +48,10 @@ export default {
             reps: 2
         },
         {
-            id: "coin_move_right",
-            film: "coin_spinning",
-            delay: 90,
-            dx: 20,
-            reps: 12
-        }
+            id: "questblock_flick",
+            film: "questblock_open",
+            delay: 120
+        },
     ]
 
 }

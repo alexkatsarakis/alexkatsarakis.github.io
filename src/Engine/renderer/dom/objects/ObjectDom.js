@@ -1,15 +1,9 @@
 import Object from '../../../objects/Object.js'
 
-import Value from '../../../objects/Value.js'
+import stage from '../../EnvironmentObject.js'
 
 import scene from './Scene.js'
 import objectManager from '../../renderer.js'
-
-function fromPercentageToPx(x,y){
-    x = x/100 * window.innerWidth;
-    y = y/100 * window.innerHeight;
-    return [x,y];
-}
 
 export default class ObjectDom extends Object{
     div
@@ -43,6 +37,8 @@ export default class ObjectDom extends Object{
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
         });
+
+        this._stage = stage;
     }
 
     setColor(col){
@@ -80,6 +76,12 @@ export default class ObjectDom extends Object{
 
     createElement(){
         throw Error("createElement must be implemented for every Dom object")
+    }    
+    
+    getMapCoords(){
+        // return [this._x,this._y];
+        
+        return [this.getValue('x') - this._stage.getValue('x'),this.getValue('y')- this._stage.getValue('y')];
     }
 
     animate(){}
@@ -90,13 +92,17 @@ export default class ObjectDom extends Object{
 
     add(){
         objectManager.addToWorld(this);
-        scene.addItem(this.div);
+        scene.addItem(this);
     }
 
     remove(){
         this.clear();
         objectManager.removeFromWorld(this);
-        scene.remove(this.div);
+        scene.remove(this);
+    }
+
+    render(){
+        this.div.style.visibility = (this.getOption('isVisible')?'visible':'hidden');
     }
 
 }

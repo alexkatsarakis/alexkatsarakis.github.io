@@ -7,12 +7,12 @@ export default class MovingAnimation extends Animation {
     _delay;
 
 
-    constructor({id,reps,dx,dy,delay}){
+    constructor({id,reps = 1,dx = 0,dy = 0,delay = 100}){
         super(id);
-        this._reps = (reps)?reps:1;
-        this._dx = (dx)?dx:0;
-        this._dy = (dy)?dy:0;
-        this._delay = (delay)?delay:100;
+        this._reps = reps;
+        this._dx = dx;
+        this._dy = dy;
+        this._delay = delay;
     }
 
     get dx(){

@@ -19,18 +19,28 @@ elem.id = 'blocklyDiv2';
 document.body.appendChild(elem);
 let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
 
-bb.fastInstall('scripting','executeCode',(text) => {
+let currObject;
+bb.fastInstall('scripting','executeCode',(text,currentObject) => {
+    if(text === undefined 
+        || text === ""
+        || text === null)
+            return;
+    let prevObject = currObject;
+    currObject = currentObject;
     eval(text);
+    currObject = prevObject;
 });
-
-bb.fastInstall('scripting','executeText',(text) => {
+bb.fastInstall('scripting','executeText',function(text,currentObject) {
     if(text === undefined 
     || text === ""
     || text === null)
         return;
     text = Blockly.Xml.textToDom(text);
     Blockly.Xml.clearWorkspaceAndLoadFromXml(text,test);
+    let prevObject = currObject;
+    currObject = currentObject;
     eval(Blockly.JavaScript.workspaceToCode(test));
+    currObject = prevObject;
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{

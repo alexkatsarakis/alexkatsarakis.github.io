@@ -43,8 +43,8 @@ export default class UIFactory {
         return popUpWrapper;
     }
 
-    createDiv({classList,id,parent,elementType}){
-        let div = document.createElement((elementType)?elementType:'div');
+    createDiv({classList,id,parent,elementType = 'div'}){
+        let div = document.createElement(elementType);
         if(id)div.id = id;
         if(classList)div.classList += ' '+classList;
         if(parent)parent.appendChild(div);

@@ -39,6 +39,32 @@ function createPopUp(film){
     mainAreaCanvas.id = 'animationPreviewCreate_popup_mainarea_canvas';
     mainArea.appendChild(mainAreaCanvas);
 
+    let filmArea = document.createElement('div');
+    filmArea.id = 'animationPreviewCreate_popup_filmarea';
+    popUp.appendChild(filmArea);
+
+    
+    for(let i = 0; i < film.totalFrames; ++i){
+        let box = film.getFrameBox(i);
+        let preview = document.createElement('canvas');
+        let width = filmArea.offsetWidth-2;
+        preview.style.width = width;
+        preview.style.height = width;
+        preview.classList = 'animationPreviewCreate_popup_filmarea_box';
+        let previewCtx = preview.getContext('2d');
+        previewCtx.canvas.width = width;
+        previewCtx.canvas.height = width;
+        previewCtx.drawImage(bb.fastGet('assets',film.bitmap),
+        box.x,box.y,box.width,box.height,
+        0, 0, width*(box.width/box.height), width);
+
+
+        filmArea.appendChild(preview);
+    }
+
+
+
+
     let editArea = document.createElement('div');
     editArea.id = 'animationPreviewCreate_popup_editarea';
     popUp.appendChild(editArea);
@@ -73,8 +99,8 @@ function createPopUp(film){
 
     let dxInput = document.createElement('input');
     dxInput.type = 'number';
-    dxInput.min = '-10';
-    dxInput.max = '10';
+    dxInput.min = '-50';
+    dxInput.max = '50';
     dxInput.step = '1';
     dxInput.value = '0';
     dxWrapper.appendChild(dxInput);    
@@ -90,8 +116,8 @@ function createPopUp(film){
 
     let dyInput = document.createElement('input');
     dyInput.type = 'number';
-    dyInput.min = '-10';
-    dyInput.max = '10';
+    dyInput.min = '-50';
+    dyInput.max = '50';
     dyInput.step = '1';
     dyInput.value = '0';
     dyWrapper.appendChild(dyInput);
@@ -124,6 +150,8 @@ function createPopUp(film){
 
     let idInput = document.createElement('input');
     idInput.type = 'text';
+    idInput.classList = 'animationPreviewCreate_popup_editarea_value';
+    idInput.placeholder = 'my animation';
     idWrapper.appendChild(idInput);
 
     let startAnim = document.createElement('div');
@@ -182,7 +210,6 @@ function createPopUp(film){
 
     function restartAnimation(){
         if(!animator.hasFinished())animator.stop();
-        animation = undefined;
         animation = new FRAnimation({
             id: '_prevCreate',
             start: 0,

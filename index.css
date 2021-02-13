@@ -12,7 +12,8 @@
 }
 
 .goog-menuitem-highlight{
-	background-color: red;
+	background-color:var(--main-color);
+	color:var(--main-color-text);
 }
 
 body { 

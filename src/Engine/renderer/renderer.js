@@ -1,15 +1,18 @@
 import bb from '../../utils/blackboard.js'
 
+const rend = bb.fastGet('renderer', 'render');
 
 class ObjectManager {
     _objects
     _objectByName
     _constructors
+    _systemObjects
 
     constructor() {
         this._constructors = {};
         this._objects = {}; 
         this._objectByName = {};
+        this._systemObjects = [];
     }
 
     addConstructor(name,cons){
@@ -58,6 +61,22 @@ class ObjectManager {
     getObjectByName(i){
         return this._objectByName[i];
     }
+
+    renderAll(){
+        if(rend)
+            rend.forEach((it)=>it());
+    }
+
+    addSystemObject(objID){
+        let index = this._systemObjects.indexOf(objID);
+        if(index !== -1) throw Error('trying to add a system object that is already registered');
+        this._systemObjects.push(objID);
+    }
+
+    isSystemObject(objID){
+        let index = this._systemObjects.indexOf(objID);
+        return (index > -1);
+    }
 }
 
 const objectManager = new ObjectManager();
@@ -66,6 +85,7 @@ export default objectManager;
 
 import envObj from './EnvironmentObject.js'
 import colObj from './CollisionsObject.js'
+import keyObj from './KeyboardObject.js'
 import domConst from './dom/renderer.js'
 import _454Const from './454GameEngine/renderer.js'
 
@@ -79,10 +99,11 @@ for(let i in domConst){
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(colObj);
+objectManager.addToWorld(keyObj);
 
-bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name]);
-
-
+objectManager.addSystemObject(envObj.id);
+objectManager.addSystemObject(colObj.id);
+objectManager.addSystemObject(keyObj.id);
 
 import changeFocus from '../../transitionHandlers/focusedObject.js'
 let clickWrapper = document.createElement('div');

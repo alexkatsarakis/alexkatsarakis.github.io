@@ -16,18 +16,22 @@ import Engine from '../Engine.js'
 function dummyAction(){
     let liveObj = Engine.ObjectManager.objects;
     
-    let allSaved = {};
+    // let allSaved = {};
+    // for(let i in liveObj){
+    //     let saved = liveObj[i].save();
+    //     saved['timeStamp'] = bb.fastGet('state','gameTime');
+    //     allSaved[saved['id']] = saved;
+    // }
+    // console.log(allSaved);
+    let toSave = {};
     for(let i in liveObj){
-        let saved = liveObj[i].save();
-        saved['timeStamp'] = bb.fastGet('state','gameTime');
-        allSaved[saved['id']] = saved;
+        toSave[i] = JSON.parse(liveObj[i].toString());
     }
-    console.log(allSaved);
 
-
-    var textFileAsBlob = new Blob([JSON.stringify(allSaved)], {type:'text/plain'}); 
+    console.log(toSave);
+    var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
     var downloadLink = document.createElement("a");
-    downloadLink.download = "savedState.txt";
+    downloadLink.download = "savedState.json";
     if (window.webkitURL != null)
     {
         // Chrome allows the link to be clicked

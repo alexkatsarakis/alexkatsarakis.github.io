@@ -37,7 +37,7 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
     return text;
 });
 
-bb.fastInstall('scripting','executeText',(text) => {
+bb.fastInstall('scripting','executeText',(text,currObject) => {
     if(text === "" || text === null || text === undefined)return;
     console.log(pyodide.runPython(text));
 });

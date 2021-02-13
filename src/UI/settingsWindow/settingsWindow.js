@@ -69,6 +69,21 @@ const settings = {
     },
     AddOns: {
         
+    },
+    Settings: {
+        dragItems: {
+            onChange: (ev)=>{
+                console.log(ev.target.value);
+                if(ev.target.value !== 'true'){
+                    bb.fastSet('settings', 'noDrag', false);
+                }else{
+                    bb.fastSet('settings', 'noDrag', true);
+                }
+            },
+            initValue: bb.fastGet('settings', 'noDrag'),
+            name: 'enable dragging items',
+            inputType:'checkbox'
+        }
     }
 }
 

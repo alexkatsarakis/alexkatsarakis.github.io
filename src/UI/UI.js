@@ -96,7 +96,6 @@ class UIManager {
 
 const uiManager = new UIManager();
 
-uiManager.installUI({name:keyboard.name,link:keyboard.link,cb:keyboard.cb});
 uiManager.installUI({name:objInfo.name,link:objInfo.link,cb:objInfo.cb});
 uiManager.installUI({name:toolbar.name,link:toolbar.link,cb:toolbar.cb},false);
 uiManager.installUI({name:objMenu.name,link:objMenu.link,cb:objMenu.cb});
@@ -105,6 +104,7 @@ uiManager.installUI({name:aninPrev.name,link:aninPrev.link,cb:aninPrev.cb});
 uiManager.installUI({name:colPrev.name,link:colPrev.link,cb:colPrev.cb});
 
 uiManager.loadAll();
+uiManager.installUI({name:keyboard.name,link:keyboard.link,cb:keyboard.cb});
 
 bb.fastInstall('UI','getUIs',()=>{return uiManager.getUIs()});
 bb.fastInstall('UI','installUI',({name,link,cb})=>uiManager.installUI({name,link,cb}));

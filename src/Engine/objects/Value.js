@@ -6,11 +6,11 @@ class Value {
     val
     tag
     constructor({tag,value,onChange,getValue}){
-        if(typeof tag !== 'string'
-        || (typeof onChange !== 'function' && onChange !== undefined)
-        || (typeof getValue !== 'function' && getValue !== undefined)){
-            throw Error("Error creating value")
-        }
+        // if(typeof tag !== 'string'
+        // || (typeof onChange !== 'function' && onChange !== undefined)
+        // || (typeof getValue !== 'function' && getValue !== undefined)){
+        //     throw Error("Error creating value")
+        // }
         this.tag = tag;
         this.val = value;
         this.onChange = onChange;
@@ -18,23 +18,29 @@ class Value {
     }
 }
 
-export default class ValueHandler{
+export default class ValueManager{
     _regValues = {}
+
+    _parent;
+
+    constructor(parent){
+        this._parent = parent;
+    }
 
     getValues() {
         return this._regValues;
     }
 
-    registerValue(val, {tag,value,onChange,getValue}) {
+    registerValue(val, {tag,value = '',onChange = {text: "", code: ""},getValue}) {
         // if(this._regValues[val]){
         //     log.logError('Couldn\'t create value '+val+' because it already exists');
         //     return;
         // }
         this._regValues[val] = new Value({
             tag: tag || 'user',
-            value: (value !== undefined)?value : '',
-            onChange: (onChange !== undefined)?onChange : undefined,
-            getValue: (getValue !== undefined)?getValue : undefined
+            value: value,
+            onChange: onChange,
+            getValue: getValue
         });
     }
 
@@ -46,8 +52,8 @@ export default class ValueHandler{
         this._regValues[val].val = v;
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
-        if (typeof this._regValues[val].onChange === 'string')
-        bb.fastGet('scripting', 'executeText')(this._regValues[val].onChange); // TODO
+        if (typeof this._regValues[val].onChange === 'object')
+            bb.fastGet('scripting', 'executeCode')(this._regValues[val].onChange.code, this._parent); // TODO
         
     }
 
@@ -58,8 +64,10 @@ export default class ValueHandler{
 
     getValueCode(val) {
         let value = this._regValues[val];
+        console.log(value);
         if(value)
             return value.onChange;
+        return {text: "", code: ""}
     }
 
     getValue(val) {
@@ -86,11 +94,7 @@ export default class ValueHandler{
 
     getValueTag(val){
         let value = this._regValues[val];
+        if(!value) throw Error('Tried to get value tag from unregistered');
         return value.tag;
     }
-
-    setUserCode(val, code){
-
-    }
-
 }

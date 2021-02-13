@@ -4,10 +4,10 @@ export default class AnimationFilm {
     _id;
     _currentFrame;
 
-    constructor({id, bitmap, boxes}){
+    constructor({id, bitmap = "", boxes = []}){
         this._id = id;
-        this._bitmap = (bitmap)?(bitmap):"";
-        this._boxes = (boxes)?(boxes):[]; 
+        this._bitmap = bitmap;
+        this._boxes = boxes; 
     }
 
     get totalFrames(){

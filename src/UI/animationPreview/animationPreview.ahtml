@@ -1,4 +1,4 @@
 <link rel="stylesheet" href="./src/UI/animationPreview/animationPreview.css">
 
-<div id='animationPreview_makeBig' class='hudChild'>Animation Preview</div>
+<div id='animationPreview_makeBig' class='hudChild'>Animation Workshop</div>
 <div id='animationPreviewWrapper' class='hudChild'></div>

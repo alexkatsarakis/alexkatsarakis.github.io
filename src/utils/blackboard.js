@@ -14,7 +14,7 @@ class BlackboardComponent{
   }
 
   triggerWatch(itemName){
-    if(this.watches[itemName] === undefined)return;
+    if(this.watches[itemName] === undefined)return; // === undefined to avoid conversions
     let callbacks = this.watches[itemName];
     delete this.watches[itemName];
     callbacks.forEach((cb)=>{
@@ -23,19 +23,18 @@ class BlackboardComponent{
   }
 
   installItem(itemName,value){
-    if(this.itemMap[itemName] !== undefined) return undefined;
+    if(this.itemMap[itemName] !== undefined) return false; // !== undefined to avoid conversions
     this.itemMap[itemName] = value;
     return true;
   }
 
   removeItem(itemName){
-    if(this.itemMap[itemName] === undefined) return undefined;
+    if(this.itemMap[itemName] === undefined) return false; // === undefined to avoid conversions
     delete this.itemMap[itemName];
     return true;
   }
 
   getItem(itemName){
-    if(this.itemMap[itemName] === undefined) return undefined;
     return this.itemMap[itemName];
   }
 

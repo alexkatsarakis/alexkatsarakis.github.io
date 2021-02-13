@@ -2,9 +2,9 @@
 class Assert {
     _assertionState = true;
 
-    check(state, errMessage){
-        if(this._assertionState === true && !state)
-            throw Error((errMessage)?errMessage:'Error on Assertion');
+    check(state, errMessage = 'Error on Assertion'){
+        if(this._assertionState === true && !state) // === true to avoid conversions
+            throw Error(errMessage);
     }
 
 }

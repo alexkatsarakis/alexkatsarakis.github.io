@@ -1,82 +1,178 @@
 #mainInfoBox {
     position: absolute;
-    width: auto;
-    min-width: 220px;
-    height: auto;
-    max-height: 500px;
     right:0;
-    top: 20%;
+    top: 60px;
+}
+
+#mainInfoBox-cover {
     background-color: var(--main-color);
-    color: var(--main-text);
-    padding: 10px;
+    color: var(--main-color-text);
     overflow-x: hidden;
     overflow-y: auto;
+    width: 250px;
+    height: 700px;
 }
 
-#objName {
-    color: var(--main-color-text);
-    font-size: 24px;
-    text-align: center;
-    margin: 10px;
-}
-
-#categName {
-    color: var(--main-color-text);
-    font-size: 20px;
-    text-align: center;
-}
-
-#statesInfo {
+.mainInfoBox-shard {
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 2px solid var(--main-color-text);
+    font-size: 14px;
+    line-height: 16px;
 }
 
-#fieldsInfo {
-    margin-left: 10px;
-}
-
-#eventsInfo {
-    margin-left: 10px;
-}
-
-#attributeInfo {
-    margin-left: 10px;
-}
-
-.InfoBox_thinLine {
-    width: 100%;
-    height: 2px;
-    background-color: var(--main-color-text);
-    margin: 10px 10px 10px 0;
-    margin-top: 25px;
-    color: var(--main-color-text);
-}
-
-.InfoBox_prompt {
-    color: var(--main-color-text);
-    font-size: 20px;
-    padding-bottom: 2px;
-}
-
-.InfoBox_inputText {
-    width: 85%;
+.mainInfoBox-shard-icon {
     float: left;
-    height: 13px;
+    width: 15px;
+    height: 15px;
+    margin-left: 20px;
+    margin-right: 10px;
+    fill: var(--main-color-text);
 }
 
-.InfoBox_addButton {
-    text-align: center;
-    color: var(--main-buttons-text-color);
-    float:left;
-    width: 10%;
+.mainInfoBox-shard-title {
+    margin-left: 45px;
+    width: calc(100% - 45px);
+}
+
+.mainInfoBox-shard-text {
+    padding: 0;
+    border: 0;
+    width: 0;
+    transition: linear 0.3s;
+}
+
+.mainInfoBox-shard-close {
+    display: none;
+    width: 15px;
+    float: right;
     cursor: pointer;
-    background-color:var(--main-buttons-background-color);
-    border-radius: 100px;
+    font-size: 16px;
+    font-family: monospace;
+    color: red;
 }
 
-.InfoBox_addButton:hover {
-    background-color: var(--main-buttons-background-color-hover);
+.mainInfoBox-shard-add {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-.InfoBox_item {
+.mainInfoBox-shard-add2 {
+    display: none;
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: green;
+}
+
+.mainInfoBox-shard-main {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+.mainInfoBox-body-states-main-wrap {
+    margin-top: 5px;
+}
+
+.mainInfoBox-body-attributes-main-wrap {
+    margin-top: 5px;
+}
+
+.mainInfoBox-body-events-main-wrap {
+    margin-top: 5px;
+}
+
+.mainInfoBox-body-flags-main-wrap {
+    margin-top: 5px;
+}
+
+.mainInfoBox-shard-main-text {
+    font-size: 14px;
+    line-height: 16px;
+    width: 60%;
+    overflow: hidden;
+}
+
+.mainInfoBox-shard-main-edit {
+    float: right;
+    fill: var(--main-color-text);
+    height: 15px;
+    width: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.mainInfoBox-shard-main-remove {
+    float: right;
+    fill: grey;
+    height: 15px;
+    width: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+}
+
+.mainInfoBox-shard-input-text {
+    /* padding: 0; */
+    border: 0;
+    width: 60px;
+}
+
+.mainInfoBox-shard-input-dropdown {
+    /* padding: 0; */
+    border: 0;
+    height: 15px;
+    width: 48px;
+}
+
+#mainInfoBox-head-preview {
+    width: 30px;
+    height: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: red;
+    float:left;
+}
+
+#mainInfoBox-head-name {
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 20px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#mainInfoBox-head-categ {
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 20px;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+#mainInfoBox-options {
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 24px;
+    height: auto;
+    background-color: var(--main-color);
     color: var(--main-color-text);
+    border-right: 1px solid var(--main-color-hover);
+}
+
+.mainInfoBox-options-item {
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: white;
 }

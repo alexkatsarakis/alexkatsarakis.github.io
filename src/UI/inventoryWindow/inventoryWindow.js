@@ -1,7 +1,5 @@
 import bb from '../../utils/blackboard.js'
 
-import Vue from '../../../libs/vue.min.js'
-
 import Engine from '../../Engine.js'
 
 export default {name:'inventoryWindow',link: './src/UI/inventoryWindow/inventoryWindow.ahtml',cb:onSettingsInventoryLoaded};
@@ -54,6 +52,13 @@ function onSettingsInventoryLoaded(){
     item.onclick = ()=>{focusTab('Objects');showObjects(body)}
     tabDiv.appendChild(item);
 
+    if(Engine.hasManager('ObjectSnapshotManager')){
+        // item = document.createElement('div');
+        // item.classList = 'inventory-window-tabs-item';
+        // item.innerHTML = 'Snapshots'
+        // item.onclick = ()=>{focusTab('Snapshots');showSnapshots(body)}
+        // tabDiv.appendChild(item);
+    }
 
 }
 

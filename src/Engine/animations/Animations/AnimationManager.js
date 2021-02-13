@@ -7,12 +7,12 @@ class AnimationManager {
     loadAll(json){
         json.animations.forEach((item)=>{
             if(!item.id || !item.film)throw Error('given animation doesn\'t have id/film');
-            item.start = (item.start)?item.start:json.defaultValues.start;
-            item.end = (item.end)?item.end:json.defaultValues.end;
-            item.reps = (item.reps)?item.reps:json.defaultValues.reps;
-            item.dx = (item.dx)?item.dx:json.defaultValues.dx;
-            item.dy = (item.dy)?item.dy:json.defaultValues.dy;
-            item.delay = (item.delay)?item.delay:json.defaultValues.delay;
+            item.start = item.start || json.defaultValues.start;
+            item.end = item.end || json.defaultValues.end;
+            item.reps = item.reps || json.defaultValues.reps;
+            item.dx = item.dx || json.defaultValues.dx;
+            item.dy = item.dy || json.defaultValues.dy;
+            item.delay = item.delay || json.defaultValues.delay;
             
             let film = animationFilmHolder.getFilm(item.film);
             item.end = (item.end !== 'max')?item.end:film.totalFrames-1;

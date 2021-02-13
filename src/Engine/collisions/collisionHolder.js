@@ -4,9 +4,9 @@ class CollisionHolder {
     constructor(){
     }
 
-    installCollision(first,second,codeAsText){
+    installCollision(first,second,code){
         if(this._collisionReactions[`${first}_${second}`] || this._collisionReactions[`${second}_${first}`])return false;
-        this._collisionReactions[`${first}_${second}`] = (codeAsText)?codeAsText:"";
+        this._collisionReactions[`${first}_${second}`] = code || {text: "",code: ""};
         return true;
     }
 
@@ -19,12 +19,12 @@ class CollisionHolder {
             if(!toReturn[obj1Name]){
                 toReturn[obj1Name] = [];
             }
-            toReturn[obj1Name][obj2Name] = {codeAsText: this._collisionReactions[i]}
+            toReturn[obj1Name][obj2Name] = {code: this._collisionReactions[i]}
             
             if(!toReturn[obj2Name]){
                 toReturn[obj2Name] = [];
             }
-            toReturn[obj2Name][obj1Name] = {codeAsText: this._collisionReactions[i]}
+            toReturn[obj2Name][obj1Name] = {code: this._collisionReactions[i]}
         }
         return toReturn;
     }
@@ -36,9 +36,9 @@ class CollisionHolder {
             let obj1Name = split[0];
             let obj2Name = split[1];
             if(obj1Name === objId){
-                toReturn.push({collisionWith:obj2Name, codeAsText: this._collisionReactions[i]});
+                toReturn.push({collisionWith:obj2Name, code: this._collisionReactions[i]});
             }else if(obj2Name === objId){
-                toReturn.push({collisionWith:obj1Name, codeAsText: this._collisionReactions[i]});
+                toReturn.push({collisionWith:obj1Name, code: this._collisionReactions[i]});
             }
         }
         return toReturn;
@@ -52,13 +52,13 @@ class CollisionHolder {
         }
     }
 
-    setCollision(first,second,codeAsText){
-        if(!codeAsText)return false;
+    setCollision(first,second,code){
+        if(!code)return false;
         let combined = `${first}_${second}`;
         let combinedRev = `${second}_${first}`;
         if(this._collisionReactions[combinedRev] !== undefined)
             delete this._collisionReactions[combinedRev]
-        this._collisionReactions[combined] = codeAsText;
+        this._collisionReactions[combined] = code;
     }
 
     removeCollision(first,second){
@@ -115,7 +115,7 @@ class CollisionHolder {
             if(this.collided(nameTranslator[obj1Name], nameTranslator[obj2Name])){
                 // aliveItems[obj1Name].triggerEvent('onCollision');
                 if(this._collisionReactions[i]){
-                    exec(this._collisionReactions[i]);
+                    exec(this._collisionReactions[i].code);
                 }
             }
         }

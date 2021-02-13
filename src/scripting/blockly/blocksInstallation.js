@@ -235,7 +235,24 @@ Blockly.JavaScript['dropdown_categ'] = function(block) {
     return '"' + inp_val + '"';
 };
 
-Blockly.Blocks['object_attr'] = {
+Blockly.Blocks['this_obj'] = {
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('this')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'Object');
+    },
+};
+
+Blockly.JavaScript['this_obj'] = function(block) {
+    return `bb.fastGet('Engine','ObjectManager').getObject(currObject)`;
+};
+
+
+Blockly.Blocks['object_flags'] = {
     validate: function(newValue) {
         this.getSourceBlock().updateConnections(newValue);
         return newValue;
@@ -248,7 +265,7 @@ Blockly.Blocks['object_attr'] = {
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
             // .appendField(Blockly.Msg.AK_FIELD)
-            .appendField("attribute")
+            .appendField("flag")
             .appendField(new Blockly.FieldDropdown([["",""]]), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
@@ -274,7 +291,7 @@ Blockly.Blocks['object_attr'] = {
         this.removeInput('value',true);
         this.appendDummyInput('values')
             // .appendField(Blockly.Msg.AK_FIELD)
-            .appendField("attribute")
+            .appendField("flag")
             .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
@@ -292,7 +309,7 @@ Blockly.Blocks['object_attr'] = {
     }
 };
 
-Blockly.JavaScript['object_attr'] = function(block) {
+Blockly.JavaScript['object_flags'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
@@ -313,8 +330,8 @@ Blockly.Blocks['object_field'] = {
             .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
-            .appendField(Blockly.Msg.AK_FIELD)
-            .appendField(new Blockly.FieldDropdown([["x","x"]]), 'FIELD')
+            .appendField('attribute')
+            .appendField(new Blockly.FieldDropdown([["",""]]), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
             .appendField(Blockly.Msg.AK_VALUE);
@@ -333,11 +350,10 @@ Blockly.Blocks['object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['x','x']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
-            .appendField(Blockly.Msg.AK_FIELD)
+            .appendField('attribute')
             .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
             .appendField(Blockly.Msg.AK_TO);
         this.appendValueInput('value')
@@ -428,7 +444,7 @@ Blockly.Blocks['object_event'] = {
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
             .appendField(Blockly.Msg.AK_EVENT)
-            .appendField(new Blockly.FieldDropdown([['onClick','onClick']]), 'FIELD')
+            .appendField(new Blockly.FieldDropdown([['','']]), 'FIELD')
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object field.');
         this.setHelpUrl('none');
@@ -444,7 +460,7 @@ Blockly.Blocks['object_event'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['onClick','onClick']];
+        if(toAdd.length === 0)toAdd = [['','']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -509,7 +525,7 @@ Blockly.Blocks['get_object_field'] = {
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
             .appendField(Blockly.Msg.AK_FIELD)
-            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD');
+            .appendField(new Blockly.FieldDropdown([["",""]]), 'FIELD');
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object field.');
         this.setHelpUrl('none');
@@ -525,7 +541,7 @@ Blockly.Blocks['get_object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['log me','log me']];
+        if(toAdd.length === 0)toAdd = [['','']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')

@@ -9,22 +9,13 @@ export default class CollisionManager {
             collisionObject.addEvent(`${obj1}_${obj2}`);
         };
     }
-
-    loadSaved(){
-        for(let i in localStorage){
-            let split = i.split("_");
-            if(split[0] === collisionObject.id){
-                this.installCollision(split[1],split[2],localStorage[i]);
-            }
-        }
-    }
-
+    
     removeCollision(obj1ID, obj2ID){
         return collisionHolder.removeCollision(obj1ID, obj2ID);
     }
 
     checkAndInvoke(arrOfObj){
-        collisionHolder.checkAndInvoke(arrOfObj,bb.fastGet('scripting','executeText')); //TODO: remove it from here
+        collisionHolder.checkAndInvoke(arrOfObj,bb.fastGet('scripting','executeCode')); //TODO: remove it from here
     }
 
     getAllCollisions(){

@@ -1,9 +1,10 @@
-import Object from './ObjectDom.js'
+class Scene {
+    _items;
 
-class Scene extends Object {
     constructor(){
-        super("scene");
         this.div = document.createElement("div");
+
+        this._items = {};
 
         this.div.style.position = "absolute";
         this.div.id = 'scene';
@@ -11,8 +12,6 @@ class Scene extends Object {
         this.div.style.height = 1080 + 'px';
 
         document.body.appendChild(this.div);
-
-        this.data.optionHandler.removeOption('isMovable');
 
         this._category = 'Scene';
 
@@ -23,11 +22,19 @@ class Scene extends Object {
     }
     
     addItem(it){
-        this.div.appendChild(it);
+        this.div.appendChild(it.div);
+        this._items[it.id] = it;
     }
 
     remove(it){
-        this.div.removeChild(it);
+        this.div.removeChild(it.div);
+        delete this._items[it.id];
+    }
+
+    renderObjects(){
+        for(let i in this._items){
+            this._items[i].render();
+        }
     }
 
 }

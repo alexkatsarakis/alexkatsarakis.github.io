@@ -2,16 +2,8 @@ import bb from '../utils/blackboard.js'
 
 import Engine from '../Engine.js'
 
-function pauseGame(){
-    Engine.pause();
-    //TODO: add pause Window;
+
+if(Engine.hasManager('PauseManager')){
+    bb.fastInstall('actions', 'pauseGame', ()=>Engine.PauseManager.pause());
+    bb.fastInstall('actions', 'resumeGame', ()=>Engine.PauseManager.resume());
 }
-
-bb.fastInstall('actions','pauseGame',pauseGame);
-
-function resumeGame(){
-    //TODO: destroy pause Window;
-    Engine.resume();
-}
-
-bb.fastInstall('actions','resumeGame',resumeGame);

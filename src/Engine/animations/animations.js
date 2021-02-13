@@ -56,15 +56,14 @@ export default class AnimationManager {
         return animationFilmHolder.getAssetsToLoad();
     }
 
-    playAnimation = ({object,anim,onStart,onFinish,animator}) => {
+    playAnimation = ({object,anim,onStart,onFinish,animator = 'FrameRangeAnimator'}) => {
 
         if(!anim)return;
         if(!object)return;
         
-        let Animator = bb.fastGet('animation',(animator)?animator:'FrameRangeAnimator');
+        let Animator = bb.fastGet('animation',animator);
         if(!Animator)return;
     
-        let obj = (object)?object:bb.fastGet('state','player');
         let an = new Animator();
         let animation = this.getAnimation(anim);
     
@@ -72,17 +71,17 @@ export default class AnimationManager {
     
         an.onStart = ()=>{
             if(onStart)onStart();
-            obj.setAnimator(an);
-            oldFilm = obj.getValue('film');
-            obj.setValue('film',animation.film.id);
+            object.setAnimator(an);
+            oldFilm = object.getValue('film');
+            object.setValue('film',animation.film.id);
         }
         an.onAction = (th)=>{
-            obj.setFrame(th.currentFrame);
-            obj.move(th.animation.dx,th.animation.dy);
+            object.setFrame(th.currentFrame);
+            object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
-            obj.setFrame(0);
-            obj.setValue('film',oldFilm);
+            object.setFrame(0);
+            object.setValue('film',oldFilm);
             if(onFinish)onFinish();
         }
     

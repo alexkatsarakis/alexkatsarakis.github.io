@@ -3,7 +3,7 @@ import bb from '../../utils/blackboard.js'
 export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
 
 function hudState(){
-    let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
+    let isVisible = (bb.fastGet('state','mode') === "editing");
     toggleVisibility();
     toggleVisibility();
     function toggleVisibility(){
@@ -50,8 +50,9 @@ function onHudLoaded(){
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.invoke('scripting','currentScriptAsText');
-        codes.stripped[tabOpen].set(text);
+        let text = bb.invoke('scripting', 'currentScriptAsText');
+        let code = bb.invoke('scripting', 'currentScriptAsCode');
+        codes.stripped[tabOpen].set({text:text,code:code});
     });
 
     function tabInfo(id,cb){
@@ -80,20 +81,23 @@ function onHudLoaded(){
         eventsTab.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
+            document.getElementById('focusedObjText').innerText = 'Stage';
             bb.invoke('scripting','clearAndLoadFromText','');
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
 
+        document.getElementById("focusedObjText").innerText = obj.name;
         infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
 
         codes = obj.getCodes();
         codes.stripped = {};
 
-        let events = codes.events;
-        let states = codes.states;
-        let values = codes.values;
+        let events  = codes.events;
+        let states  = codes.states;
+        let values  = codes.values;
+        let options = codes.options;
 
         let eventSplit = document.createElement('div');
         eventSplit.classList = 'tabSplitter';
@@ -142,7 +146,7 @@ function onHudLoaded(){
 
         let valueSplit = document.createElement('div');
         valueSplit.classList = 'tabSplitter';
-        valueSplit.innerHTML = 'Fields';
+        valueSplit.innerHTML = 'Attributes';
         eventsTab.appendChild(valueSplit);
 
         for(let i in values){
@@ -152,6 +156,25 @@ function onHudLoaded(){
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,values[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
+        let optionSplit = document.createElement('div');
+        optionSplit.classList = 'tabSplitter';
+        optionSplit.innerHTML = 'Flags';
+        eventsTab.appendChild(optionSplit);
+
+        for(let i in options){
+            codes.stripped[i] = options[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,options[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();

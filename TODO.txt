@@ -2,6 +2,10 @@
 -> = Explanation
 => = Problems I face 
 
+
+IMPORTANT TODO:
+    - On code save, save the executable code so I don't have to load XML and translate to code each time
+
 IDE:
 
     - (Done) Extra UI to manipulate theme-colors!! and/or which UI built-in components I want to be able to see
@@ -93,3 +97,10 @@ PROBABLY DISCARDED:
         
     - add unique IDs to everything instead of just names
         => this doesn't help on reload / sharing
+
+
+
+
+KNOWN BUGS:
+    - A DOM render object position is wrong with relative position
+    - 

@@ -1,40 +1,91 @@
 <link rel="stylesheet" href="./src/UI/objectInfo/objectInfo.css">
 
 <div id="mainInfoBox" class="hudChild">
-  <div id="objName">OBJNAME</div>
-  <div id="categInfo">
-    <div id="categName">CatName</div>
+  <div id="mainInfoBox-options" class="hudChild">
   </div>
-  <div class="InfoBox_thinLine"></div>
-  
-  
-  <div class="InfoBox_prompt">States Information:</div>
-  <div class="InfoBox_prompt" id='InfoBox_currentState'></div>
-  <div id="statesInfo">
+  <div id="mainInfoBox-cover">
+    <div id="mainInfoBox-head" class="mainInfoBox-shard">
+      <!-- <div id="mainInfoBox-head-preview"></div> -->
+      <div id="mainInfoBox-head-name">
+        Name: name
+      </div>
+      <div id="mainInfoBox-head-categ">
+        Category: categ
+      </div>
+    </div>
+    <div id="mainInfoBox-body">
+      <div id="mainInfoBox-body-states" class="mainInfoBox-shard">
+        <svg id="mainInfoBox-body-states-icon" class="mainInfoBox-shard-icon" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m420.879 0h-319.343c-14.888 0-27 12.112-27 27v37.821h-16.065c-8.284 0-15 6.716-15 15s6.716 15 15 15h16.065v58.089h-16.065c-8.284 0-15 6.716-15 15s6.716 15 15 15h16.065v58.09h-16.065c-8.284 0-15 6.716-15 15s6.716 15 15 15h16.065v58.09h-16.065c-8.284 0-15 6.716-15 15s6.716 15 15 15h16.065v58.089h-16.065c-8.284 0-15 6.716-15 15s6.716 15 15 15h16.065v37.821c0 14.888 12.112 27 27 27h319.343c26.274 0 47.65-21.375 47.65-47.65v-416.7c0-26.275-21.375-47.65-47.65-47.65zm17.65 464.35c0 9.732-7.917 17.65-17.65 17.65h-316.343v-34.821h16.065c8.284 0 15-6.716 15-15s-6.716-15-15-15h-16.065v-58.089h16.065c8.284 0 15-6.716 15-15s-6.716-15-15-15h-16.065v-58.09h16.065c8.284 0 15-6.716 15-15s-6.716-15-15-15h-16.065v-58.09h16.065c8.284 0 15-6.716 15-15s-6.716-15-15-15h-16.065v-58.089h16.065c8.284 0 15-6.716 15-15s-6.716-15-15-15h-16.065v-34.821h316.343c9.732 0 17.65 7.917 17.65 17.65z"/><path d="m378.563 417.179h-71.554c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.554c8.284 0 15-6.716 15-15s-6.716-15-15-15z"/><path d="m378.563 64.821h-183.356c-8.284 0-15 6.716-15 15v81.392c0 8.284 6.716 15 15 15h183.356c8.284 0 15-6.716 15-15v-81.392c0-8.284-6.716-15-15-15zm-15 81.392h-153.356v-51.392h153.356z"/></g></svg>
+        <div id="mainInfoBox-body-states-title" class="mainInfoBox-shard-title">
+          States
+          <input type='text' id="mainInfoBox-body-states-text" class="mainInfoBox-shard-text"></input>
+          <div id="mainInfoBox-body-states-add" class="mainInfoBox-shard-add">
+            +
+          </div>
+          <div id="mainInfoBox-body-states-add2" class="mainInfoBox-shard-add2">
+            +
+          </div>
+          <div id="mainInfoBox-body-states-close" class="mainInfoBox-shard-close">
+            x
+          </div>
+        </div>
+        <div id="mainInfoBox-body-states-main" class="mainInfoBox-shard-main">
+        </div>
+      </div>
+      <div id="mainInfoBox-body-attributes" class="mainInfoBox-shard">
+        <svg version="1.1" id="mainInfoBox-body-attributes-icon" class="mainInfoBox-shard-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;" xml:space="preserve"><g><g><path d="M460.8,221.867H185.31c-9.255-36.364-46.237-58.34-82.602-49.085c-24.116,6.138-42.947,24.969-49.085,49.085H17.067C7.641,221.867,0,229.508,0,238.934S7.641,256,17.067,256h36.557c9.255,36.364,46.237,58.34,82.602,49.085c24.116-6.138,42.947-24.969,49.085-49.085H460.8c9.426,0,17.067-7.641,17.067-17.067S470.226,221.867,460.8,221.867zM119.467,273.067c-18.851,0-34.133-15.282-34.133-34.133c0-18.851,15.282-34.133,34.133-34.133s34.133,15.282,34.133,34.133C153.6,257.785,138.318,273.067,119.467,273.067z"/></g></g><g><g><path d="M460.8,51.2h-53.623c-9.255-36.364-46.237-58.34-82.602-49.085C300.459,8.253,281.628,27.084,275.49,51.2H17.067C7.641,51.2,0,58.841,0,68.267s7.641,17.067,17.067,17.067H275.49c9.255,36.364,46.237,58.34,82.602,49.085c24.116-6.138,42.947-24.969,49.085-49.085H460.8c9.426,0,17.067-7.641,17.067-17.067S470.226,51.2,460.8,51.2z M341.334,102.4c-18.851,0-34.133-15.282-34.133-34.133s15.282-34.133,34.133-34.133s34.133,15.282,34.133,34.133S360.185,102.4,341.334,102.4z"/></g></g><g><g><path d="M460.8,392.534h-87.757c-9.255-36.364-46.237-58.34-82.602-49.085c-24.116,6.138-42.947,24.969-49.085,49.085H17.067C7.641,392.534,0,400.175,0,409.6s7.641,17.067,17.067,17.067h224.29c9.255,36.364,46.237,58.34,82.602,49.085c24.116-6.138,42.947-24.969,49.085-49.085H460.8c9.426,0,17.067-7.641,17.067-17.067S470.226,392.534,460.8,392.534zM307.2,443.734c-18.851,0-34.133-15.282-34.133-34.133s15.282-34.133,34.133-34.133c18.851,0,34.133,15.282,34.133,34.133S326.052,443.734,307.2,443.734z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+        <div id="mainInfoBox-body-attributes-title" class="mainInfoBox-shard-title">
+          Attributes
+          <input type='text' id="mainInfoBox-body-attributes-text" class="mainInfoBox-shard-text"></input>
+          <div id="mainInfoBox-body-attributes-add" class="mainInfoBox-shard-add">
+            +
+          </div>
+          <div id="mainInfoBox-body-attributes-add2" class="mainInfoBox-shard-add2">
+            +
+          </div>
+          <div id="mainInfoBox-body-attributes-close" class="mainInfoBox-shard-close">
+            x
+          </div>
+        </div>
+        <div id="mainInfoBox-body-attributes-main" class="mainInfoBox-shard-main">
+        </div>
+      </div>
+      <div id="mainInfoBox-body-events" class="mainInfoBox-shard">
+        <svg version="1.1" id="mainInfoBox-body-events-icon" class="mainInfoBox-shard-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 433.633 433.633" style="enable-background:new 0 0 433.633 433.633;" xml:space="preserve"><g><g><g><path d="M388.749,47.038c-0.886-0.036-1.773-0.042-2.66-0.017h-33.437V18.286C352.653,6.792,341.681,0,330.187,0h-30.824c-11.494,0-19.853,6.792-19.853,18.286V47.02H154.122V18.286C154.122,6.792,145.763,0,134.269,0h-30.825C91.951,0,80.979,6.792,80.979,18.286V47.02H47.543C26.199,46.425,8.414,63.246,7.819,84.589c-0.025,0.886-0.019,1.774,0.017,2.66v301.975c0,22.988,16.718,44.408,39.706,44.408H386.09c22.988,0,39.706-21.42,39.706-44.408V87.249C426.67,65.915,410.083,47.912,388.749,47.038z M299.363,20.898h32.392v57.469h-32.392V20.898z M103.445,20.898h29.78v57.469h-29.78V20.898z M404.898,389.224c0,11.494-7.314,23.51-18.808,23.51H47.543c-11.494,0-18.808-12.016-18.808-23.51V167.184h376.163V389.224z M404.898,87.249v59.037H28.734V87.249c-0.885-9.77,6.318-18.408,16.088-19.293c0.904-0.082,1.814-0.094,2.72-0.037h33.437v11.494c0,11.494,10.971,19.853,22.465,19.853h30.825c10.672,0.293,19.56-8.122,19.853-18.794c0.01-0.353,0.01-0.706,0-1.059V67.918H279.51v11.494c-0.293,10.672,8.122,19.56,18.794,19.853c0.353,0.01,0.706,0.01,1.059,0h30.825c11.494,0,22.465-8.359,22.465-19.853V67.918h33.437c9.791-0.617,18.228,6.82,18.845,16.611C404.992,85.435,404.98,86.345,404.898,87.249z"/><path d="M158.824,309.812l-9.404,52.245c-0.372,2.241-0.004,4.543,1.049,6.556c2.675,5.113,8.989,7.09,14.102,4.415l47.02-24.555l47.02,24.555l4.702,1.045c2.267,0.04,4.48-0.698,6.269-2.09c3.123-2.281,4.73-6.099,4.18-9.927l-9.404-52.245l38.139-36.571c2.729-2.949,3.719-7.109,2.612-10.971c-1.407-3.57-4.577-6.145-8.359-6.792l-52.245-7.837l-23.51-47.543c-1.025-2.116-2.733-3.825-4.849-4.849c-5.194-2.515-11.443-0.344-13.959,4.849l-23.51,47.543l-52.245,7.837c-3.782,0.646-6.952,3.222-8.359,6.792c-1.107,3.862-0.116,8.022,2.612,10.971L158.824,309.812z M187.559,267.494c3.281-0.491,6.061-2.675,7.314-5.747l16.718-33.437l16.718,33.437c1.254,3.072,4.033,5.256,7.314,5.747l37.094,5.224l-26.645,25.6c-2.482,2.457-3.646,5.949-3.135,9.404l6.269,37.094l-32.914-17.763l-4.702-1.045l-4.702,1.045l-32.914,17.763l6.269-37.094c0.512-3.455-0.653-6.947-3.135-9.404l-26.645-25.6L187.559,267.494z"/></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+        <div id="mainInfoBox-body-events-title" class="mainInfoBox-shard-title">
+          Events
+          <input type='text' id="mainInfoBox-body-events-text" class="mainInfoBox-shard-text"></input>
+          <div id="mainInfoBox-body-events-add" class="mainInfoBox-shard-add">
+            +
+          </div>
+          <div id="mainInfoBox-body-events-add2" class="mainInfoBox-shard-add2">
+            +
+          </div>
+          <div id="mainInfoBox-body-events-close" class="mainInfoBox-shard-close">
+            x
+          </div>
+        </div>
+        <div id="mainInfoBox-body-events-main" class="mainInfoBox-shard-main">
+        </div>
+      </div>
+      <div id="mainInfoBox-body-flags" class="mainInfoBox-shard">
+        <svg id="mainInfoBox-body-flags-icon" class="mainInfoBox-shard-icon" height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m497 482h-228.027344c-9.761718-35.570312-50.542968-55.507812-87.972656-59.253906v-212.746094h90v45c0 8.285156 6.714844 15 15 15h180c5.683594 0 10.875-3.210938 13.417969-8.292969s1.992187-11.160156-1.417969-15.707031l-38.25-51 38.25-51c3.410156-4.546875 3.957031-10.625 1.417969-15.707031-2.542969-5.082031-7.734375-8.292969-13.417969-8.292969h-135v-45c0-8.285156-6.714844-15-15-15h-107.578125c1.664063-4.695312 2.578125-9.742188 2.578125-15 0-24.8125-20.1875-45-45-45s-45 20.1875-45 45c0 19.554688 12.539062 36.226562 30 42.421875v335.324219c-37.320312 3.738281-78.191406 23.617187-87.972656 59.253906h-48.027344c-8.285156 0-15 6.714844-15 15s6.714844 15 15 15h482c8.285156 0 15-6.714844 15-15s-6.714844-15-15-15zm-61-332-27 36c-4 5.332031-4 12.667969 0 18l27 36h-135v-30h15c8.285156 0 15-6.714844 15-15v-45zm-135 30h-120v-90h120zm-135-150c8.269531 0 15 6.730469 15 15s-6.730469 15-15 15-15-6.730469-15-15 6.730469-15 15-15zm0 422c31.9375 0 59.972656 12.71875 70.527344 30h-141.054688c10.554688-17.28125 38.589844-30 70.527344-30zm0 0"/></svg>
+        <div id="mainInfoBox-body-flags-title" class="mainInfoBox-shard-title">
+          Flags
+          <input type='text' id="mainInfoBox-body-flags-text" class="mainInfoBox-shard-text"></input>
+          <div id="mainInfoBox-body-flags-add" class="mainInfoBox-shard-add">
+            +
+          </div>
+          <div id="mainInfoBox-body-flags-add2" class="mainInfoBox-shard-add2">
+            +
+          </div>
+          <div id="mainInfoBox-body-flags-close" class="mainInfoBox-shard-close">
+            x
+          </div>
+        </div>
+        <div id="mainInfoBox-body-flags-main" class="mainInfoBox-shard-main">
+        </div>
+      </div>
+    </div>
   </div>
-  <input type="text" id="addStateText" class="InfoBox_inputText"></input>
-  <div id="addStateButton" class="InfoBox_addButton">+</div>
-  <div class="InfoBox_thinLine"></div> 
-
-  <div class="InfoBox_prompt">Fields Information:</div>
-  <div id="fieldsInfo">
-  </div>
-  <input type="text" id="addFieldText" class="InfoBox_inputText"></input>
-  <div id="addFieldButton" class="InfoBox_addButton">+</div>
-  <div class="InfoBox_thinLine"></div> 
-
-
-  <div class="InfoBox_prompt">Events Information:</div>
-  <div id="eventsInfo">
-  </div>
-  <input type="text" id="addEventText" class="InfoBox_inputText"></input>
-  <div id="addEventButton" class="InfoBox_addButton">+</div>
-  <div class="InfoBox_thinLine"></div> 
-
-  
-  <div class="InfoBox_prompt">Attributes Information:</div>
-  <div id="attributeInfo">
-  </div>
-  <input type="text" id="addAttributeText" class="InfoBox_inputText"></input>
-  <div id="addAttributeButton" class="InfoBox_addButton">+</div>
 </div>

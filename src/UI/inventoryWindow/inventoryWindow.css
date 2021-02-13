@@ -29,13 +29,15 @@
 
 #inventory-window-head-close {
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 0;
-    height: 30px;
+    height: 20px;
     width: 30px;
-    font-size: 30px;
+    text-align: center;
+    font-size: 20px;
     cursor: pointer;
-    color: white;
+    font-family: monospace;
+    color: var(--main-color-text);
 }
 #inventory-window-head-title {
     position: absolute;
@@ -43,7 +45,7 @@
     height: 20px;
     width: 100%;
     text-align: center;
-    color: white;
+    color: var(--main-color-text);
 }
 
 #inventory-window-tabs {

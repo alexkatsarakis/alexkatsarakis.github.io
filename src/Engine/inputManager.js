@@ -7,25 +7,50 @@ const InputState = {
 }
 
 class InputManager {
-    currentlyPressed = {}
+    currentlyPressed = {};
+    releasedKeys = [];
+
+    keyCombos = {
+        'Copy': ['ControlLeft', 'KeyC'],
+        'Paste': ['ControlLeft', 'KeyV']
+    }
     
     keyPressed(key,forever){
         // logManager.logAction(`Pressed Key ${key}`);
         if(forever) this.currentlyPressed[key] = InputState.FOREVER;
         else this.currentlyPressed[key] = InputState.TOTRIGGER;
+
+        for(let combo in this.keyCombos){
+            let isCombo = true;
+            let keysForCombo = this.keyCombos[combo];
+            for(let key in keysForCombo){
+                if(!this.currentlyPressed[keysForCombo[key]])
+                    isCombo = false;
+            }
+            if(isCombo === true) /// === true so it doesn't try to convert isCombo from bool
+                this.currentlyPressed[combo] = InputState.TOTRIGGER;
+        }
     }
     
     keyReleased(key){
         delete this.currentlyPressed[key];
+        this.releasedKeys.push(key);
         // logManager.logAction(`Released Key ${key}`);
     }
     
+    getReleasedKeys(){
+        let toReturn = this.releasedKeys;
+        this.releasedKeys = [];
+        return toReturn;
+    }
+
     getPressedKeys(){
         let keysPressed = [];
         for(let i in this.currentlyPressed){
             let currP = this.currentlyPressed[i];
             if(currP === InputState.TOTRIGGER 
             || currP === InputState.FOREVER){
+                // logManager.logAction(`Action for input ${i}`);
                 keysPressed.push(i);
             }
 

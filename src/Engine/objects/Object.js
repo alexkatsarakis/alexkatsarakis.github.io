@@ -4,7 +4,7 @@ import rand from '../../utils/randomGenerator.js'
 import EventManager from './Event.js'
 import StateManager from './State.js'
 import OptionManager from './Option.js'
-import ValueHandler from './Value.js'
+import ValueManager from './Value.js'
 
 export default class Object {
     _id 
@@ -15,14 +15,18 @@ export default class Object {
 
     _category;
 
+    _isPrototype;
+
     constructor(_name, _id) {
         this._name = _name;
-        this.id = (_id) ? _id : rand.generateGameID();
+        this.id = _id || rand.generateGameID();
 
-        this.data.eventHandler  = new EventManager(true);
-        this.data.stateHandler  = new StateManager();
-        this.data.valueHandler  = new ValueHandler();
-        this.data.optionHandler = new OptionManager(true); 
+        this._isPrototype = false;
+
+        this.data.eventHandler  = new EventManager(true, this.id);
+        this.data.stateHandler  = new StateManager(this.id);
+        this.data.valueHandler  = new ValueManager(this.id);
+        this.data.optionHandler = new OptionManager(true, this.id); 
 
     }
 
@@ -31,6 +35,9 @@ export default class Object {
         this.states  = this.getStates();
         this.options = this.getOptions();
         this.values  = this.getValues();
+        for(let i in this.values){
+            this.values[i].val = this.getValue(i);
+        }
         let string = JSON.stringify(this);
         delete this.events; 
         delete this.states;
@@ -62,7 +69,7 @@ export default class Object {
         for (let i in events) {
             toReturn.events[i] = {};
             toReturn.events[i].get = () => {
-                return this.getEvent(i)
+                return this.getEvent(i).text
             } 
             toReturn.events[i].set = (code) => {
                 this.setEvent(i, code)
@@ -76,14 +83,14 @@ export default class Object {
             toReturn.states[i] = {};
             toReturn.states[i]['out of '+i] = {};
             toReturn.states[i]['out of '+i].get = () => {
-                return state.transitionFrom;
+                return state.transitionFrom.text;
             } 
             toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
             toReturn.states[i]['go to '+i] = {};
             toReturn.states[i]['go to '+i].get = () => {
-                return state.transitionTo;
+                return state.transitionTo.text;
             } 
             toReturn.states[i]['go to '+i].set = (code) => {
                 this.setState(i,undefined,code);
@@ -93,14 +100,27 @@ export default class Object {
         let values = this.getValues();
         toReturn.values = {};
         for(let i in values){
-            let tag = this.getValueTag(i);
-            if(tag === 'user'){
-                toReturn.values['on'+i+'Change'] = {};
-                toReturn.values['on'+i+'Change'].set = (code) => {
+            if(this.getValueTag(i) === 'user'){
+                toReturn.values['on '+i+' Change'] = {};
+                toReturn.values['on '+i+' Change'].set = (code) => {
                     this.setValueCode(i, code);
                 };
-                toReturn.values['on'+i+'Change'].get = () => {
-                    return this.getValueCode(i);
+                toReturn.values['on '+i+' Change'].get = () => {
+                    return this.getValueCode(i).text;
+                }
+            }
+        }
+
+        let options = this.getOptions();
+        toReturn.options = {};
+        for(let i in options){
+            if(this.getOptionTag(i) === 'user'){
+                toReturn.options['on '+i+' Change'] = {};
+                toReturn.options['on '+i+' Change'].set = (code) => {
+                    this.setOptionCode(i, code);
+                };
+                toReturn.options['on '+i+' Change'].get = () => {
+                    return this.getOptionCode(i).text;
                 }
             }
         }
@@ -165,52 +185,6 @@ export default class Object {
         throw Error("add needs to be implemented");
     }
 
-    save() {
-        let savedData = {};
-        savedData['id'] = this._id;
-        savedData['name'] = this._name;
-
-        savedData['events'] = {};
-        let events = savedData['events'];
-        for (let i in this.getEvents()) {
-            events[i] = this.getEvent(i);
-        }
-
-        savedData['options'] = {};
-        let options = savedData['options'];
-        for (let i in this.data.optionHandler) {
-            options[i] = this.getOption(i);
-        }
-
-        savedData['values'] = {};
-        let values = savedData['values'];
-        for (let i in this.data.valueHandler) {
-            values[i] = this.getValue(i);
-        }
-        savedData['category'] = this._category;
-        return savedData;
-    }
-
-    loadFromSaved(objData) {
-        this.id = objData.id;
-        this.name = objData.name;
-
-        let events = objData.events;
-        for (let i in events) {
-            this.setEvent(i, events[i]);
-        }
-
-        let options = objData.options;
-        for (let i in options) {
-            this.setOption(i, options[i]);
-        }
-
-        let values = objData.values;
-        for (let i in values) {
-            this.setValue(i, values[i]);
-        }
-    }
-
     clear() {
         delete this.data.eventHandler;
 
@@ -249,6 +223,14 @@ Object.prototype.setEvent = function(ev, code) {
 
 Object.prototype.triggerEvent = function(ev) {
     this.data.eventHandler.triggerEvent(ev);
+}
+
+Object.prototype.removeEvent = function(ev) {
+    this.data.eventHandler.removeEvent(ev);
+}
+
+Object.prototype.getEventTag = function(ev) {
+    this.data.eventHandler.getEventTag(ev);
 }
 
 
@@ -294,6 +276,26 @@ Object.prototype.setOption = function(opt, val) {
     this.data.optionHandler.setOption(opt,val);
 }
 
+Object.prototype.getOptionTag = function(opt) {
+    return this.data.optionHandler.getOptionTag(opt);
+}
+
+Object.prototype.removeOption = function(opt) {
+    return this.data.optionHandler.removeOption(opt);
+}
+
+Object.prototype.setOptionCode = function(opt, code) {
+    this.data.optionHandler.setOptionCode(opt, code);
+}
+
+Object.prototype.getOptionCode = function(opt) {
+    return this.data.optionHandler.getOptionCode(opt);
+}
+
+Object.prototype.hasOption = function(opt) {
+    return this.data.optionHandler.hasOption(opt);
+}
+
 //////////VALUE FUNCTIONS////////////////////
 Object.prototype.getValues = function() {
     return this.data.valueHandler.getValues();
@@ -321,4 +323,8 @@ Object.prototype.setValueCode = function(val, code) {
 
 Object.prototype.getValueCode = function(val) {
     return this.data.valueHandler.getValueCode(val);
+}
+
+Object.prototype.removeValue = function(val) {
+    this.data.valueHandler.removeValue(val);
 }
