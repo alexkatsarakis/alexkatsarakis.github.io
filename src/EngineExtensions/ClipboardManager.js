@@ -22,8 +22,7 @@ export default class ClipboardManager {
         return this._collection;
     }
 
-    copy(){
-        let obj = bb.fastGet('state','focusedObject');
+    copy(obj = bb.fastGet('state', 'focusedObject')){
         if(!obj)return;
         console.log(obj);
         let newObj = JSON.parse(obj+'');
@@ -35,7 +34,9 @@ export default class ClipboardManager {
     paste(){
         let obj = this.top();
         if(!obj)return;
+        let oldName = obj._name;
         obj._name = obj._name+'_'+Math.floor(Math.random() * 1000);
         utils.createObject(obj);
+        obj._name = oldName;
     }
 }

@@ -1,11 +1,11 @@
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
 const colourPalette = {
     colour: 24,
     object: 190
 }
 
-import objManager from '../../Engine/renderer/renderer.js'
+import objManager from '../../renderer/ObjectManager.js'
 
 Blockly.Blocks['move_object'] = {
     init: function() {

@@ -1,8 +1,12 @@
-import bb from '../../utils/blackboard.js'
-
 import Engine from '../../Engine.js'
 
-export default {name:'keyboard',link: './src/UI/keyboard/keyboard.ahtml',cb:onKeyboardLoaded};
+export default {
+    name:'keyboard',
+    link: './src/UI/keyboard/keyboard.ahtml',
+    cb:onKeyboardLoaded,
+    removable: true, 
+    loadOnInstall: false
+};
 
 function onKeyboardInteraction(value){
     function action(){

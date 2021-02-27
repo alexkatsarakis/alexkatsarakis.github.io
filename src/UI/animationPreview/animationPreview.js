@@ -1,12 +1,18 @@
 import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
-export default {name:'animationPreview',link: './src/UI/animationPreview/animationPreview.ahtml',cb:onAnimationPreviewLoaded};
+export default {
+    name: 'animationPreview',
+    link: './src/UI/animationPreview/animationPreview.ahtml',
+    cb: onAnimationPreviewLoaded, 
+    removable: true, 
+    loadOnInstall: true
+};
 
 
 
-const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
-const FRAnimation = bb.fastGet('animation','FrameRangeAnimation');
+const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
+const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
 
 function createPopUp(film){
     let wrap = document.createElement('div');

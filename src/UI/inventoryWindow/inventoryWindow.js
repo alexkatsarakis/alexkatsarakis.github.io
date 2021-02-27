@@ -2,15 +2,22 @@ import bb from '../../utils/blackboard.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'inventoryWindow',link: './src/UI/inventoryWindow/inventoryWindow.ahtml',cb:onSettingsInventoryLoaded};
+export default {
+    name:'inventoryWindow',
+    link: './src/UI/inventoryWindow/inventoryWindow.ahtml',
+    cb:onSettingsInventoryLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 
-const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
-const FRAnimation = bb.fastGet('animation','FrameRangeAnimation');
+const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
+const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
 
 function closeInventoryWindow(){
     removeAllAnimators();
     bb.fastGet('UI','hideUI')('inventoryWindow');
+    bb.fastGet('UI','removeUI')('inventoryWindow');
 }
 
 function focusTab(tabName){
@@ -42,8 +49,8 @@ function onSettingsInventoryLoaded(){
     
     item = document.createElement('div');
     item.classList = 'inventory-window-tabs-item';
-    item.innerHTML = 'Animations'
-    item.onclick = ()=>{focusTab('Animations');showAnimations(body)}
+    item.innerHTML = 'Films'
+    item.onclick = ()=>{focusTab('Films');showFilms(body)}
     tabDiv.appendChild(item);
 
     item = document.createElement('div');
@@ -135,7 +142,7 @@ function removeAllAnimators(){
     animatorsForPreview.forEach((an)=>an());
 }
 
-function showAnimations(objWrapper){
+function showFilms(objWrapper){
     let items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
     for(let i in items){

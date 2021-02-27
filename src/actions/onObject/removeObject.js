@@ -1,6 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-import focusObject from '../../transitionHandlers/focusedObject.js'
+import focusObject from '../../utils/focusedObject.js'
 
 import logManager from '../../utils/logs.js'
 

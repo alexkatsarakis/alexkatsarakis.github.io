@@ -1,10 +1,16 @@
 import bb from '../../utils/blackboard.js'
 
-import focusedObject from '../../transitionHandlers/focusedObject.js'
+import focusedObject from '../../utils/focusedObject.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'toolbar',link: './src/UI/toolbar/toolbar.ahtml',cb:onToolbarLoaded};
+export default {
+    name:'toolbar',
+    link: './src/UI/toolbar/toolbar.ahtml',
+    cb:onToolbarLoaded,
+    removable: false, 
+    loadOnInstall: true
+};
 
 function actionsDropdown(){
     let isVisible = false;
@@ -141,57 +147,6 @@ function eventsDropdown(){
     return toggleDropdown;
 }
 
-function uisDropdown(){
-    let isVisible = false;
-
-    function getUIs(){
-        return bb.fastGet('UI','getUIs')();
-    }
-
-    function createDropdown(){
-        let UIs = getUIs();
-        let dropdown = document.createElement('div');
-        dropdown.id = 'toolbar_uis_dropdown';
-        dropdown.classList += 'toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_uis').offsetLeft + 'px'; 
-        document.body.appendChild(dropdown);
-        UIs.forEach((item)=>{
-            let ddItem = document.createElement('div');
-            ddItem.id = 'toolbar_object_'+item;
-            ddItem.classList += 'toolbar_dropdown_item';
-            ddItem.innerHTML = item;
-            let itemIsVis = true;
-            ddItem.addEventListener('click',()=>{
-                bb.fastGet('UI',(itemIsVis)?'hideUI':'loadUI')(item);
-                itemIsVis = !itemIsVis;
-                // if(itemIsVis === 0){
-                //     bb.fastGet('UI','hideUI')(item);
-                //     itemIsVis = false;
-                // }else {
-                //     bb.fastGet('UI','loadUI')(item);
-                //     itemIsVis = true;
-                // }
-            });
-            dropdown.appendChild(ddItem);
-        });
-        bb.installWatch('state','focusedObject',closeDropdown);
-    }
-  
-    function closeDropdown(){
-        isVisible = false;
-        let dropdown = document.getElementById('toolbar_uis_dropdown');
-        if(dropdown)dropdown.remove();
-    }
-
-    function toggleDropdown(){
-        isVisible = !isVisible;
-        if(isVisible)createDropdown();
-        else closeDropdown();
-    }
-
-    return toggleDropdown;
-}
-
 import setWindow from '../settingsWindow/settingsWindow.js'
 
 function openSettings(){
@@ -221,11 +176,6 @@ function onToolbarLoaded(){
     toggle = eventsDropdown();
     dropdown.addEventListener('click',toggle);
     document.getElementById('toolbar_events').addEventListener('click',toggle);
-    
-    dropdown = document.getElementById('toolbar_uis_dropdown_button');
-    toggle = uisDropdown();
-    dropdown.addEventListener('click',toggle);
-    document.getElementById('toolbar_uis').addEventListener('click',toggle);
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);

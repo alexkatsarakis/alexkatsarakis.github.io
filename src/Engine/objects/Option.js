@@ -1,4 +1,4 @@
-import bb from '../../utils/blackboard.js'
+import Engine from '../../Engine.js'
 
 class Option {
     val
@@ -43,19 +43,19 @@ export default class OptionManager{
     }
 
     hasOption(opt){
-        return (this._regOptions[opt] !== undefined);
+        return (this._regOptions[opt] !== undefined); // !== undefined to prevent type conversion
     }
 
     getOption(opt) {
-        if(!this._regOptions[opt]) return true;
+        if(!this._regOptions[opt]) return undefined;
         return this._regOptions[opt].val;
     }
 
     setOption(opt, val) {
-        if(!this._regOptions[opt]) throw Error('set an option that doesn\'t exist');
+        if(!this._regOptions[opt]) throw Error('Tried to set an option that doesn\'t exist');
         this._regOptions[opt].val = val;
         if(this._regOptions[opt].onChange.code !== "")
-            bb.fastGet('scripting', 'executeCode')(this._regOptions[opt].onChange.code, this._parent); // TODO
+            Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent); // TODO
     }
 
     setOptionCode(opt, code) {
@@ -71,12 +71,12 @@ export default class OptionManager{
     }
 
     removeOption(opt){
-        if(!this._regOptions[opt]) throw Error('remove an option that doesn\'t exist');
+        if(!this._regOptions[opt]) throw Error('Tried to remove an option that doesn\'t exist');
         delete this._regOptions[opt];
     }
 
     getOptionTag(opt){
-        if(!this._regOptions[opt]) throw Error('get an option that doesn\'t exist');
+        if(!this._regOptions[opt]) throw Error('Tried to get an option that doesn\'t exist');
         return this._regOptions[opt].tag;
     }
 }

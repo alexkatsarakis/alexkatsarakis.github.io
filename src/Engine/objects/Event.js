@@ -1,4 +1,4 @@
-import bb from '../../utils/blackboard.js'
+import Engine from '../../Engine.js'
 
 class Event {
     val
@@ -78,7 +78,7 @@ export default class EventsManager {
         if (!this._regEvents[ev] || !this._regEvents[ev].val) 
             return;
 
-        bb.fastGet('scripting', 'executeCode')(this.getEvent(ev).code,this._parent); // TODO
+        Engine.ScriptingManager.executeCode(this.getEvent(ev),this._parent);
     }
 
     getEventTag(ev){

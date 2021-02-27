@@ -1,9 +1,15 @@
 import bb from '../../utils/blackboard.js'
 
-import transition from '../../transitionHandlers/focusedObject.js'
+import transition from '../../utils/focusedObject.js'
 import Engine from '../../Engine.js';
 
-export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
+export default {
+    name:'objectInfo',
+    link: './src/UI/objectInfo/objectInfo.ahtml',
+    cb:onObjectInfoLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function refreshInfoBox(id){
     transition(undefined);
@@ -128,7 +134,7 @@ function createAttributesView(attrs){
             inp.value = focusedObj.getValue(i);
             inp.onchange = (ev) => {
                 let val = ev.target.value;
-                if(isNaN(val))
+                if(isNaN(val) || val === '')
                     focusedObj.setValue(i, val);
                 else
                     focusedObj.setValue(i, Number.parseFloat(val))

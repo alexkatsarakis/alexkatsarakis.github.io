@@ -1,10 +1,16 @@
 import bb from '../../utils/blackboard.js'
 
-import focusObject from '../../transitionHandlers/focusedObject.js'
+import focusObject from '../../utils/focusedObject.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'objectMenu',link: './src/UI/objectMenu/objectMenu.ahtml',cb:onObjectMenuLoaded};
+export default {
+    name:'objectMenu',
+    link: './src/UI/objectMenu/objectMenu.ahtml',
+    cb:onObjectMenuLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function toggleObjectMenu(){
     let wrapper = document.getElementById('objectMenuWrapper');

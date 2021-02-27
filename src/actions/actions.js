@@ -14,6 +14,7 @@ import './pauseGame.js'
 import './saveToDatabase.js'
 import './copyPaste.js'
 import './objectSnapshot.js'
+import './printGrid.js'
 
 
 import './dummyAction.js'

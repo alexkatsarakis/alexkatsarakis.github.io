@@ -1,5 +1,3 @@
-import bb from '../utils/blackboard.js'
-
 export default function dragElement(elmnt,ev) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   dragMouseDown();

@@ -34,15 +34,10 @@ class KeyboardObject extends Object {
         }
 
     }
-
-    move(x,y){
-    }
     
     newFrame(){
         this.triggerEvent('onEachFrame');
     }
-
-    setPosition(){}
     add(){}
 
     remove(){

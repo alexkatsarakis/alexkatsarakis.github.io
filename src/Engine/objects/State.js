@@ -1,4 +1,5 @@
-import bb from '../../utils/blackboard.js'
+import Engine from '../../Engine.js'
+
 class State {
     tag
     transitionFrom
@@ -36,9 +37,9 @@ export default class StateManager{
          // TODO
         let oldState = this.getState(this.getCurrentState());
         let nState = this.getState(newState);
-        bb.fastGet('scripting', 'executeCode')(oldState.transitionFrom.code, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(oldState.transitionFrom, this._parent); // TODO
         this._currState = this._regStates[newState];
-        bb.fastGet('scripting', 'executeCode')(nState.transitionTo.code, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(nState.transitionTo, this._parent); // TODO
 
     }
 
@@ -60,6 +61,7 @@ export default class StateManager{
     }
 
     removeState(state) {
+        if(!this._regStates[state])throw Error('Tried to delete a state that isn\'t registered');
         delete this._regStates[state]
     }
 

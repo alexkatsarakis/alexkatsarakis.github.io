@@ -17,23 +17,9 @@ import '../Engine.js'
 // </Engine>
 
 // <Required>
-import '../scripting/scripting.js'
-
 import '../actions/actions.js'
 // </Required>
 
 // <Extra>
-import '../UI/UI.js'
+import('../UI/UI.js');
 // </Extra>
-
-
-// <SanityChecks>
-import requirements from '../../assets/json/strictRequirementsAfterLoad.js' // json
-
-for(let i in requirements){
-    if(!bb.getComponent(i))throw Error("Missing Component "+i);
-    requirements[i].forEach(element => {
-        if(!bb.fastGet(i,element))throw Error("Missing Component Element " + i + "->" + element);
-    });
-}
-// </SanityChecks>

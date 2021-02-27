@@ -68,19 +68,19 @@ let comMan = new CommunicationManager();
 
 export default comMan;
 
-let struc = [
-    {
-        name: 'id',
-        type: 'TEXT PRIMARY KEY',
-    },
-    {
-        name: 'objectInfo',
-        type: 'TEXT',
-    }
-];
+// let struc = [
+//     {
+//         name: 'id',
+//         type: 'TEXT PRIMARY KEY',
+//     },
+//     {
+//         name: 'objectInfo',
+//         type: 'TEXT',
+//     }
+// ];
 
 
-comMan.createTable('superMarioReal',struc)
+// comMan.createTable('superMarioReal',struc)
 
 // comMan.addItemToTable('aaaa',struc);
 // comMan.getTable('superMario');

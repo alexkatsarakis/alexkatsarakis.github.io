@@ -1,13 +1,13 @@
 :root {
 	--main-color: #1d3557;
 	--main-color-hover: #457b9d;
-	--main-color-text: white;
+	--main-color-text: #ffffff;
 	--main-buttons-background-color: #3b5e6f;
-	--main-buttons-text-color: white;
+	--main-buttons-text-color: #ffffff;
 	--main-buttons-background-color-hover: #5b89a0;
 	--secondary-color: #e63946;
 	--secondary-color-hover: #a8dadc;
-	--secondary-color-text: white;
+	--secondary-color-text: #ffffff;
 	--canvas-default-bg-color: lightgrey;
 }
 

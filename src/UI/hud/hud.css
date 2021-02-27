@@ -118,6 +118,16 @@
     background-size: contain;
 }
 
+#showScriptButton {
+    /* visibility: hidden; */
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 180px;
+    left: 670px;
+    background-color: red;
+}
+
 #saveScriptButton {
     /* visibility: hidden; */
     position: absolute;

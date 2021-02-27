@@ -1,17 +1,32 @@
-import bb from '../../../utils/blackboard.js'
-
 import Rect from './objects/Rectangle.js'
 
 import scene from './objects/Scene.js'
-import './mouseEvents.js'
+import mouseEvents from './mouseEvents.js'
 
-if(!bb.fastGet('renderer','render')){
-    bb.fastSet('renderer','render',[()=>scene.renderObjects()]);
-} else {
-    bb.fastGet('renderer','render').push(()=>scene.renderObjects());
+class Object454Manager {
+    _constructors;
+    _mouseEvents;
+
+    constructor(){
+        this._constructors = {
+            'Rectangle': Rect
+        }
+        this._mouseEvents = mouseEvents;
+    }
+
+    render(){
+        scene.renderObjects()
+    }
+
+    get constructors() {
+        return this._constructors;
+    }
+
+    get mouseEvents() {
+        return this._mouseEvents;
+    }
 }
 
+const object454Manager = new Object454Manager();
 
-export default {
-    'Rectangle' : Rect
-}
+export default object454Manager;

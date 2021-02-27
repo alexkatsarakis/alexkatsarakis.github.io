@@ -11,7 +11,7 @@ export default class PauseManager {
 
     pause(){
         if(this._timePaused) throw Error('Pause while paused');
-        this._timePaused = bb.fastGet('state','gameTime');
+        this._timePaused = bb.fastGet('state','gameTime'); //TODO change this to Engine.TimeManager
         Engine.game.pause();
     }
 

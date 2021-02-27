@@ -1,7 +1,12 @@
 import Engine from '../../Engine.js';
-import bb from '../../utils/blackboard.js'
 
-export default {name:'collisionPreview',link: './src/UI/collisionPreview/collisionPreview.ahtml',cb:onCollisionPreviewLoaded};
+export default {
+    name:'collisionPreview',
+    link: './src/UI/collisionPreview/collisionPreview.ahtml',
+    cb:onCollisionPreviewLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function closeCollisionWindow(){
     let items = document.getElementsByClassName('collisionPreview_itemWrapper');
@@ -80,11 +85,11 @@ function showCollisions(){
     body.appendChild(createCollision);
 
     let aliveItems = Engine.ObjectManager.objects;
-    let systemObjects = bb.fastGet('state', 'systemObjects');
 
     for(let i in aliveItems){
         let name = aliveItems[i].name;
-        if(systemObjects.indexOf(name) !== -1)continue;
+        let id = aliveItems[i].id;
+        if(Engine.ObjectManager.isSystemObject(id))continue;
         list1.innerHTML += `<option value=${name}>${name}</option>`;
         list2.innerHTML += `<option value=${name}>${name}</option>`;
     }

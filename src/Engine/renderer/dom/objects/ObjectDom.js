@@ -3,7 +3,7 @@ import Object from '../../../objects/Object.js'
 import stage from '../../EnvironmentObject.js'
 
 import scene from './Scene.js'
-import objectManager from '../../renderer.js'
+import objectManager from '../../ObjectManager.js'
 
 export default class ObjectDom extends Object{
     div

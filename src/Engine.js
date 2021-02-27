@@ -7,12 +7,14 @@ import utils from './utils/utils.js'
 
 
 import inputManager from './Engine/inputManager.js'
-import objectManager from './Engine/renderer/renderer.js'
+import objectManager from './Engine/renderer/ObjectManager.js'
 import AnimationManager from './Engine/animations/animations.js'
 import CollisionManager from './Engine/collisions/collisions.js'
 import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 import ClockManager from './Engine/clock/ClockManager.js'
+import ScriptingManager from './Engine/scripting/scripting.js'
+import SaveManager from './Engine/save/save.js'
 
 
 class _Engine {
@@ -22,6 +24,21 @@ class _Engine {
     constructor(){
         this._managers = {};
         this._app = new App();
+        this.installManager('CollisionManager', new CollisionManager());
+    
+        this.installManager('SoundManager', new SoundManager());
+    
+        this.installManager('ObjectManager', objectManager);
+    
+        this.installManager('InputManager', inputManager);
+    
+        this.installManager('ClockManager', new ClockManager());
+    
+        this.installManager('ScriptingManager', new ScriptingManager());
+
+        this.installManager('SaveManager', new SaveManager());
+    
+        // this.installManager('PhysicsManager', new PhysicsManager());
     }
 
     installManager(name, manager){
@@ -33,6 +50,17 @@ class _Engine {
 
     hasManager(name){
         return name in this._managers;
+    }
+
+    start(){
+        Engine.app.main();
+        bb.fastInstall('Engine','Self',Engine);
+    
+        let aliveItems = Engine.ObjectManager.objects;
+        for(let i in aliveItems)
+            aliveItems[i].triggerEvent('onGameStart');
+    
+        bb.print();
     }
 
     get app(){
@@ -80,21 +108,7 @@ const game = app.game;
 app.addInitialiseFunction(()=>{
     Engine.installManager('AnimationManager', new AnimationManager(Engine.animationBundle,Engine.preSetAnimations))
 
-    Engine.installManager('CollisionManager', new CollisionManager());
-
-    Engine.installManager('SoundManager', new SoundManager());
-
-    Engine.installManager('ObjectManager', objectManager);
-
-    Engine.installManager('InputManager', inputManager);
-
-    Engine.installManager('ClockManager', new ClockManager());
-
-    // Engine.installManager('PhysicsManager', new PhysicsManager());
-
     let init = Engine.initInfo;
-    if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
-    if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
     init.objects.forEach((item)=>{
         utils.createObject(item);
@@ -149,17 +163,5 @@ game.userCode = ()=>{
 game.extra = ()=>{
     Engine.ClockManager.update();
 };
-
-Engine.start = ()=>{
-    Engine.app.main();
-    bb.fastInstall('Engine','Self',Engine);
-
-    let aliveItems = Engine.ObjectManager.objects;
-    for(let i in aliveItems)
-        aliveItems[i].triggerEvent('onGameStart');
-
-    bb.print();
-}
-
 
 export default Engine;

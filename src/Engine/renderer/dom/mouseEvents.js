@@ -1,9 +1,9 @@
 import bb from '../../../utils/blackboard.js'
 
-import focusTransition from '../../../transitionHandlers/focusedObject.js'
-import dragElement from '../../../transitionHandlers/drag.js';
+import focusTransition from '../../../utils/focusedObject.js'
+import dragElement from '../../../utils/drag.js';
 
-import objManager from '../renderer.js'
+import objManager from '../ObjectManager.js'
 
 var mouse = { x : 0, y : 0 };
 
@@ -44,12 +44,6 @@ function rightClick(e){
     }
 }
 
-if(!bb.fastGet('renderer','rightClick')){
-    bb.fastSet('renderer','rightClick',[rightClick]);
-}else{
-    bb.fastGet('renderer',"rightClick").push(rightClick);
-}
-
 function mouseDown(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
@@ -62,13 +56,6 @@ function mouseDown(e){
         }
     }
 }
-
-if(!bb.fastGet('renderer','mouseDown')){
-    bb.fastSet('renderer','mouseDown',[mouseDown]);
-}else{
-    bb.fastGet('renderer',"mouseDown").push(mouseDown);
-}
-
 
 function leftClick(e){
     e.preventDefault();
@@ -86,8 +73,8 @@ function leftClick(e){
 
 }
 
-if(!bb.fastGet('renderer','leftClick')){
-    bb.fastSet('renderer','leftClick',[leftClick]);
-}else{
-    bb.fastGet('renderer',"leftClick").push(leftClick);
+export default {
+    'leftClick': leftClick,
+    'rightClick': rightClick,
+    'mouseDown': mouseDown
 }

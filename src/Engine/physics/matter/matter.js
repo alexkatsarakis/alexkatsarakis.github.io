@@ -5,12 +5,12 @@ function trimPX(str){
 }
 
 export default class MatterJS {
-    engine
+    _pe
 
     objMap = {};
 
     constructor(){
-        this.engine = Matter.Engine.create();
+        this._pe = Matter.Engine.create();
     }
 
     addToWorld(item){
@@ -42,12 +42,12 @@ export default class MatterJS {
         }
         objMapItem["phObject"].name = item.name;
         objMapItem["phObject"].id = item.id;
-        Matter.World.add(this.engine.world, objMapItem["phObject"]);
+        Matter.World.add(this._pe.world, objMapItem["phObject"]);
     }
 
     removeFromWorld(name){
         if(!this.objMap[name])throw Error("This item doesn't exist in matter world");
-        Matter.World.remove(this.engine.world, this.objMap[name]["phObject"]);
+        Matter.World.remove(this._pe.world, this.objMap[name]["phObject"]);
         delete this.objMap[name];
     }
 
@@ -66,8 +66,8 @@ export default class MatterJS {
     }
 
     update(){
-        Matter.Engine.update(this.engine);
-        this.engine.world.bodies.forEach((body)=>{
+        Matter.Engine.update(this._pe);
+        this._pe.world.bodies.forEach((body)=>{
             let realObj = bb.fastGet('Engine','ObjectManager').getObject(body.id);
             if(!realObj){
                 this.removeFromWorld(body.name);

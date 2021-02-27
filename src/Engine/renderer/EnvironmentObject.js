@@ -21,7 +21,6 @@ class EnvironmentObject extends Object {
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
 
-
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {
@@ -75,7 +74,26 @@ class EnvironmentObject extends Object {
             getValue: () => {return this._windowHeight;}
         });
 
-        this.data.optionHandler.removeOption('isMovable');
+        this.data.valueHandler.registerValue('color',{
+            tag: "texture",
+            value: '#ffffff',
+            onChange: (value) => {
+                document.body.style.backgroundColor = value;
+            }
+        });
+
+        this.data.valueHandler.registerValue('background',{
+            tag: "texture",
+            onChange: (value) => {
+                if(value === '')
+                    document.body.style.backgroundImage = '';    
+                else
+                    document.body.style.backgroundImage = `url('../assets/textures/${value}')`;
+            }
+        });
+
+
+        // this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');
         this.data.optionHandler.removeOption('isVisible');
         this.data.optionHandler.removeOption('isSolid');
@@ -94,17 +112,9 @@ class EnvironmentObject extends Object {
     }
 
     move(x,y){
-        if(!this.options['isMovable'])return;
+        if(!this.getOption('isMovable'))return;
         this.setValue('x',this._x + x);
         this.setValue('y',this._y + y);
-        // this._x += x;
-        // if(this._x + this._windowWidth > this._width)
-        //     this._x = this._width - this._windowWidth;
-        // if(this._x < 0)this._x = 0;
-        // this._y += y;
-        // if(this._y + this._windowHeight > this._height)
-        //     this._y = this._height - this._windowHeight;
-        // if(this._y < 0)this._y = 0;
     }
 
     setPosition(x,y){

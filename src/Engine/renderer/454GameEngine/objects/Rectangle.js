@@ -51,7 +51,10 @@ export default class Rectangle extends Object {
         if(!this.getOption('isVisible'))return;
         
         let [drawX,drawY] = this.getMapCoords();
-
+        if(drawX + this.getValue('width') <= 0
+        || drawX > this._stage.getValue('windowWidth')
+        || drawY + this.getValue('height') <= 0
+        || drawY > this._stage.getValue('windowHeight')) return;
         if(!film){
             ctx.fillStyle = this._color;
             ctx.fillRect(drawX, drawY, this._width, this._height);

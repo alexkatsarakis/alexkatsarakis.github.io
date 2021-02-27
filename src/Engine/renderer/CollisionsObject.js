@@ -29,11 +29,6 @@ class CollisionsObject extends Object {
 
     }
 
-    move(x,y){
-        if(!this.options['isMovable'])return;
-
-    }
-
     addEvent(ev,code){
         this.data.eventHandler.registerEvent(ev,{code:code});
         let split = ev.split('_');

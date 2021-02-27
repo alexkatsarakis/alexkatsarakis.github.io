@@ -76,7 +76,9 @@
     top: 50px;
     width: 100%;
     height: calc(100% - 50px);
-    overflow-y: scroll;
+    overflow-y: scroll;    
+    display: grid;
+    grid-template-columns: auto auto auto auto;
 }
 
 
@@ -91,6 +93,7 @@
     margin: 0 20px 40px 20px;
     float: left;
     overflow: hidden;
+    height: 200px;
 }
 
 .inventory-window-animationPreview_objName {
@@ -122,6 +125,7 @@
     margin: 0 20px 0 20px;
     float: left;
     overflow: hidden;
+    height: 200px;
 }
 
 .inventory-window-objName {

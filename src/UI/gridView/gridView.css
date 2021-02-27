@@ -1,0 +1,12 @@
+#gridView-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.gridView-v {
+    position: absolute;
+    background-color: #ff000050;
+    pointer-events: none;
+    overflow: hidden;
+}

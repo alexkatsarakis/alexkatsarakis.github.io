@@ -1,8 +1,8 @@
-export default {
-    info: {
-        filmToLoad: '#$@#$342.png'
+{
+    "info": {
+        "filmToLoad": "#$@#$342.png"
     },
-    boxes: {
+    "boxes": {
          "turtle_green_left_flying_1": {
             "x":90,
             "y":0,
@@ -493,20 +493,6 @@ export default {
            "height":16,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "mario_small_left_stopping_1": {
-           "x":67,
-           "y":398,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_small_left_stopping_1": {
-           "x":67,
-           "y":398,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "mario_small_left_walking_3": {
            "x":96,
            "y":398,
@@ -558,20 +544,6 @@ export default {
           },
         "mario_small_right_walking_1": {
            "x":307,
-           "y":398,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_small_right_stopping_1": {
-           "x":336,
-           "y":398,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_small_right_stopping_1": {
-           "x":336,
            "y":398,
            "width":16,
            "height":16,
@@ -710,20 +682,6 @@ export default {
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "mario_big_right_stopping_1": {
-           "x":67,
-           "y":450,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_big_right_stopping_1": {
-           "x":67,
-           "y":450,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "mario_big_left_walking_3": {
            "x":97,
            "y":449,
@@ -775,20 +733,6 @@ export default {
           },
         "mario_big_right_walking_1": {
            "x":246,
-           "y":450,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_big_left_stopping_1": {
-           "x":336,
-           "y":450,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_big_left_stopping_1": {
-           "x":336,
            "y":450,
            "width":16,
            "height":32,
@@ -948,20 +892,6 @@ export default {
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "mario_fire_right_stopping_1": {
-           "x":59,
-           "y":520,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_fire_right_stopping_1": {
-           "x":59,
-           "y":520,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "mario_fire_left_walking_3": {
            "x":159,
            "y":519,
@@ -1063,20 +993,6 @@ export default {
         "mario_fire_right_walking_3": {
            "x":294,
            "y":519,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_fire_left_stopping_1": {
-           "x":344,
-           "y":520,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "mario_fire_left_stopping_1": {
-           "x":344,
-           "y":520,
            "width":16,
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
@@ -1221,20 +1137,6 @@ export default {
            "height":16,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "luigi_small_left_stopping_1": {
-           "x":383,
-           "y":208,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_small_left_stopping_1": {
-           "x":383,
-           "y":208,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "luigi_small_left_walking_1": {
            "x":412,
            "y":208,
@@ -1286,20 +1188,6 @@ export default {
           },
         "luigi_small_right_walking_3": {
            "x":623,
-           "y":208,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_small_right_stopping_1": {
-           "x":654,
-           "y":208,
-           "width":16,
-           "height":16,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_small_right_stopping_1": {
-           "x":654,
            "y":208,
            "width":16,
            "height":16,
@@ -1438,20 +1326,6 @@ export default {
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "luigi_big_right_stopping_1": {
-           "x":383,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_big_right_stopping_1": {
-           "x":383,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "luigi_big_left_walking_3": {
            "x":413,
            "y":261,
@@ -1511,20 +1385,6 @@ export default {
         "luigi_big_right_walking_3": {
            "x":622,
            "y":261,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_big_left_stopping_1": {
-           "x":652,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_big_left_stopping_1": {
-           "x":652,
-           "y":260,
            "width":16,
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
@@ -1676,20 +1536,6 @@ export default {
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"
           },
-        "luigi_fire_right_stopping_1": {
-           "x":383,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_fire_right_stopping_1": {
-           "x":383,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
         "luigi_fire_left_walking_3": {
            "x":413,
            "y":261,
@@ -1749,20 +1595,6 @@ export default {
         "luigi_fire_right_walking_3": {
            "x":622,
            "y":261,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_fire_left_stopping_1": {
-           "x":652,
-           "y":260,
-           "width":16,
-           "height":32,
-           "sprite_url":"./assets/images/mario_sprite.png"
-          },
-        "luigi_fire_left_stopping_1": {
-           "x":652,
-           "y":260,
            "width":16,
            "height":32,
            "sprite_url":"./assets/images/mario_sprite.png"

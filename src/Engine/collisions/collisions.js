@@ -1,7 +1,7 @@
-import bb from '../../utils/blackboard.js'
-
 import collisionHolder from './collisionHolder.js'
 import collisionObject from '../renderer/CollisionsObject.js'
+
+import Engine from '../../Engine.js'
 
 export default class CollisionManager {
     installCollision(obj1, obj2,codeAsText){
@@ -15,7 +15,7 @@ export default class CollisionManager {
     }
 
     checkAndInvoke(arrOfObj){
-        collisionHolder.checkAndInvoke(arrOfObj,bb.fastGet('scripting','executeCode')); //TODO: remove it from here
+        collisionHolder.checkAndInvoke(arrOfObj, (codes,currObj)=>{Engine.ScriptingManager.executeCode(codes,currObj)}); //TODO: remove it from here
     }
 
     getAllCollisions(){

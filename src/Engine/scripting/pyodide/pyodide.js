@@ -1,4 +1,4 @@
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 /*
 <script type="text/javascript">
     // set the pyodide files URL (packages.json, pyodide.asm.data etc)
@@ -37,14 +37,14 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
     return text;
 });
 
-bb.fastInstall('scripting','executeText',(text,currObject) => {
-    if(text === "" || text === null || text === undefined)return;
-    console.log(pyodide.runPython(text));
+bb.fastInstall('scripting','executeText',(codes,currObject) => {
+    if(!codes)return;
+    console.log(pyodide.runPython(codes.text));
 });
 
-bb.fastInstall('scripting','executeCode',(text) => {
-    if(text === "" || text === null || text === undefined)return;
-    console.log(pyodide.runPython(text));
+bb.fastInstall('scripting','executeCode',(codes) => {
+    if(!codes)return;
+    console.log(pyodide.runPython(codes.code));
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{

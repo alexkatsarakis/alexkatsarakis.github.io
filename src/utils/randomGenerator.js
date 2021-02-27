@@ -26,7 +26,7 @@ class Randomizer {
         return Number.parseInt(accum);
     }
 
-    randomString({capital = false,small = false,number = false,special = false,length = 10} = {capital:false,small:true,number:false,special:false,length:10}){
+    randomString({capital = false,small = false,number = false,special = false,length = 10}){
         assert.check(length > 0,'length of random string must be greater than 0');
 
         let fromStringToChoose = "";

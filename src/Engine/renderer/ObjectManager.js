@@ -1,18 +1,32 @@
-import bb from '../../utils/blackboard.js'
+import envObj from './EnvironmentObject.js'
+import colObj from './CollisionsObject.js'
+import keyObj from './KeyboardObject.js'
+import ODomManager from './dom/renderer.js'
+import O454Manager from './454GameEngine/renderer.js'
 
-const rend = bb.fastGet('renderer', 'render');
+import changeFocus from '../../utils/focusedObject.js'
 
 class ObjectManager {
     _objects
     _objectByName
     _constructors
     _systemObjects
+    _renderManagers
 
     constructor() {
         this._constructors = {};
         this._objects = {}; 
         this._objectByName = {};
         this._systemObjects = [];
+        this._renderManagers = [];
+    }
+
+    addRenderManager(manager){
+        this._renderManagers.push(manager);
+    }
+
+    getRenderManagers(){
+        return this._renderManagers;
     }
 
     addConstructor(name,cons){
@@ -63,8 +77,9 @@ class ObjectManager {
     }
 
     renderAll(){
-        if(rend)
-            rend.forEach((it)=>it());
+        this._renderManagers.forEach(manager => {
+            manager.render();
+        })
     }
 
     addSystemObject(objID){
@@ -83,19 +98,20 @@ const objectManager = new ObjectManager();
 
 export default objectManager;
 
-import envObj from './EnvironmentObject.js'
-import colObj from './CollisionsObject.js'
-import keyObj from './KeyboardObject.js'
-import domConst from './dom/renderer.js'
-import _454Const from './454GameEngine/renderer.js'
+let _454Const = O454Manager.constructors;
 
 for(let i in _454Const){
     objectManager.addConstructor(i,_454Const[i]);
 }
 
+let domConst = ODomManager.constructors;
+
 for(let i in domConst){
     objectManager.addConstructor(i,domConst[i]);
 }
+
+objectManager.addRenderManager(O454Manager);
+objectManager.addRenderManager(ODomManager);
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(colObj);
@@ -105,7 +121,6 @@ objectManager.addSystemObject(envObj.id);
 objectManager.addSystemObject(colObj.id);
 objectManager.addSystemObject(keyObj.id);
 
-import changeFocus from '../../transitionHandlers/focusedObject.js'
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
     clickWrapper.style.width = '100vw';
@@ -116,27 +131,32 @@ let clickWrapper = document.createElement('div');
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
-
-let funcsLC = bb.fastGet('renderer','leftClick');
+let managers = objectManager.getRenderManagers();
 clickWrapper.addEventListener('click',(ev)=>{
-    let anythingFocused = false;
-    for(var f in funcsLC){
-        anythingFocused = funcsLC[f](ev);
-        if(anythingFocused)break;
+    for(let i in managers){
+        if(managers[i].mouseEvents.leftClick){
+            if(managers[i].mouseEvents.leftClick(ev))
+                return;
+        }
     }
-    if(!anythingFocused)changeFocus(undefined);
+    changeFocus(undefined);
 });
 
-let funcsMD = bb.fastGet('renderer','mouseDown');
 clickWrapper.addEventListener('mousedown',(ev)=>{
-    for(var f in funcsMD){
-        if(funcsMD[f](ev))break;
+    for(let i in managers){
+        if(managers[i].mouseEvents.mouseDown){
+            if(managers[i].mouseEvents.mouseDown(ev))
+                return;
+        }
     }
 });
 
-let funcsRC = bb.fastGet('renderer','rightClick');
 clickWrapper.addEventListener('contextmenu',(ev) => {
-    for(var f in funcsRC){
-        if(funcsRC[f](ev))break;
+    for(let i in managers){
+        if(managers[i].mouseEvents.rightClick){
+            if(managers[i].mouseEvents.rightClick(ev))
+                return;
+        }
     }
+    changeFocus(undefined);
 })

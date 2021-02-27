@@ -13,10 +13,28 @@ import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnim
 export default class AnimationManager {
     _animationFilms
     _animationManagement
+    _animationCategories
+    _animatorCategories
 
     constructor(animationFilms,animationManagement){
         this._animationFilms = animationFilms;
         this._animationManagement = animationManagement;
+        this._animationCategories = {
+            'MovingAnimation': MovingAnimation,
+            'FrameRangeAnimation': FrameRangeAnimation
+        }
+        this._animatorCategories = {
+            'MovingAnimator': MovingAnimator,
+            'FrameRangeAnimator': FrameRangeAnimator
+        }
+    }
+
+    getAnimationCategory(cat){
+        return this._animationCategories[cat];
+    }
+
+    getAnimatorCategory(cat){
+        return this._animatorCategories[cat];
     }
 
     load(){
@@ -61,7 +79,7 @@ export default class AnimationManager {
         if(!anim)return;
         if(!object)return;
         
-        let Animator = bb.fastGet('animation',animator);
+        let Animator = this.getAnimatorCategory(animator);
         if(!Animator)return;
     
         let an = new Animator();
@@ -92,9 +110,3 @@ export default class AnimationManager {
     }
 
 }
-
-bb.fastInstall('animation', 'MovingAnimator', MovingAnimator);
-bb.fastInstall('animation', 'FrameRangeAnimator', FrameRangeAnimator);
-
-bb.fastInstall('animation', 'MovingAnimation', MovingAnimation);
-bb.fastInstall('animation', 'FrameRangeAnimation', FrameRangeAnimation);

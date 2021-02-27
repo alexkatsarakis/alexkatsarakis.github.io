@@ -53,12 +53,8 @@ function createObject(item){
         it.setState(s,states[s].transitionFrom,states[s].transitionTo);
     }
 
-    //TODO 
-    if(it.name === 'player')
-        bb.fastInstall('state','player',it);
-
     it.add();
-    if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
+    if(Engine.PhysicsManager && !Engine.ObjectManager.isSystemObject(it.id))Engine.PhysicsManager.addToWorld(it);
 }
 
 function resetObject(item){

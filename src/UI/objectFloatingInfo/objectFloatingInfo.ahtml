@@ -1,0 +1,5 @@
+<link rel="stylesheet" href="./src/UI/objectFloatingInfo/objectFloatingInfo.css">
+
+<div id="objectFloatingInfo_box" class="hudChild">
+  <div id="objectFloatingInfo_info"></div>
+</div>

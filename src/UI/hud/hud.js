@@ -1,6 +1,14 @@
 import bb from '../../utils/blackboard.js'
 
-export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
+import Engine from '../../Engine.js'
+
+export default {
+    name:'hud',
+    link: './src/UI/hud/hud.ahtml',
+    cb:onHudLoaded, 
+    removable: false, 
+    loadOnInstall: true
+};
 
 function hudState(){
     let isVisible = (bb.fastGet('state','mode') === "editing");
@@ -36,6 +44,20 @@ function hudState(){
 //     console.log(res);
 // }
 
+function showHideCodeUI(show = 'block'){
+    let eventsTab = document.getElementById('eventsTab');
+    let infoBar = document.getElementById('infoBar');
+    let languageDiv = document.getElementById('languageDiv');
+    let playScriptButton = document.getElementById('playScriptButton');
+    let showScriptButton = document.getElementById('showScriptButton');
+    let saveScriptButton = document.getElementById('saveScriptButton');
+    languageDiv.style.display = show;
+    eventsTab.style.display = show;
+    infoBar.style.display = show;
+    playScriptButton.style.display = show;
+    saveScriptButton.style.display = show;
+    showScriptButton.style.display = show;
+}
 
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
@@ -45,50 +67,55 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = bb.invoke('scripting','currentScriptAsCode');
-        bb.invoke('scripting','executeCode',code);
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        let currObj = bb.fastGet('state','focusedObject');
+        Engine.ScriptingManager.executeCode({text: code, code: code},currObj.id);
+    });
+    
+    document.getElementById('showScriptButton').addEventListener('click',()=>{
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        console.log(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.invoke('scripting', 'currentScriptAsText');
-        let code = bb.invoke('scripting', 'currentScriptAsCode');
+        let text = Engine.ScriptingManager.currentScriptAsText();
+        let code = Engine.ScriptingManager.currentScriptAsCode();
         codes.stripped[tabOpen].set({text:text,code:code});
     });
 
     function tabInfo(id,cb){
         return ()=>{
-            let text = cb();
-            bb.invoke('scripting','clearAndLoadFromText',text);
-            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
+            let codes = cb();
+            Engine.ScriptingManager.clearAndLoadFromText(codes);
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
         };
     }
 
-    let consoleArea = document.getElementById('consoleArea');
-    function onActionChange(newMessage){
-        consoleArea.value += '\n'+newMessage;
-        consoleArea.scrollTop = consoleArea.scrollHeight;
-        // logAllActions += newMessage+'\n';
-        bb.installWatch('state','lastAction',onActionChange);
-    }
+    // let consoleArea = document.getElementById('consoleArea');
+    // function onActionChange(newMessage){
+    //     consoleArea.value += '\n'+newMessage;
+    //     consoleArea.scrollTop = consoleArea.scrollHeight;
+    //     // logAllActions += newMessage+'\n';
+    //     bb.installWatch('state','lastAction',onActionChange);
+    // }
 
-    bb.installWatch('state','lastAction',onActionChange);
-    
+    // bb.installWatch('state','lastAction',onActionChange);
     function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
         let infoBar = document.getElementById('infoBar');
+        showHideCodeUI('block');
         eventsTab.innerHTML = "";
+        infoBar.innerHTML = "";
         if(obj === undefined){
+            showHideCodeUI('none');
             document.getElementById('openTab').innerHTML = "";
-            document.getElementById('focusedObjText').innerText = 'Stage';
-            bb.invoke('scripting','clearAndLoadFromText','');
+            Engine.ScriptingManager.clearAndLoadFromText({text: '',code: ''});
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
 
-        document.getElementById("focusedObjText").innerText = obj.name;
         infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
 
         codes = obj.getCodes();
@@ -196,6 +223,6 @@ function onHudLoaded(){
 
     bb.installWatch('state','FPS',onFPSChange);
 
-    bb.invoke('scripting','injectInDiv',document.getElementById('languageDiv'));
-
+    Engine.ScriptingManager.injectInDiv(document.getElementById('languageDiv'));
+    showHideCodeUI('none');
 }

@@ -349,12 +349,9 @@
 <div id="languageDiv" class="hudChild"></div>
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
+<div id="showScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
-
-<!-- Top Middle Side -->
-<!-- <div id="focusedObjText" category="Text" class="hudChild"></div> -->
-<div id="focusedObjText" class="hudChild"></div>
+<!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 
 <!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
   <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 

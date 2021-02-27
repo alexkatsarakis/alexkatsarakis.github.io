@@ -2,11 +2,20 @@ import bb from '../../utils/blackboard.js'
 
 import Vue from '../../../libs/vue.min.js'
 
-export default {name:'settingsWindow',link: './src/UI/settingsWindow/settingsWindow.ahtml',cb:onSettingsWindowLoaded};
+export default {
+    name:'settingsWindow',
+    link: './src/UI/settingsWindow/settingsWindow.ahtml',
+    cb:onSettingsWindowLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function closeSettingsWindow(){
     bb.fastGet('UI','hideUI')('settingsWindow');
+    bb.fastGet('UI','removeUI')('settingsWindow');
 }
+
+const computedStyle = getComputedStyle(document.documentElement);
 
 const settings = {
     Colors: {
@@ -14,6 +23,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--main-color', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--main-color').substring(1),
             name: 'mainColor',
             inputType:'color'
         },
@@ -21,6 +31,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--main-color-hover', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--main-color-hover').substring(1),
             name: 'mainColorHover',
             inputType:'color'
         },
@@ -28,6 +39,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--main-color-text', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--main-color-text').substring(1),
             name: 'mainColorText',
             inputType:'color'
         },
@@ -35,6 +47,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--secondary-color', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--secondary-color').substring(1),
             name: 'secondaryColor',
             inputType:'color'
         },
@@ -42,6 +55,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--secondary-color-hover', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--secondary-color-hover').substring(1),
             name: 'secondaryColorHover',
             inputType:'color'
         },
@@ -49,6 +63,7 @@ const settings = {
             onChange: (ev)=>{
                 document.documentElement.style.setProperty('--secondary-color-text', ev.target.value);
             },
+            initValue: computedStyle.getPropertyValue('--secondary-color-text').substring(1),
             name: 'secondaryColorText',
             inputType:'color'
         }
@@ -81,7 +96,7 @@ const settings = {
                 }
             },
             initValue: bb.fastGet('settings', 'noDrag'),
-            name: 'enable dragging items',
+            name: 'Εnable dragging items',
             inputType:'checkbox'
         }
     }
@@ -113,7 +128,7 @@ function onSettingsWindowLoaded(){
     document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
 
     fillUIsSettings();
-    
+
     Vue.component('settings-category', {
         props: ['settings','catname'],
         template:`<div class='settings_category'>
