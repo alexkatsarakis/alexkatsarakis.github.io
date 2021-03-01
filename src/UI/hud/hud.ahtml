@@ -2,8 +2,17 @@
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
-      <block type="this_obj"></block>
+  <category name="Current Object" colour="%{BKY_COLOUR_HUE}">
+    <block type="this_obj"></block>
+    <block type="this_object_state"></block>
+    <block type="get_this_object_state"></block>
+    <block type="this_object_event"></block>
+    <block type="this_object_value"></block>
+    <block type="get_this_object_value"></block>
+    <block type="this_object_flags"></block>
+    <block type="get_this_object_flags"></block>
+  </category>  
+  <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
       <block type="get_object_field"></block>
       <block type="dropdown_obj"></block>
       <block type="object_flags"></block>
@@ -13,9 +22,7 @@
       <block type="remove_object"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
-      <block type="move_object"></block>
       <block type="name_change_choose_object"></block>
-      <block type="colour_change_choose_object"></block>
       <!-- <block type="get_object"></block> -->
       <block type="console_log"></block>
     </category>

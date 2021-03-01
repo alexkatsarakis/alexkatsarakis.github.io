@@ -27,6 +27,7 @@ export default class OptionManager{
             this.registerOption('isVisible', 'visibility', true);
             this.registerOption('isSolid', 'physics', false);
             this.registerOption('isCollidable', 'collision', true);
+            this.registerOption('moveWithScroll', 'scroll', true);
         }
         this._parent = parent;
     }

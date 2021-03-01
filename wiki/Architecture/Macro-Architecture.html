@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="./wiki/Architecture/Macro-Architecture.css">
+
+<h1>Macro-Architecture</h1>
+
+<p>
+    In order to understand the Macro-Architecture of the application we must first 
+    see the main components of the system.
+</p>
+
+<ol>
+    <li>
+        Utilities
+    </li>
+    <li>
+        Database
+    </li>
+    <li>
+        Assets
+    </li>
+    <li>
+        <a href="#Ma-Arch-Engine">Engine</a>
+    </li>
+    <li>
+        <a href="#Ma-Arch-Engine-Extension">Engine Extension</a>
+    </li>
+    <li>
+        <a href="#Ma-Arch-Engine-API">Engine API</a>
+    </li>
+    <li>
+        <a href="#Ma-Arch-Actions">Actions</a>
+        
+    </li>
+    <li>
+        <a href="#Ma-Arch-UIs">User Interfaces</a>
+    </li>
+</ol>
+
+<p>
+    The connection between those is shown below:
+</p>
+
+<div id="Ma-Arch-img1" class="Ma-Arch-image"></div>
+
+<p>
+    For now, let's skip Utilities, Database and Assets.
+</p>
+
+<br>
+<h3 id="Ma-Arch-Engine">Engine</h3>
+<p>
+    The Engine is the most important part of our system (check Engine tab for more details). 
+</p>
+<p>
+    The idea is, that the Engine object is responsible for the life cycle of the app and at the same time it 
+    is responsible to install all the Managers (check Managers tab) that are required.
+</p>
+<p>
+    In other words, the Engine is a class that installs all the required managers for important tasks (such as time tracking, 
+    animations, objects) and firing events each frame (input, render, AI, user code, etc).
+</p>
+
+<div id="Ma-Arch-img2" class="Ma-Arch-image"></div>
+
+<br>
+<h3 id="Ma-Arch-Engine-Extension">Engine Extension</h3>
+<p>
+    Of course, having a closed system, like the Engine isn't ideal since we want to be able 
+    to expand our system later with features we haven't even thought. That's why we need 
+    Engine Extension that will install extra Managers that aren't necessary for the system to operate.
+</p>
+<p>
+    The idea behind Engine Extension is to have a mechanism responsible to install extra managers 
+    that will eventually be part of the Engine in order to provide extra features.
+</p>
+
+<div id="Ma-Arch-img3" class="Ma-Arch-image"></div>
+
+<p>
+    Now, that we saw how the core of the system works and how it is getting composed from 
+    different Managers we can finally take a step back and treat all the Engine (Engine, Engine Extension) 
+    as a black box. 
+</p>
+<br>
+<h3 id="Ma-Arch-Engine-API">Engine API</h3>
+<p>
+    In order to help the developer, it is very helpful to keep some things as black boxes even within 
+    the same system. That's why, isolating the Engine and being able to use it only by interacting with it's API 
+    is so important.
+</p>
+<p>
+    The engine API is the accumulation of all the individual APIs provided by the Managers as shown below.
+</p>
+
+<div id="Ma-Arch-img4" class="Ma-Arch-image"></div>
+
+<br>
+<h3 id="Ma-Arch-Actions">Actions</h3>
+<p>
+    After the initialization of the Engine and the Engine Extension the API is now available, we are now able to use it. 
+    We are taking advantage of the API by extending our systems capabilities even more. The first way to do it, is by providing small 
+    but important functionality using the given API.
+</p>
+<p>
+    For example, if our Engine has installed PauseManager that means (according to PauseManager's API) that 
+    We are able to use some functions like stop, resume, etc. to create higher level functionality like 
+    pauseAndOpenDialogBox that will open a dialog box after the pause. 
+</p>
+<p>
+    The idea behind Actions, is that we are using the minimum functionality within the Engine in order to keep it 
+    as simple as possible and it isn't poluted by complicated code that can be more focused (just like our example above)
+</p>
+
+<br>
+<h3 id="Ma-Arch-UIs">User Interfaces</h3>
+<p>
+    Last but definatelly not least, is the User Interfaces (check User Interfaces Tab for more details). 
+</p>
+<p>
+    UIs are able to use both Engine API and all the Actions that are created in order to provide the user with 
+    useful and interactive UIs to help them use the system and make their UX (User Experience) much better.
+</p>
+<p>
+    So how the UIManager works?
+</p>
+<p>
+    UIManager is responsible to install all the UIs that each one consists of (JS,HTML,CSS,etc). 
+    UIManager can remove, add, update each UI at any point of the run time.
+</p>
+
+<div id="Ma-Arch-img5" class="Ma-Arch-image"></div>

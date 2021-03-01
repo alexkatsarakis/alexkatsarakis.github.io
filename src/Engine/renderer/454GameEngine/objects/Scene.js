@@ -16,10 +16,19 @@ class Scene {
         this._canvasCTX.canvas.height = 1080;// window.innerHeight;
         document.body.appendChild(this._canvas);
 
-        this._offScreenCanvas = new OffscreenCanvas(1920,1080);
-        this._offScreenCanvasCTX = this._offScreenCanvas.getContext('2d');
-        this._offScreenCanvasCTX.canvas.width = 1920;
-        this._offScreenCanvasCTX.canvas.height = 1080;
+        // This is better but it doesn't work on mozilla at the moment
+        // Because OffscreenCanvas.getContext is not implemented
+    //     this._offScreenCanvas = new OffscreenCanvas(1920,1080);
+    //     this._offScreenCanvasCTX = this._offScreenCanvas.getContext('2d');
+    //     this._offScreenCanvasCTX.canvas.width = 1920;
+    //     this._offScreenCanvasCTX.canvas.height = 1080;
+
+        this._offScreenCanvas = document.createElement('canvas');
+        this._offScreenCanvas.style.width = 1920+'px';// window.innerWidth+'px';
+        this._offScreenCanvas.style.height = 1080+'px';// window.innerHeight+'px';
+        this._offScreenCanvasCTX = this._offScreenCanvas.getContext("2d");
+        this._offScreenCanvasCTX.canvas.width = 1920;// window.innerWidth;
+        this._offScreenCanvasCTX.canvas.height = 1080;// window.innerHeight;
     }
 
     addItem(id){

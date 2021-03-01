@@ -1,0 +1,129 @@
+:root {
+	--main-color: #1d3557;
+	--main-color-hover: #457b9d;
+	--main-color-text: #ffffff;
+	--main-buttons-background-color: #3b5e6f;
+	--main-buttons-text-color: #ffffff;
+	--main-buttons-background-color-hover: #5b89a0;
+	--secondary-color: #e63946;
+	--secondary-color-hover: #a8dadc;
+	--secondary-color-text: #ffffff;
+	--canvas-default-bg-color: lightgrey;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    color: var(--main-color-text);
+}
+
+
+#content {
+    width: 80%;
+    height: 93vh;
+    float: right;
+}
+
+#content-wrapper {
+    background-color: var(--main-color-hover);
+    padding-left: 2%;
+    width: 98%;
+    height: 100%;
+    overflow: auto;
+}
+
+
+
+
+
+#table-of-content {
+    float: left;
+    height: 93vh;
+    width: calc(20% - 2px);
+    background-color: var(--main-color-hover);
+    border-right: 2px solid var(--main-color-text);
+    overflow: auto;
+}
+
+.ToC-category-wrapper {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+.ToC-item-focused {
+    background-color: #5b89a0;
+}
+
+.ToC-category {
+    color: var(--main-color-text);
+    text-emphasis: bold;
+    font-size: x-large;
+}
+
+.ToC-item {
+    color: var(--main-color-text);
+    margin-left: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.ToC-item:hover {
+    background-color: var(--main-color);
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2vh;
+    width: 100%;
+    background-color: var(--main-color);
+}
+
+
+.navbar-item {
+    float: right;
+    color: var(--main-color-text);
+    line-height: 4vh;
+    width: 4vh;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    margin-right: 20px;
+    border-radius: 50px;
+    text-align: center;
+    background-color: var(--main-color-hover);
+    cursor: pointer;
+}
+
+
+#navbar {
+    width: 100%;
+    background-color: var(--main-color);
+    height: 5vh;
+}
+
+#navbar-logo {
+    float: left;
+    width: 4vh;
+    height: 4vh;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-image: url("../assets/favicon.ico");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+#navbar-logo-text {
+    float: left;
+    color: var(--main-color-text);
+    line-height: 5vh;
+}

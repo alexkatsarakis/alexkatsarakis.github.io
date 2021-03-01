@@ -1,13 +1,9 @@
 import './blocksInstallation.js'
+import './blocksCurrentObject.js'
 
 import bb from '../../../utils/blackboard.js'
 
-
-let elem = document.createElement('div');
-elem.id = 'blocklyDiv2';
-document.body.appendChild(elem);
-let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
-
+import AK from '../../../utils/API.js'
 
 let currObject;
 

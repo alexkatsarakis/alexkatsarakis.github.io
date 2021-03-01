@@ -224,5 +224,5 @@ function onHudLoaded(){
     bb.installWatch('state','FPS',onFPSChange);
 
     Engine.ScriptingManager.injectInDiv(document.getElementById('languageDiv'));
-    showHideCodeUI('none');
+    Engine.ClockManager.callIn(showHideCodeUI,'none',200);
 }

@@ -1,0 +1,23 @@
+#Ma-Arch-img1 {
+    background-image: url("./Macro-Arch1.png");
+}
+#Ma-Arch-img2 {
+    background-image: url("./Macro-Arch2.png");
+}
+#Ma-Arch-img3 {
+    background-image: url("./Macro-Arch3.png");
+}
+#Ma-Arch-img4 {
+    background-image: url("./Macro-Arch4.png");
+}
+#Ma-Arch-img5 {
+    background-image: url("./Macro-Arch5.png");
+}
+
+.Ma-Arch-image {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 600px;
+    height: 500px;
+}

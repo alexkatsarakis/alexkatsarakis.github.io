@@ -18,7 +18,7 @@ function createObject(item){
         it = Engine.ObjectManager.getObjectByName(item._category);
     }else{ 
         let category = Engine.ObjectManager.getConstructor(item._category);
-        it = new category({name:item._name},item._id);
+        it = new category({name:item._name, div: item._div},item._id);
     }
     let values = item.values;
     let options = item.options;

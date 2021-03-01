@@ -7,20 +7,22 @@ import objectManager from '../../ObjectManager.js'
 
 export default class ObjectDom extends Object{
     div
+    _x
+    _y
 
     constructor(name,id){
         super(name,id);
         this.renderer = 'dom';
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
-            onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
-            getValue: () => {return this.div.offsetLeft;}
+            onChange: (value) => {if(this.getOption('isMovable'))this._x = value;},
+            getValue: () => {return this._x;}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
-            onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
-            getValue: () => {return this.div.offsetTop;}
+            onChange: (value) => {if(this.getOption('isMovable'))this._y = value;},
+            getValue: () => {return this._y;}
         });
 
         this.data.valueHandler.registerValue('rotation',{
@@ -61,8 +63,10 @@ export default class ObjectDom extends Object{
 
     move(x,y){
         if(!this.getOption('isMovable'))return;
-        this.div.style.left = (this.div.offsetLeft+x) +"px";
-        this.div.style.top = (this.div.offsetTop+y) +"px";
+        this._x += x;
+        this._y += y;
+        if(x !== 0 || y !== 0)
+            this.triggerEvent('onMove');
     }
 
     getBoundingBox(){
@@ -80,8 +84,9 @@ export default class ObjectDom extends Object{
     
     getMapCoords(){
         // return [this._x,this._y];
-        
-        return [this.getValue('x') - this._stage.getValue('x'),this.getValue('y')- this._stage.getValue('y')];
+        if(!this.getOption('moveWithScroll'))
+            return [this._x, this._y];
+        return [this._x - this._stage.getValue('x'),this._y- this._stage.getValue('y')];
     }
 
     animate(){}
@@ -102,6 +107,9 @@ export default class ObjectDom extends Object{
     }
 
     render(){
+        const [X,Y] = this.getMapCoords();
+        this.div.style.left = X + 'px';
+        this.div.style.top  = Y + 'px';
         this.div.style.visibility = (this.getOption('isVisible')?'visible':'hidden');
     }
 

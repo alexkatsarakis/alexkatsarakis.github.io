@@ -1,43 +1,13 @@
 import bb from '../../../utils/blackboard.js'
 
+import AK from '../../../utils/API.js'
+
 const colourPalette = {
     colour: 24,
     object: 190
 }
 
 import objManager from '../../renderer/ObjectManager.js'
-
-Blockly.Blocks['move_object'] = {
-    init: function() {
-        this.appendValueInput('Obj')
-            .setCheck('Object')
-            .appendField(Blockly.Msg.AK_OBJECT);
-        this.appendValueInput('valX')
-            .setCheck('Number')
-            .appendField(Blockly.Msg.AK_MOVEX);
-        this.appendValueInput('valY')
-            .setCheck('Number')
-            .appendField(Blockly.Msg.AK_MOVEY);
-        this.setColour(colourPalette.object);
-        this.setTooltip('Move an object.');
-        this.setHelpUrl('none');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        return 0;
-    }
-};
-
-Blockly.JavaScript['move_object'] = function(block) {
-    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument1 = Blockly.JavaScript.valueToCode(block, 'valX',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    var argument2 = Blockly.JavaScript.valueToCode(block, 'valY',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    argument1 = eval(argument1);
-    argument2 = eval(argument2);
-    return `bb.fastGet('actions','move')(${argument0},${argument1},${argument2});`;
-};
 
 Blockly.Blocks['console_log'] = {
     init: function() {
@@ -56,32 +26,6 @@ Blockly.JavaScript['console_log'] = function(block) {
     var argument0 = Blockly.JavaScript.valueToCode(block, 'CON_LOG',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return 'console.log('+argument0+');';
-};
-
-
-Blockly.Blocks['colour_change_choose_object'] = {
-    init: function() {
-        this.appendValueInput('Obj')
-            .setCheck('Object')
-            .appendField(Blockly.Msg.AK_OBJECT);
-        this.appendValueInput('Colour')
-            .setCheck('Colour')
-            .appendField(Blockly.Msg.AK_COLOUR);
-        this.setColour(colourPalette.colour);
-        this.setTooltip('Change the colour of the object it refers.');
-        this.setHelpUrl('none');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        return 0;
-    }
-};
-
-Blockly.JavaScript['colour_change_choose_object'] = function(block) {
-    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument1 = Blockly.JavaScript.valueToCode(block, 'Colour',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return `bb.fastGet('actions','changeColor')(${argument0},${argument1});`;
 };
 
 Blockly.Blocks['name_change_choose_object'] = {
@@ -106,7 +50,7 @@ Blockly.JavaScript['name_change_choose_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.valueToCode(block, 'Name',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return `bb.fastGet('actions','renameObject')(${argument0},${argument1});`;
+    return `AK.renameObject(${argument0},${argument1});`;
 };
 
 Blockly.Blocks['every_seconds_do'] = {
@@ -170,9 +114,6 @@ Blockly.Blocks['create_object'] = {
         this.appendValueInput('Name')
             .setCheck('String')
             .appendField(Blockly.Msg.AK_NAME);
-        this.appendValueInput('Colour')
-            .setCheck('Colour')
-            .appendField(Blockly.Msg.AK_COLOUR);
         this.appendValueInput('PosX')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_AXISX);
@@ -193,18 +134,16 @@ Blockly.JavaScript['create_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.valueToCode(block, 'Name',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument2 = Blockly.JavaScript.valueToCode(block, 'Colour',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument3 = Blockly.JavaScript.valueToCode(block, 'PosX',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument4 = Blockly.JavaScript.valueToCode(block, 'PosY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-    return `bb.fastGet('actions','createObject')({
+    return `AK.createObject({
         'category': ${argument0},
         'name':${argument1},
-        'colour':${argument2},
-        'position':{'x':${argument3},'y':${argument4}} 
+        'x':${argument3},
+        'y':${argument4} 
         });`;
 };
 
@@ -234,23 +173,6 @@ Blockly.JavaScript['dropdown_categ'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
     return '"' + inp_val + '"';
 };
-
-Blockly.Blocks['this_obj'] = {
-    
-    init: function() {
-        this.appendDummyInput()
-            .appendField('this')
-        this.setColour(colourPalette.object);
-        this.setTooltip('Get an object field.');
-        this.setHelpUrl('none');
-        this.setOutput(true, 'Object');
-    },
-};
-
-Blockly.JavaScript['this_obj'] = function(block) {
-    return `bb.fastGet('Engine','ObjectManager').getObject(currObject)`;
-};
-
 
 Blockly.Blocks['object_flags'] = {
     validate: function(newValue) {
@@ -314,8 +236,7 @@ Blockly.JavaScript['object_flags'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    console.log(obj_val);
-    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setOption('${field_val}',${val_val});`;
+    return `AK.setFlag(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_field'] = {
@@ -375,7 +296,7 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setValue('${field_val}',${val_val});`;
+    return `AK.setAttribute(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_state'] = {
@@ -428,7 +349,7 @@ Blockly.Blocks['object_state'] = {
 Blockly.JavaScript['object_state'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setCurrentState('${field_val}');`;
+    return `AK.setCurrentState(AK.getObjectByID('${obj_val}'),'${field_val}');`;
 };
 
 Blockly.Blocks['object_event'] = {
@@ -481,7 +402,7 @@ Blockly.Blocks['object_event'] = {
 Blockly.JavaScript['object_event'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').triggerEvent('${field_val}');`;
+    return `AK.triggerEvent(AK.getObjectByID('${obj_val}'),'${field_val}');`;
 };
 
 Blockly.Blocks['dropdown_obj'] = {
@@ -507,7 +428,7 @@ Blockly.Blocks['dropdown_obj'] = {
 
 Blockly.JavaScript['dropdown_obj'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
-    return `bb.fastGet('Engine','ObjectManager').getObject('${inp_val}')`;
+    return `AK.getObjectByID('${inp_val}')`;
 };
 
 //====================================================================================
@@ -562,7 +483,7 @@ Blockly.Blocks['get_object_field'] = {
 Blockly.JavaScript['get_object_field'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return [`bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+    return [`AK.getAttribute(AK.getObjectByID('${obj_val}'),'${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Blocks['remove_object'] = {
@@ -583,7 +504,7 @@ Blockly.JavaScript['remove_object'] = function(block) {
     var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-    return `bb.fastGet('actions','removeObject')(${argument0});`;
+    return `AK.removeObject(${argument0});`;
 };
 
 
@@ -641,7 +562,7 @@ Blockly.JavaScript['play_animation'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument0 = argument0.trim();
     argument1 = argument1.trim();
-    return `bb.fastGet('actions','playAnimation')(
+    return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}' 
@@ -692,7 +613,7 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
     //     })`);
 
-    return `bb.fastGet('actions','playAnimation')(
+    return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}',
@@ -737,7 +658,7 @@ Blockly.Blocks['play_sound'] = {
 
 Blockly.JavaScript['play_sound'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('Engine','SoundManager').playSound('${inp_val}');`;
+    return `AK.playSound('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_sound'] = {
@@ -764,7 +685,7 @@ Blockly.Blocks['stop_sound'] = {
 
 Blockly.JavaScript['stop_sound'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('Engine','SoundManager').stopSound('${inp_val}');`;
+    return `AK.stopSound('${inp_val}');`;
 };
 
 Blockly.Blocks['play_background'] = {
@@ -792,7 +713,7 @@ Blockly.Blocks['play_background'] = {
 
 Blockly.JavaScript['play_background'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('Engine','SoundManager').playSoundOnRepeat('${inp_val}');`;
+    return `AK.playBackground('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_background'] = {
@@ -820,7 +741,7 @@ Blockly.Blocks['stop_background'] = {
 
 Blockly.JavaScript['stop_background'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('Engine','SoundManager').stopSoundOnRepeat('${inp_val}');`;
+    return `AK.stopBackground('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_every_sound'] = {
@@ -836,5 +757,5 @@ Blockly.Blocks['stop_every_sound'] = {
 };
 
 Blockly.JavaScript['stop_every_sound'] = function(block) {
-    return `bb.fastGet('Engine','SoundManager').stopAllSounds();`;
+    return `AK.stopAllSounds();`;
 };

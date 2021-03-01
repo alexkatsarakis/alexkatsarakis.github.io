@@ -77,8 +77,7 @@ class UIManager {
     readTextFile(name,file,onFinish){
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", file, true);
-        rawFile.onreadystatechange = function ()
-        {
+        rawFile.onreadystatechange = () => {
             if(rawFile.readyState === 4)
             {
                 if(rawFile.status === 200 || rawFile.status == 0)
@@ -88,6 +87,7 @@ class UIManager {
                     UIwrapper.id = '_UIWRAPPER_'+name;
                     UIwrapper.insertAdjacentHTML('beforeend',allText);
                     document.body.appendChild(UIwrapper);
+                    this.convertHTMLtoObjects(UIwrapper);
                     onFinish();
                 }
             }
@@ -95,16 +95,18 @@ class UIManager {
         rawFile.send(null);
     }
 
-    convertHTMLtoObjects(){
+    convertHTMLtoObjects(node){
         //TODO: UPDATE THIS FUNCTION
-        let children = [ ...document.body.children ];
+        let children = [ ...node.getElementsByTagName('*') ];
         children.map(child => {
             if(child.attributes.getNamedItem("category")){
-                let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
-                document.body.removeChild(child);
-                let obj = new objCat({name:child.id,div:child});
-                bb.fastSet('liveObjects',child.id,obj);
-                obj.add();
+                let objCat = child.attributes["category"].nodeValue;
+                child.remove();
+                utils.createObject({
+                    _name: child.id,
+                    _category: objCat,
+                    _div: child
+                })
             }
         })
     }

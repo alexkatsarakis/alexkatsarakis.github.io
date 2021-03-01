@@ -46,6 +46,7 @@ export default class Object454 extends Object{
     }
 
     setPosition(x,y){
+        if(!this.getOption('isMovable'))return;
         this._x = x;
         this._y = y;
     }
@@ -59,6 +60,7 @@ export default class Object454 extends Object{
     }
 
     move(x,y){
+        if(!this.getOption('isMovable'))return;
         this._x += x;
         this._y += y;
         if(x !== 0 || y !== 0)
@@ -67,7 +69,8 @@ export default class Object454 extends Object{
 
     getMapCoords(){
         // return [this._x,this._y];
-        
+        if(!this.getOption('moveWithScroll'))
+            return [this._x, this._y];
         return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
     }
 

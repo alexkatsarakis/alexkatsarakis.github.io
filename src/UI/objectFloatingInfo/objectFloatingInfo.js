@@ -7,18 +7,22 @@ export default {
     link: './src/UI/objectFloatingInfo/objectFloatingInfo.ahtml',
     cb:onObjectInfoLoaded,
     removable: true, 
-    loadOnInstall: true
+    loadOnInstall: false
 };
 
 function updateInfo(obj){
     if(!document.getElementById('objectFloatingInfo_box'))return;
+    let dom = document.getElementById('objectFloatingInfo_box');
+    let info = document.getElementById('objectFloatingInfo_info');
+    dom.style.display = 'block';
+    info.style.display = 'block';
     if(!obj){
+        dom.style.display = 'none';
+        info.style.display = 'none';
         bb.installWatch('state','focusedObject',updateInfo);
         return;
     }
     
-    let dom = document.getElementById('objectFloatingInfo_box');
-    let info = document.getElementById('objectFloatingInfo_info');
     let positional = obj.getPositional();
     let stage = Engine.ObjectManager.getObjectByName('Stage');
     let offsetX = stage.getValue('x');

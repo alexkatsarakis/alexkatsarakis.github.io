@@ -74,9 +74,13 @@ export default class MatterJS {
                 return;
             }
             let proxy = this.objMap[body.name];
+            let phObj = proxy.phObject;
             if(body.label === "Rectangle Body"){
-                realObj.setValue('x',body.position.x - proxy.width/2);
-                realObj.setValue('y',body.position.y - proxy.height/2);
+                // realObj.setValue('x',body.position.x - proxy.width/2);
+                // realObj.setValue('y',body.position.y - proxy.height/2);
+                // realObj.setValue('rotation',body.angle);
+                realObj.setValue('x',(phObj.position.x - phObj.positionPrev.x) + realObj.getValue('x'))
+                realObj.setValue('y',(phObj.position.y - phObj.positionPrev.y) + realObj.getValue('y'))
                 realObj.setValue('rotation',body.angle);
             }else {
                 realObj.setValue('x',body.position.x - proxy.r);
