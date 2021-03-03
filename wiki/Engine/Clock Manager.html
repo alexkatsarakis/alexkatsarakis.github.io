@@ -1,0 +1,55 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Clock Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Clock Manager is responsible for keeping the game time and 
+    also provide some useful functionality for the user based on time.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/clock/ClockManager.js
+    </li>
+    <li>
+        Exports: Class ClockManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.ClockManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        update(): This function is updating the game time and keeps track of FPS internally. Must be called each frame once.
+    </li>
+    <li>
+        callIn(callback, args, delay): Similar to setTimeout(cb,delay) but according to game timer and it triggers the callback 
+        at the end of each update if the new timer is after the delay 
+    </li>
+    <li>
+        cancelCallBack(returnedObjectOfCallIn): Similar to clearTimeout(returnedObjectOfsetTimeout).
+    </li>
+</ol>
+<p>
+    Future Plans:
+</p>
+<ol>
+    <li>
+        getFPS(): will return the current FPS of the game. (currently served throught blackboard)
+    </li>
+    <li>
+        getGameTime(): will return the current game time. (currently served throught blackboard)
+    </li>
+    <li>
+        callInRepeat(callback, args, delay): will work like setInterval(cb, delay) but according to game timer. 
+    </li>
+</ol>

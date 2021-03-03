@@ -1,7 +1,7 @@
 :root {
 	--main-color: #1d3557;
-	--main-color-hover: #457b9d;
-	--main-color-text: #ffffff;
+	--main-color-hover: #ffffff;
+	--main-color-text: #000000;
 	--main-buttons-background-color: #3b5e6f;
 	--main-buttons-text-color: #ffffff;
 	--main-buttons-background-color-hover: #5b89a0;
@@ -65,11 +65,13 @@ body {
     color: var(--main-color-text);
     margin-left: 10px;
     padding-left: 10px;
+    user-select: none;
     cursor: pointer;
 }
 
 .ToC-item:hover {
     background-color: var(--main-color);
+    color: var(--main-color-hover);
     margin-left: 10px;
     padding-left: 10px;
 }
@@ -124,6 +126,6 @@ body {
 
 #navbar-logo-text {
     float: left;
-    color: var(--main-color-text);
+    color: var(--main-color-hover);
     line-height: 5vh;
 }

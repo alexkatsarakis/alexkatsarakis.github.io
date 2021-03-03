@@ -17,7 +17,7 @@ class UIFactory {
 
 const uiFactory = new UIFactory();
 
-let games = ['Super Mario','Wiki'];
+let games = ['Super Mario','PacMan'];
 
 let gameList = uiFactory.createElement({
     parent: document.body,
@@ -35,10 +35,6 @@ games.forEach( gameName => {
     });
 
     but.addEventListener('click',()=>{
-        if(gameName === 'Wiki'){
-            window.location.pathname = '/wiki.html';
-        }else{
-            window.location.pathname = '/editor.html';
-        }
+        window.location.pathname = '/editor.html';
     });
 });

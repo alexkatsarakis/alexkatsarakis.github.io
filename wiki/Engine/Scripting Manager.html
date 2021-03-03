@@ -1,0 +1,100 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Scripting Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Scripting Manager is responsible to manage any interaction that includes user code.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/scripting/scripting.js
+    </li>
+    <li>
+        Exports: Class ScriptingManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.ScriptingManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        currentScriptAsText(): Return the current script on editor as Text (whatever represantation the current editor wants as string).
+    </li>
+    <li>
+        currentScriptAsCode(): Return the current script on editor as Code (Javascript code as string).
+    </li>
+    <li>
+        executeCode(codes, currentObjectID): Executes the code saved from currentScript.
+    </li>
+    <li>
+        clearAndLoadFromText(codes): Clear the editor and load the new text on editor.
+    </li>
+    <li>
+        injectInDiv(div): Called from UI in order to notify that the scripting UI shall be added there.
+    </li>
+</ol>
+
+<br>
+<h3>What languages are currently supported?</h3>
+<p>
+    Currently the system supports two languages. 
+    The first is a visual programming language (Blockly) to help users with no programming experience to learn and experiment.
+    The second is pure Javascript that will enable the user to type Javascript to code the game.
+</p>
+
+<br>
+<h3>How can I add a new language?</h3>
+<p>
+    In order for someone to add a new language to the system the first requirement is to implement 
+    the API that the ScriptingManager will call.
+    <ul>
+        <li>
+            currentScriptAsText
+        </li>
+        <li>
+            currentScriptAsCode
+        </li>
+        <li>
+            executeCode
+        </li>
+        <li>
+            clearAndLoadFromText
+        </li>
+        <li>
+            injectInDiv
+        </li>
+    </ul>
+    Also, a way to call the API provided by the system that has wrapped in Engine API, Actions (check Engine API and Actions tabs for more details).
+</p>
+<p>
+    For example, if you wanted to add python as a supported language. You 'll need an interpreter to translate 
+    python to Javascript and a way to represent the systems API to the language for example AK.createObject(...) 
+    should be translated to AK.createObject(...) in Javascript.
+</p>
+
+<br>
+<h3>How does ScriptingManager works?</h3>
+<p>
+    At the construction (that happens sometime on Engine construction) it will install all the supported languages 
+    then only one currentEditor (This is for now, in future work it will supports cross language coding meaning you can add a script in Javascript and one Blockly at the same object)
+    and then the manager is responsible to call the correct language in order to complete the request.
+</p>
+
+<br>
+<h3>Why "codes"?</h3>
+<p>
+    Whenever an object saves a code it requires two things a text and a code the first is the representation on the editor 
+    for example for blockly is XML but for pure Javascript it's Javascript. But, at the same time it requires the code so 
+    the game can be run afterwards even if the editor isn't installed (also it's much faster than translating it) because 
+    the code will always be in Javascript and can be evaluated.
+</p>

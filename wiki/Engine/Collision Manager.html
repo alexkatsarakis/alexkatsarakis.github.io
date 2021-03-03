@@ -1,0 +1,55 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Collision Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Collision Manager is responsible to keep the collisions, check and fire collision events.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/collisions/collisions.js
+    </li>
+    <li>
+        Exports: Class CollisionManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.CollisionManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        installCollision(obj1ID, obj2ID, code): Adding a new Collision to the manager between two objects.
+    </li>
+    <li>
+        removeCollision(obj1ID, obj2ID): Removing the collision.
+    </li>
+    <li>
+        getAllCollisions(): Returns an object with all the collisions.
+    </li>
+    <li>
+        getCollisions(objID): Returns an object with all collision involving the object with the given id.
+    </li>
+    <li>
+        getCollision(obj1ID, obj2ID): Returns the collision (if it exists) of two objects. 
+    </li>
+    <li>
+        setCollision(obj1ID, obj2ID, code): Setting the code to be executed on collision of two objects.
+    </li>
+</ol>
+<p>
+    Future Plans:
+</p>
+<p>
+    Change general collisions to surface collision. 
+    Meaning you will be able to add collision between an object and side of an object. 
+</p>
