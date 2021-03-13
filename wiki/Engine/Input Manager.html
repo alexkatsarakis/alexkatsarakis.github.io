@@ -1,0 +1,49 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Input Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Input Manager is responsible to handle anything related to input. 
+    That includes keys, key combinations, controller.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/input/InputManager.js
+    </li>
+    <li>
+        Exports: InputManager inputManager
+    </li>
+    <li>
+        Responsible to initialize: InputManager.js
+    </li>
+    <li>
+        API access: Engine.InputManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        keyPressed(key, keepFiring): Mark the key as pressed and choose if you want to keep adding it on pressed on each getPressedKeys() call.
+    </li>
+    <li>
+        keyReleased(key): Mark the key as released and it will return it as released key on the next getReleasedKeys().
+    </li>
+    <li>
+        getReleasedKeys(): Returns an array of all the keys released since the function was last called.
+    </li>
+    <li>
+        getPressedKeys(): Returns an array of all the pressed keys since last checked (also includes the keys that are marked as keep keepFiring).
+    </li>
+    <li>
+        addCombo(id, keys): Gets an id and an array of keys and from now on if these keys are being pressed at the same time this combo will be returned as pressed.
+    </li>
+    <li>
+        removeCombo(id): Removes the combination with the given id.
+    </li>
+</ol>

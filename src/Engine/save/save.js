@@ -38,21 +38,25 @@ export default class SaveManager {
 
     getObjectsLocal(){
         return new Promise((resolve, reject) => {
-            httpRequest('GET',this._localState,null).then((resp)=>{
-                let res = JSON.parse(resp);
-                let arr = [];
-        
-                for(let i in res){
-                    arr.push(res[i]);
-                }
-                resolve(arr);
-            });
+                httpRequest('GET',this._localState,null).then((resp)=>{
+                    let res;
+                    try{
+                        res = JSON.parse(resp);
+                    }catch(err){
+                        res = [];
+                    }
+                    let arr = [];
+            
+                    for(let i in res){
+                        arr.push(res[i]);
+                    }
+                    resolve(arr);
+                });
         });
     }
 
     getObjectsDB(){
         serverCommuncator.tableName = this._DBName;
-
         return new Promise((resolve, reject) => {
             serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
                 if(res !== ''){
@@ -174,6 +178,8 @@ export default class SaveManager {
 
         Engine.preSetAnimations = preSetAnimations;
         Engine.animationBundle = animationBundle;
+        Engine.AnimationManager.setAnimationFilms(animationBundle);
+        Engine.AnimationManager.setAnimationManagement(preSetAnimations);
         callback();
     }
 

@@ -13,7 +13,7 @@ function onKeyboardInteraction(value){
         if(isNaN(value))
             Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedKey'+value);
         else
-        Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedDigit'+value);
+            Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedDigit'+value);
     }
 
     return action;

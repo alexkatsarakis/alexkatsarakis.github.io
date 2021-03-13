@@ -1,4 +1,5 @@
 import Object from '../objects/Object.js'
+import bb from '../../utils/blackboard.js'
 
 class KeyboardObject extends Object {
 
@@ -39,6 +40,12 @@ class KeyboardObject extends Object {
         this.triggerEvent('onEachFrame');
     }
     add(){}
+
+    triggerEvent(ev){
+        if(bb.fastGet('state', 'mode') === 'paused')return;
+        
+        super.triggerEvent(ev);
+    }
 
     remove(){
         throw Error('Keyboard Object cannot be removed!');

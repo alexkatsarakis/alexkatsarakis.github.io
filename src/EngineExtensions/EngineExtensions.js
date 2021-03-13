@@ -13,3 +13,10 @@ import GridManager from './GridManager.js'
 const gridManager = new GridManager();
 Engine.installManager('GridManager', gridManager);
 Engine.app.addLoadFunction(()=>{gridManager.calculateGrid()});
+
+import CalculatorManager from './CalculatorManager.js'
+Engine.installManager('CalculatorManager', new CalculatorManager());
+
+
+import QuantizerManager from './QuantizerManager.js'
+Engine.installManager('QuantizerManager', new QuantizerManager());

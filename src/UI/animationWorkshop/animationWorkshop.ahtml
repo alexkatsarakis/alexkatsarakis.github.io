@@ -1,0 +1,4 @@
+<link rel="stylesheet" href="./src/UI/animationWorkshop/animationWorkshop.css">
+
+<div id='animationWorkshop_makeBig' class='hudChild'>Animation Workshop</div>
+<div id='animationWorkshopWrapper' class='hudChild'></div>

@@ -1,0 +1,51 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Save Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Save Manager is responsible to save/retrieve the game state either to remote Database 
+    or locally from JSON file if DB is not available.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/save/save.js
+    </li>
+    <li>
+        Exports: Class SaveManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.SaveManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        setEngine(): This function is crucial in order to load the game because it loads the information needed. Must be called before Engine.start().
+    </li>
+    <li>
+        saveObjects(): Will save the objects to Database if you are database is available or download a JSON file
+    </li>
+    <li>
+        getObjects(): Will retrieve the objects either from Database or from the JSON file
+    </li>
+</ol>
+<h3>
+    Future Plans:
+</h3>
+<ol>
+    <li>
+        saveGameState(): Will save all the game state
+    </li>
+    <li>
+        getGameState(): Will retrieve the whole game state
+    </li>
+</ol>

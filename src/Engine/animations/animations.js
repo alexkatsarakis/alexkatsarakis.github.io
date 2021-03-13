@@ -17,8 +17,6 @@ export default class AnimationManager {
     _animatorCategories
 
     constructor(animationFilms,animationManagement){
-        this._animationFilms = animationFilms;
-        this._animationManagement = animationManagement;
         this._animationCategories = {
             'MovingAnimation': MovingAnimation,
             'FrameRangeAnimation': FrameRangeAnimation
@@ -27,6 +25,16 @@ export default class AnimationManager {
             'MovingAnimator': MovingAnimator,
             'FrameRangeAnimator': FrameRangeAnimator
         }
+    }
+
+    setAnimationFilms(anFilms){
+        //TODO: append this not replace
+        this._animationFilms = anFilms;
+    }
+
+    setAnimationManagement(anMan){
+        //TODO: append this not replace
+        this._animationManagement = anMan;
     }
 
     getAnimationCategory(cat){

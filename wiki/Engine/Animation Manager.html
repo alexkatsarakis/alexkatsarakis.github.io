@@ -1,0 +1,74 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Animation Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Animation Manager is responsible for keeping, creating and manipulating anything related to animations during the game.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/animations/animations.js
+    </li>
+    <li>
+        Exports: Class AnimationManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.AnimationManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        getAnimationCategory(catID)
+    </li>
+    <li>
+        getAnimatorCategory(catID)
+    </li>
+    <li>
+        progress(gameTime)
+    </li>
+    <li>
+        timeShift(gameTime)
+    </li>
+    <li>
+        getAllFilms()
+    </li>
+    <li>
+        getFilm(filmID)
+    </li>
+    <li>
+        getAnimation(animID)
+    </li>
+    <li>
+        getAllAnimations()
+    </li>
+    <li>
+        registerNewAnimation(anim,filmID)
+    </li>
+    <li>
+        playAnimation({object,anim,onStart,onFinish,animator})
+    </li>
+</ol>
+
+<br>
+<h3>Currently supported Animation/Animator categories</h3>
+<ul>
+    <li>
+        Moving Animator
+    </li>
+    <li>
+        FrameRange Animator
+    </li>
+</ul>
+<p>
+    Check Animation tab for more details
+</p>

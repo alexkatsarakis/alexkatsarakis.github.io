@@ -1,0 +1,62 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Sound Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Sound Manager is responsible to play sounds and background music and everything associated with sound.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/sound/sound.js
+    </li>
+    <li>
+        Exports: Class SoundManager()
+    </li>
+    <li>
+        Responsible to initialize: Engine
+    </li>
+    <li>
+        API access: Engine.SoundManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        addSound(tag, path): Install a new sound to the soundManager
+    </li>
+    <li>
+        removeSound(tag): Remove a sound from the manager
+    </li>
+    <li>
+        getSounds(): Return all the installed sounds
+    </li>
+    <li>
+        playSoundOnRepeat(tag): Plays a sound on repeat until it is stopped by either stopSoundOnRepeat or stopAllSounds
+    </li>
+    <li>
+        stopSoundOnRepeat(tag): Stop a sound that is playing on repeat
+    </li>
+    <li>
+        playSound(tag): Play an installed sound. (if this sound is already playing it will restart)
+    </li>
+    <li>
+        stopSound(tag): Stop a sound that is playing. 
+    </li>
+    <li>
+        stopAllSounds(): Stops all the sounds currently playing.
+    </li>
+</ol>
+<h3>
+    Future Plans:
+</h3>
+<ol>
+    <li>
+        haveSound(tag): Return true/false if there is a sound installed with this tag
+    </li>
+</ol>

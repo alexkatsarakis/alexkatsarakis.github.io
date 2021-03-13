@@ -126,10 +126,66 @@ AK.prototype.stopAllSounds = ()=>{
 }
 
 
+/////////////MOVE///////////////
+AK.prototype.moveBy = (obj, x, y) => {
+    obj.setValue('x', obj.getValue('x')+ x);
+    obj.setValue('y', obj.getValue('y')+ y);
+}
+
+AK.prototype.moveTo = (obj, x, y) => {
+    obj.setValue('x', x);
+    obj.setValue('y', y);
+}
+
+AK.prototype.moveByInMSeconds = (obj, x, y, delay) => {
+    Engine.QuantizerManager.move(obj, x, y, delay);
+}
+
+AK.prototype.moveToInMSeconds = (obj, x, y, delay) => {
+    Engine.QuantizerManager.moveTo(obj, x, y, delay);
+}
+////////////DISTANCE////////////
+AK.prototype.distanceObjects = (obj1, obj2) => {
+    return Engine.CalculatorManager.distanceObject(obj1, obj2);
+}
+
+AK.prototype.distanceTwoPoints = (p1, p2) => {
+    return Engine.CalculatorManager.distanceTwoPoints(p1, p2);
+}
+
+AK.prototype.getObjectCenter = (obj1) => {
+    return Engine.CalculatorManager.getObjectCenter(obj1);
+}
+
+/////////////CLONES/////////////
+
+
+
+///////////RANDOM///////////////
+
+
+
+//////////TIMER////////////////
+
+// AK.runAfterOnce(code, delay)
+// AK.runAfterRepeat(code, delay)
+// AK.stopRepeat(code, delay)
+
+
 //////////////////////////////////////////////
 // AK.prototype.consoleLog = (t)=>{
 //     console.log(t);
 // }
+
+/////////////KEYS///////////////
+AK.prototype.isKeyPressed = (key) => {
+    if(isNaN(key)){
+        key = 'Key'+key;
+    }else{
+        key = 'Digit'+key;
+    }
+    return Engine.InputManager.isCurrentlyPressed(key);
+}
 
 
 const ak = new AK();

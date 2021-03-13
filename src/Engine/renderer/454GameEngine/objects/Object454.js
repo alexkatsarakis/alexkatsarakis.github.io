@@ -61,8 +61,8 @@ export default class Object454 extends Object{
 
     move(x,y){
         if(!this.getOption('isMovable'))return;
-        this._x += x;
-        this._y += y;
+        if(x !== 0) this.setValue('x', this._x + x);
+        if(y !== 0) this.setValue('y', this._y + y);
         if(x !== 0 || y !== 0)
             this.triggerEvent('onMove');
     }

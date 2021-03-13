@@ -2,9 +2,9 @@ import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
 export default {
-    name: 'animationPreview',
-    link: './src/UI/animationPreview/animationPreview.ahtml',
-    cb: onAnimationPreviewLoaded, 
+    name: 'animationWorkshop',
+    link: './src/UI/animationWorkshop/animationWorkshop.ahtml',
+    cb: onAnimationWorkshopLoaded, 
     removable: true, 
     loadOnInstall: true
 };
@@ -16,37 +16,37 @@ const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnim
 
 function createPopUp(film){
     let wrap = document.createElement('div');
-    wrap.id = 'animationPreviewCreateWrapper';
+    wrap.id = 'animationWorkshopCreateWrapper';
     document.body.appendChild(wrap);
 
     let popUpCloseBack = document.createElement('div');
-    popUpCloseBack.id = 'animationPreviewCreate_popup_close_back';
+    popUpCloseBack.id = 'animationWorkshopCreate_popup_close_back';
     wrap.appendChild(popUpCloseBack);
 
     let popUp = document.createElement('div');
-    popUp.id = 'animationPreviewCreate_popup';
+    popUp.id = 'animationWorkshopCreate_popup';
     wrap.appendChild(popUp);
 
     let toolbar = document.createElement('div');
-    toolbar.id = 'animationPreviewCreate_popup_toolbar';
+    toolbar.id = 'animationWorkshopCreate_popup_toolbar';
     toolbar.innerHTML = 'Animation Workshop';
     popUp.appendChild(toolbar);
 
     let popUpClose = document.createElement('div');
-    popUpClose.id = 'animationPreviewCreate_popup_close';
+    popUpClose.id = 'animationWorkshopCreate_popup_close';
     popUpClose.innerHTML = 'X';
     toolbar.appendChild(popUpClose);
 
     let mainArea = document.createElement('div');
-    mainArea.id = 'animationPreviewCreate_popup_mainarea';
+    mainArea.id = 'animationWorkshopCreate_popup_mainarea';
     popUp.appendChild(mainArea);
 
     let mainAreaCanvas = document.createElement('canvas');
-    mainAreaCanvas.id = 'animationPreviewCreate_popup_mainarea_canvas';
+    mainAreaCanvas.id = 'animationWorkshopCreate_popup_mainarea_canvas';
     mainArea.appendChild(mainAreaCanvas);
 
     let filmArea = document.createElement('div');
-    filmArea.id = 'animationPreviewCreate_popup_filmarea';
+    filmArea.id = 'animationWorkshopCreate_popup_filmarea';
     popUp.appendChild(filmArea);
 
     
@@ -56,7 +56,7 @@ function createPopUp(film){
         let width = filmArea.offsetWidth-2;
         preview.style.width = width;
         preview.style.height = width;
-        preview.classList = 'animationPreviewCreate_popup_filmarea_box';
+        preview.classList = 'animationWorkshopCreate_popup_filmarea_box';
         let previewCtx = preview.getContext('2d');
         previewCtx.canvas.width = width;
         previewCtx.canvas.height = width;
@@ -72,35 +72,35 @@ function createPopUp(film){
 
 
     let editArea = document.createElement('div');
-    editArea.id = 'animationPreviewCreate_popup_editarea';
+    editArea.id = 'animationWorkshopCreate_popup_editarea';
     popUp.appendChild(editArea);
 
     let delayWrapper = document.createElement('div');
-    delayWrapper.classList += 'animationPreviewCreate_popup_editarea_wrap';
+    delayWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(delayWrapper);
 
     let delaySliderPrompt = document.createElement('div');
     delaySliderPrompt.innerHTML = 'Delay: ';
-    delaySliderPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
+    delaySliderPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     delayWrapper.appendChild(delaySliderPrompt);
 
     let delaySlider = document.createElement('input');
     delaySlider.type = 'range';
-    delaySlider.id = 'animationPreviewCreate_popup_editarea_delaySlider';
+    delaySlider.id = 'animationWorkshopCreate_popup_editarea_delaySlider';
     delaySlider.min = '20';
     delaySlider.max = '200';
     delaySlider.step = '1';
     delaySlider.value = '90';
-    delaySlider.classList += 'animationPreviewCreate_popup_editarea_value';
+    delaySlider.classList += 'animationWorkshopCreate_popup_editarea_value';
     delayWrapper.appendChild(delaySlider);
 
     let dxWrapper = document.createElement('div');
-    dxWrapper.classList += 'animationPreviewCreate_popup_editarea_wrap';
+    dxWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(dxWrapper);
 
     let dxPrompt = document.createElement('div');
     dxPrompt.innerHTML = 'Dx: ';
-    dxPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
+    dxPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dxWrapper.appendChild(dxPrompt);
 
     let dxInput = document.createElement('input');
@@ -112,12 +112,12 @@ function createPopUp(film){
     dxWrapper.appendChild(dxInput);    
     
     let dyWrapper = document.createElement('div');
-    dyWrapper.classList += 'animationPreviewCreate_popup_editarea_wrap';
+    dyWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(dyWrapper);
 
     let dyPrompt = document.createElement('div');
     dyPrompt.innerHTML = 'Dy: ';
-    dyPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
+    dyPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dyWrapper.appendChild(dyPrompt);
 
     let dyInput = document.createElement('input');
@@ -129,12 +129,12 @@ function createPopUp(film){
     dyWrapper.appendChild(dyInput);
 
     let repsWrapper = document.createElement('div');
-    repsWrapper.classList += 'animationPreviewCreate_popup_editarea_wrap';
+    repsWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(repsWrapper);
 
     let repsPrompt = document.createElement('div');
     repsPrompt.innerHTML = 'Repetitions: ';
-    repsPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
+    repsPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     repsWrapper.appendChild(repsPrompt);
 
     let repsInput = document.createElement('input');
@@ -146,27 +146,27 @@ function createPopUp(film){
     repsWrapper.appendChild(repsInput);
 
     let idWrapper = document.createElement('div');
-    idWrapper.classList += 'animationPreviewCreate_popup_editarea_wrap';
+    idWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(idWrapper);
 
     let idPrompt = document.createElement('div');
     idPrompt.innerHTML = 'Animation ID: ';
-    idPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
+    idPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     idWrapper.appendChild(idPrompt);
 
     let idInput = document.createElement('input');
     idInput.type = 'text';
-    idInput.classList = 'animationPreviewCreate_popup_editarea_value';
+    idInput.classList = 'animationWorkshopCreate_popup_editarea_value';
     idInput.placeholder = 'my animation';
     idWrapper.appendChild(idInput);
 
     let startAnim = document.createElement('div');
-    startAnim.id = 'animationPreviewCreate_popup_editarea_play';
+    startAnim.id = 'animationWorkshopCreate_popup_editarea_play';
     startAnim.innerHTML = 'Reset Position';
     editArea.appendChild(startAnim);
 
     let createAnim = document.createElement('div');
-    createAnim.id = 'animationPreviewCreate_popup_editarea_create';
+    createAnim.id = 'animationWorkshopCreate_popup_editarea_create';
     createAnim.innerHTML = 'Create Animation';
     editArea.appendChild(createAnim);
 
@@ -263,27 +263,27 @@ let animatorsForPreview = [];
 function showAnimations(){
     let items = Engine.AnimationManager.getAllFilms();
 
-    let objWrapper = document.getElementById('animationPreviewWrapper');
+    let objWrapper = document.getElementById('animationWorkshopWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
         let wrap = document.createElement('div');
-        wrap.classList += 'animationPreview_itemWrapper';
+        wrap.classList += 'animationWorkshop_itemWrapper';
         objWrapper.appendChild(wrap);
         let popuplistener = wrap.addEventListener('click',()=>{
             createPopUp(items[i]);
         })
 
         let title = document.createElement('div');
-        title.classList += 'animationPreview_objName';
+        title.classList += 'animationWorkshop_objName';
         title.innerHTML = i;
         wrap.appendChild(title);
         
 
         let body = document.createElement('div');
-        body.classList += 'animationPreview_body';
+        body.classList += 'animationWorkshop_body';
 
         let anim = document.createElement('canvas');
-        anim.classList += 'animationPreview_film';
+        anim.classList += 'animationWorkshop_film';
         let ctx = anim.getContext('2d');
         
         let animator = new FRAnimator();
@@ -326,9 +326,9 @@ function removeAllAnimators(){
     animatorsForPreview.forEach((an)=>an());
 }
 
-function toggleAnimationPreview(){
-    let wrapper = document.getElementById('animationPreviewWrapper');
-    let toggleBut = document.getElementById('animationPreview_makeBig');
+function toggleAnimationWorkshop(){
+    let wrapper = document.getElementById('animationWorkshopWrapper');
+    let toggleBut = document.getElementById('animationWorkshop_makeBig');
     if(wrapper.style.height === '200px'){
         removeAllAnimators();
         wrapper.innerHTML = '';
@@ -341,8 +341,8 @@ function toggleAnimationPreview(){
     }
 }
 
-function onAnimationPreviewLoaded(){
+function onAnimationWorkshopLoaded(){
 
-    let toggleBut = document.getElementById('animationPreview_makeBig');
-    toggleBut.addEventListener('click',toggleAnimationPreview)
+    let toggleBut = document.getElementById('animationWorkshop_makeBig');
+    toggleBut.addEventListener('click',toggleAnimationWorkshop)
 }

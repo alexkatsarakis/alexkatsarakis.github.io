@@ -9,6 +9,7 @@ class Scene {
     constructor(){
         this._canvas = document.createElement('canvas');
         this._canvas.id = '454Scene';
+        this._canvas.style.position = 'absolute';
         this._canvas.style.width = 1920+'px';// window.innerWidth+'px';
         this._canvas.style.height = 1080+'px';// window.innerHeight+'px';
         this._canvasCTX = this._canvas.getContext("2d");

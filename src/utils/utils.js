@@ -14,8 +14,8 @@ function Utils(){
 function createObject(item){
     if(!item._name)return;
     let it;
-    if(Engine.ObjectManager.getObjectByName(item._category)){
-        it = Engine.ObjectManager.getObjectByName(item._category);
+    if(Engine.ObjectManager.getObjectByName(item._name)){
+        it = Engine.ObjectManager.getObjectByName(item._name);
     }else{ 
         let category = Engine.ObjectManager.getConstructor(item._category);
         it = new category({name:item._name, div: item._div},item._id);
@@ -55,6 +55,8 @@ function createObject(item){
 
     it.add();
     if(Engine.PhysicsManager && !Engine.ObjectManager.isSystemObject(it.id))Engine.PhysicsManager.addToWorld(it);
+
+    return it;
 }
 
 function resetObject(item){
@@ -93,9 +95,9 @@ function resetObject(item){
 
 // import keyToAction from '../assets/json/keyToActions.js' //json
 function inputHandler(key) {
-    if(key === 'Copy' || key === 'Paste'){
+    if(key === 'PressedCopy' || key === 'PressedPaste' || key === 'PresseddummyAction'){
         console.log(key);
-        bb.fastGet('actions',key)();
+        bb.fastGet('actions',key.substring(7))();
     }else {
         Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent(key);
     }

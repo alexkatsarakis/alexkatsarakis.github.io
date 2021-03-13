@@ -1,0 +1,88 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Object Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Object Manager is responsible for keeping track of everything related to the objects. 
+    First, it is able to save individual RenderManagers (check RenderManagers tab for more info) 
+    that each one will provide their constructor for objects. Secondly, it will keep track of the 
+    constructors available at any point. And third, it keeps track of all the objects alive.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/Engine/renderer/ObjectManager.js
+    </li>
+    <li>
+        Exports: ObjectManager objectManager
+    </li>
+    <li>
+        Responsible to initialize: ObjectManager
+    </li>
+    <li>
+        API access: Engine.ObjectManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    Most frequent:
+    <li>
+        objects: Return an object that contains all the alive objects currently on the game.
+    </li>
+    <li>
+        getObjectByID(objId): Return the object corresponding to this id if it's alive.
+    </li>
+    <li>
+        getObjectByName(objName): Return the object corresponding to this name if it's alive
+    </li>
+    <br>
+    Less frequent:
+    <li>
+        isSystemObject(objId): Return true/false if the object is listed as systemObject (like scene,collision,keyboard).
+    </li>
+    <li>
+        addSystemObject(objId): From now on isSystemObject(objId) will return true for this id.
+    </li>
+    <li>
+        renderAll(): Will render all the objects to the screen. (it's called by Engine each loop)
+    </li>
+    <li>
+        addToWorld(newObject): Add newObject to the world. (usually called within the initialisation of the object itself)
+    </li>
+    <li>
+        removeFromWorld(aliveObject): Removes aliveObject from the world. (usually called within the deconstruction of the object itself)
+    </li>
+
+
+    <li>
+        addConstructor(name,constr): Installs a new constructor for objects. (installed by ObjectManager itself)
+    </li>
+    <li>
+        removeConstructor(name): Removes an installed constructor from the manager
+    </li>
+    <li>
+        getConstructor(name): Returns the constructor with that name.
+    </li>
+</ol>
+
+<br>
+<h3>System Objects</h3>
+<p>
+    The Object Manager is responsible to instantiate these objects since these objects are not bound to any other manager. 
+    More information can be found on System Object tab
+</p>
+
+<br>
+<h3>Example</h3>
+<p>
+    At the moment, there are two different RenderingManagers working at the same time. One is using the browser's element system and 
+    the second one is using a custom made rendering system using canvas.
+    So, when I install the First Manager all the constructors associated with it will come along and be installed to the system.
+    From this point forward, the ObjectManager will be calling the render function of the manager each frame. 
+    and each object created from a constructor that belong to that manager will have to be rendered.
+</p>

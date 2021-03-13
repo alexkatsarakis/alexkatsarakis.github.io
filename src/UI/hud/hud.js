@@ -116,7 +116,7 @@ function onHudLoaded(){
         }
         let firstObject = true;
 
-        infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
+        infoBar.innerHTML = 'Scripts for Object ('+obj.name+')';
 
         codes = obj.getCodes();
         codes.stripped = {};

@@ -1,0 +1,42 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Object Snapshot Manager</h1>
+
+<h3>Description:</h3>
+<p>
+    Object Snapshot Manager is responsible to keep a collection of Snapshots of objects.
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/EngineExtensions/ObjectSnapshotManager.js
+    </li>
+    <li>
+        Exports: Class ObjectSnapshotManager()
+    </li>
+    <li>
+        Responsible to initialize: EngineExtensions
+    </li>
+    <li>
+        API access: Engine.ObjectSnapshotManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        snapshotObject(obj): Save a snapshot of the object.
+    </li>
+    <li>
+        getSnapshots(obj): Returns all the saved snapshots for the given object.
+    </li>
+    <li>
+        getAllSnapshots(): Returns all the saved snapshots.
+    </li>
+    <li>
+        resetObjectToSnapshot(objID, snapID): Set objects state to the snapshot state.
+    </li>
+</ol>

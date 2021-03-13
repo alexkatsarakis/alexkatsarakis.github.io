@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="./wiki/Architecture/Engine Architecture.css">
+
+<h1>UI Manager Architecture</h1>
+
+<h3>Description:</h3>
+<p>
+    UI Manager is a crucial part of the system. 
+    It is the outer most layer of the Macro-Architecture (as shown on Macro-Architecture tab) 
+    and it is the UI that the end user will interact the most. 
+    It is important to mention that, all the other sub-systems (Engine, Engine Extension, Actions) are 
+    completely independent and unaware of the UI sub-system. This gives us the ability to create UIs that are 
+    both functional and aesthetically pleasing for the end user.
+</p>
+
+<br>
+<h3>The AddOn mechanisms:</h3>
+<p>
+    Since, we established that the UIs are only interacting with the system through the provided API 
+    that means, that we can add as many UIs we want without "polluting" our base code.
+</p>
+
+<br>
+<h3>API provided:</h3>
+<ol>
+    <li>
+        installUI(args): Installs a UI to the Manager and will be a part of the system from now on.
+    </li>
+    <li>
+        removeUI(name): Removes a UI from the Manager.
+    </li>
+    <li>
+        loadUI(name): Load an installed UI and from now on it will be visible.
+    </li>
+    <li>
+        hideUI(name): Hides a UI and now it won't be visible from the user.
+    </li>
+    <li>
+        getUIs(): Returns an array of all the UIs installed at the system.
+    </li>
+    <li>
+        getLoadedUIs(): Returns an array of all the loaded UIs currently on the system.
+    </li>
+</ol>
+<br>
+<h3>Features:</h3>
+<ol>
+    <li>
+        Dynamically install,load,hide,remove UIs during the game play.
+    </li>
+    <li>
+        Create dynamic UIs using it's own HTML5,CSS,JS with the provided API to interact with the system.
+    </li>
+    <li>
+        Create Game Objects with HTML5,CSS,JS that will get intergrated to the game when the UI is installed for the first time.
+        This enable the AddOn developers to do very high level UI functionality like adding videos, other web pages and other features to the game.
+    </li>
+</ol>
+<br>
+
+<h3>How do I add an AddOn?</h3>
+<ol>
+    <li>
+        Within the UI folder of the system you create a folder with the name of the UI you want.
+    </li>
+    <li>
+        You create a Javascript file with the same name within that folder.
+    </li>
+    <li>
+        The Javascript must export the followings.
+        <br>
+        <code>
+            export default {<br>
+                &emsp;&emsp;name:'{the name of the UI}',<br>
+                &emsp;&emsp;link: './src/UI/{folder}/inventoryWindow.html',<br>
+                &emsp;&emsp;cb: onLoadCallback,<br>
+                &emsp;&emsp;removable: true, // if the can be removed after installation <br>
+                &emsp;&emsp;loadOnInstall: true // if we want to load the UI right away<br>
+            };<br>
+        </code>
+    </li>
+    <li>
+        To use the API import Engine and follow each API you want (check the appropriate Manager tab)
+    </li>
+    <li>
+        To use the blackboard import blackboard and check what things are installed at the moment.
+    </li>
+</ol>

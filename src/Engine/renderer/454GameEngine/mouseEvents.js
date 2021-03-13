@@ -47,7 +47,7 @@ function mouseDown(e){
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             if(!aliveItems[it].getOption('isMovable'))return false;
-            if(!bb.fastGet('settings','noDrag'))dragElement(aliveItems[it],e);
+            if(bb.fastGet('settings','Dragging Objects'))dragElement(aliveItems[it],e);
             return true;
         }
     }

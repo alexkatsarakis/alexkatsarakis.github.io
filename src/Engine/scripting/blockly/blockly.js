@@ -1,5 +1,7 @@
 import './blocksInstallation.js'
 import './blocksCurrentObject.js'
+import './blocksMove.js'
+import './blocksCalculation.js'
 
 import bb from '../../../utils/blackboard.js'
 

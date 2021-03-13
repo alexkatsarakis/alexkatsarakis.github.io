@@ -131,7 +131,10 @@ class EnvironmentObject extends Object {
     remove(){
         throw Error('Environment Object cannot be removed!');
     }
-
+    setAnimator(animator){
+        if(this._animator !== undefined)this._animator.stop();
+        this._animator = animator;
+    }
 }
 
 

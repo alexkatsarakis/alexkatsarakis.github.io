@@ -6,7 +6,14 @@ bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
 
-bb.fastSet('settings','noDrag', false);
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+urlParams.forEach((val,key)=>{
+    console.log(key,val);
+    bb.fastSet('urlParams', key, val);
+});
+
+bb.fastSet('settings','Dragging Objects', true);
 bb.fastSet('settings','highlightInvisibleObjects',false);
 
 // <Engine>
@@ -21,5 +28,6 @@ import '../actions/actions.js'
 // </Required>
 
 // <Extra>
-import('../UI/UI.js');
+if(!bb.fastGet('urlParams','play'))
+    import('../UI/UI.js');
 // </Extra>

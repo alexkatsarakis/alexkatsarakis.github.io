@@ -1,4 +1,4 @@
-#animationPreview_makeBig {
+#animationWorkshop_makeBig {
     position: absolute;
     left:0;
     bottom: 40px;
@@ -12,11 +12,11 @@
     z-index: 2;
 }
 
-#animationPreview_makeBig:hover {
+#animationWorkshop_makeBig:hover {
     background-color: var(--main-buttons-background-color-hover);
 }
 
-#animationPreviewWrapper {
+#animationWorkshopWrapper {
     position: absolute;
     bottom: 0;
     left:0;
@@ -29,14 +29,14 @@
     z-index: 5;
 }
 
-.animationPreview_itemWrapper {
+.animationWorkshop_itemWrapper {
     width: 200px;
     margin: 0 20px 40px 20px;
     float: left;
     overflow: hidden;
 }
 
-.animationPreview_objName {
+.animationWorkshop_objName {
     width: 100%;
     height: 20px;
     /* border-bottom: 1px solid black; */
@@ -47,7 +47,7 @@
     cursor: pointer;
 }
 
-.animationPreview_body {
+.animationWorkshop_body {
     width: 100%;
     height: 180px;
     text-align: center;
@@ -55,12 +55,12 @@
     cursor: pointer;
 }
 
-.animationPreview_film {
+.animationWorkshop_film {
     width: 100%;
     height: 100%;
 }
 
-#animationPreviewCreateWrapper {
+#animationWorkshopCreateWrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -70,7 +70,7 @@
     z-index: 7;
 }
 
-#animationPreviewCreate_popup {
+#animationWorkshopCreate_popup {
     position: absolute;
     top: 10%;
     left: 10%;
@@ -79,7 +79,7 @@
     background-color: white;
 }
 
-#animationPreviewCreate_popup_close_back {
+#animationWorkshopCreate_popup_close_back {
     position: absolute;
     top:0;
     left:0;
@@ -87,7 +87,7 @@
     height: 100%;
 }
 
-#animationPreviewCreate_popup_toolbar {
+#animationWorkshopCreate_popup_toolbar {
     top: 0;
     width: 100%;
     height: 30px;
@@ -97,7 +97,7 @@
     font-size: large;
 }
 
-#animationPreviewCreate_popup_close {
+#animationWorkshopCreate_popup_close {
     padding: 5px;
     padding-right: 8px;
     background-color: var(--main-color);
@@ -107,11 +107,11 @@
     font-family: monospace;
 }
 
-#animationPreviewCreate_popup_close:hover {
+#animationWorkshopCreate_popup_close:hover {
     text-decoration: underline;
 }
 
-#animationPreviewCreate_popup_filmarea {
+#animationWorkshopCreate_popup_filmarea {
     position: absolute;
     left: 2%;
     top: 10%;
@@ -122,12 +122,12 @@
     overflow-x: hidden;
 }
 
-.animationPreviewCreate_popup_filmarea_box {
+.animationWorkshopCreate_popup_filmarea_box {
     background-color: lightgray;
     margin-bottom: 10px;
 }
 
-#animationPreviewCreate_popup_mainarea {
+#animationWorkshopCreate_popup_mainarea {
     position: absolute;
     left: 17%;
     top: 10%;
@@ -136,7 +136,7 @@
     border: 1px solid var(--main-color);
 }
 
-#animationPreviewCreate_popup_editarea {
+#animationWorkshopCreate_popup_editarea {
     position: absolute;
     right: 2%;
     top: 10%;
@@ -145,13 +145,13 @@
     border: 1px solid var(--main-color);
 }
 
-#animationPreviewCreate_popup_mainarea_canvas {
+#animationWorkshopCreate_popup_mainarea_canvas {
     width: 100%;
     height: 100%;
     background-color: var(--canvas-default-bg-color);
 }
 
-#animationPreviewCreate_popup_editarea_play {
+#animationWorkshopCreate_popup_editarea_play {
     cursor: pointer;
     text-align: center;
     padding: 5px;
@@ -160,7 +160,7 @@
     color: var(--main-color-text);
 }
 
-#animationPreviewCreate_popup_editarea_create {
+#animationWorkshopCreate_popup_editarea_create {
     cursor: pointer;
     text-align: center;
     padding: 5px;
@@ -169,36 +169,36 @@
     color: var(--main-color-text);
 }
 
-#animationPreviewCreate_popup_editarea_play:hover {
+#animationWorkshopCreate_popup_editarea_play:hover {
     text-decoration: underline;
     background-color: var(--main-color-hover);
 }
 
-#animationPreviewCreate_popup_editarea_create:hover {
+#animationWorkshopCreate_popup_editarea_create:hover {
     text-decoration: underline;
     background-color: var(--main-color-hover);
 }
 
-.animationPreviewCreate_popup_editarea_wrap {
+.animationWorkshopCreate_popup_editarea_wrap {
     padding: 10px;
     height: 20px;
 }
 
-.animationPreviewCreate_popup_editarea_prompt {
+.animationWorkshopCreate_popup_editarea_prompt {
     width: 48%;
     padding-top: 2px;
     font-size: 16px;
     float: left;
 }
 
-.animationPreviewCreate_popup_editarea_value {
+.animationWorkshopCreate_popup_editarea_value {
     padding: 0;
     width: 50%;
     right: 10px;
     height: 20px;
 }
 
-#animationPreviewCreate_popup_editarea_delaySlider {
+#animationWorkshopCreate_popup_editarea_delaySlider {
     -webkit-appearance: none;
     background: #d3d3d3;
     outline: none;
@@ -206,11 +206,11 @@
     transition: opacity .2s;
 }
 
-#animationPreviewCreate_popup_editarea_delaySlider:hover {
+#animationWorkshopCreate_popup_editarea_delaySlider:hover {
     opacity: 1;
 }
 
-#animationPreviewCreate_popup_editarea_delaySlider::-webkit-slider-thumb {
+#animationWorkshopCreate_popup_editarea_delaySlider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -219,7 +219,7 @@
     cursor: pointer;
 }
 
-#animationPreviewCreate_popup_editarea_delaySlider::-moz-range-thumb {
+#animationWorkshopCreate_popup_editarea_delaySlider::-moz-range-thumb {
     width: 20px;
     height: 20px;
     background: var(--main-color);

@@ -1,0 +1,63 @@
+<h1>Hud</h1>
+
+<h3>Description:</h3>
+<p>
+    Hud is the main UI for the system that is necessary if someone wants to create interact with the system.    
+</p>
+
+<br>
+<h3>Main Parts:</h3>
+<p>
+    The hud consists from some small components
+    <ol>
+        <li>
+            infoBar: Shows an info above the coding area.
+        </li>
+        <li>
+            eventsTab: Shows all the available scripts that the user can code.
+        </li>
+        <li>
+            languageDiv: Is the div element that the corresponding language (check Scripting Manager for details) is currently running.
+        </li>
+        <li>
+            openTab: Display the name of the script that is currently showing to the end user.
+        </li>
+        <li>
+            playScriptButton: Clicking this button will run the current script.
+        </li>
+        <li>
+            saveScriptButton: Will save the current script to the corresponding position.
+        </li>
+        <li>
+            showScriptButton: When pressed will show the Javascript code that was produced by the current language.
+        </li>
+        <li>
+            fpsCounter: Shows the current fps of the system.
+        </li>
+        <li>
+            hudToggle: Every element that has class="hudChild" will be automatically hidden from the user 
+            and when clicked again the UIs will appear.
+        </li>
+    </ol>
+</p>
+
+<br>
+<h3>How does it work?</h3>
+<p>
+    When the UI is first loaded it hooks some function to some variables on the blackboard of the system. 
+    That means, that every time this variable changes value the callback is being triggered. 
+    Having this mechanism enables the system to be more interactive for example when a user clicks on an object 
+    The value on blackboard-> state -> focusedObject is changed and the callback to re-render all the appropriate elements fires. 
+    The same happens with the fps (blackboard -> state -> FPS).
+</p>
+
+<br>
+<h3>Screenshots:</h3>
+<img src="./wiki/UIs/hud1.png" width="700px" height="600px">
+<br>
+
+<br>
+<h3>Future Plans:</h3>
+<p>
+    Add small popup alerts on the bottom left when a major event or an error happens.
+</p>

@@ -352,6 +352,36 @@ Blockly.JavaScript['object_state'] = function(block) {
     return `AK.setCurrentState(AK.getObjectByID('${obj_val}'),'${field_val}');`;
 };
 
+Blockly.Blocks['get_current_state'] = {
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('get')
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField(Blockly.Msg.AK_APOSS);
+        this.appendDummyInput('values')
+            .appendField('current state')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'String')
+    },
+
+    getObjects(){
+        let map = objManager.objects;
+        let categs = [];
+        for(let i in map){
+                categs.push([map[i].name,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['get_current_state'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    return [`AK.getObjectByID('${obj_val}').getCurrentState()`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
 Blockly.Blocks['object_event'] = {
     validate: function(newValue) {
         this.getSourceBlock().updateConnections(newValue);
@@ -758,4 +788,25 @@ Blockly.Blocks['stop_every_sound'] = {
 
 Blockly.JavaScript['stop_every_sound'] = function(block) {
     return `AK.stopAllSounds();`;
+};
+
+
+
+Blockly.Blocks['is_key_pressed'] = {
+    init: function() {
+        this.appendValueInput('key')
+            .appendField('is');
+        this.appendDummyInput()
+            .appendField('pressed')
+        this.setColour(colourPalette.object);
+        this.setTooltip('returns boolean if a key is pressed');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'Boolean')
+      }
+};
+
+Blockly.JavaScript['is_key_pressed'] = function(block) {
+    let key = Blockly.JavaScript.valueToCode(block, 'key',
+        Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    return [`AK.isKeyPressed(${key})`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

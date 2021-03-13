@@ -12,7 +12,6 @@ export default class MovingAnimator extends Animator {
 
     progress(currTime){
         if(this.hasFinished())return;
-
         while(currTime > this._lastTime && (currTime - this._lastTime) >= this._anim.delay){
             this._lastTime += this._anim.delay;
             this.notifyAction();// this.notifyAction(this._anim);

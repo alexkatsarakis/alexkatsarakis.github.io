@@ -1,11 +1,13 @@
 import bb from '../utils/blackboard.js'
 
+import utils from '../utils/utils.js'
+
 const UIs = [
     'keyboard',
     'objectInfo',
     'objectMenu',
     'createObjectMenu',
-    'animationPreview',
+    'animationWorkshop',
     'collisionPreview',
     'hud',
     'toolbar',
@@ -102,11 +104,13 @@ class UIManager {
             if(child.attributes.getNamedItem("category")){
                 let objCat = child.attributes["category"].nodeValue;
                 child.remove();
-                utils.createObject({
+                let obj = utils.createObject({
                     _name: child.id,
                     _category: objCat,
                     _div: child
-                })
+                });
+                obj._x = child.offsetLeft;
+                obj._y = child.offsetTop;
             }
         })
     }
@@ -115,7 +119,7 @@ class UIManager {
 const uiManager = new UIManager();
 
 bb.fastInstall('UI','getUIs',()=>{return uiManager.getUIs()});
-bb.fastInstall('UI','installUI',({name,link,cb})=>uiManager.installUI({name,link,cb}));
+bb.fastInstall('UI','installUI',(args)=>uiManager.installUI(args));
 bb.fastInstall('UI','removeUI',(name)=>uiManager.removeUI(name));
 bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());

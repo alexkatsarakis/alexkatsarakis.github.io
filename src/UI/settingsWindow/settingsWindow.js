@@ -1,7 +1,5 @@
 import bb from '../../utils/blackboard.js'
 
-import Vue from '../../../libs/vue.min.js'
-
 export default {
     name:'settingsWindow',
     link: './src/UI/settingsWindow/settingsWindow.ahtml',
@@ -68,37 +66,25 @@ const settings = {
             inputType:'color'
         }
     },
-    Names:{
-        myName: {
-            onChange: (ev)=>{
-                if(ev.target.value !== 'true'){
-                    console.log('true');
-                }else{
-                    console.log('false');
-                }
-            },
-            initValue: false,
-            name: 'myName',
-            inputType:'checkbox'
-        }
-    },
     AddOns: {
         
     },
     Settings: {
-        dragItems: {
+    }
+}
+
+function fillSettings(){
+    let set = bb.getComponent('settings').itemMap;
+    for(let i in set){
+        settings.Settings[i] = {
             onChange: (ev)=>{
-                console.log(ev.target.value);
-                if(ev.target.value !== 'true'){
-                    bb.fastSet('settings', 'noDrag', false);
-                }else{
-                    bb.fastSet('settings', 'noDrag', true);
-                }
+                bb.fastSet('settings', i, ev.target.checked);
             },
-            initValue: bb.fastGet('settings', 'noDrag'),
-            name: 'Εnable dragging items',
+            initValue: set[i],
+            name: i,
             inputType:'checkbox'
         }
+
     }
 }
 
@@ -111,11 +97,7 @@ function fillUIsSettings(){
         if(item === 'settingsWindow')return;
         settings.AddOns[item] = {
             onChange: (ev)=>{
-                if(ev.target.value !== 'true'){
-                    bb.fastGet('UI','loadUI')(item);
-                }else{
-                    bb.fastGet('UI','hideUI')(item);
-                }
+                bb.fastGet('UI',(ev.target.checked)?'loadUI':'hideUI')(item);
             },
             initValue: (loaded.indexOf(item) !== -1),
             name: item,
@@ -124,6 +106,50 @@ function fillUIsSettings(){
     });
 }
 
+function onSettingsWindowLoaded(){
+    document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
+
+    const setWindow = document.getElementById('settings-window');
+    fillSettings();
+    fillUIsSettings();
+    
+    for(let cat in settings){
+        let catItems = settings[cat];
+
+        let wrapper = document.createElement('div');
+        wrapper.classList = 'settings_category';
+        setWindow.appendChild(wrapper);
+
+        let catNameElem = document.createElement('div');
+        catNameElem.classList = 'settings_category_name';
+        catNameElem.innerHTML = cat;
+        wrapper.appendChild(catNameElem);
+
+        for(let item in catItems){
+            let setting = catItems[item];
+            let itemWrapper = document.createElement('div');
+            itemWrapper.classList = 'objectItem';
+            itemWrapper.innerHTML = setting.name;
+            wrapper.appendChild(itemWrapper);
+
+            let itemInput = document.createElement('input');
+            itemInput.type = setting.inputType;
+            if(setting.inputType === 'checkbox'){
+                itemInput.checked = setting.initValue;
+            }
+            itemInput.value = setting.initValue;
+            itemInput.onchange = setting.onChange;
+            itemWrapper.appendChild(itemInput);
+        }
+
+        
+    }
+}
+
+
+// Vue solution
+/*
+import Vue from '../../../libs/vue.min.js'
 function onSettingsWindowLoaded(){
     document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
 
@@ -162,3 +188,4 @@ function onSettingsWindowLoaded(){
         }
     })
 }
+*/

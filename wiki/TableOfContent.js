@@ -3,15 +3,46 @@ import bb from './blackboard.js'
 const tableOfContent ={
     'user': [
         'general/Welcome',
-        'Quick Start/intro',
+        'Quick Start/Intro',
+        'Quick Start/Adding Objects',
+        'Quick Start/Coding',
     ],
     'dev': [
         'general/Welcome',
         'general/Future Work',
         'general/Goals',
         'general/Related Work',
+        'general/External Libraries',
         'Architecture/Macro-Architecture',
-        'Architecture/Engine Architecture'
+        'Architecture/Engine Architecture',
+        'Architecture/UI Manager Architecture',
+        'engine/Clock Manager',
+        'engine/Input Manager',
+        'Engine Extension/Clipboard Manager',
+        'Engine Extension/Pause Manager',
+        'Engine Extension/Object Snapshot Manager',
+        'engine/Save Manager',
+        'engine/Sound Manager',
+        'engine/Scripting Manager',
+        'Scripting/Blockly',
+        'Scripting/Javascript',
+        'engine/Object Manager',
+        'renderer/Document Elements',
+        'renderer/Custom Canvas',
+        'engine/Collision Manager',
+        'engine/Animation Manager',
+        'engine/Physics Manager',
+        'UIs/Animation Workshop',
+        'UIs/Collision Registry',
+        'UIs/Object Creation',
+        'UIs/Hud',
+        'UIs/Inventory Window',
+        'UIs/Keyboard',
+        'UIs/Object Floating Information',
+        'UIs/Object Information',
+        'UIs/Object Preview',
+        'UIs/Settings Window',
+        'UIs/Toolbar'
     ]
 }
 

@@ -3,14 +3,11 @@
 => = Problems I face 
 
 
-IMPORTANT TODO:
-    - On code save, save the executable code so I don't have to load XML and translate to code each time
-
 IDE:
 
     - (Done) Extra UI to manipulate theme-colors!! and/or which UI built-in components I want to be able to see
 
-    - add object preview for 454engine.
+    - (Done) add object preview for 454engine.
 
     - make the user able to change frame order on animation creation.
 
@@ -19,15 +16,15 @@ ENGINE:
 
     - (Done) Change all names to be IDs (objects, events, values, collisions, etc)
 
-    - Add tickAnimator (!important)
+    - (Done) Add tickAnimator (!important)
 
     - Load manager
 
-    - invoke functions through blackboard
+    - (deprecated) invoke functions through blackboard
 
-    - Pause/start
+    - (Done) Pause/start
 
-    - Add states for objects
+    - (Done) Add states for objects
 
     - Create ScrollingManager and map coordinates from there.
 
@@ -36,22 +33,27 @@ ENGINE:
         => who owns the code? (CollisionManager)
         => how am Ι going to handle collision with different objects? (different scripts)
 
-    - Add Options (e.g. I want to be able to move things with my mouse while playing)
+    - (Done) Add Options (e.g. I want to be able to move things with my mouse while playing)
 
 FEATURES:
+
+    - More Blocks
+        -> Category: Distance // Between objects, from grid, from mouse
+        -> Category: Quantizer // e.g. Move to {...} in {x} seconds
+        -> Category: Mouse // click 
+        -> Games state
+        -> Stop/Resume
+        -> KeyIsPressed
+        -> Save {object name} current snapshot as {user input string}
+        -> Set {object name} from snapshot {user input string} // IF FOUND
+        -> Copy {object name} with name {user input string}
 
     - What's happening on an object
         -> when I hit extra information about an object it shows me 
             what things are currently affecting this object....
             e.g. Animation x, script y, 
 
-    - introduce script information
-        -> when a script is clicked it will automatically show:
-                1) object that the script is binded to.
-                2) objects that the script is refering.
-                3) highlight objects affected by the script.
-
-    - Code even more stuff
+    - (DONE) Code even more stuff
         -> transitionToState(X,code),transitionOutOfState(X,code)
            (dont on collisionmanager) onCollisionWith(X,code), 
            onAttributeChange(X,code),onAttributeRetrieval(X,code)
@@ -66,7 +68,7 @@ FEATURES:
     - Logging system
         -> Log all actions done and show it to user in order to understand whats going on easier.
 
-    - Integrated key binding feature (in settings).
+    - (Depricated) Integrated key binding feature (in settings).
 
     - Integrated menu system for user to END-user.
         -> pause the game
@@ -79,28 +81,14 @@ FEATURES:
         
 
 Extra:
-
-    - Add block for:
-        -> distance
-
     - Starting Page includes
         -> What animation films to include
         -> Level of experience and start with different settings
         -> load saved/import projects
 
 
-PROBABLY DISCARDED:
-
-    - Scale canvas ctx
-        => scaling must be done on obj values, renderer, physics engine (which creates dependency)
-        => problem with picking and scaling is not intuitive to people
-        
-    - add unique IDs to everything instead of just names
-        => this doesn't help on reload / sharing
-
-
 
 
 KNOWN BUGS:
-    - A DOM render object position is wrong with relative position
+    - (Fixed) A DOM render object position is wrong with relative position
     - 

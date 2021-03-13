@@ -62,7 +62,7 @@ class ObjectManager {
         return this._objects;
     }
 
-    rename(obj,newName){
+    rename(obj,newName){ //TODO: move it from here
         if(this._objectByName[newName] || !this._objects[obj.id])return;
         obj.name = newName;
         this._objectByName[newName] = obj;
