@@ -333,7 +333,7 @@ function toggleAnimationWorkshop(){
         removeAllAnimators();
         wrapper.innerHTML = '';
         wrapper.style.height = 0;
-        toggleBut.style.bottom = '40px';
+        toggleBut.style.bottom = '60px';
     }else{
         wrapper.style.height = '200px';
         toggleBut.style.bottom = '200px';

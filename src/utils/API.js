@@ -3,7 +3,6 @@ import bb from './blackboard.js'
 import logManager from './logs.js'
 
 import Engine from '../Engine.js'
-import objectManager from '../Engine/renderer/ObjectManager.js';
 
 function AK() {
     

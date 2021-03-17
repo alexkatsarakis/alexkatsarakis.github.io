@@ -17,7 +17,7 @@ class AnimationManager {
             let film = animationFilmHolder.getFilm(item.film);
             item.end = (item.end !== 'max')?item.end:film.totalFrames-1;
 
-            this._animations[item.id] = {animation: new FrameRangeAnimation(item),film: film}
+            this._animations[item.id] = {animation: new FrameRangeAnimation(item),film: film};
         });
     }
 

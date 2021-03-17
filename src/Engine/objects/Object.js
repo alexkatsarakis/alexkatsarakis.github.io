@@ -6,10 +6,10 @@ import StateManager from './State.js'
 import OptionManager from './Option.js'
 import ValueManager from './Value.js'
 
-const ObjectState = {
-    ENABLED: 'enabled',
-    DISABLED: 'disabled'
-} //TODO when the window aura comes near then the item triggers an event to activate
+// const ObjectState = {
+//     ENABLED: 'enabled',
+//     DISABLED: 'disabled'
+// } //TODO when the window aura comes near then the item triggers an event to activate
 
 export default class Object {
     _id 

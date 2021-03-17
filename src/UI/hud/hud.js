@@ -26,24 +26,6 @@ function hudState(){
     return toggleVisibility;
 }
 
-// function codeAnalysis(srcCode){
-//     const reg = /(AK\.)([^\(]+)\(([^\,\)]*)\)/gim;
-//     let matches = ((srcCode || '').match(reg) || []);
-//     let res = [];
-
-//     matches.forEach((match)=>{
-//         let test = match;
-//         res.push(match);
-//         while((test = test.replace(reg,'$3'))){
-//             let m = (test || '').match(reg) || [];
-//             console.log(m);
-//             if(m.length === 0)return;
-//             m.forEach(mat=>res.push(mat));
-//         }
-//     })
-//     console.log(res);
-// }
-
 function showHideCodeUI(show = 'block'){
     let eventsTab = document.getElementById('eventsTab');
     let infoBar = document.getElementById('infoBar');

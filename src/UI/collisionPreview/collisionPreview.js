@@ -107,7 +107,7 @@ function toggleCollisionPreview(){
         closeCollisionWindow();
         wrapper.innerHTML = '';
         wrapper.style.height = 0;
-        toggleBut.style.bottom = '60px';
+        toggleBut.style.bottom = '90px';
     }else{
         wrapper.style.height = '200px';
         toggleBut.style.bottom = '200px';

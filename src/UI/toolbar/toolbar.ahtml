@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="./src/UI/toolbar/toolbar.css">
 
 <div id="toolbar" class="hudChild">
+    <div id="toolbar-logo-img"></div>
     <div id="toolbar_actions" class="toolbar_item">
         Actions
     </div>

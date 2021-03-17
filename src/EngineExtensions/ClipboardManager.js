@@ -24,11 +24,9 @@ export default class ClipboardManager {
 
     copy(obj = bb.fastGet('state', 'focusedObject'),saveToCollection){
         if(!obj)return;
-        console.log(obj);
         let newObj = JSON.parse(obj+'');
         delete newObj._id;
         this.push(newObj,saveToCollection);
-        console.log(this.getCollection());
     }
 
     paste(){

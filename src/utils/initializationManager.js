@@ -9,7 +9,6 @@ bb.fastSet('state','focusedObject',undefined);
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 urlParams.forEach((val,key)=>{
-    console.log(key,val);
     bb.fastSet('urlParams', key, val);
 });
 

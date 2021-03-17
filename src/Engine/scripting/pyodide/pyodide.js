@@ -19,7 +19,7 @@ languagePluginLoader.then(function () {
         sys.version
     `));
     
-})
+});
 
 bb.fastInstall('scripting','currentScriptAsText',()=>{
     return inputArea.value;

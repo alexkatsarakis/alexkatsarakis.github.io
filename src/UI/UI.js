@@ -107,7 +107,9 @@ class UIManager {
                 let obj = utils.createObject({
                     _name: child.id,
                     _category: objCat,
-                    _div: child
+                    extra:{
+                        div: child
+                    }
                 });
                 obj._x = child.offsetLeft;
                 obj._y = child.offsetTop;

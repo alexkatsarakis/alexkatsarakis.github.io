@@ -18,7 +18,7 @@ function createObject(item){
         it = Engine.ObjectManager.getObjectByName(item._name);
     }else{ 
         let category = Engine.ObjectManager.getConstructor(item._category);
-        it = new category({name:item._name, div: item._div},item._id);
+        it = new category({name:item._name,...item.extra},item._id);
     }
     let values = item.values;
     let options = item.options;
@@ -34,8 +34,7 @@ function createObject(item){
     }
 
     for(let v in values){
-        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-        else it.setValue(v,values[v].val);
+        it.setValue(v,values[v].val);
         if(values[v].onChange){
             it.setValueCode(v, values[v].onChange);
         }
@@ -72,8 +71,7 @@ function resetObject(item){
     }
 
     for(let v in values){
-        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-        else it.setValue(v,values[v].val);
+        it.setValue(v,values[v].val);
         if(values[v].onChange){
             it.setValueCode(v, values[v].onChange);
         }
@@ -105,40 +103,6 @@ function inputHandler(key) {
     // if(keyToAction[key]){
     //     keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     // }
-}
-
-function createObjectSmall(item){
-        //     let category = Engine.ObjectManager.getConstructor(item.category);
-    //     if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
-    //     if(item.meta.name !== undefined){
-    //         let it = new category(item.meta,item.id);
-    //         if(item.color)it.setColor(item.color);
-    //         if(item.position)it.setPosition(item.position.x,item.position.y);
-    //         if(item.attributes){
-    //             for(let a in item.attributes){
-    //                 if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
-    //                 it.setOption(a,item.attributes[a]);
-    //             }
-    //         }
-    //         if(item.fields){
-    //             for(let f in item.fields){
-    //                 it.addValue(f,item.fields[f]);
-    //             }
-    //         }
-    //         if(item.events){
-    //             for(let e in item.events){
-    //                 it.addEvent(item.events[e]);
-    //             }
-    //         }
-    //         if(item.states){
-    //             for(let e in item.states){
-    //                 it.addState(item.states[e]);
-    //             }
-    //         }
-    //         it.add();
-    //         if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
-    //     }
-    // });
 }
 
 const utils = new Utils();

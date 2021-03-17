@@ -13,28 +13,12 @@ class UIFactory {
         if(parent) parent.appendChild(div);
         return div;
     }
+
+    addHTMLfromString({str,parent}){
+        parent.insertAdjacentHTML('afterbegin',str);
+    }
 }
 
 const uiFactory = new UIFactory();
 
-let games = ['Super Mario','PacMan'];
-
-let gameList = uiFactory.createElement({
-    parent: document.body,
-    id: 'gamesList',
-});
-
-games.forEach( gameName => {
-    let but = uiFactory.createElement({
-        parent: gameList,
-        id: 'goToEditorBut_'+gameName,
-        classList: 'goToEditorBut',
-        type: 'input',
-        inputType: 'button',
-        value: gameName
-    });
-
-    but.addEventListener('click',()=>{
-        window.location.pathname = '/editor.html';
-    });
-});
+export default uiFactory;

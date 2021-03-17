@@ -1,11 +1,9 @@
 import bb from '../../../utils/blackboard.js'
 
-import AK from '../../../utils/API.js'
-
 const colourPalette = {
     colour: 24,
     object: 190
-}
+};
 
 import objManager from '../../renderer/ObjectManager.js'
 

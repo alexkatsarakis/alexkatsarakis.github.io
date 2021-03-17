@@ -31,6 +31,20 @@
             "delay": 70
         },
         {
+            "id": "mario_big_jump_up",
+            "film": "mario_big_right_jumping",
+            "dy": -30,
+            "delay": 35,
+            "reps": 10
+        },
+        {
+            "id": "mario_big_jump_down",
+            "film": "mario_big_right_jumping",
+            "dy": 30,
+            "delay": 35,
+            "reps": 10
+        },
+        {
             "id": "coin_spin",
             "film": "coin_spinning",
             "delay": 90

@@ -4,8 +4,7 @@ import './blocksMove.js'
 import './blocksCalculation.js'
 
 import bb from '../../../utils/blackboard.js'
-
-import AK from '../../../utils/API.js'
+import AK from '../../../utils/API.js' //THIS IS ON PURPOSE SO IT WILL BE ON EVAL
 
 let currObject;
 
@@ -15,10 +14,6 @@ function currentScriptAsText() {
 
 function currentScriptAsCode() {
     return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
-}
-
-function clear() {
-    Blockly.mainWorkspace.clear();
 }
 
 function executeCode(codes,currentObject) {

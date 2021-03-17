@@ -7,6 +7,20 @@
     color: var(--main-text);
 }
 
+#toolbar-logo-img {
+	float: left;
+	margin-left: 10px;
+    margin-right: 10px;
+	margin-top: 3px;
+	height: 24px;
+	width: 24px;
+	background-image: url("../../../assets/favicon.ico");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
 .toolbar_item {
     float:left;
     padding-top: 5px;

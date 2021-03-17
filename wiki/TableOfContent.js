@@ -44,7 +44,7 @@ const tableOfContent ={
         'UIs/Settings Window',
         'UIs/Toolbar'
     ]
-}
+};
 
 const ToCElement = document.getElementById('table-of-content');
 

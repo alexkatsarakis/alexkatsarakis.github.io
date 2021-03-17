@@ -78,7 +78,7 @@ function updateObjectList(){
             body.innerHTML = 'Copying for '+i+' isn\'t possible';
         }
 
-        body.onmouseenter = () => {
+        body.onmouseenter = (() => {
             let item = items[i];
             let pos = Engine.ObjectManager.getObject(item.id).getPositional();
             let mark = document.createElement('div');
@@ -107,16 +107,16 @@ function updateObjectList(){
             document.body.appendChild(objName);
             document.body.appendChild(mark);
 
-        }
+        });
 
-        body.onclick = () => {
+        body.onclick = (() => {
             focusObject(i);
-        }
+        });
 
-        body.onmouseleave = () => {
+        body.onmouseleave = (() => {
             document.getElementById('objectMenu_focus_name').remove();
             document.getElementById('objectMenu_focus').remove();
-        }
+        });
 
         wrap.appendChild(body);
 

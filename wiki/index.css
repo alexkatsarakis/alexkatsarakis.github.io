@@ -126,6 +126,12 @@ body {
 
 #navbar-logo-text {
     float: left;
-    color: var(--main-color-hover);
-    line-height: 5vh;
+    color: #ffffff;
+	vertical-align: middle;
+	line-height: 5vh;
+	font-size: 20px;
+	white-space: nowrap;
+	width: max-content;
+	cursor: pointer;
+	height: 5vh;
 }

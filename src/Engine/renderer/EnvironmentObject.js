@@ -30,7 +30,7 @@ class EnvironmentObject extends Object {
                 if(this._x < 0)this._x = 0;
             },
             getValue: () => {return this._x;}
-        })
+        });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",

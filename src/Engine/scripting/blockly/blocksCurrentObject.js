@@ -3,7 +3,7 @@ import bb from '../../../utils/blackboard.js'
 const colourPalette = {
     colour: 24,
     object: 190
-}
+};
 
 
 Blockly.Blocks['this_obj'] = {
@@ -189,7 +189,6 @@ Blockly.Blocks['get_this_object_value'] = {
 };
 
 Blockly.JavaScript['get_this_object_value'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
     return [`AK.getObjectByID(currObject).getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

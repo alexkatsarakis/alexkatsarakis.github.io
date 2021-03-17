@@ -1,18 +1,27 @@
 import serverCommuncator from '../../utils/serverCommunication.js'
 import httpRequest from '../../utils/httpRequest.js'
 
+import bb from '../../utils/blackboard.js'
+
 import Engine from '../../Engine.js'
 
 export default class SaveManager {
-    // _DBName = 'superMarioReal';
-    _DBName = 'myPersonalPage';
+    _DBName = 'superMarioReal';
+    // _DBName = 'myPersonalPage';
     _loadRemote = false;
 
-    _localState = './assets/json/savedState.json'; 
+    _localState = './assets/json/savedState1.json'; 
     _localPreSettedAnim = './assets/json/AnimationManager.json';
     _localAnimationFilms = './assets/json/AnimationFilmHolder.json';
 
     constructor(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        let gameName = urlParams.get('game');
+        if(gameName){
+            this._DBName = gameName;
+            this._localState = `./assets/json/${gameName}.json`
+        }
     }
 
     getPreSettedAnim(){

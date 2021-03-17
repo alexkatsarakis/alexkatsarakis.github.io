@@ -1,13 +1,5 @@
 import Object from './ObjectDom.js'
 
-import Value from '../../../objects/Value.js'
-
-function fromPercentageToPx(x,y){
-    // x = x/100 * window.innerWidth;
-    // y = y/100 * window.innerHeight;
-    return [x,y];
-}
-
 export default class Humanoid extends Object {
     
     constructor({name,texture,dim},id){
@@ -15,7 +7,8 @@ export default class Humanoid extends Object {
 
         this.div = document.createElement('div');
         this.div.id = name;
-        let [X,Y] = fromPercentageToPx((dim&&dim.width)?dim.width:10,(dim&&dim.height)?dim.height: 10);
+        let X = (dim&&dim.width)?dim.width:10;
+        // let Y = (dim&&dim.height)?dim.height: 10;
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";
         this.div.style.position = "absolute";

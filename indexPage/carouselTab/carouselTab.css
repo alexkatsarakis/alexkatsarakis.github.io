@@ -1,0 +1,70 @@
+#carouselWrapper {
+    width: 100%;
+    height: 60vh;
+    background-color: var(--main-color-hover);
+}
+
+#carouselButLeft {
+    float:left;
+    width: 5%;
+    height: 50px;
+    margin-top: calc(30vh - 25px);
+    cursor: pointer;
+    transform: rotate(90deg);
+    background-image: url("../../assets/images/dropdown_toggle.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#carouselButRight {
+    float:left;
+    width: 5%;
+    height: 50px;
+    margin-top: calc(30vh - 25px);
+    cursor: pointer;
+    transform: rotate(-90deg);
+    background-image: url("../../assets/images/dropdown_toggle.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#carouselImageLeft {
+    float:left;
+    width: 20%;
+    height: 100px;
+    margin-top: calc(30vh - 50px);
+}
+
+#carouselImageMid {
+    float:left;
+    width: 50%;
+    height: 300px;
+    margin-top: calc(30vh - 150px);
+}
+
+#carouselImageRight {
+    float:left;
+    width: 20%;
+    height: 100px;
+    margin-top: calc(30vh - 50px);
+}
+
+#carouselMainImageDesc {
+    float:left;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 20px;
+    color: var(--main-color-text);
+    font-size: x-large;
+    text-align: center;
+}
+
+.carouselItem {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: linear background-image 0.5s;
+}

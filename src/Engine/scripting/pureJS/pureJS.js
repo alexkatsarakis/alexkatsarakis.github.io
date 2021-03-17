@@ -1,7 +1,7 @@
-import bb from '../../../utils/blackboard.js'
-
-import AK from '../../../utils/API.js'
 import logManager from '../../../utils/logs.js'
+
+import bb from '../../../utils/blackboard.js'
+import AK from '../../../utils/API.js' //THIS IS ON PURPOSE SO IT WILL BE ON EVAL
 
 let inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
@@ -15,14 +15,6 @@ function currentScriptAsText(){
 
 function currentScriptAsCode(){
     return inputArea.value;
-};
-
-function clear(){
-    inputArea.value = "";
-};
-
-function fromTextToCode(text) {
-    return text;
 };
 
 let currObject;

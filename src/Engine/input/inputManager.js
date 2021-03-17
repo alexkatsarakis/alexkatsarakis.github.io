@@ -1,10 +1,8 @@
-import logManager from '../../utils/logs.js'
-
 const InputState = {
     TRIGGERED: 'TRIGGERED',
     TOTRIGGER: 'TOTRIGGER',
     FOREVER: 'FOREVER'
-}
+};
 
 class InputManager {
     currentlyPressed = {};
@@ -128,7 +126,6 @@ class GamepadController {
       var pressed = false;
       if (typeof(val) == "object") {
         pressed = val.pressed;
-        val = val.value;
       }
 
       if (pressed) {

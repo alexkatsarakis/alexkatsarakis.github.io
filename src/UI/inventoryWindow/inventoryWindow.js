@@ -170,7 +170,7 @@ function showFilms(objWrapper){
             end: items[i].totalFrames - 1,
             reps: -1,
             delay: 100
-        })
+        });
 
         animator.onAction = (th)=>{
             let firstBox = items[i].getFrameBox(th.currentFrame);
@@ -185,7 +185,7 @@ function showFilms(objWrapper){
         animator.start({
             animation: animation,
             timestamp: bb.fastGet('state','gameTime'),
-        })
+        });
 
         body.appendChild(anim);
 

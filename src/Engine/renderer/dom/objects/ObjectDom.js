@@ -43,10 +43,6 @@ export default class ObjectDom extends Object{
         this._stage = stage;
     }
 
-    setColor(col){
-        this.div.style.backgroundColor = col;
-    }
-
     setPosition(x,y){
         // [x,y] = fromPercentageToPx(x,y);
         this.div.style.left = x +"px";

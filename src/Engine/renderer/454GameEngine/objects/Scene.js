@@ -24,12 +24,12 @@ class Scene {
     //     this._offScreenCanvasCTX.canvas.width = 1920;
     //     this._offScreenCanvasCTX.canvas.height = 1080;
 
-        this._offScreenCanvas = document.createElement('canvas');
-        this._offScreenCanvas.style.width = 1920+'px';// window.innerWidth+'px';
-        this._offScreenCanvas.style.height = 1080+'px';// window.innerHeight+'px';
-        this._offScreenCanvasCTX = this._offScreenCanvas.getContext("2d");
-        this._offScreenCanvasCTX.canvas.width = 1920;// window.innerWidth;
-        this._offScreenCanvasCTX.canvas.height = 1080;// window.innerHeight;
+        // this._offScreenCanvas = document.createElement('canvas');
+        // this._offScreenCanvas.style.width = 1920+'px';// window.innerWidth+'px';
+        // this._offScreenCanvas.style.height = 1080+'px';// window.innerHeight+'px';
+        // this._offScreenCanvasCTX = this._offScreenCanvas.getContext("2d");
+        // this._offScreenCanvasCTX.canvas.width = 1920;// window.innerWidth;
+        // this._offScreenCanvasCTX.canvas.height = 1080;// window.innerHeight;
     }
 
     addItem(id){
@@ -42,11 +42,16 @@ class Scene {
     }
 
 
+    // renderObjects(){
+    //     this._offScreenCanvasCTX.clearRect(0, 0, this._offScreenCanvas.width, this._offScreenCanvas.height);
+    //     this._items.forEach((obj)=>obj.render(this._offScreenCanvasCTX));
+    //     this._canvasCTX.clearRect(0,0,this._canvas.width,this._canvas.height);
+    //     this._canvasCTX.drawImage(this._offScreenCanvas,0,0);
+    // }
+
     renderObjects(){
-        this._offScreenCanvasCTX.clearRect(0, 0, this._offScreenCanvas.width, this._offScreenCanvas.height);
-        this._items.forEach((obj)=>obj.render(this._offScreenCanvasCTX));
         this._canvasCTX.clearRect(0,0,this._canvas.width,this._canvas.height);
-        this._canvasCTX.drawImage(this._offScreenCanvas,0,0);
+        this._items.forEach((obj)=>obj.render(this._canvasCTX));
     }
 
 }

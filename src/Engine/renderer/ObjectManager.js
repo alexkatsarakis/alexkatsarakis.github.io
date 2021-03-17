@@ -159,4 +159,4 @@ clickWrapper.addEventListener('contextmenu',(ev) => {
         }
     }
     changeFocus(undefined);
-})
+});

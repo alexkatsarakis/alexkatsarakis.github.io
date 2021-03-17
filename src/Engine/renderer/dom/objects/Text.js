@@ -1,11 +1,5 @@
 import Object from './ObjectDom.js'
 
-import Value from '../../../objects/Value.js'
-
-function pxToNumber(str){
-    str.substr(1,str.length-4);
-    return parseInt(str);
-}
 export default class Text extends Object {
     
     constructor({name,texture,dim,defaultText,div},id){
@@ -48,7 +42,7 @@ export default class Text extends Object {
             tag: "appearance",
             onChange: (value) => {this.div.style.fontSize = value+"px";},
             getValue: () => {return this.div.style.fontSize.slice(0,-2);}
-        })
+        });
 
         this._category = 'Text';
 

@@ -6,7 +6,7 @@ const gameStates = {
 };
 
 export default class Game {
-    _gameState = gameStates.IDLE
+    _gameState;
     _actions;
 
     constructor(){

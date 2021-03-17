@@ -1,7 +1,5 @@
 import Object from './Object454.js'
 
-import Value from '../../../objects/Value.js'
-
 import bb from '../../../../utils/blackboard.js'
 
 
@@ -41,7 +39,7 @@ export default class Rectangle extends Object {
                 this._film = value;
             },
             getValue: () => {return this._film;}
-        })
+        });
 
         this._getFilm = bb.fastGet('Engine','AnimationManager').getFilm;
     }

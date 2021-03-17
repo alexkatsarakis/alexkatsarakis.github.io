@@ -15,7 +15,7 @@ class Object454Manager {
     }
 
     render(){
-        scene.renderObjects()
+        scene.renderObjects();
     }
 
     get constructors() {

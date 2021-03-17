@@ -162,6 +162,11 @@ function openInventory(){
 }
 
 function onToolbarLoaded(){
+    let backBut = document.getElementById('toolbar-logo-img');
+    backBut.onclick = (() => {
+        window.location = '/';
+    });
+
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');
     let toggle = actionsDropdown();
     dropdown.addEventListener('click',toggle);

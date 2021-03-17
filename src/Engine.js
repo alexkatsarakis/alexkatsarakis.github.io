@@ -10,7 +10,7 @@ import inputManager from './Engine/input/inputManager.js'
 import objectManager from './Engine/renderer/ObjectManager.js'
 import AnimationManager from './Engine/animations/animations.js'
 import CollisionManager from './Engine/collisions/collisions.js'
-import PhysicsManager from './Engine/physics/physics.js'
+// import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 import ClockManager from './Engine/clock/ClockManager.js'
 import ScriptingManager from './Engine/scripting/scripting.js'
@@ -25,7 +25,7 @@ class _Engine {
         this._managers = {};
         this._app = new App();
 
-        this.installManager('AnimationManager', new AnimationManager())
+        this.installManager('AnimationManager', new AnimationManager());
 
         this.installManager('CollisionManager', new CollisionManager());
     
@@ -144,7 +144,7 @@ game.animation = ()=>{
 };
 
 game.ai = ()=>{
-}
+};
 
 game.physics = ()=>{
     if(Engine.PhysicsManager)Engine.PhysicsManager.update();

@@ -4,9 +4,6 @@ Blockly is used as visual programming language so the user can code without the 
  ### [Matter.js](https://brm.io/matter-js/)
  MatterJS is used as a physics engine for the game
 
- ### [Vue.js](https://vuejs.org/)
- Vue is used to create UI only for some AddOns 
-
 # Icons
 
 ### [Flaticon](https://www.flaticon.com/)

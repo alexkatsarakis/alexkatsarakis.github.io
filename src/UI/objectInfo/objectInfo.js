@@ -118,14 +118,14 @@ function createAttributesView(attrs){
         if(focusedObj.getValueTag(i) === 'user'){
             rmBut.style.fill = 'red';
             rmBut.style.cursor = 'pointer';
-            rmBut.onclick = () => {focusedObj.removeValue(i);refreshInfoBox(focusedObj.id);}
+            rmBut.onclick = (() => {focusedObj.removeValue(i);refreshInfoBox(focusedObj.id);});
         }else{
             rmBut.style.fill = 'grey';
             rmBut.style.cursor = 'normal';
         }
 
         let editBut = document.getElementById(`mainInfoBox-body-attributes-main-edit-${i}`);
-        editBut.onclick = () => {
+        editBut.onclick = (() => {
             editBut.style.display = 'none';
             text.innerHTML = i+': ';
             let inp = document.createElement('input');
@@ -140,7 +140,7 @@ function createAttributesView(attrs){
                     focusedObj.setValue(i, Number.parseFloat(val))
             }
             text.appendChild(inp);
-        }
+        });
     }
 }
 
@@ -196,10 +196,10 @@ function createEventsView(events){
             let rmBut = document.getElementById(`mainInfoBox-body-events-main-remove-${i}`);
             rmBut.style.fill = 'red';
             rmBut.style.cursor = 'pointer';
-            rmBut.onclick = () => {
+            rmBut.onclick = (() => {
                 focusedObj.removeEvent(i);
                 refreshInfoBox(focusedObj.id);
-            }
+            });
         }
     }
 }
@@ -284,14 +284,14 @@ function createFlagsView(flags){
             opt.appendChild(trueOpt);
             opt.appendChild(falseOpt);
 
-            opt.onchange = (ev) => {
+            opt.onchange = ((ev) => {
                 if(ev.target.value === 'true'){
                     obj.setOption(i,true);
                 }else{
                     obj.setOption(i,false);
                 }
                 refreshInfoBox(obj.id);
-            }
+            });
 
             text.innerHTML = i + ": ";
             text.appendChild(opt);
