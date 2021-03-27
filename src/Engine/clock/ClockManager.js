@@ -2,6 +2,8 @@ import bb from '../../utils/blackboard.js'
 
 import idCreator from '../../utils/randomGenerator.js'
 
+import Engine from '../../Engine.js'
+
 class Callback {
     _id
 
@@ -29,6 +31,10 @@ class Callback {
         return this._timeToFire;
     }
 
+    timeShift(time){
+        this._timeToFire = this._timeToFire + time;
+    }
+
     fireCallback() {
         this._function(this._arguments);
     }
@@ -39,13 +45,37 @@ export default class ClockManager {
     _sinceLastCount
 
     _callbacks
+    
+    _checkForCB
 
     constructor() {
         let d = new Date();
         this._lastTime = d.getTime();
         this._sinceLastCount = 0;
 
+        this._checkForCB = true;
+
         this._callbacks = {};
+    }
+
+    onLoad(){
+        this.update();
+
+        Engine.PauseManager.addOnPause(()=>{
+            this._checkForCB = false;
+        });
+
+        Engine.PauseManager.addOnResume((time)=>{
+            for(let i in this._callbacks){
+                this._callbacks[i].timeShift(time);
+            }
+            this._checkForCB = true;
+        });
+    }
+
+    getTime(){
+        let d = new Date();
+        return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getDate()}/${d.getMonth()}`;
     }
 
     update() {
@@ -58,7 +88,7 @@ export default class ClockManager {
             this._sinceLastCount++;
         }
         bb.fastSet('state','gameTime',currTime);
-        this.checkForCallbacks(currTime);
+        if(this._checkForCB)this.checkForCallbacks(currTime);
     }
 
     checkForCallbacks(currTime){

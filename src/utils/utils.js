@@ -91,9 +91,12 @@ function resetObject(item){
 
 }
 
-// import keyToAction from '../assets/json/keyToActions.js' //json
 function inputHandler(key) {
-    if(key === 'PressedCopy' || key === 'PressedPaste' || key === 'PresseddummyAction'){
+    if(key === 'PressedCopy' 
+    || key === 'PressedPaste' 
+    || key === 'PresseddummyAction'
+    || key === 'PressedpauseGame' 
+    || key === 'PressedresumeGame'){
         console.log(key);
         bb.fastGet('actions',key.substring(7))();
     }else {

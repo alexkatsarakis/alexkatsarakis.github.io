@@ -166,6 +166,11 @@ AK.prototype.getObjectCenter = (obj1) => {
 
 //////////TIMER////////////////
 
+AK.prototype.callIn = (cb,args,delay) => {
+    return Engine.ClockManager.callIn(cb,args,delay);
+}
+
+
 // AK.runAfterOnce(code, delay)
 // AK.runAfterRepeat(code, delay)
 // AK.stopRepeat(code, delay)

@@ -27,7 +27,7 @@ function actionsDropdown(){
         let actions = getActions();
         let dropdown = document.createElement('div');
         dropdown.id = 'toolbar_actions_dropdown';
-        dropdown.classList += 'toolbar_dropdown';
+        dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_actions').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         actions.forEach((item)=>{
@@ -72,7 +72,7 @@ function objectsDropdown(){
         let objects = getObjects();
         let dropdown = document.createElement('div');
         dropdown.id = 'toolbar_liveobjects_dropdown';
-        dropdown.classList += 'toolbar_dropdown';
+        dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_liveobjects').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
@@ -118,7 +118,7 @@ function eventsDropdown(){
         let events = getEvents();
         let dropdown = document.createElement('div');
         dropdown.id = 'toolbar_events_dropdown';
-        dropdown.classList += 'toolbar_dropdown';
+        dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_events').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         events.forEach((item)=>{

@@ -21,14 +21,14 @@
         {
             "id": "mario_big_r_r",
             "film": "mario_big_right_walking",
-            "dx": 20,
-            "delay": 70
+            "dx": 11.5,
+            "delay": 40
         },
         {
             "id": "mario_big_r_l",
             "film": "mario_big_left_walking",
-            "dx": -20,
-            "delay": 70
+            "dx": -11.5,
+            "delay": 40
         },
         {
             "id": "mario_big_jump_up",

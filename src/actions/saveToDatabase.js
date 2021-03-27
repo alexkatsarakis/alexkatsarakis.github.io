@@ -3,5 +3,5 @@ import bb from '../utils/blackboard.js'
 import Engine from '../Engine.js'
 
 if(Engine.hasManager('SaveManager')){
-    bb.fastInstall('actions','saveToDatabase',()=>Engine.SaveManager.saveObjects());
+    bb.fastInstall('actions','saveToDatabase',()=>Engine.SaveManager.saveGame());
 }

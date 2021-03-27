@@ -21,8 +21,6 @@ export default class Object {
 
     _category;
 
-    _isPrototype;
-
     constructor(_name, _id) {
         this._name = _name;
         this.id = _id || rand.generateGameID();
@@ -37,19 +35,20 @@ export default class Object {
     }
 
     toString(){
-        this.events  = this.getEvents();
-        this.states  = this.getStates();
-        this.options = this.getOptions();
-        this.values  = this.getValues();
-        for(let i in this.values){
-            this.values[i].val = this.getValue(i);
+        let toSave = {
+            events:     this.getEvents(),        
+            states:     this.getStates(),
+            options:    this.getOptions(),
+            values:     this.getValues(),
+            _name:      this.name,
+            _category:  this._category,
+            _id:        this.id
         }
-        let string = JSON.stringify(this);
-        delete this.events; 
-        delete this.states;
-        delete this.options;
-        delete this.values;
-        return string;
+
+        for(let i in this.values){
+            toSave.values[i].val = this.getValue(i);
+        }
+        return JSON.stringify(toSave);
     }
 
     getCategory() {
@@ -139,8 +138,18 @@ export default class Object {
         throw Error("setColor needs to be implemented");
     }
 
-    setPosition(x, y) {
-        throw Error("setPosition needs to be implemented");
+    setPosition(x,y){
+        if(!this.getOption('isMovable'))return;
+        this.setValue('x', x);
+        this.setValue('y', y);
+    }
+
+    move(x,y){
+        if(!this.getOption('isMovable'))return;
+        if(x !== 0) this.setValue('x', this._x + x);
+        if(y !== 0) this.setValue('y', this._y + y);
+        if(x !== 0 || y !== 0)
+            this.triggerEvent('onMove');
     }
 
     getPosition() {
@@ -173,10 +182,6 @@ export default class Object {
 
     setName(newName) {
         this.name = newName;
-    }
-
-    move(x, y) {
-        throw Error("move needs to be implemented");
     }
 
     newFrame() {

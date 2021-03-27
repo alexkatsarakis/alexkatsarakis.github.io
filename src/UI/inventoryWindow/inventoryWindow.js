@@ -1,6 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
 import Engine from '../../Engine.js'
+import uiFactory from '../../utils/UIFactory.js';
 
 export default {
     name:'inventoryWindow',
@@ -9,10 +10,6 @@ export default {
     removable: true, 
     loadOnInstall: true
 };
-
-
-const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
-const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
 
 function closeInventoryWindow(){
     removeAllAnimators();
@@ -38,34 +35,50 @@ function onSettingsInventoryLoaded(){
     let tabDiv = document.getElementById('inventory-window-tabs');
 
     let body = document.getElementById('inventory-window-body');
-    body.innerHTML = 'test'
+    body.innerHTML = '';
 
-    let item = document.createElement('div');
-    item.classList = 'inventory-window-tabs-item';
-    item.classList += ' inventory-window-tabs-item-selected';
-    item.innerHTML = 'TEEEEE'
-    item.onclick = ()=>{focusTab('TEEEEE');showNothing(body)}
-    tabDiv.appendChild(item);
-    
-    item = document.createElement('div');
-    item.classList = 'inventory-window-tabs-item';
-    item.innerHTML = 'Films'
-    item.onclick = ()=>{focusTab('Films');showFilms(body)}
-    tabDiv.appendChild(item);
+    uiFactory.createElement({
+        classList: 'inventory-window-tabs-item  inventory-window-tabs-item-selected',
+        innerHTML: 'Films',
+        parent: tabDiv
+    }).onclick = () => {
+        focusTab('Films');
+        showFilms(body);
+    }
 
-    item = document.createElement('div');
-    item.classList = 'inventory-window-tabs-item';
-    item.innerHTML = 'Objects'
-    item.onclick = ()=>{focusTab('Objects');showObjects(body)}
-    tabDiv.appendChild(item);
+    uiFactory.createElement({
+        classList: 'inventory-window-tabs-item',
+        innerHTML: 'Objects',
+        parent: tabDiv
+    }).onclick = () => {
+        focusTab('Objects');
+        showObjects(body);
+    }
+
+    if(Engine.hasManager('ClipboardManager')){
+        uiFactory.createElement({
+            classList: 'inventory-window-tabs-item',
+            innerHTML: 'Clipboard',
+            parent: tabDiv
+        }).onclick = () => {
+            focusTab('Clipboard');
+            showClipboard(body);
+        }
+    }
 
     if(Engine.hasManager('ObjectSnapshotManager')){
-        // item = document.createElement('div');
-        // item.classList = 'inventory-window-tabs-item';
-        // item.innerHTML = 'Snapshots'
-        // item.onclick = ()=>{focusTab('Snapshots');showSnapshots(body)}
-        // tabDiv.appendChild(item);
+        uiFactory.createElement({
+            classList: 'inventory-window-tabs-item',
+            innerHTML: 'Object Snapshot',
+            parent: tabDiv
+        }).onclick = () => {
+            focusTab('Object Snapshot');
+            showSnapshots(body);
+        }
     }
+
+    focusTab('Films');
+    showFilms(body);
 
 }
 
@@ -73,24 +86,68 @@ function clear(){
     removeAllAnimators();
 }
 
+function showSnapshots(objWrapper){
+    objWrapper.innerHTML = '';    
+}
+
+function showClipboard(objWrapper){
+    objWrapper.innerHTML = '';
+    let clipboardObjs = Engine.ClipboardManager.getCollection();
+    clipboardObjs.reverse();
+    clipboardObjs.forEach(item=>{
+        console.log(item);
+        let wrap = uiFactory.createElement({
+            classList: 'inventory-window-itemWrapper',
+            parent: objWrapper
+        });
+
+        uiFactory.createElement({
+            classList: 'inventory-window-objName',
+            innerHTML: item._name,
+            parent: wrap
+        });
+        
+
+        let body = uiFactory.createElement({
+            classList: 'inventory-window-body',
+            innerHTML: `Category: ${item._category}
+            Name: ${item._name}
+            Time: ${item._time}`,
+            parent: wrap
+        });
+
+        body.style.cursor = 'pointer';
+        
+        body.onclick = () => {
+            Engine.ClipboardManager.paste(item);
+            closeInventoryWindow();
+        };
+
+    });
+}
+
 function showObjects(objWrapper){
     objWrapper.innerHTML = '';
     let items = Engine.ObjectManager.objects;
     for(let i in items){
         let item = items[i];
-        let name = item.name;
-        let wrap = document.createElement('div');
-        wrap.classList += 'inventory-window-itemWrapper';
-        objWrapper.appendChild(wrap);
+        let wrap = uiFactory.createElement({
+            classList: 'inventory-window-itemWrapper',
+            parent: objWrapper
+        });
 
-        let title = document.createElement('div');
-        title.classList += 'inventory-window-objName';
-        title.innerHTML = name;
-        wrap.appendChild(title);
+        uiFactory.createElement({
+            classList: 'inventory-window-objName',
+            innerHTML: item.name,
+            parent: wrap
+        });
         
 
-        let body = document.createElement('div');
-        body.classList += 'inventory-window-body';
+        let body = uiFactory.createElement({
+            classList: 'inventory-window-body',
+            parent: wrap
+        });
+
         if(item.renderer === 'dom'){
             let newItem = item.getObject().cloneNode(true);
             body.appendChild(newItem);
@@ -109,9 +166,11 @@ function showObjects(objWrapper){
                 let info = item._getFilm(item._film);
                 let box = info.getFrameBox(item._frame);
                 let img = info.bitmap;
-                let canv = document.createElement('canvas');
-                canv.id = item.id+'_objectMenu_inventory';
-                body.appendChild(canv);
+                let canv = uiFactory.createElement({
+                    type: 'canvas',
+                    id: item.id+'_objectMenu_inventory',
+                    parent: body
+                });
                 canv.style.width = '100%';
                 canv.style.height = '100%';
                 let ctx = canv.getContext('2d');
@@ -122,17 +181,11 @@ function showObjects(objWrapper){
                 x, y, pos.width, pos.height);
             }
         }else {
-            body.innerHTML = 'Preview for '+i+' isn\'t possible';
+            body.innerHTML = 'Preview for '+item.name+' isn\'t possible';
         }
-
-        wrap.appendChild(body);
 
     }
 
-}
-
-function showNothing(objWrapper){
-    objWrapper.innerHTML = 'LOL';
 }
 
 
@@ -143,24 +196,32 @@ function removeAllAnimators(){
 }
 
 function showFilms(objWrapper){
+    const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
+    const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
     let items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
     for(let i in items){
-        let wrap = document.createElement('div');
-        wrap.classList += 'inventory-window-animationPreview_itemWrapper';
-        objWrapper.appendChild(wrap);
+        let wrap = uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_itemWrapper',
+            parent: objWrapper
+        });
 
-        let title = document.createElement('div');
-        title.classList += 'inventory-window-animationPreview_objName';
-        title.innerHTML = i;
-        wrap.appendChild(title);
-        
+        uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_objName',
+            innerHTML: i,
+            parent: wrap
+        });
 
-        let body = document.createElement('div');
-        body.classList += 'inventory-window-animationPreview_body';
+        let body = uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_body',
+            parent: wrap
+        });
 
-        let anim = document.createElement('canvas');
-        anim.classList += 'inventory-window-animationPreview_film';
+        let anim = uiFactory.createElement({
+            type: 'canvas',
+            classList: 'inventory-window-animationPreview_film',
+            parent: body
+        });
         let ctx = anim.getContext('2d');
         
         let animator = new FRAnimator();
@@ -177,7 +238,7 @@ function showFilms(objWrapper){
             ctx.clearRect(0,0,anim.width,anim.height);
             ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
                 firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                (anim.width/2) - (firstBox.width*5/2),(anim.height/2) - (firstBox.height*5/2),firstBox.width*5,firstBox.height*5)
+                0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
         };
 
         
@@ -186,10 +247,6 @@ function showFilms(objWrapper){
             animation: animation,
             timestamp: bb.fastGet('state','gameTime'),
         });
-
-        body.appendChild(anim);
-
-        wrap.appendChild(body);
 
 
         animatorsForPreview.push(()=>{

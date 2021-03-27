@@ -9,8 +9,10 @@ class InputManager {
     releasedKeys = [];
 
     keyCombos = {
-        // 'Copy': ['ControlLeft', 'KeyC'],
-        // 'Paste': ['ControlLeft', 'KeyV'],
+        'Copy': ['ControlLeft', 'ShiftLeft', 'KeyC'],
+        'Paste': ['ControlLeft', 'ShiftLeft', 'KeyV'],
+        'pauseGame': ['ControlLeft', 'ShiftLeft', 'Digit1'],
+        'resumeGame': ['ControlLeft', 'ShiftLeft', 'Digit2'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }
 

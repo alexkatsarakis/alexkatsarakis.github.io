@@ -15,8 +15,14 @@ const games = [
         }
     },
     {
-        id: 'Empty',
-        displayName: 'Empty Project',
+        id: 'EmptyMario',
+        displayName: 'Empty (Mario Films)',
+        defaultParameters: {
+        }
+    },
+    {
+        id: 'EmptyMortal',
+        displayName: 'Empty (Mortal Films)',
         defaultParameters: {
         }
     }

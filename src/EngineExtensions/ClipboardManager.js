@@ -1,5 +1,6 @@
 import utils from '../utils/utils.js'
 import bb from '../utils/blackboard.js'
+import Engine from '../Engine.js';
 
 export default class ClipboardManager {
     _clipboard;
@@ -19,22 +20,23 @@ export default class ClipboardManager {
     }
 
     getCollection(){
-        return this._collection;
+        return [...this._collection];
     }
 
     copy(obj = bb.fastGet('state', 'focusedObject'),saveToCollection){
-        if(!obj)return;
+        if(!obj || Engine.ObjectManager.isSystemObject(obj.id))return;
         let newObj = JSON.parse(obj+'');
         delete newObj._id;
+        newObj._time = Engine.ClockManager.getTime();
         this.push(newObj,saveToCollection);
     }
 
-    paste(){
-        let obj = this.top();
+    paste(obj = this.top()){
         if(!obj)return;
         let oldName = obj._name;
         obj._name = obj._name+'_'+Math.floor(Math.random() * 10000000000);
         let newObj = utils.createObject(obj);
+        newObj.triggerEvent('onGameStart');
         obj._name = oldName;
         return newObj;
     }

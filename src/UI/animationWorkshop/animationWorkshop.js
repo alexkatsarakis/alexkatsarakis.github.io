@@ -184,7 +184,10 @@ function createPopUp(film){
     ctx.width = mainAreaCanvas.width;
     ctx.height = mainAreaCanvas.height;
     let firstBox = film.getFrameBox(0);
-    let currPos = {x:(mainAreaCanvas.width/2) - (firstBox.width*2/2),y:(mainAreaCanvas.height/2) - (firstBox.height*2/2)};
+    let currPos = {
+        x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
+        y:(mainAreaCanvas.height/2) - ((mainAreaCanvas.height/3)/2)
+    };
 
     animator.onAction = (th)=>{
         firstBox = film.getFrameBox(th.currentFrame);
@@ -201,9 +204,13 @@ function createPopUp(film){
         ctx.clearRect(0,0,mainAreaCanvas.width,mainAreaCanvas.height);
         ctx.drawImage(bb.fastGet('assets',film.bitmap),
             firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-            currPos.x ,currPos.y ,firstBox.width*2,firstBox.height*2)
+            currPos.x ,
+            currPos.y ,
+            (firstBox.width/firstBox.height)*(mainAreaCanvas.height/3),
+            (mainAreaCanvas.height/3)
+        )
     };
-
+    // anim.height*(firstBox.width/firstBox.height), anim.height
     animator.start({
         animation: animation,
         timestamp: bb.fastGet('state','gameTime'),
@@ -250,7 +257,12 @@ function createPopUp(film){
     dyInput.addEventListener('change',restartAnimation);
     repsInput.addEventListener('change',restartAnimation);
     delaySlider.addEventListener('change',restartAnimation);
-    startAnim.addEventListener('click',()=>{currPos = {x:(mainAreaCanvas.width/2) - (firstBox.width*2/2),y:(mainAreaCanvas.height/2) - (firstBox.height*2/2)};});
+    startAnim.addEventListener('click',()=>{
+        currPos = {
+            x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
+            y:(mainAreaCanvas.height/2) - ((mainAreaCanvas.height/3)/2)
+        };
+    });
     createAnim.addEventListener('click',saveAnimation);
     popUpClose.addEventListener('click',destroyPopUP);
     popUpCloseBack.addEventListener('click',destroyPopUP);
@@ -300,7 +312,7 @@ function showAnimations(){
             ctx.clearRect(0,0,anim.width,anim.height);
             ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
                 firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                (anim.width/2) - (firstBox.width*5/2),(anim.height/2) - (firstBox.height*5/2),firstBox.width*5,firstBox.height*5)
+                0, 0, anim.height*(firstBox.width/firstBox.height), anim.height);
         };
 
         

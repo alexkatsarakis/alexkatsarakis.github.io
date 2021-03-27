@@ -43,26 +43,12 @@ export default class ObjectDom extends Object{
         this._stage = stage;
     }
 
-    setPosition(x,y){
-        // [x,y] = fromPercentageToPx(x,y);
-        this.div.style.left = x +"px";
-        this.div.style.top = y +"px";
-    }
-
     getPosition(){
         return [this.div.style.top,this.div.style.left];
     }
 
     getObject(){
         return this.div;
-    }
-
-    move(x,y){
-        if(!this.getOption('isMovable'))return;
-        this._x += x;
-        this._y += y;
-        if(x !== 0 || y !== 0)
-            this.triggerEvent('onMove');
     }
 
     getBoundingBox(){

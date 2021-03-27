@@ -1,0 +1,208 @@
+{
+  "objects": {
+    "BpAoTcBMfklfGm6": {
+      "events": {
+        "onGameStart": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "system"
+        },
+        "onEachFrame": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "system"
+        }
+      },
+      "states": {
+        "idle": { "tag": "idle", "transitionFrom": {}, "transitionTo": {} }
+      },
+      "options": {
+        "isMovable": {
+          "val": true,
+          "tag": "system",
+          "onChange": { "text": "", "code": "" }
+        },
+        "isCollidable": {
+          "val": false,
+          "tag": "collision",
+          "onChange": { "text": "", "code": "" }
+        },
+        "moveWithScroll": {
+          "val": true,
+          "tag": "scroll",
+          "onChange": { "text": "", "code": "" }
+        }
+      },
+      "values": {
+        "x": { "val": -124, "tag": "positional" },
+        "y": { "val": 134, "tag": "positional" },
+        "width": { "val": 3100, "tag": "positional" },
+        "height": { "val": 1080, "tag": "positional" },
+        "windowWidth": { "val": 1680, "tag": "positional" },
+        "windowHeight": { "val": 946, "tag": "positional" },
+        "color": { "val": "#ffffff", "tag": "texture" },
+        "background": { "val": "", "tag": "texture" }
+      },
+      "_name": "Stage",
+      "_category": "Stage",
+      "_id": "BpAoTcBMfklfGm6"
+    },
+    "KciKIiWkUB9QL6q": {
+      "events": {},
+      "states": {
+        "idle": { "tag": "idle", "transitionFrom": {}, "transitionTo": {} }
+      },
+      "options": {
+        "moveWithScroll": {
+          "val": true,
+          "tag": "scroll",
+          "onChange": { "text": "", "code": "" }
+        }
+      },
+      "values": {},
+      "_name": "Collisions",
+      "_category": "Collisions",
+      "_id": "KciKIiWkUB9QL6q"
+    },
+    "vxz19AN3VqipnPH": {
+      "events": {
+        "PressedKeyA": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "PressedKeyB": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "PressedKeyC": { "val": {}, "tag": "user" },
+        "PressedKeyD": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "PressedKeyE": { "val": {}, "tag": "user" },
+        "PressedKeyF": { "val": {}, "tag": "user" },
+        "PressedKeyG": { "val": {}, "tag": "user" },
+        "PressedKeyH": { "val": {}, "tag": "user" },
+        "PressedKeyI": { "val": {}, "tag": "user" },
+        "PressedKeyJ": { "val": {}, "tag": "user" },
+        "PressedKeyK": { "val": {}, "tag": "user" },
+        "PressedKeyL": { "val": {}, "tag": "user" },
+        "PressedKeyM": { "val": {}, "tag": "user" },
+        "PressedKeyN": { "val": {}, "tag": "user" },
+        "PressedKeyO": { "val": {}, "tag": "user" },
+        "PressedKeyP": { "val": {}, "tag": "user" },
+        "PressedKeyQ": { "val": {}, "tag": "user" },
+        "PressedKeyR": { "val": {}, "tag": "user" },
+        "PressedKeyS": { "val": {}, "tag": "user" },
+        "PressedKeyT": { "val": {}, "tag": "user" },
+        "PressedKeyU": { "val": {}, "tag": "user" },
+        "PressedKeyV": { "val": {}, "tag": "user" },
+        "PressedKeyW": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "PressedKeyX": { "val": {}, "tag": "user" },
+        "PressedKeyY": { "val": {}, "tag": "user" },
+        "PressedKeyZ": { "val": {}, "tag": "user" },
+        "PressedDigit0": { "val": {}, "tag": "user" },
+        "PressedDigit1": { "val": {}, "tag": "user" },
+        "PressedDigit2": { "val": {}, "tag": "user" },
+        "PressedDigit3": { "val": {}, "tag": "user" },
+        "PressedDigit4": { "val": {}, "tag": "user" },
+        "PressedDigit5": { "val": {}, "tag": "user" },
+        "PressedDigit6": { "val": {}, "tag": "user" },
+        "PressedDigit7": { "val": {}, "tag": "user" },
+        "PressedDigit8": { "val": {}, "tag": "user" },
+        "PressedDigit9": { "val": {}, "tag": "user" },
+        "UnpressedKeyA": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "UnpressedKeyB": { "val": {}, "tag": "user" },
+        "UnpressedKeyC": { "val": {}, "tag": "user" },
+        "UnpressedKeyD": {
+          "val": {
+            "text": "",
+            "code": ""
+          },
+          "tag": "user"
+        },
+        "UnpressedKeyE": { "val": {}, "tag": "user" },
+        "UnpressedKeyF": { "val": {}, "tag": "user" },
+        "UnpressedKeyG": { "val": {}, "tag": "user" },
+        "UnpressedKeyH": { "val": {}, "tag": "user" },
+        "UnpressedKeyI": { "val": {}, "tag": "user" },
+        "UnpressedKeyJ": { "val": {}, "tag": "user" },
+        "UnpressedKeyK": { "val": {}, "tag": "user" },
+        "UnpressedKeyL": { "val": {}, "tag": "user" },
+        "UnpressedKeyM": { "val": {}, "tag": "user" },
+        "UnpressedKeyN": { "val": {}, "tag": "user" },
+        "UnpressedKeyO": { "val": {}, "tag": "user" },
+        "UnpressedKeyP": { "val": {}, "tag": "user" },
+        "UnpressedKeyQ": { "val": {}, "tag": "user" },
+        "UnpressedKeyR": { "val": {}, "tag": "user" },
+        "UnpressedKeyS": { "val": {}, "tag": "user" },
+        "UnpressedKeyT": { "val": {}, "tag": "user" },
+        "UnpressedKeyU": { "val": {}, "tag": "user" },
+        "UnpressedKeyV": { "val": {}, "tag": "user" },
+        "UnpressedKeyW": { "val": {}, "tag": "user" },
+        "UnpressedKeyX": { "val": {}, "tag": "user" },
+        "UnpressedKeyY": { "val": {}, "tag": "user" },
+        "UnpressedKeyZ": { "val": {}, "tag": "user" },
+        "UnpressedDigit0": { "val": {}, "tag": "user" },
+        "UnpressedDigit1": { "val": {}, "tag": "user" },
+        "UnpressedDigit2": { "val": {}, "tag": "user" },
+        "UnpressedDigit3": { "val": {}, "tag": "user" },
+        "UnpressedDigit4": { "val": {}, "tag": "user" },
+        "UnpressedDigit5": { "val": {}, "tag": "user" },
+        "UnpressedDigit6": { "val": {}, "tag": "user" },
+        "UnpressedDigit7": { "val": {}, "tag": "user" },
+        "UnpressedDigit8": { "val": {}, "tag": "user" },
+        "UnpressedDigit9": { "val": {}, "tag": "user" }
+      },
+      "states": {
+        "idle": { "tag": "idle", "transitionFrom": {}, "transitionTo": {} }
+      },
+      "options": {
+        "moveWithScroll": {
+          "val": true,
+          "tag": "scroll",
+          "onChange": { "text": "", "code": "" }
+        }
+      },
+      "values": {},
+      "_name": "Keyboard",
+      "_category": "Keyboard",
+      "_id": "vxz19AN3VqipnPH"
+    }
+  },
+  "info": {
+    "name": "savedState",
+    "preSet": [],
+    "films": [
+      "./assets/json/scorpion_left_json_translated.json",
+      "./assets/json/scorpion_right_json_translated.json",
+      "./assets/json/subzero_left_json_translated.json",
+      "./assets/json/subzero_right_json_translated.json"
+    ]
+  }
+}

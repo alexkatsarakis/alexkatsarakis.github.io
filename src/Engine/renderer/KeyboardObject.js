@@ -27,13 +27,21 @@ class KeyboardObject extends Object {
         this._category = 'Keyboard';
 
         // i = 'A'.charCodeAt(0), j = 'Z'.charCodeAt(0); 
-        for (let i = 65; i <= 90; ++i) {
+        for(let i = 65; i <= 90; ++i) {
             this.addEvent('PressedKey'+String.fromCharCode(i));
         }
-        for (let i = 65; i <= 90; ++i) {
+
+        for(let i = 0; i < 10; ++i){
+            this.addEvent('PressedDigit'+i);
+        }
+
+        for(let i = 65; i <= 90; ++i) {
             this.addEvent('UnpressedKey'+String.fromCharCode(i));
         }
 
+        for(let i = 0; i < 10; ++i){
+            this.addEvent('UnpressedDigit'+i);
+        }
     }
     
     newFrame(){

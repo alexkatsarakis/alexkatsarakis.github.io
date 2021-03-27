@@ -101,7 +101,7 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.statementToCode(block, 'Value',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'setTimeout(()=>{'+argument1+'},'+argument0+');';
+    return 'AK.callIn(()=>{'+argument1+'},[],'+argument0+');';
 };
 
 Blockly.Blocks['create_object'] = {
@@ -556,6 +556,11 @@ Blockly.Blocks['get_animation'] = {
         for(let i in map){
                 categs.push([i,i]);
         }
+
+        if(categs.length === 0){
+            categs.push(["",""]);
+        }
+
         return categs;
     }
 };
@@ -626,27 +631,15 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument0 = argument0.trim();
     argument1 = argument1.trim();
-    var statements_onstart = Blockly.JavaScript.statementToCode(block, 'onStart');
-    var statements_onend = Blockly.JavaScript.statementToCode(block, 'onEnd');
-    
-    // const reg = /;/gi;
-    // statements_onstart = statements_onstart.replace(reg,'');
-    // statements_onend = statements_onend.replace(reg,'');
-    
-    // console.log(`bb.fastGet('actions','playAnimation')(
-    //     {
-    //        object: ${argument1},
-    //        anim: '${argument0}',
-    //        onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
-    //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
-    //     })`);
+    var statements_onstart = JSON.stringify(Blockly.JavaScript.statementToCode(block, 'onStart'));
+    var statements_onend = JSON.stringify(Blockly.JavaScript.statementToCode(block, 'onEnd'));
 
     return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
-           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
+           onStart: ()=>{eval(${statements_onstart || ''})},
+           onFinish: ()=>{eval(${statements_onend || ''})}
         })`;
 };
 

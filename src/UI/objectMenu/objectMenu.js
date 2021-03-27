@@ -75,49 +75,13 @@ function updateObjectList(){
                 x, y, pos.width, pos.height);
             }
         }else {
-            body.innerHTML = 'Copying for '+i+' isn\'t possible';
+            body.innerHTML = 'Copying for '+item.name+' isn\'t possible';
         }
-
-        body.onmouseenter = (() => {
-            let item = items[i];
-            let pos = Engine.ObjectManager.getObject(item.id).getPositional();
-            let mark = document.createElement('div');
-            mark.id = 'objectMenu_focus';
-            if(pos.r){
-                mark.style.width = (pos.r * 2)+'px';
-                mark.style.height = (pos.r * 2)+'px';
-            }else{
-                mark.style.width = pos.width+'px';
-                mark.style.height = pos.height+'px';
-                mark.style.transform = `rotate(${pos.rotation}deg)`;
-            }
-            mark.style.top = pos.y+'px';
-            mark.style.left = pos.x+'px';
-
-            let objName = document.createElement('div');
-            objName.id = 'objectMenu_focus_name';
-        
-            objName.innerText = `Name: ${item.name}\n
-                                 Category: ${Engine.ObjectManager.getObject(item.id).getCategory()}\n
-                                 X: ${pos.x}px\n
-                                 Y: ${pos.y}px`;
-            objName.style.top = (pos.y - 120)+'px';
-            objName.style.left = pos.x+'px';
-
-            document.body.appendChild(objName);
-            document.body.appendChild(mark);
-
-        });
 
         body.onclick = (() => {
             focusObject(i);
         });
-
-        body.onmouseleave = (() => {
-            document.getElementById('objectMenu_focus_name').remove();
-            document.getElementById('objectMenu_focus').remove();
-        });
-
+        
         wrap.appendChild(body);
 
     }

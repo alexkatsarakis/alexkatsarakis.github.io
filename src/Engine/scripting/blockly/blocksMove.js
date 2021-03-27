@@ -41,7 +41,7 @@ Blockly.JavaScript['moveBy_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.moveBy(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2})`;
+    return `AK.moveBy(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2});`;
 };
 
 Blockly.Blocks['moveTo_object'] = {
@@ -80,7 +80,7 @@ Blockly.JavaScript['moveTo_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.moveTo(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2})`;
+    return `AK.moveTo(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2});`;
 };
 
 
@@ -125,7 +125,7 @@ Blockly.JavaScript['moveByMS_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument3 = Blockly.JavaScript.valueToCode(block, 'FIELDMS',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.moveByInMSeconds(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2}, ${argument3})`;
+    return `AK.moveByInMSeconds(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2}, ${argument3});`;
 };
 
 Blockly.Blocks['moveToMS_object'] = {
@@ -169,5 +169,5 @@ Blockly.JavaScript['moveToMS_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument3 = Blockly.JavaScript.valueToCode(block, 'FIELDMS',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.moveToInMSeconds(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2}, ${argument3})`;
+    return `AK.moveToInMSeconds(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2}, ${argument3});`;
 };

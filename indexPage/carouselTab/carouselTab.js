@@ -79,7 +79,7 @@ let mainImageDesc = uiFactory.createElement({
     id: 'carouselMainImageDesc',
     parent: carWrapper,
     innerHtml: 'test'
-})
+});
 
 let currentlyShowing = 7;
 

@@ -45,12 +45,6 @@ export default class Object454 extends Object{
         this._color = col;
     }
 
-    setPosition(x,y){
-        if(!this.getOption('isMovable'))return;
-        this._x = x;
-        this._y = y;
-    }
-
     getPosition(){
         return [x,y];
     }
@@ -58,15 +52,7 @@ export default class Object454 extends Object{
     getObject(){
         return this;
     }
-
-    move(x,y){
-        if(!this.getOption('isMovable'))return;
-        if(x !== 0) this.setValue('x', this._x + x);
-        if(y !== 0) this.setValue('y', this._y + y);
-        if(x !== 0 || y !== 0)
-            this.triggerEvent('onMove');
-    }
-
+    
     getMapCoords(){
         // return [this._x,this._y];
         if(!this.getOption('moveWithScroll'))

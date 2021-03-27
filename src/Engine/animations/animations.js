@@ -16,7 +16,9 @@ export default class AnimationManager {
     _animationCategories
     _animatorCategories
 
-    constructor(animationFilms,animationManagement){
+    constructor(){
+        this._animationFilms = [];
+        this._animationManagement = [];
         this._animationCategories = {
             'MovingAnimation': MovingAnimation,
             'FrameRangeAnimation': FrameRangeAnimation
@@ -28,13 +30,11 @@ export default class AnimationManager {
     }
 
     setAnimationFilms(anFilms){
-        //TODO: append this not replace
-        this._animationFilms = anFilms;
+        this._animationFilms.push(anFilms);
     }
 
     setAnimationManagement(anMan){
-        //TODO: append this not replace
-        this._animationManagement = anMan;
+        this._animationManagement.push(anMan);
     }
 
     getAnimationCategory(cat){
@@ -46,8 +46,12 @@ export default class AnimationManager {
     }
 
     load(){
-        animationFilmHolder.loadAll(this._animationFilms);
-        animationManager.loadAll(this._animationManagement);
+        this._animationFilms.forEach((films)=>{
+            animationFilmHolder.loadAll(films);
+        });
+        this._animationManagement.forEach((manag)=>{
+            animationManager.loadAll(manag);
+        });
     }
 
     progress(gameTime){

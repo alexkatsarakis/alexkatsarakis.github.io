@@ -2,6 +2,8 @@ import log from '../../utils/logs.js'
 
 import Engine from '../../Engine.js'
 
+import bb from '../../utils/blackboard.js'
+
 class Value {
     val
     tag
@@ -49,6 +51,14 @@ export default class ValueManager{
             this.registerValue(val, {value:v});
             return;
         }
+        bb.fastSet('events', 'last', {
+            type: 'setValue',
+            objectID: this._parent,
+            information: {
+                type: val,
+                value: v
+            }
+        });
         this._regValues[val].val = v;
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);

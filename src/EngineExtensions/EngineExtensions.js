@@ -12,7 +12,10 @@ Engine.installManager('PauseManager', new PauseManager());
 import GridManager from './GridManager.js'
 const gridManager = new GridManager();
 Engine.installManager('GridManager', gridManager);
-Engine.app.addLoadFunction(()=>{gridManager.calculateGrid()});
+Engine.app.addLoadFunction(()=>{
+    gridManager.calculateGrid();
+    gridManager.onLoad();
+});
 
 import CalculatorManager from './CalculatorManager.js'
 Engine.installManager('CalculatorManager', new CalculatorManager());
