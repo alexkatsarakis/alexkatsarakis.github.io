@@ -1,0 +1,31 @@
+{
+    "defaultValues": {
+        "start": 0,
+        "end": "max",
+        "reps": -1,
+        "dx": 0,
+        "dy": 0,
+        "delay": 80
+    },
+    "animations": [
+        {
+            "id": "scorpion_fighting_stance_left",
+            "film": "scorpion_fighting_stance_left"
+        },
+        {
+            "id": "scorpion_fighting_stance_right",
+            "film": "scorpion_r_fighting_stance_right"
+        },
+        {
+            "id": "scorpion_moving_right",
+            "film": "scorpion_r_walking_forward_right",
+            "dx": -25
+        },
+        {
+            "id": "scorpion_moving_left",
+            "film": "scorpion_walking_forward_left",
+            "dx": 25
+        }
+    ]
+
+}

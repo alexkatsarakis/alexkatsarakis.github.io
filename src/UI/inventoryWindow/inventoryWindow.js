@@ -129,6 +129,12 @@ function showClipboard(objWrapper){
 function showObjects(objWrapper){
     objWrapper.innerHTML = '';
     let items = Engine.ObjectManager.objects;
+
+    objWrapper = uiFactory.createElement({
+        classList: 'inventory-window-body-grid',
+        parent: objWrapper
+    });
+
     for(let i in items){
         let item = items[i];
         let wrap = uiFactory.createElement({
@@ -200,57 +206,101 @@ function showFilms(objWrapper){
     const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
     let items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
-    for(let i in items){
-        let wrap = uiFactory.createElement({
-            classList: 'inventory-window-animationPreview_itemWrapper',
-            parent: objWrapper
-        });
 
-        uiFactory.createElement({
-            classList: 'inventory-window-animationPreview_objName',
-            innerHTML: i,
-            parent: wrap
-        });
+    let pageSwapWrap = uiFactory.createElement({
+        parent: objWrapper,
+        classList: 'inventory-window-body-page-swap'
+    });
 
-        let body = uiFactory.createElement({
-            classList: 'inventory-window-animationPreview_body',
-            parent: wrap
-        });
+    objWrapper = uiFactory.createElement({
+        classList: 'inventory-window-body-grid',
+        parent: objWrapper
+    });
 
-        let anim = uiFactory.createElement({
-            type: 'canvas',
-            classList: 'inventory-window-animationPreview_film',
-            parent: body
-        });
-        let ctx = anim.getContext('2d');
-        
-        let animator = new FRAnimator();
-        let animation = new FRAnimation({
-            id: '_prev_'+i,
-            start: 0,
-            end: items[i].totalFrames - 1,
-            reps: -1,
-            delay: 100
-        });
+    const itemsPerPage = 24;
 
-        animator.onAction = (th)=>{
-            let firstBox = items[i].getFrameBox(th.currentFrame);
-            ctx.clearRect(0,0,anim.width,anim.height);
-            ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
-                firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
-        };
+    let keys = Object.keys(items);
+    let pages = Math.ceil((keys.length-1) / itemsPerPage);
+    let currPage = 1;
 
-        
     
-        animator.start({
-            animation: animation,
-            timestamp: bb.fastGet('state','gameTime'),
-        });
+    function currFilmsShowing(){
+        
+        let starting = (currPage - 1) * itemsPerPage;
+        let ending = (currPage) * itemsPerPage;
+        if(ending > (keys.length)) ending = keys.length;
+        pageSwapWrap.innerHTML = '';
+        for(let i = 1; i <= pages; ++i){
+            uiFactory.createElement({
+                parent: pageSwapWrap,
+                classList: 'inventory-window-body-page-item' + 
+                ((Number.parseInt(currPage) === i)?
+                    ' inventory-window-body-page-item-current':
+                    ''),
+                innerHTML: i
+            }).onclick = (ev) => {
+                objWrapper.innerHTML = '';
+                currPage = ev.target.innerHTML;
+                removeAllAnimators();
+                currFilmsShowing();
+            };
+        }
 
-
-        animatorsForPreview.push(()=>{
-            animator.stop();
-        });
+        for(let j = starting; j < ending; ++j){
+            let i = keys[j];
+            let wrap = uiFactory.createElement({
+                classList: 'inventory-window-animationPreview_itemWrapper',
+                parent: objWrapper
+            });
+    
+            uiFactory.createElement({
+                classList: 'inventory-window-animationPreview_objName',
+                innerHTML: i,
+                parent: wrap
+            });
+    
+            let body = uiFactory.createElement({
+                classList: 'inventory-window-animationPreview_body',
+                parent: wrap
+            });
+    
+            let anim = uiFactory.createElement({
+                type: 'canvas',
+                classList: 'inventory-window-animationPreview_film',
+                parent: body
+            });
+            let ctx = anim.getContext('2d');
+            
+            let animator = new FRAnimator();
+            let animation = new FRAnimation({
+                id: '_prev_'+i,
+                start: 0,
+                end: items[i].totalFrames - 1,
+                reps: -1,
+                delay: 100
+            });
+    
+            animator.onAction = (th)=>{
+                let firstBox = items[i].getFrameBox(th.currentFrame);
+                ctx.clearRect(0,0,anim.width,anim.height);
+                ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
+                    firstBox.x,firstBox.y,firstBox.width,firstBox.height,
+                    0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
+            };
+    
+            
+        
+            animator.start({
+                animation: animation,
+                timestamp: bb.fastGet('state','gameTime'),
+            });
+    
+    
+            animatorsForPreview.push(()=>{
+                animator.stop();
+            });
+        }
     }
+
+    currFilmsShowing();
 }

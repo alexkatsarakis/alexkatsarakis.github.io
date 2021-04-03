@@ -1,0 +1,757 @@
+{
+    "objects": {
+        "BpAoTcBMfklfGm6": {
+            "events": {
+                "onGameStart": {
+                    "val": {
+                        "text": "",
+                        "code": ""
+                    },
+                    "tag": "system"
+                },
+                "onEachFrame": {
+                    "val": {
+                        "text": "",
+                        "code": ""
+                    },
+                    "tag": "system"
+                }
+            },
+            "states": {
+                "idle": {
+                    "tag": "idle",
+                    "transitionFrom": {},
+                    "transitionTo": {}
+                }
+            },
+            "options": {
+                "isMovable": {
+                    "val": true,
+                    "tag": "system",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isCollidable": {
+                    "val": false,
+                    "tag": "collision",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "moveWithScroll": {
+                    "val": true,
+                    "tag": "scroll",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                }
+            },
+            "values": {
+                "x": {
+                    "val": -124,
+                    "tag": "positional"
+                },
+                "y": {
+                    "val": 134,
+                    "tag": "positional"
+                },
+                "width": {
+                    "val": 3100,
+                    "tag": "positional"
+                },
+                "height": {
+                    "val": 1080,
+                    "tag": "positional"
+                },
+                "windowWidth": {
+                    "val": 1680,
+                    "tag": "positional"
+                },
+                "windowHeight": {
+                    "val": 946,
+                    "tag": "positional"
+                },
+                "color": {
+                    "val": "#ffffff",
+                    "tag": "texture"
+                },
+                "background": {
+                    "val": "blueprint.jpg",
+                    "tag": "texture"
+                }
+            },
+            "_name": "Stage",
+            "_category": "Stage",
+            "_id": "BpAoTcBMfklfGm6"
+        },
+        "KciKIiWkUB9QL6q": {
+            "events": {},
+            "states": {
+                "idle": {
+                    "tag": "idle",
+                    "transitionFrom": {},
+                    "transitionTo": {}
+                }
+            },
+            "options": {
+                "moveWithScroll": {
+                    "val": true,
+                    "tag": "scroll",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                }
+            },
+            "values": {},
+            "_name": "Collisions",
+            "_category": "Collisions",
+            "_id": "KciKIiWkUB9QL6q"
+        },
+        "vxz19AN3VqipnPH": {
+            "events": {
+                "PressedKeyA": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"object_state\" id=\"0G%RINEvNKi{.O!-E0[r\" x=\"59\" y=\"189\"><field name=\"MODE\">hiLXW9X4Td46Mrn</field><field name=\"FIELD\">movingLeft</field></block></xml>",
+                        "code": "AK.setCurrentState(AK.getObjectByID('hiLXW9X4Td46Mrn'),'movingLeft');"
+                    },
+                    "tag": "user"
+                },
+                "PressedKeyB": {
+                    "val": {
+                        "text": "",
+                        "code": ""
+                    },
+                    "tag": "user"
+                },
+                "PressedKeyC": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyD": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"object_state\" id=\"Z[r*jH.!vYR^?}8Vrjp7\" x=\"65\" y=\"186\"><field name=\"MODE\">hiLXW9X4Td46Mrn</field><field name=\"FIELD\">movingRight</field></block></xml>",
+                        "code": "AK.setCurrentState(AK.getObjectByID('hiLXW9X4Td46Mrn'),'movingRight');"
+                    },
+                    "tag": "user"
+                },
+                "PressedKeyE": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyF": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyG": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyH": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyI": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyJ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyK": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyL": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyM": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyN": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyO": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyP": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyQ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyR": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyS": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyT": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyU": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyV": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyW": {
+                    "val": {
+                        "text": "",
+                        "code": ""
+                    },
+                    "tag": "user"
+                },
+                "PressedKeyX": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyY": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedKeyZ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit0": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit1": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit2": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit3": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit4": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit5": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit6": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit7": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit8": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "PressedDigit9": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyA": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"controls_if\" id=\"WR40p-w`X_M#V1I081/r\" x=\"23\" y=\"161\"><value name=\"IF0\"><block type=\"logic_compare\" id=\"bCYd@(1?%6hw.+@8Nw^(\"><field name=\"OP\">NEQ</field><value name=\"A\"><block type=\"get_current_state\" id=\"#IX65d3_2JR{CS%qxUA{\"><field name=\"MODE\">BpAoTcBMfklfGm6</field></block></value><value name=\"B\"><block type=\"text\" id=\"3=+=U-!u7v{-9R;Ma%r}\"><field name=\"TEXT\">MovingLeft</field></block></value></block></value><statement name=\"DO0\"><block type=\"object_state\" id=\"x5LCX!#q_@qkhe)TY6|A\"><field name=\"MODE\">hiLXW9X4Td46Mrn</field><field name=\"FIELD\">idle_left</field></block></statement></block></xml>",
+                        "code": "if (AK.getObjectByID('BpAoTcBMfklfGm6').getCurrentState() != 'MovingLeft') {\n  AK.setCurrentState(AK.getObjectByID('hiLXW9X4Td46Mrn'),'idle_left');}\n"
+                    },
+                    "tag": "user"
+                },
+                "UnpressedKeyB": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyC": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyD": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"controls_if\" id=\"9cG;$`sqOTOGU/$TUGeb\" x=\"23\" y=\"160\"><value name=\"IF0\"><block type=\"logic_compare\" id=\"gY|3W5OeW0UqwNPn72XL\"><field name=\"OP\">NEQ</field><value name=\"A\"><block type=\"get_current_state\" id=\"/H58%#7Tv88ba[Ymb9@:\"><field name=\"MODE\">BpAoTcBMfklfGm6</field></block></value><value name=\"B\"><block type=\"text\" id=\"pYJ9;Sca-nH1^pdTzJA=\"><field name=\"TEXT\">MovingRight</field></block></value></block></value><statement name=\"DO0\"><block type=\"object_state\" id=\"L8S8sVzk[4T16_NMAgpO\"><field name=\"MODE\">hiLXW9X4Td46Mrn</field><field name=\"FIELD\">idle_right</field></block></statement></block></xml>",
+                        "code": "if (AK.getObjectByID('BpAoTcBMfklfGm6').getCurrentState() != 'MovingRight') {\n  AK.setCurrentState(AK.getObjectByID('hiLXW9X4Td46Mrn'),'idle_right');}\n"
+                    },
+                    "tag": "user"
+                },
+                "UnpressedKeyE": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyF": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyG": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyH": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyI": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyJ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyK": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyL": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyM": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyN": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyO": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyP": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyQ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyR": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyS": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyT": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyU": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyV": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyW": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyX": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyY": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedKeyZ": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit0": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit1": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit2": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit3": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit4": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit5": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit6": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit7": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit8": {
+                    "val": {},
+                    "tag": "user"
+                },
+                "UnpressedDigit9": {
+                    "val": {},
+                    "tag": "user"
+                }
+            },
+            "states": {
+                "idle": {
+                    "tag": "idle",
+                    "transitionFrom": {},
+                    "transitionTo": {}
+                }
+            },
+            "options": {
+                "moveWithScroll": {
+                    "val": true,
+                    "tag": "scroll",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                }
+            },
+            "values": {},
+            "_name": "Keyboard",
+            "_category": "Keyboard",
+            "_id": "vxz19AN3VqipnPH"
+        },
+        "hiLXW9X4Td46Mrn": {
+            "events": {
+                "onClick": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onRightClick": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onGameStart": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"this_object_state\" id=\"8=caCnRpibBygPMc5$Fs\" x=\"44\" y=\"67\"><field name=\"FIELD\">idle_right</field></block></xml>",
+                        "code": "AK.getObjectByID(currObject).setCurrentState('idle_right');"
+                    },
+                    "tag": "system"
+                },
+                "onRemove": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onMove": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onEachFrame": {
+                    "val": {},
+                    "tag": "system"
+                }
+            },
+            "states": {
+                "idle": {
+                    "tag": "idle",
+                    "transitionFrom": {},
+                    "transitionTo": {}
+                },
+                "idle_right": {
+                    "tag": "idle_right",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"*bf!ba2z7C}+ylhW[?N,\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"1dY$zaxa7N%ifh/s2{fT\"><field name=\"TESTF\">scorpion_fighting_stance_left</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"q8u%Wy@}wD.WR51faO_1\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_fighting_stance_left'\n        });"
+                    }
+                },
+                "idle_left": {
+                    "tag": "idle_left",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"K{IMsaq5Y-+4AQDxquN3\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"eMV6@(n#slJEifi_d:C~\"><field name=\"TESTF\">scorpion_fighting_stance_right</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"jmoRm%1ANz4qHM_C[U]=\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_fighting_stance_right'\n        });"
+                    }
+                },
+                "movingRight": {
+                    "tag": "movingRight",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"Q8ENir*$3O@F5gI|+NpX\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"QLa9`2z@97C,{s-X+W6s\"><field name=\"TESTF\">scorpion_moving_left</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"I2]G,9~eO=yEH5d`^i3H\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_moving_left'\n        });"
+                    }
+                },
+                "movingLeft": {
+                    "tag": "movingLeft",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"T5S,DrY|cn62LijOn7L~\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"i^MHY.?UGBx%XPbZwd/(\"><field name=\"TESTF\">scorpion_moving_right</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"g,S9-w4/AD]~:}t0GrJ`\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_moving_right'\n        });"
+                    }
+                }
+            },
+            "options": {
+                "isMovable": {
+                    "val": true,
+                    "tag": "system",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isRemovable": {
+                    "val": true,
+                    "tag": "system",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isVisible": {
+                    "val": true,
+                    "tag": "visibility",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isSolid": {
+                    "val": false,
+                    "tag": "physics",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isCollidable": {
+                    "val": true,
+                    "tag": "collision",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "moveWithScroll": {
+                    "val": true,
+                    "tag": "scroll",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                }
+            },
+            "values": {
+                "x": {
+                    "val": 830,
+                    "tag": "positional"
+                },
+                "y": {
+                    "val": 674,
+                    "tag": "positional"
+                },
+                "colour": {
+                    "val": "",
+                    "tag": "texture"
+                },
+                "width": {
+                    "val": 150,
+                    "tag": "positional"
+                },
+                "height": {
+                    "val": 400,
+                    "tag": "positional"
+                },
+                "film": {
+                    "val": "scorpion_fighting_stance_left",
+                    "tag": "render"
+                }
+            },
+            "_name": "scorpion",
+            "_category": "Rectangle",
+            "_id": "hiLXW9X4Td46Mrn"
+        },
+        "up8t9sDkfbwTDSB": {
+            "events": {
+                "onClick": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onRightClick": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onGameStart": {
+                    "val": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"this_object_state\" id=\"8=caCnRpibBygPMc5$Fs\" x=\"44\" y=\"67\"><field name=\"FIELD\">idle_right</field></block></xml>",
+                        "code": "AK.getObjectByID(currObject).setCurrentState('idle_right');"
+                    },
+                    "tag": "system"
+                },
+                "onRemove": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onMove": {
+                    "val": {},
+                    "tag": "system"
+                },
+                "onEachFrame": {
+                    "val": {},
+                    "tag": "system"
+                }
+            },
+            "states": {
+                "idle": {
+                    "tag": "idle",
+                    "transitionFrom": {},
+                    "transitionTo": {}
+                },
+                "idle_right": {
+                    "tag": "idle_right",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"*bf!ba2z7C}+ylhW[?N,\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"1dY$zaxa7N%ifh/s2{fT\"><field name=\"TESTF\">scorpion_fighting_stance_left</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"q8u%Wy@}wD.WR51faO_1\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_fighting_stance_left'\n        });"
+                    }
+                },
+                "idle_left": {
+                    "tag": "idle_left",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"K{IMsaq5Y-+4AQDxquN3\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"eMV6@(n#slJEifi_d:C~\"><field name=\"TESTF\">scorpion_fighting_stance_right</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"jmoRm%1ANz4qHM_C[U]=\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'scorpion_fighting_stance_right'\n        });"
+                    }
+                },
+                "movingRight": {
+                    "tag": "movingRight",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"Mk;E0pYSn%5I(c1oei56\" x=\"16\" y=\"60\"><value name=\"Anim\"><block type=\"get_animation\" id=\"^G1.XkFC45H289!%S~}]\"><field name=\"TESTF\">test</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"FuX)|Gz^pc{%0/`u@_Vk\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'test'\n        });"
+                    }
+                },
+                "movingLeft": {
+                    "tag": "movingLeft",
+                    "transitionFrom": {},
+                    "transitionTo": {
+                        "text": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"play_animation\" id=\"o=RJO]:dG.KrSlW5`g-m\" x=\"16\" y=\"59\"><value name=\"Anim\"><block type=\"get_animation\" id=\"][.AwoWG/$5WR:=:bXX%\"><field name=\"TESTF\">moving left</field></block></value><value name=\"Obj\"><block type=\"this_obj\" id=\"jXT-)sv;95TH|NT7x0zk\"></block></value></block></xml>",
+                        "code": "AK.playAnimation(\n        {\n           object: AK.getObjectByID(currObject),\n           anim: 'moving left'\n        });"
+                    }
+                }
+            },
+            "options": {
+                "isMovable": {
+                    "val": true,
+                    "tag": "system",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isRemovable": {
+                    "val": true,
+                    "tag": "system",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isVisible": {
+                    "val": true,
+                    "tag": "visibility",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isSolid": {
+                    "val": false,
+                    "tag": "physics",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "isCollidable": {
+                    "val": true,
+                    "tag": "collision",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                },
+                "moveWithScroll": {
+                    "val": true,
+                    "tag": "scroll",
+                    "onChange": {
+                        "text": "",
+                        "code": ""
+                    }
+                }
+            },
+            "values": {
+                "x": {
+                    "val": 1198,
+                    "tag": "positional"
+                },
+                "y": {
+                    "val": 675,
+                    "tag": "positional"
+                },
+                "colour": {
+                    "val": "",
+                    "tag": "texture"
+                },
+                "width": {
+                    "val": 150,
+                    "tag": "positional"
+                },
+                "height": {
+                    "val": 400,
+                    "tag": "positional"
+                },
+                "film": {
+                    "val": "scorpion_r_fighting_stance_right",
+                    "tag": "render"
+                }
+            },
+            "_name": "scorpion_5096772680",
+            "_category": "Rectangle",
+            "_id": "up8t9sDkfbwTDSB"
+        }
+    },
+    "info": {
+        "name": "MortalKombat",
+        "preSet": [
+            "./assets/json/MK_anims.json"
+        ],
+        "films": [
+          "./assets/json/scorpion_left_json_translated.json",
+          "./assets/json/scorpion_right_json_translated.json",
+          "./assets/json/subzero_left_json_translated.json",
+          "./assets/json/subzero_right_json_translated.json"
+        ]
+    }
+}

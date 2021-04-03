@@ -3,15 +3,21 @@ import uiFactory from '../utils/UIFactory.js'
 const games = [
     {
         id: 'savedState',
-        displayName: 'SΜ Example',
+        displayName: 'Super Mario Example',
         defaultParameters: {
         }
     },
     {
         id: 'savedState',
-        displayName: 'SΜ Example Play',
+        displayName: 'Super Mario Example Play',
         defaultParameters: {
             play: 'true'
+        }
+    },
+    {
+        id: 'MortalKombat',
+        displayName: 'Mortal Kombat',
+        defaultParameters: {
         }
     },
     {

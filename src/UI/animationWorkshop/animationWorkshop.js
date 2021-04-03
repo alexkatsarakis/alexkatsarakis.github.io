@@ -1,6 +1,8 @@
 import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
+import uiFactory from '../../utils/UIFactory.js'
+
 export default {
     name: 'animationWorkshop',
     link: './src/UI/animationWorkshop/animationWorkshop.ahtml',
@@ -277,61 +279,109 @@ function showAnimations(){
 
     let objWrapper = document.getElementById('animationWorkshopWrapper');
     objWrapper.innerHTML = '';
-    for(let i in items){
-        let wrap = document.createElement('div');
-        wrap.classList += 'animationWorkshop_itemWrapper';
-        objWrapper.appendChild(wrap);
-        let popuplistener = wrap.addEventListener('click',()=>{
-            createPopUp(items[i]);
-        })
 
-        let title = document.createElement('div');
-        title.classList += 'animationWorkshop_objName';
-        title.innerHTML = i;
-        wrap.appendChild(title);
-        
+    /////////////////////////
 
-        let body = document.createElement('div');
-        body.classList += 'animationWorkshop_body';
+    let pageSwapWrap = uiFactory.createElement({
+        parent: objWrapper,
+        classList: 'inventory-window-body-page-swap'
+    });
 
-        let anim = document.createElement('canvas');
-        anim.classList += 'animationWorkshop_film';
-        let ctx = anim.getContext('2d');
-        
-        let animator = new FRAnimator();
-        let animation = new FRAnimation({
-            id: '_prev_'+i,
-            start: 0,
-            end: items[i].totalFrames - 1,
-            reps: -1,
-            delay: 100
-        })
+    objWrapper = uiFactory.createElement({
+        classList: 'inventory-window-body-grid',
+        parent: objWrapper
+    });
 
-        animator.onAction = (th)=>{
-            let firstBox = items[i].getFrameBox(th.currentFrame);
-            ctx.clearRect(0,0,anim.width,anim.height);
-            ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
-                firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                0, 0, anim.height*(firstBox.width/firstBox.height), anim.height);
-        };
+    const itemsPerPage = 24;
 
-        
+    let keys = Object.keys(items);
+    let pages = Math.ceil((keys.length-1) / itemsPerPage);
+    let currPage = 1;
+
     
-        animator.start({
-            animation: animation,
-            timestamp: bb.fastGet('state','gameTime'),
-        })
+    function currFilmsShowing(){
+        
+        let starting = (currPage - 1) * itemsPerPage;
+        let ending = (currPage) * itemsPerPage;
+        if(ending > (keys.length)) ending = keys.length;
+        pageSwapWrap.innerHTML = '';
+        for(let i = 1; i <= pages; ++i){
+            uiFactory.createElement({
+                parent: pageSwapWrap,
+                classList: 'inventory-window-body-page-item' + 
+                ((Number.parseInt(currPage) === i)?
+                    ' inventory-window-body-page-item-current':
+                    ''),
+                innerHTML: i
+            }).onclick = (ev) => {
+                objWrapper.innerHTML = '';
+                currPage = ev.target.innerHTML;
+                removeAllAnimators();
+                currFilmsShowing();
+            };
+        }
 
-        body.appendChild(anim);
+        for(let j = starting; j < ending; ++j){
+            let i = keys[j];
+            let wrap = document.createElement('div');
+            wrap.classList += 'animationWorkshop_itemWrapper';
+            objWrapper.appendChild(wrap);
+            let popuplistener = wrap.addEventListener('click',()=>{
+                createPopUp(items[i]);
+            })
 
-        wrap.appendChild(body);
+            let title = document.createElement('div');
+            title.classList += 'animationWorkshop_objName';
+            title.innerHTML = i;
+            wrap.appendChild(title);
+            
+
+            let body = document.createElement('div');
+            body.classList += 'animationWorkshop_body';
+
+            let anim = document.createElement('canvas');
+            anim.classList += 'animationWorkshop_film';
+            let ctx = anim.getContext('2d');
+            
+            let animator = new FRAnimator();
+            let animation = new FRAnimation({
+                id: '_prev_'+i,
+                start: 0,
+                end: items[i].totalFrames - 1,
+                reps: -1,
+                delay: 100
+            })
+
+            animator.onAction = (th)=>{
+                let firstBox = items[i].getFrameBox(th.currentFrame);
+                ctx.clearRect(0,0,anim.width,anim.height);
+                ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
+                    firstBox.x,firstBox.y,firstBox.width,firstBox.height,
+                    0, 0, anim.height*(firstBox.width/firstBox.height), anim.height);
+            };
+
+            
+        
+            animator.start({
+                animation: animation,
+                timestamp: bb.fastGet('state','gameTime'),
+            })
+
+            body.appendChild(anim);
+
+            wrap.appendChild(body);
 
 
-        animatorsForPreview.push(()=>{
-            animator.stop();
-            wrap.removeEventListener('click',popuplistener);
-        });
+            animatorsForPreview.push(()=>{
+                animator.stop();
+                wrap.removeEventListener('click',popuplistener);
+            });
+        }
     }
+
+    currFilmsShowing();
+
+    /////////////////////////
 }
 
 function removeAllAnimators(){

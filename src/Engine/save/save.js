@@ -174,7 +174,7 @@ export default class SaveManager {
             films: [
                 this._localAnimationFilms
             ]
-        }
+        };
 
         var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
         var downloadLink = document.createElement("a");
