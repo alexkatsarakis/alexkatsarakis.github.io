@@ -23,7 +23,8 @@ class ContentPageManager {
 
     constructor(){
         bb.installWatch('Page','currentlyShowing',(newP)=>this.swapPage(newP));
-        this.swapPage('General/Welcome');       
+        // this.swapPage('General/Welcome');
+        this.swapPage('Engine Extension/Distance Manager');       
     }
     
     readTextFile(file,onFinish){

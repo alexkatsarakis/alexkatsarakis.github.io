@@ -2,7 +2,10 @@ import bb from '../utils/blackboard.js'
 
 import Engine from '../Engine.js'
 
-export default class PauseManager {
+import Manager from '../Engine/Manager.js'
+
+export default class PauseManager extends Manager{
+    
     _timePaused
     _prevGameState
 
@@ -10,9 +13,19 @@ export default class PauseManager {
     _onResumeCB
 
     constructor(){
+        super();
         this._timePaused = undefined;
         this._onPauseCB = [];
         this._onResumeCB = [];
+
+        // window.onfocus = ()=>{
+        //     this.resume();
+        // }
+        
+        // window.onblur = ()=>{
+        //     this.pause();
+        // }
+
     }
 
 

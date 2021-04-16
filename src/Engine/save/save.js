@@ -3,7 +3,10 @@ import httpRequest from '../../utils/httpRequest.js'
 
 import Engine from '../../Engine.js'
 
-export default class SaveManager {
+import Manager from '../Manager.js'
+
+
+export default class SaveManager extends Manager{
     _DBName = 'superMarioReal';
     // _DBName = 'myPersonalPage';
     _loadRemote = false;
@@ -14,6 +17,7 @@ export default class SaveManager {
 
 
     constructor(){
+        super();
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         let gameName = urlParams.get('game');

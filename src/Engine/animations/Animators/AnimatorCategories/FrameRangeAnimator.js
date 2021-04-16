@@ -4,6 +4,11 @@ export default class FrameRangeAnimator extends MovingAnimator{
     _currentFrame;
     _currentRep;
 
+    constructor(){
+        super();
+        this._name = 'FrameRangeAnimator';
+    }
+
     progress(currTime){
         if(this.hasFinished())return;
 

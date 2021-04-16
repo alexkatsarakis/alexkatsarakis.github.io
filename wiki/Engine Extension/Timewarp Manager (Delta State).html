@@ -1,0 +1,72 @@
+<!-- <link rel="stylesheet" href="./wiki/Welcome/welcome.css"> -->
+
+<h1>Timewarp Manager (Delta State)</h1>
+
+<h3>Description:</h3>
+<p>
+    Timewarp manager is responsible about replaying/playback of a scene with the 
+    ability to retrace your steps and continue from each point of the recording. 
+</p>
+
+<br>
+<h3>Info:</h3>
+<ul>
+    <li>
+        Path: {src}/EngineExtensions/TimewarpManager.js
+    </li>
+    <li>
+        Exports: Class TimewarpManager()
+    </li>
+    <li>
+        Responsible to initialize: EngineExtensions
+    </li>
+    <li>
+        API access: Engine.TimewarpManager
+    </li>
+</ul>
+
+<br>
+<h3>API Exported:</h3>
+<ol>
+    <li>
+        startRecording(interval): Start recording and save frame each interval (0 for each frame).
+    </li>
+    <li>
+        stopRecording(): Will pause the game and will give the ability to rewind/replay or even step to a point in the recordings.
+    </li>
+    <li>
+        playForward(startingTimestamp, speedfactor = 1): Play each frame from the frame on the given timestamp until the end with the original delay 
+        that the game had (except if you change speedfactor).
+    </li>
+    <li>
+        playBackward(startingTimestamp, speedfactor = 1): Play each frame from the frame on the given timestamp until the first with the original delay 
+        that the game had (except if you change speedfactor).
+    </li>    
+    <li>
+        stopPlayback(): if there was a playback currently playing will stop showing the rest of the frames. 
+    </li>
+    <li>
+        showSnapshot(timeStamp, frame): Display the frame on the given timeStamp on the screen. if frame is provided it will show the end user the frame that is currently showing. 
+    </li>
+    <li>
+        getRecordedTimestamps(): returns an array with all the timestamps that the recording managed to collect.
+    </li>    
+    <li>
+        resumeFromRecording(timeStamp): Display the frame on the given timeStamp and then resume the game and the animators so the user is able to continue the game from this point.
+    </li>
+</ol>
+
+<h3>How it works:</h3>
+<p>
+    When the manager get's a startRecording with a given interval the first frame after interval milliseconds 
+    pass will book-keep every value that changes. So, it will enable us to know what we need to do in order to 
+    get back on the previous state.
+    <br>
+    The showFunction is a little more complicated in Delta State than on Snapshots because in order to show a snapshot 
+    we have to calculate ALL the changes that happened from the beginning of the recording until the given timeStamp.
+    <br>
+    Another thing that this manager provides is the replay methods (playForward,playBackward). These methods,
+    just says to the ClockManager to play a current frame on a given moment. So, if we play the snapshots with the correct 
+    delay we give the user a nice playback experience. And if we want to stop the playback we can just remove all the callbacks 
+    that we asked ClockManager to play.
+</p>

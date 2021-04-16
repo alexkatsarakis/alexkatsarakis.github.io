@@ -11,6 +11,12 @@ import ValueManager from './Value.js'
 //     DISABLED: 'disabled'
 // } //TODO when the window aura comes near then the item triggers an event to activate
 
+const ObjectState = {
+    LOADED: 'loaded',
+    ALIVE: 'alive',
+    REMOVED: 'removed'
+}
+
 export default class Object {
     _id 
     _name 
@@ -20,10 +26,13 @@ export default class Object {
     data = {};
 
     _category;
+    _animator;
 
     constructor(_name, _id) {
         this._name = _name;
         this.id = _id || rand.generateGameID();
+
+        this._state = ObjectState.ALIVE;
 
         this._isPrototype = false;
 
@@ -42,7 +51,8 @@ export default class Object {
             values:     this.getValues(),
             _name:      this.name,
             _category:  this._category,
-            _id:        this.id
+            _id:        this.id,
+            _currState: this.getCurrentState()
         }
 
         for(let i in this.values){
@@ -93,6 +103,13 @@ export default class Object {
             toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
+            toReturn.states[i]['while in '+i] = {};
+            toReturn.states[i]['while in '+i].get = () => {
+                return state.transitionTo;
+            } 
+            toReturn.states[i]['while in '+i].set = (code) => {
+                this.setState(i,undefined,undefined,code);
+            }
             toReturn.states[i]['go to '+i] = {};
             toReturn.states[i]['go to '+i].get = () => {
                 return state.transitionTo;
@@ -130,14 +147,9 @@ export default class Object {
             }
         }
 
-        // console.log(toReturn);
         return toReturn;
     }
-
-    setColor(col) {
-        throw Error("setColor needs to be implemented");
-    }
-
+    
     setPosition(x,y){
         if(!this.getOption('isMovable'))return;
         this.setValue('x', x);
@@ -158,6 +170,21 @@ export default class Object {
 
     getObject() {
         throw Error("getObject needs to be implemented");
+    }
+
+
+    setAnimator(animator){
+        if(this._animator !== undefined)this._animator.stop();
+        this._animator = animator;
+    }
+
+    getAnimator(){
+        return this._animator;
+    }
+
+    destroyAnimator(){
+        if(this._animator !== undefined)this._animator.destroy();
+        this._animator = undefined;
     }
 
     get id() {
@@ -184,8 +211,9 @@ export default class Object {
         this.name = newName;
     }
 
-    newFrame() {
-        throw Error("newFrame needs to be implemented");
+    newFrame(){
+        this.triggerEvent('onEachFrame');
+        this.executeInState();
     }
 
     add() { // Add this item on renderer
@@ -205,8 +233,13 @@ export default class Object {
 
     }
 
-    remove() { // Remove this item from blackboard and from renderer to.
-        throw Error("remove needs to be implemented");
+    get isAlive(){
+        return this._state !== ObjectState.REMOVED;
+    }
+
+    remove() { 
+        this._state = ObjectState.REMOVED;
+        this.clear();
     }
 
 }
@@ -262,8 +295,12 @@ Object.prototype.getState = function(state) {
     return this.data.stateHandler.getState(state);
 }
 
-Object.prototype.setState = function(state, transitionFrom, transitionTo) {
-    this.data.stateHandler.setState(state,transitionFrom,transitionTo);
+Object.prototype.executeInState = function () {
+    this.data.stateHandler.executeInState();
+}
+
+Object.prototype.setState = function(state, transitionFrom, transitionTo, whileInState) {
+    this.data.stateHandler.setState({state,transitionFrom,transitionTo, whileInState});
 }
 
 //////////OPTION FUNCTIONS ////////////////////

@@ -1,10 +1,15 @@
 import bb from '../utils/blackboard.js'
 import utils from '../utils/utils.js'
 
-export default class ObjectSnapshotManager {
+import Manager from '../Engine/Manager.js'
+
+import Engine from '../Engine.js'
+
+export default class ObjectSnapshotManager extends Manager{
     _collection;
 
     constructor(){
+        super();
         this._collection = {};
     }
 
@@ -14,7 +19,9 @@ export default class ObjectSnapshotManager {
         if(!objCollection){
             this._collection[item.id] = [];
         }
-        this._collection[item.id].push(JSON.parse(item.toString()));
+        let snap = JSON.parse(item.toString());
+        snap._time = Engine.ClockManager.getTime();
+        this._collection[item.id].push(snap);
     }
     
     getSnapshots(item){

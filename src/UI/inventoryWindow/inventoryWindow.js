@@ -87,7 +87,40 @@ function clear(){
 }
 
 function showSnapshots(objWrapper){
-    objWrapper.innerHTML = '';    
+    objWrapper.innerHTML = '';
+
+    let allSnapshots = Engine.ObjectSnapshotManager.getAllSnapshots();
+    for(let i in allSnapshots){
+        let currSnapshots = allSnapshots[i];
+        currSnapshots.forEach((snap,index)=>{
+            let wrap = uiFactory.createElement({
+                classList: 'inventory-window-itemWrapper',
+                parent: objWrapper
+            });
+    
+            uiFactory.createElement({
+                classList: 'inventory-window-objName',
+                innerHTML: snap._name,
+                parent: wrap
+            });
+            
+    
+            let body = uiFactory.createElement({
+                classList: 'inventory-window-body',
+                innerHTML: `Category: ${snap._category}
+                Name: ${snap._name}
+                Time: ${snap._time}`,
+                parent: wrap
+            });
+    
+            body.style.cursor = 'pointer';
+            
+            body.onclick = () => {
+                Engine.ObjectSnapshotManager.resetObjectToSnapshot(i,index);
+                closeInventoryWindow();
+            };
+        });
+    }
 }
 
 function showClipboard(objWrapper){
@@ -95,7 +128,6 @@ function showClipboard(objWrapper){
     let clipboardObjs = Engine.ClipboardManager.getCollection();
     clipboardObjs.reverse();
     clipboardObjs.forEach(item=>{
-        console.log(item);
         let wrap = uiFactory.createElement({
             classList: 'inventory-window-itemWrapper',
             parent: objWrapper

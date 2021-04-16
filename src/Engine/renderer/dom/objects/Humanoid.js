@@ -7,7 +7,7 @@ export default class Humanoid extends Object {
 
         this.div = document.createElement('div');
         this.div.id = name;
-        let X = (dim&&dim.width)?dim.width:10;
+        let X = (dim&&dim.width)?dim.width:50;
         // let Y = (dim&&dim.height)?dim.height: 10;
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";

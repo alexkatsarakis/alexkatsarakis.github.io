@@ -44,6 +44,13 @@ class _Engine {
         // this.installManager('PhysicsManager', new PhysicsManager());
     }
 
+    removeManager(name){
+        assert.check(this._managers[name],'Removing a manager that doesn\'t exist');
+        delete this._managers[name]
+        delete this[name];
+        bb.fastRemove('Engine',name);
+    }
+
     installManager(name, manager){
         assert.check(!this._managers[name],'Installing a manager that already exists');
         this._managers[name] = manager;
@@ -90,7 +97,10 @@ app.addInitialiseFunction(()=>{
 });
 
 app.addLoadFunction(()=>{
-    Engine.AnimationManager.load();
+    for(let i in Engine._managers){
+        Engine._managers[i].onLoad();
+    }
+
     Engine.AnimationManager.requiredAssets().forEach((asset)=>{
         if(!bb.fastGet('assets',asset)){
             let img = new Image();
@@ -98,8 +108,6 @@ app.addLoadFunction(()=>{
             bb.fastInstall('assets',asset,img);
         }
     });
-
-    Engine.ClockManager.onLoad();
 
     installWatches();
 });

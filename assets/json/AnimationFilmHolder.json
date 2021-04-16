@@ -1962,6 +1962,48 @@
            "width":16,
            "height":24,
            "sprite_url":"./assets/images/mario_sprite.png"
-          }
+          },
+          "pole_1": {
+            "x":71,
+            "y":0,
+            "width":2,
+            "height":16,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           },
+           "brick_block_brown_1": {
+            "x":240,
+            "y":176,
+            "width":16,
+            "height":16,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           },
+           "brick_block_brown_close_1": {
+            "x":176,
+            "y":0,
+            "width":16,
+            "height":16,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           },
+           "flag_1": {
+            "x":144,
+            "y":176,
+            "width":16,
+            "height":16,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           },
+           "brick_block_green_1": {
+            "x":192,
+            "y":32,
+            "width":16,
+            "height":16,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           },
+           "pipe_up_1": {
+            "x":48.5,
+            "y":32,
+            "width":31,
+            "height":32,
+            "sprite_url":"./assets/images/mario_tileSet.png"
+           }
       }
 }

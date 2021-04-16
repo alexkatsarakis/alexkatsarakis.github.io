@@ -7,7 +7,8 @@ function Utils(){
     return {
         createObject,
         resetObject,
-        inputHandler
+        inputHandler,
+        msToString
     }
 }
 
@@ -49,7 +50,11 @@ function createObject(item){
 
     for(let s in states){
         it.addState(s);
-        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
+    }
+
+    if(item._currState){
+        it.setCurrentState(item._currState);
     }
 
     it.add();
@@ -60,14 +65,21 @@ function createObject(item){
 
 function resetObject(item){
     let it = Engine.ObjectManager.objects[item._id];
+    if(!it){
+        createObject(item);
+        return;
+    }
     let values = item.values;
     let options = item.options;
     let events = item.events;
     let states = item.states;
 
     for(let a in options){
-        if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
-        it.setOption(a,options[a]);
+        if(!it.hasOption(a))it.addOption(a);
+        it.setOption(a,options[a].val);
+        if(options[a].onChange){
+            it.setOptionCode(a, options[a].onChange);
+        }
     }
 
     for(let v in values){
@@ -86,7 +98,27 @@ function resetObject(item){
 
     for(let s in states){
         it.addState(s);
-        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
+    }
+
+    if(item.values['film']){
+        item._film = item.values['film'].val; 
+    }
+
+    if(item.values['frame']){
+        item._frame = item.values['frame'].val; 
+    }
+
+    if(item._film){
+        it.setFilm(item._film);
+    }
+
+    if(item._frame){
+        it.setFrame(item._frame);
+    }
+
+    if(item._currState){
+        it.setCurrentState(item._currState);
     }
 
 }
@@ -106,6 +138,13 @@ function inputHandler(key) {
     // if(keyToAction[key]){
     //     keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     // }
+}
+
+function msToString(ms1,ms2){
+    let diff = Math.abs(ms1 - ms2);
+    let secs = Number.parseInt(diff / 1000);
+    diff = diff - secs*1000;
+    return `${secs},${diff}s`;
 }
 
 const utils = new Utils();

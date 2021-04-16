@@ -3,6 +3,7 @@ import bb from './blackboard.js'
 const tableOfContent ={
     'user': [
         'general/Welcome',
+        
         'Quick Start/Intro',
         'Quick Start/Adding Objects',
         'Quick Start/Coding',
@@ -13,25 +14,34 @@ const tableOfContent ={
         'general/Goals',
         'general/Related Work',
         'general/External Libraries',
+
         'Architecture/Macro-Architecture',
         'Architecture/Engine Architecture',
         'Architecture/UI Manager Architecture',
-        'engine/Clock Manager',
-        'engine/Input Manager',
-        'Engine Extension/Clipboard Manager',
-        'Engine Extension/Pause Manager',
-        'Engine Extension/Object Snapshot Manager',
-        'engine/Save Manager',
-        'engine/Sound Manager',
-        'engine/Scripting Manager',
+
         'Scripting/Blockly',
         'Scripting/Javascript',
-        'engine/Object Manager',
-        'renderer/Document Elements',
+
         'renderer/Custom Canvas',
-        'engine/Collision Manager',
+        'renderer/Document Elements',
+
         'engine/Animation Manager',
+        'engine/Clock Manager',
+        'engine/Collision Manager',
+        'engine/Input Manager',
+        'engine/Object Manager',
         'engine/Physics Manager',
+        'engine/Save Manager',
+        'engine/Scripting Manager',
+        'engine/Sound Manager',
+
+        'Engine Extension/Clipboard Manager',
+        'Engine Extension/Distance Manager',
+        'Engine Extension/Object Snapshot Manager',
+        'Engine Extension/Pause Manager',
+        'engine Extension/Timewarp Manager (Snapshot)',
+        'engine Extension/Timewarp Manager (Delta State)',
+        
         'UIs/Animation Workshop',
         'UIs/Collision Registry',
         'UIs/Object Creation',
@@ -42,7 +52,7 @@ const tableOfContent ={
         'UIs/Object Information',
         'UIs/Object Preview',
         'UIs/Settings Window',
-        'UIs/Toolbar'
+        'UIs/Toolbar',
     ]
 };
 

@@ -1,7 +1,5 @@
 import bb from '../../utils/blackboard.js'
 
-import focusObject from '../../utils/focusedObject.js'
-
 import logManager from '../../utils/logs.js'
 
 function removeObject(obj){
@@ -14,7 +12,7 @@ function removeObject(obj){
     obj.triggerEvent('onRemove');
     obj.remove();
     logManager.logAction("Removed Object ["+obj.name+"]");
-    focusObject(undefined);
+    bb.fastSet('state', 'focusedObject', undefined);
 }
 
 bb.fastInstall('actions','removeObject',removeObject)

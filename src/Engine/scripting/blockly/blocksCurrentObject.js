@@ -57,7 +57,7 @@ Blockly.JavaScript['this_object_flags'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.getObjectByID.setOption('${field_val}',${val_val});`;
+    return `AK.getObjectByID(currObject).setOption('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['this_object_value'] = {
@@ -94,7 +94,7 @@ Blockly.JavaScript['this_object_value'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.getObjectByID.setValue('${field_val}',${val_val});`;
+    return `AK.getObjectByID(currObject).setValue('${field_val}',${val_val});`;
 };
 
 

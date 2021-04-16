@@ -1,11 +1,13 @@
 import bb from '../utils/blackboard.js'
 
 import Engine from '../Engine.js'
+import Manager from '../Engine/Manager.js'
 
-export default class QuantizerManager {
+export default class QuantizerManager extends Manager{
     _QuantizeMS
 
     constructor(){
+        super();
         this._QuantizeMS = 16;
     }
 
@@ -25,22 +27,24 @@ export default class QuantizerManager {
                 dx: dx,
                 dy: dy,
                 delay: this._QuantizeMS
-            }) 
+            }); 
             
         an.onStart = ()=>{
+            if(!object.isAlive)
+                object = Engine.ObjectManager.objects[object.id];
             object.setAnimator(an);
-        }
+        };
         an.onAction = (th)=>{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
             
-        }
+        };
     
         an.start({
             animation: animation,
             timestamp: bb.fastGet('state','gameTime'),
-        })
+        });
     }
 
     moveTo(object, goalX, goalY, delay){

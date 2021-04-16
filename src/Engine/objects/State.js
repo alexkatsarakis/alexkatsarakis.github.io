@@ -4,13 +4,14 @@ class State {
     tag
     transitionFrom
     transitionTo
-    constructor({tag,transitionFrom = {},transitionTo = {}}){
+    constructor({tag,transitionFrom = {},transitionTo = {}, whileInState = {}}){
         if(typeof tag !== 'string')
             throw Error('Error creating State')
 
         this.tag = tag;
         this.transitionFrom = transitionFrom;
         this.transitionTo = transitionTo;
+        this.whileInState = whileInState;
     }
 }
 
@@ -43,6 +44,10 @@ export default class StateManager{
 
     }
 
+    executeInState() {
+        Engine.ScriptingManager.executeCode(this._currState.whileInState, this._parent); // TODO
+    }
+
     getStates() {
         return this._regStates;
     }
@@ -55,9 +60,10 @@ export default class StateManager{
         return this._regStates[state];
     }
 
-    setState(state, transitionFrom, transitionTo) {
+    setState({state, transitionFrom, transitionTo, whileInState}) {
         if(transitionFrom) this._regStates[state].transitionFrom = transitionFrom;
         if(transitionTo) this._regStates[state].transitionTo = transitionTo;
+        if(whileInState) this._regStates[state].whileInState = whileInState;
     }
 
     removeState(state) {

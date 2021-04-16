@@ -15,6 +15,7 @@ class CollisionsObject extends Object {
         this.data.optionHandler.removeOption('isVisible');
         this.data.optionHandler.removeOption('isSolid');
         this.data.optionHandler.removeOption('isCollidable');
+        this.data.optionHandler.removeOption('moveWithScroll');
 
 
         this.data.eventHandler.removeEvent('onCollision');
@@ -24,7 +25,6 @@ class CollisionsObject extends Object {
         this.data.eventHandler.removeEvent('onEachFrame');
         this.data.eventHandler.removeEvent('onClick');
         this.data.eventHandler.removeEvent('onRightClick');
-
         this._category = 'Collisions';
 
     }
@@ -39,10 +39,6 @@ class CollisionsObject extends Object {
         this.data.eventHandler.setEvent(ev,code);
         let split = ev.split('_');
         return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
-    }
-    
-    newFrame(){
-        this.triggerEvent('onEachFrame');
     }
 
     setPosition(){}

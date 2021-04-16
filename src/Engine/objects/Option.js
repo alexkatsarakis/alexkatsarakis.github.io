@@ -1,5 +1,6 @@
 import Engine from '../../Engine.js'
 
+import bb from '../../utils/blackboard.js'
 class Option {
     val
     tag
@@ -54,9 +55,22 @@ export default class OptionManager{
 
     setOption(opt, val) {
         if(!this._regOptions[opt]) throw Error('Tried to set an option that doesn\'t exist');
+        
+        const event = {
+            type: 'setOption',
+            objectID: this._parent,
+            information: {
+                type: opt,
+                value: val,
+                oldVal: this._regOptions[opt].val
+            }
+        };
+        
         this._regOptions[opt].val = val;
         if(this._regOptions[opt].onChange.code !== "")
             Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent); // TODO
+    
+        bb.fastSet('events', 'last', event );
     }
 
     setOptionCode(opt, code) {

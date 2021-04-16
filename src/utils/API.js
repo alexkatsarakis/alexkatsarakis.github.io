@@ -145,15 +145,15 @@ AK.prototype.moveToInMSeconds = (obj, x, y, delay) => {
 }
 ////////////DISTANCE////////////
 AK.prototype.distanceObjects = (obj1, obj2) => {
-    return Engine.CalculatorManager.distanceObject(obj1, obj2);
+    return Engine.DistanceManager.distanceObject(obj1, obj2);
 }
 
 AK.prototype.distanceTwoPoints = (p1, p2) => {
-    return Engine.CalculatorManager.distanceTwoPoints(p1, p2);
+    return Engine.DistanceManager.distanceTwoPoints(p1, p2);
 }
 
 AK.prototype.getObjectCenter = (obj1) => {
-    return Engine.CalculatorManager.getObjectCenter(obj1);
+    return Engine.DistanceManager.getObjectCenter(obj1);
 }
 
 /////////////CLONES/////////////

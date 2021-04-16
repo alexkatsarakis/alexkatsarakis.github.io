@@ -18,7 +18,7 @@ ENGINE:
 
     - (Done) Add tickAnimator (!important)
 
-    - Load manager
+    - (Done) Load manager
 
     - (deprecated) invoke functions through blackboard
 
@@ -43,7 +43,7 @@ FEATURES:
         -> Category: Mouse // click 
         -> Games state
         -> Stop/Resume
-        -> KeyIsPressed
+        -> (Done) KeyIsPressed
         -> Save {object name} current snapshot as {user input string}
         -> Set {object name} from snapshot {user input string} // IF FOUND
         -> Copy {object name} with name {user input string}
@@ -59,7 +59,7 @@ FEATURES:
            onAttributeChange(X,code),onAttributeRetrieval(X,code)
            onValueChange(X,code),onValueRetrieval(X,code)
 
-    - introduce timelines
+    - (Depricated with Timewarp) introduce timelines
         -> a button that when clicked it will create a different "timeline" and it will show to user what will happen
            when the script is activated
         => how to prevent side-effects (e.g. object removal)
@@ -91,4 +91,4 @@ Extra:
 
 KNOWN BUGS:
     - (Fixed) A DOM render object position is wrong with relative position
-    - 
+    - When I move I check the grid but I must also move the object next to the grid

@@ -1,4 +1,6 @@
-export default class SoundManager {
+import Manager from '../Manager.js'
+
+export default class SoundManager extends Manager{
     prefix = './assets/sounds/';
     postfix = '.mp3';
     sounds = {};
@@ -8,6 +10,7 @@ export default class SoundManager {
     restart = true;
 
     constructor(){
+        super();
         // this.addSound('demo','demoSound');
         this.addSound('coin_pick','coin-pick');
     }

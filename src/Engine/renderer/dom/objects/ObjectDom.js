@@ -65,7 +65,6 @@ export default class ObjectDom extends Object{
     }    
     
     getMapCoords(){
-        // return [this._x,this._y];
         if(!this.getOption('moveWithScroll'))
             return [this._x, this._y];
         return [this._x - this._stage.getValue('x'),this._y- this._stage.getValue('y')];
@@ -73,17 +72,13 @@ export default class ObjectDom extends Object{
 
     animate(){}
 
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
-
     add(){
         objectManager.addToWorld(this);
         scene.addItem(this);
     }
 
     remove(){
-        this.clear();
+        super.remove();
         objectManager.removeFromWorld(this);
         scene.remove(this);
     }

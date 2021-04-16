@@ -6,7 +6,11 @@ import O454Manager from './454GameEngine/renderer.js'
 
 import changeFocus from '../../utils/focusedObject.js'
 
-class ObjectManager {
+import bb from '../../utils/blackboard.js'
+
+import Manager from '../Manager.js'
+
+class ObjectManager extends Manager{
     _objects
     _objectByName
     _constructors
@@ -14,6 +18,7 @@ class ObjectManager {
     _renderManagers
 
     constructor() {
+        super();
         this._constructors = {};
         this._objects = {}; 
         this._objectByName = {};
@@ -62,7 +67,8 @@ class ObjectManager {
         return this._objects;
     }
 
-    rename(obj,newName){ //TODO: move it from here
+    rename(obj,newName){
+        // TODO: implement this
         if(this._objectByName[newName] || !this._objects[obj.id])return;
         obj.name = newName;
         this._objectByName[newName] = obj;
@@ -135,8 +141,12 @@ let managers = objectManager.getRenderManagers();
 clickWrapper.addEventListener('click',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.leftClick){
-            if(managers[i].mouseEvents.leftClick(ev))
+            let obj = managers[i].mouseEvents.leftClick(ev);
+            if(obj){
+                changeFocus(obj.id);
+                obj.triggerEvent('onClick');
                 return;
+            }
         }
     }
     changeFocus(undefined);
@@ -145,8 +155,10 @@ clickWrapper.addEventListener('click',(ev)=>{
 clickWrapper.addEventListener('mousedown',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
-            if(managers[i].mouseEvents.mouseDown(ev))
+            let obj = managers[i].mouseEvents.mouseDown(ev);
+            if(obj){
                 return;
+            }
         }
     }
 });
@@ -154,9 +166,13 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
 clickWrapper.addEventListener('contextmenu',(ev) => {
     for(let i in managers){
         if(managers[i].mouseEvents.rightClick){
-            if(managers[i].mouseEvents.rightClick(ev))
+            let obj = managers[i].mouseEvents.rightClick(ev);
+            if(obj){
+                obj.triggerEvent('onRightClick');
+                bb.fastSet('events','contextMenu',{objID: obj.id,event: ev});
                 return;
+            }
         }
     }
-    changeFocus(undefined);
+    bb.fastSet('events','contextMenu',{objID: envObj.id,event: ev});
 });

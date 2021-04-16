@@ -1,19 +1,25 @@
+import Manager from '../Manager.js'
+
 const InputState = {
     TRIGGERED: 'TRIGGERED',
     TOTRIGGER: 'TOTRIGGER',
     FOREVER: 'FOREVER'
 };
 
-class InputManager {
+class InputManager extends Manager{
     currentlyPressed = {};
     releasedKeys = [];
 
     keyCombos = {
-        'Copy': ['ControlLeft', 'ShiftLeft', 'KeyC'],
-        'Paste': ['ControlLeft', 'ShiftLeft', 'KeyV'],
+        'Copy': ['ControlLeft', 'AltLeft', 'KeyC'],
+        'Paste': ['ControlLeft', 'AltLeft', 'KeyV'],
         'pauseGame': ['ControlLeft', 'ShiftLeft', 'Digit1'],
         'resumeGame': ['ControlLeft', 'ShiftLeft', 'Digit2'],
         'dummyAction': ['ControlLeft', 'KeyB']
+    }
+
+    constructor(){
+        super();
     }
 
     isCurrentlyPressed(key){

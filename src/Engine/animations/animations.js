@@ -10,13 +10,18 @@ import MovingAnimation from './Animations/AnimationCategories/MovingAnimation.js
 import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnimation.js'
 
  
-export default class AnimationManager {
+import Manager from '../Manager.js'
+
+import Engine from '../../Engine.js'
+
+export default class AnimationManager extends Manager{
     _animationFilms
     _animationManagement
     _animationCategories
     _animatorCategories
 
     constructor(){
+        super();
         this._animationFilms = [];
         this._animationManagement = [];
         this._animationCategories = {
@@ -45,7 +50,15 @@ export default class AnimationManager {
         return this._animatorCategories[cat];
     }
 
-    load(){
+    getAnimators(){
+        return animatorManager.getAnimators();
+    }
+
+    restoreAnimators(newAnimators){
+        animatorManager.restoreAnimators(newAnimators);
+    }
+
+    onLoad(){
         this._animationFilms.forEach((films)=>{
             animationFilmHolder.loadAll(films);
         });
@@ -98,16 +111,19 @@ export default class AnimationManager {
         let animation = this.getAnimation(anim);
     
         let oldFilm;
-    
-        an.onStart = ()=>{
+        an.onStart = (animator,an)=>{
+            if(!object.isAlive){
+                object = Engine.ObjectManager.objects[object.id];
+            }
             if(onStart)onStart();
-            object.setAnimator(an);
+            object.setAnimator(animator);
             oldFilm = object.getValue('film');
-            object.setValue('film',animation.film.id);
+            let anim = Engine.AnimationManager.getAnimation(an.id);
+            object.setValue('film',anim.film.id);
         }
-        an.onAction = (th)=>{
-            object.setFrame(th.currentFrame);
-            object.move(th.animation.dx,th.animation.dy);
+        an.onAction = (animator)=>{
+            object.setFrame(animator.currentFrame);
+            object.move(animator.animation.dx,animator.animation.dy);
         };
         an.onFinish = ()=>{
             object.setFrame(0);

@@ -57,8 +57,4 @@ export default class Text extends Object {
         this.div.style.textShadow = '1px 1px 0 #444';
     }
 
-    setColor(col){
-        this.div.style.color = col;
-    }
-
 }

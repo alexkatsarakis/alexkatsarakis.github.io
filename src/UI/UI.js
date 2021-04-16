@@ -12,7 +12,9 @@ const UIs = [
     'hud',
     'toolbar',
     'gridView',
-    'objectFloatingInfo'
+    'objectFloatingInfo',
+    'timewarp',
+    'contextMenu'
 ]
 
 function getFile(id,cb){

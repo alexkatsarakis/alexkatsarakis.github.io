@@ -3,10 +3,10 @@ import Animator from '../Animator.js'
 export default class MovingAnimator extends Animator {
 
     _currentRep;
-    _anim; // MovingAnimation
 
     constructor(){
         super();
+        this._name = 'MovingAnimator';
         this._currentRep = 0;
     }
 
@@ -21,10 +21,6 @@ export default class MovingAnimator extends Animator {
                 return;
             }
         }
-    }
-
-    get animation(){
-        return this._anim;
     }
 
     start({animation,timestamp}){

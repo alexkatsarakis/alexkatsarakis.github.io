@@ -2,11 +2,13 @@ import utils from '../utils/utils.js'
 import bb from '../utils/blackboard.js'
 import Engine from '../Engine.js';
 
-export default class ClipboardManager {
+import Manager from '../Engine/Manager.js'
+export default class ClipboardManager extends Manager{
     _clipboard;
     _collection;
 
     constructor(){
+        super();
         this._collection = [];
     }
 
@@ -34,7 +36,7 @@ export default class ClipboardManager {
     paste(obj = this.top()){
         if(!obj)return;
         let oldName = obj._name;
-        obj._name = obj._name+'_'+Math.floor(Math.random() * 10000000000);
+        obj._name = obj._name+'('+Math.floor(Math.random() * 1000000)+')';
         let newObj = utils.createObject(obj);
         newObj.triggerEvent('onGameStart');
         obj._name = oldName;

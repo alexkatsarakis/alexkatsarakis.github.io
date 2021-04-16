@@ -8,11 +8,6 @@ class Value {
     val
     tag
     constructor({tag,value,onChange,getValue}){
-        // if(typeof tag !== 'string'
-        // || (typeof onChange !== 'function' && onChange !== undefined)
-        // || (typeof getValue !== 'function' && getValue !== undefined)){
-        //     throw Error("Error creating value")
-        // }
         this.tag = tag;
         this.val = value;
         this.onChange = onChange;
@@ -34,10 +29,6 @@ export default class ValueManager{
     }
 
     registerValue(val, {tag = 'user',value = '',onChange = {text: "", code: ""},getValue}) {
-        // if(this._regValues[val]){
-        //     log.logError('Couldn\'t create value '+val+' because it already exists');
-        //     return;
-        // }
         this._regValues[val] = new Value({
             tag: tag,
             value: value,
@@ -51,20 +42,22 @@ export default class ValueManager{
             this.registerValue(val, {value:v});
             return;
         }
-        bb.fastSet('events', 'last', {
+        const event = {
             type: 'setValue',
             objectID: this._parent,
             information: {
                 type: val,
-                value: v
+                value: v,
+                oldVal: this._regValues[val].val
             }
-        });
+        };
         this._regValues[val].val = v;
         if (typeof this._regValues[val].onChange === 'function') 
-            this._regValues[val].onChange(v);
+        this._regValues[val].onChange(v);
         if (typeof this._regValues[val].onChange === 'object')
-            Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent); // TODO
         
+        bb.fastSet('events', 'last', event );
     }
 
     setValueCode(val, code) {

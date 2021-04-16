@@ -15,7 +15,7 @@ class EnvironmentObject extends Object {
 
         this._x = 0;
         this._y = 0;
-        this._width = 3100;
+        this._width = 3500;
         this._height = 1080;
 
         this._windowWidth = window.innerWidth;
@@ -123,10 +123,6 @@ class EnvironmentObject extends Object {
     }
 
     add(){}
-
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
 
     remove(){
         throw Error('Environment Object cannot be removed!');

@@ -3,7 +3,9 @@ import collisionObject from '../renderer/CollisionsObject.js'
 
 import Engine from '../../Engine.js'
 
-export default class CollisionManager {
+import Manager from '../Manager.js'
+
+export default class CollisionManager extends Manager{
     installCollision(obj1, obj2,codeAsText){
         if(collisionHolder.installCollision(obj1, obj2, codeAsText)){
             collisionObject.addEvent(`${obj1}_${obj2}`);

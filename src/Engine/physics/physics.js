@@ -1,10 +1,12 @@
 import MatterJS from './matter/matter.js'
 
+import Manager from '../Manager.js'
 
-export default class PhysicsManager {
+export default class PhysicsManager extends Manager{
     _pe
 
     constructor(){
+        super();
         this._pe = new MatterJS();
     }
 
