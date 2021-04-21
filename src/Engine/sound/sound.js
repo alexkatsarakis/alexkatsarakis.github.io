@@ -19,7 +19,7 @@ export default class SoundManager extends Manager{
         if(this.sounds[tag])throw Error('Tried to add a sound that already exists');
         
         this.sounds[tag] = new Audio(this.prefix+url+this.postfix);
-        
+        this.sounds[tag].volume = 0.1;
     };
 
     getSounds(){

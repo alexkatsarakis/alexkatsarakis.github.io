@@ -61,6 +61,13 @@ export default class GridManager extends Manager{
         return isAttached;
     }
 
+    sameArea(rect1,rect2){
+        return(rect1.x === rect2.x
+            && rect1.y === rect2.y
+            && rect1.width === rect2.width
+            && rect1.height === rect2.height);
+    }
+
     isPointInGrid(x,y){
         for(let i in this._gridRectangles){
             let rect = this._gridRectangles[i];
@@ -87,6 +94,7 @@ export default class GridManager extends Manager{
                 for(let i = boundingBox.y; i < h; ++i){
                     if((collisionRect = this.isPointInGrid(boundingBox.x + 1,i))){
                         //LEFT
+                        if(this.sameArea(collisionRect,boundingBox))continue;
                         obj.setValue('x',(collisionRect.x + collisionRect.width) - 1);
                         return;
                     }
@@ -97,6 +105,7 @@ export default class GridManager extends Manager{
                 for(let i = boundingBox.y; i < h; ++i){
                     if((collisionRect = this.isPointInGrid(w - 1,i))){
                         //RIGHT
+                        if(this.sameArea(collisionRect,boundingBox))continue;
                         obj.setValue('x',(collisionRect.x - boundingBox.width) + 1);
                         return;
                     }
@@ -108,17 +117,19 @@ export default class GridManager extends Manager{
                 for(let i = boundingBox.x; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,boundingBox.y))){
                         //UP
-                        obj.setValue('y',collisionRect.y + collisionRect.height);
+                        if(this.sameArea(collisionRect,boundingBox))continue;
+                        obj.setValue('y',(collisionRect.y + collisionRect.height) - 1);
                         return;
                     }
                 }
             }else{
                 let h = boundingBox.y + boundingBox.height;
                 let w = boundingBox.x + boundingBox.width;
-                for(let i = boundingBox.x; i < w; ++i){
+                for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,h))){
                         //DOWN
-                        obj.setValue('y',collisionRect.y - boundingBox.height);
+                        if(this.sameArea(collisionRect,boundingBox))continue;
+                        obj.setValue('y',(collisionRect.y - boundingBox.height) + 1);
                         return;
                     }
                 }
@@ -156,9 +167,8 @@ export default class GridManager extends Manager{
                 }
                 if(obj && obj.getOption('isSolid')){
                     this.calculateGrid();
-                }else{
-                    this.canMove(e.objectID,e.information);
                 }
+                this.canMove(e.objectID,e.information);
             }
         }
 

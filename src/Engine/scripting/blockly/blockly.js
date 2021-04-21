@@ -52,7 +52,7 @@ function injectInDiv(div) {
 }
 
 export default {
-    id: 'Blockly',
+    id: 'blockly',
     currentScriptAsText,
     currentScriptAsCode,
     executeCode,

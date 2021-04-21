@@ -14,13 +14,10 @@ function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
     let boundingBox = obj.getBoundingBox();
     // console.log(obj.name,boundingBox);
-    if(boundingBox.x < x
-    && boundingBox.x + boundingBox.width > x
-    && boundingBox.y < y
-    && boundingBox.y + boundingBox.height > y){
-        return true;
-    }
-    return false;
+    return(boundingBox.x < x
+        && boundingBox.x + boundingBox.width > x
+        && boundingBox.y < y
+        && boundingBox.y + boundingBox.height > y);
 }
 
 function rightClick(e){

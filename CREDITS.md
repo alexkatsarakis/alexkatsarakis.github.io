@@ -20,7 +20,9 @@ Attributes Icon: <img width="20px" height="20px" src="./assets/icons/attributes.
 
 Events Icon: <img width="20px" height="20px" src="./assets/icons/events.svg">  ([Kiranshastry](https://www.flaticon.com/authors/kiranshastry))
 
-Flags Icon: <img width="20px" height="20px" src="./assets/icons/flags.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+Flags Icon: <img width="20px" height="20px" src="./assets/icons/collision.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Collision Icon: <img width="20px" height="20px" src="./assets/icons/flags.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
 Close X Icon: <img width="20px" height="20px" src="./assets/icons/closeX.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 

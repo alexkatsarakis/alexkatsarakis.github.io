@@ -5,6 +5,7 @@ import EventManager from './Event.js'
 import StateManager from './State.js'
 import OptionManager from './Option.js'
 import ValueManager from './Value.js'
+import CollisionManager from './Collision.js'
 
 // const ObjectState = {
 //     ENABLED: 'enabled',
@@ -36,10 +37,11 @@ export default class Object {
 
         this._isPrototype = false;
 
-        this.data.eventHandler  = new EventManager(true, this.id);
-        this.data.stateHandler  = new StateManager(this.id);
-        this.data.valueHandler  = new ValueManager(this.id);
-        this.data.optionHandler = new OptionManager(true, this.id); 
+        this.data.eventHandler     = new EventManager(true, this.id);
+        this.data.stateHandler     = new StateManager(this.id);
+        this.data.valueHandler     = new ValueManager(this.id);
+        this.data.optionHandler    = new OptionManager(true, this.id); 
+        this.data.collisionHandler = new CollisionManager(this);
 
     }
 
@@ -49,15 +51,16 @@ export default class Object {
             states:     this.getStates(),
             options:    this.getOptions(),
             values:     this.getValues(),
+            collisions: this.getCollisions(),
             _name:      this.name,
             _category:  this._category,
             _id:        this.id,
             _currState: this.getCurrentState()
         }
-
         for(let i in this.values){
             toSave.values[i].val = this.getValue(i);
         }
+
         return JSON.stringify(toSave);
     }
 
@@ -105,7 +108,7 @@ export default class Object {
             }
             toReturn.states[i]['while in '+i] = {};
             toReturn.states[i]['while in '+i].get = () => {
-                return state.transitionTo;
+                return state.whileInState;
             } 
             toReturn.states[i]['while in '+i].set = (code) => {
                 this.setState(i,undefined,undefined,code);
@@ -146,6 +149,18 @@ export default class Object {
                 }
             }
         }
+
+        let collisions = this.getCollisions();
+        toReturn.collisions = {};
+        for(let i in collisions){
+            toReturn.collisions[i] = {};
+            toReturn.collisions[i].set = (code) => {
+                this.setCollision(i, code);
+            };
+            toReturn.collisions[i].get = () => {
+                return this.getCollisionCode(i);
+            };
+        };
 
         return toReturn;
     }
@@ -371,4 +386,29 @@ Object.prototype.getValueCode = function(val) {
 
 Object.prototype.removeValue = function(val) {
     this.data.valueHandler.removeValue(val);
+}
+
+///////////COLLISION FUNCTIONS///////////////
+Object.prototype.addCollision = function(colObjName){
+    this.data.collisionHandler.registerCollision(colObjName);
+}
+
+Object.prototype.setCollision = function(colObjName, code){
+    this.data.collisionHandler.setCollision(colObjName, code);
+}
+
+Object.prototype.getCollision = function(colObjName){
+    return this.data.collisionHandler.getCollision(colObjName);
+}
+
+Object.prototype.getCollisions = function() {
+    return this.data.collisionHandler.getCollisions();
+}
+
+Object.prototype.getCollisionCode = function(colObjName) {
+    return this.data.collisionHandler.getCollisionCode(colObjName);
+}
+
+Object.prototype.removeCollision = function(colObjName) {
+    return this.data.collisionHandler.removeCollision(colObjName);
 }

@@ -45,6 +45,7 @@ AK.prototype.setAttribute = (obj, attr, value) => {
 }
 
 AK.prototype.setCurrentState = (obj, newState) => {
+    if(!obj)debugger;
     obj.setCurrentState(newState);
 }
 

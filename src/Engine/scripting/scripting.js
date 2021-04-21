@@ -18,6 +18,16 @@ export default class ScriptingManager extends Manager{
         this._currentEditor = blScr;
     }
 
+    getCurrentEditorID(){
+        return this._currentEditor.id;
+    }
+
+    setNewEditor(editorID){
+        this._currentEditor = this._installedMechanisms[editorID];
+        this._div.innerHTML = '';
+        this.injectInDiv(this._div); 
+    }
+
     currentScriptAsText(){
         return this._currentEditor.currentScriptAsText();
     }
@@ -36,6 +46,7 @@ export default class ScriptingManager extends Manager{
     }
 
     injectInDiv(div) {
+        this._div = div;
         this._currentEditor.injectInDiv(div);
     }
 

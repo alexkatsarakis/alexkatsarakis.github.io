@@ -15,7 +15,7 @@ class EnvironmentObject extends Object {
 
         this._x = 0;
         this._y = 0;
-        this._width = 3500;
+        this._width = 8000;
         this._height = 1080;
 
         this._windowWidth = window.innerWidth;

@@ -51,24 +51,6 @@
       "_category": "Stage",
       "_id": "BpAoTcBMfklfGm6"
     },
-    "KciKIiWkUB9QL6q": {
-      "events": {
-      },
-      "states": {
-        "idle": { "tag": "idle", "transitionFrom": {}, "transitionTo": {} }
-      },
-      "options": {
-        "moveWithScroll": {
-          "val": true,
-          "tag": "scroll",
-          "onChange": { "text": "", "code": "" }
-        }
-      },
-      "values": {},
-      "_name": "Collisions",
-      "_category": "Collisions",
-      "_id": "KciKIiWkUB9QL6q"
-    },
     "vxz19AN3VqipnPH": {
       "events": {
         "PressedKeyA": {

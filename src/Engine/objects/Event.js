@@ -29,6 +29,7 @@ export default class EventsManager {
             this.registerEvent('onRightClick',{tag: 'system'});
             this.registerEvent('onGameStart',{tag: 'system'});
             this.registerEvent('onRemove',{tag: 'system'});
+            this.registerEvent('onCollision',{tag: 'system'});
             this.registerEvent('onMove',{tag: 'system'});
             this.registerEvent('onEachFrame',{tag: 'system'});
         }

@@ -15,13 +15,10 @@ function focused(obj,x,y){
     let boundingBox = obj.getBoundingBox();
     let [mapX,mapY] = obj.getMapCoords();
     // console.log(obj.name,boundingBox);
-    if(mapX < x
-    && mapX + boundingBox.width > x
-    && mapY < y
-    && mapY + boundingBox.height > y){
-        return true;
-    }
-    return false;
+    return(mapX < x
+        && mapX + boundingBox.width > x
+        && mapY < y
+        && mapY + boundingBox.height > y);
 }
 
 function rightClick(e){

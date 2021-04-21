@@ -115,7 +115,7 @@ class CollisionHolder {
             if(this.collided(nameTranslator[obj1Name], nameTranslator[obj2Name])){
                 // aliveItems[obj1Name].triggerEvent('onCollision');
                 if(this._collisionReactions[i]){
-                    exec(this._collisionReactions[i]);
+                    exec(this._collisionReactions[i], nameTranslator[obj1Name].id);
                 }
             }
         }

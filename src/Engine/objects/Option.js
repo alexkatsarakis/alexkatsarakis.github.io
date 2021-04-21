@@ -54,7 +54,9 @@ export default class OptionManager{
     }
 
     setOption(opt, val) {
-        if(!this._regOptions[opt]) throw Error('Tried to set an option that doesn\'t exist');
+        if(!this._regOptions[opt]){
+            this.registerOption(opt,'user',val);
+        }
         
         const event = {
             type: 'setOption',
@@ -68,7 +70,7 @@ export default class OptionManager{
         
         this._regOptions[opt].val = val;
         if(this._regOptions[opt].onChange.code !== "")
-            Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent); // TODO
+            Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent);
     
         bb.fastSet('events', 'last', event );
     }

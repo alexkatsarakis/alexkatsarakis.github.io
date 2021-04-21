@@ -1,5 +1,4 @@
 import collisionHolder from './collisionHolder.js'
-import collisionObject from '../renderer/CollisionsObject.js'
 
 import Engine from '../../Engine.js'
 
@@ -7,9 +6,7 @@ import Manager from '../Manager.js'
 
 export default class CollisionManager extends Manager{
     installCollision(obj1, obj2,codeAsText){
-        if(collisionHolder.installCollision(obj1, obj2, codeAsText)){
-            collisionObject.addEvent(`${obj1}_${obj2}`);
-        };
+        collisionHolder.installCollision(obj1, obj2, codeAsText);
     }
     
     removeCollision(obj1ID, obj2ID){
@@ -17,7 +14,7 @@ export default class CollisionManager extends Manager{
     }
 
     checkAndInvoke(arrOfObj){
-        collisionHolder.checkAndInvoke(arrOfObj, (codes,currObj)=>{Engine.ScriptingManager.executeCode(codes,currObj)}); //TODO: remove it from here
+        collisionHolder.checkAndInvoke(arrOfObj, (codes,currObj)=>{Engine.ScriptingManager.executeCode(codes,currObj)});
     }
 
     getAllCollisions(){

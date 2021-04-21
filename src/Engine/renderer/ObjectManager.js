@@ -1,5 +1,4 @@
 import envObj from './EnvironmentObject.js'
-import colObj from './CollisionsObject.js'
 import keyObj from './KeyboardObject.js'
 import ODomManager from './dom/renderer.js'
 import O454Manager from './454GameEngine/renderer.js'
@@ -120,11 +119,9 @@ objectManager.addRenderManager(O454Manager);
 objectManager.addRenderManager(ODomManager);
 
 objectManager.addToWorld(envObj);
-objectManager.addToWorld(colObj);
 objectManager.addToWorld(keyObj);
 
 objectManager.addSystemObject(envObj.id);
-objectManager.addSystemObject(colObj.id);
 objectManager.addSystemObject(keyObj.id);
 
 let clickWrapper = document.createElement('div');

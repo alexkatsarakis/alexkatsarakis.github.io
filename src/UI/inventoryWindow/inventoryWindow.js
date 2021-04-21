@@ -104,7 +104,6 @@ function showSnapshots(objWrapper){
                 parent: wrap
             });
             
-    
             let body = uiFactory.createElement({
                 classList: 'inventory-window-body',
                 innerHTML: `Category: ${snap._category}
