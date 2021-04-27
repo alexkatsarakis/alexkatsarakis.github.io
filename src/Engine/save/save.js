@@ -199,12 +199,6 @@ export default class SaveManager extends Manager{
 
         let game = await this.getGame();
         
-        //We do the above technique to start loading all at the same time
-        // ------ wait        instead of -------wait
-        // ----------- wait                         ---------wait
-        // ----------------- wait                                -----------wait
-        // 
-        
         Engine.initInfo = {
             objects: game.objects
         };

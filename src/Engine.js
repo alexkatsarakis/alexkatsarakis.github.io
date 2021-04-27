@@ -10,7 +10,6 @@ import inputManager from './Engine/input/inputManager.js'
 import objectManager from './Engine/renderer/ObjectManager.js'
 import AnimationManager from './Engine/animations/animations.js'
 import CollisionManager from './Engine/collisions/collisions.js'
-// import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 import ClockManager from './Engine/clock/ClockManager.js'
 import ScriptingManager from './Engine/scripting/scripting.js'
@@ -40,8 +39,6 @@ class _Engine {
         this.installManager('ScriptingManager', new ScriptingManager());
 
         this.installManager('SaveManager', new SaveManager());
-    
-        // this.installManager('PhysicsManager', new PhysicsManager());
     }
 
     removeManager(name){
@@ -63,10 +60,10 @@ class _Engine {
     }
 
     start(){
-        Engine.app.main();
-        bb.fastInstall('Engine','Self',Engine);
+        this.app.main();
+        bb.fastInstall('Engine','Self',this);
     
-        let aliveItems = Engine.ObjectManager.objects;
+        let aliveItems = this.ObjectManager.objects;
         for(let i in aliveItems)
             aliveItems[i].triggerEvent('onGameStart');
     
@@ -117,7 +114,6 @@ game.render = ()=>{
 };
 
 game.input = ()=>{
-    // if(game.gameState === 3)return; // 3 === PAUSED
     Engine.InputManager.pollKeys();
     Engine.InputManager.getReleasedKeys().forEach((key)=>utils.inputHandler('Unpressed'+key));
     Engine.InputManager.getPressedKeys().forEach((key)=>utils.inputHandler('Pressed'+key));
@@ -131,7 +127,6 @@ game.ai = ()=>{
 };
 
 game.physics = ()=>{
-    if(Engine.PhysicsManager)Engine.PhysicsManager.update();
 };
 
 game.collisions = ()=>{

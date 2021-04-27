@@ -13,8 +13,7 @@ export default class ObjectSnapshotManager extends Manager{
         this._collection = {};
     }
 
-    snapshotObject(item){
-        item = item || bb.fastGet('state','focusedObject');
+    snapshotObject(item = bb.fastGet('state','focusedObject')){
         let objCollection = this._collection[item.id];
         if(!objCollection){
             this._collection[item.id] = [];

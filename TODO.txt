@@ -92,3 +92,12 @@ Extra:
 KNOWN BUGS:
     - (Fixed) A DOM render object position is wrong with relative position
     - When I move I check the grid but I must also move the object next to the grid
+
+
+
+#Useful Commands
+For Architecture Visualizing. #Require Madge
+    madge ./src/ -i tmp.png 
+
+For file structure in JSON form.
+python projectInspector/projectStructure.py

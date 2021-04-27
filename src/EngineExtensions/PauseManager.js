@@ -44,7 +44,11 @@ export default class PauseManager extends Manager{
 
         this._onPauseCB.forEach((cb)=>{
             cb();
-        });
+        });       
+        const objects = Engine.ObjectManager.objects;
+        for(let i in objects){
+            objects[i].triggerEvent('onResume');
+        }
         
         this._prevGameState = bb.fastGet('state','mode');
         bb.fastSet('state', 'mode', 'paused');
@@ -55,13 +59,18 @@ export default class PauseManager extends Manager{
         let timePassed = bb.fastGet('state','gameTime') - this._timePaused;
 
         Engine.AnimationManager.timeShift(timePassed);
-        this._onResumeCB.forEach((cb)=>{
-            cb(timePassed);
-        });
-
+        
         Engine.game.unpause();
         this._timePaused = undefined;
         bb.fastSet('state', 'mode', this._prevGameState);
         this._prevGameState = undefined;
+        
+        this._onResumeCB.forEach((cb)=>{
+            cb(timePassed);
+        });
+        const objects = Engine.ObjectManager.objects;
+        for(let i in objects){
+            objects[i].triggerEvent('onResume');
+        }
     }
 }

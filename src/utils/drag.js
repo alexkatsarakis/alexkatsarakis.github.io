@@ -21,8 +21,6 @@ export default function dragElement(elmnt,ev) {
     pos4 = e.clientY;
 
     elmnt.move(-pos1,-pos2);
-    // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    // elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
   }
 

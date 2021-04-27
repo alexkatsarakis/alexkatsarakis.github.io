@@ -1,4 +1,0 @@
-<link rel="stylesheet" href="./src/UI/collisionPreview/collisionPreview.css">
-
-<div id='collisionPreview_makeBig' class='hudChild'>Collision Preview</div>
-<div id='collisionPreviewWrapper' class='hudChild'></div>

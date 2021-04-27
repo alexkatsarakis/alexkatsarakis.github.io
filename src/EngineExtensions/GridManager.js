@@ -23,7 +23,8 @@ export default class GridManager extends Manager{
         this._gridRectangles = [];
         for(let i in objs){
             let obj = objs[i];
-            if(obj.getOption('isSolid') === true){ // === true on purpose to prevent auto conversions
+            if(obj.getOption('isSolid') === true 
+            && obj.getOption('moveWithScroll') === true){ // === true on purpose to prevent auto conversions
                 this._gridRectangles.push(obj.getPositional());
             }
         }
@@ -114,7 +115,7 @@ export default class GridManager extends Manager{
         }else if(action.type === 'y'){
             if(action.oldVal > action.value){
                 let w = boundingBox.x + boundingBox.width;
-                for(let i = boundingBox.x; i < w; ++i){
+                for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,boundingBox.y))){
                         //UP
                         if(this.sameArea(collisionRect,boundingBox))continue;

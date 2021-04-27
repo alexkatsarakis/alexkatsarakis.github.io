@@ -18,6 +18,7 @@ export default class QuantizerManager extends Manager{
         let reps = Number.parseInt(ms / this._QuantizeMS);
         let dx = x / reps;
         let dy = y / reps;
+        console.log({x,y},{dx: dx*reps, dy: dy*reps});
 
         let Animation = Engine.AnimationManager.getAnimationCategory('MovingAnimation');
         let animation = new Animation(
@@ -38,7 +39,6 @@ export default class QuantizerManager extends Manager{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
-            
         };
     
         an.start({

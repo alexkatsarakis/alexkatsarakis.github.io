@@ -179,10 +179,6 @@ export default class Object {
             this.triggerEvent('onMove');
     }
 
-    getPosition() {
-        throw Error("getPosition needs to be implemented");
-    }
-
     getObject() {
         throw Error("getObject needs to be implemented");
     }

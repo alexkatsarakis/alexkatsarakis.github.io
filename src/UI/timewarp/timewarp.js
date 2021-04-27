@@ -9,7 +9,7 @@ export default {
     link: './src/UI/timewarp/timewarp.ahtml',
     cb:onTimewarpLoad,
     removable: true, 
-    loadOnInstall: true
+    loadOnInstall: Engine.hasManager('TimewarpManager')
 };
 
 function getLowerNumber(array,number){

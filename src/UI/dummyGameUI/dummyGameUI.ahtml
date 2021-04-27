@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="./src/UI/dummyGameUI/dummyGameUI.css">
+
+
+<img id="vid" category="Square" style="width: 1920px; height: 1080px; position: absolute; left:0; top:0; border:0" src="https://www.csd.uoc.gr/~hy340/img/header-bg.jpg">
+</img>
+<img id="vid2" category="Square" style="width: 1920px; height: 1080px; position: absolute; left:1920px; top:0; border:0" src="https://www.csd.uoc.gr/~hy340/img/header-bg.jpg">
+</img>
+<!-- <div id="testststs" category="Square" style="width: 500px; height: 300px; position: absolute; left:1200px; top:400px; border:0; background-color:black;">
+</div>  -->
+<!-- <iframe id="testststs" category="Square" style="width: 1920px; height: 108a0px; position: absolute; left:0; top:0; border:0" src="demo_iframe.htm">
+</iframe>  -->

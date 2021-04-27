@@ -12,7 +12,7 @@ function translator(ev){
 
 function focused(obj,x,y){
     if(obj.renderer !== '454')return false;
-    let boundingBox = obj.getBoundingBox();
+    let boundingBox = obj.getPositional();
     let [mapX,mapY] = obj.getMapCoords();
     // console.log(obj.name,boundingBox);
     return(mapX < x

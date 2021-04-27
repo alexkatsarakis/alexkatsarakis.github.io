@@ -12,8 +12,7 @@ function translator(ev){
 
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
-    let boundingBox = obj.getBoundingBox();
-    // console.log(obj.name,boundingBox);
+    let boundingBox = obj.getPositional();
     return(boundingBox.x < x
         && boundingBox.x + boundingBox.width > x
         && boundingBox.y < y
@@ -25,7 +24,6 @@ function rightClick(e){
     [mouse.x,mouse.y] = translator(e);
     let aliveItems = objManager.objects;
     for(var it in aliveItems){
-        // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             return aliveItems[it];
         }

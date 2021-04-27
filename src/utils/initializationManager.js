@@ -12,7 +12,7 @@ urlParams.forEach((val,key)=>{
     bb.fastSet('urlParams', key, val);
 });
 
-bb.fastSet('settings','Dragging Objects', true);
+bb.fastSet('settings','Dragging Objects', !urlParams.get('play'));
 bb.fastSet('settings','highlightInvisibleObjects',false);
 
 // <Engine>
@@ -27,6 +27,5 @@ import '../actions/actions.js'
 // </Required>
 
 // <Extra>
-if(!bb.fastGet('urlParams','play'))
-    import('../UI/UI.js');
+import '../UI/UI.js';
 // </Extra>

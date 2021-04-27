@@ -20,25 +20,25 @@ export default class Object454 extends Object{
 
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
-            onChange: (value) => {this._x = value;},
+            onChange: (value) => {this._x = Number.parseInt(value);},
             getValue: () => {return this._x;}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
-            onChange: (value) => {this._y = value;},
+            onChange: (value) => {this._y = Number.parseInt(value);},
             getValue: () => {return this._y;}
         });
 
         this.data.valueHandler.registerValue('width',{
             tag: "positional",
-            onChange: (value) => {this._width = value;},
+            onChange: (value) => {this._width = Number.parseInt(value);},
             getValue: () => {return this._width;}
         });
 
         this.data.valueHandler.registerValue('height',{
             tag: "positional",
-            onChange: (value) => {this._height = value;},
+            onChange: (value) => {this._height = Number.parseInt(value);},
             getValue: () => {return this._height;}
         });
 
@@ -74,16 +74,11 @@ export default class Object454 extends Object{
         let toSave = JSON.parse(super.toString());
         toSave._film = this._film;
         toSave._frame = this._frame;
-        if(this.name === 'f')debugger;
         return JSON.stringify(toSave);
     }
 
     setColor(col){
         this.setValue('colour',col);
-    }
-
-    getPosition(){
-        return [x,y];
     }
 
     getObject(){
@@ -94,15 +89,6 @@ export default class Object454 extends Object{
         if(!this.getOption('moveWithScroll'))
             return [this._x, this._y];
         return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
-    }
-
-    getBoundingBox(){
-        return {
-            x: this._x,
-            y: this._y,
-            width: this._width,
-            height: this._height
-        }
     }
 
     animate(){}

@@ -16,13 +16,13 @@ export default class ObjectDom extends Object{
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this._x = value;},
-            getValue: () => {return this._x;}
+            getValue: () => {return this.getMapCoords()[0];}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this._y = value;},
-            getValue: () => {return this._y;}
+            getValue: () => {return this.getMapCoords()[1]}
         });
 
         this.data.valueHandler.registerValue('rotation',{
@@ -40,24 +40,13 @@ export default class ObjectDom extends Object{
             getValue: () => {return this.div.style.backgroundColor;}
         });
 
-        this._stage = stage;
-    }
+        this.data.optionHandler.registerOption('moveThroughGrid', 'user', true);
 
-    getPosition(){
-        return [this.div.style.top,this.div.style.left];
+        this._stage = stage;
     }
 
     getObject(){
         return this.div;
-    }
-
-    getBoundingBox(){
-        return {
-            x: (this.div.offsetLeft),
-            y: (this.div.offsetTop),
-            width: (this.div.offsetWidth),
-            height: (this.div.offsetHeight)
-        }
     }
 
     createElement(){

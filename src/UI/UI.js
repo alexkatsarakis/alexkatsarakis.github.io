@@ -5,17 +5,19 @@ import utils from '../utils/utils.js'
 const UIs = [
     'keyboard',
     'objectInfo',
-    'objectMenu',
     'createObjectMenu',
-    'animationWorkshop',
-    'collisionPreview',
     'hud',
     'toolbar',
     'gridView',
     'objectFloatingInfo',
     'timewarp',
-    'contextMenu'
+    'contextMenu',
+    'dummyGameUI'
 ]
+
+const notDefaultUIs = [
+    'dummyGameUI'
+];
 
 function getFile(id,cb){
     import(`./${id}/${id}.js`).then((res)=>{
@@ -31,9 +33,17 @@ class UIManager {
     _UIInstalled = {};
 
     constructor(){
-        UIs.forEach((item)=>{
-            getFile(item,(val) => uiManager.installUI(val));
-        })
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if(!urlParams.get('play')){  
+            UIs.forEach((item)=>{
+                getFile(item,(val) => uiManager.installUI(val));
+            });
+        }else{
+            notDefaultUIs.forEach((item)=>{
+                getFile(item,(val) => uiManager.installUI(val));
+            });
+        }
     }
 
     getUIs(){
