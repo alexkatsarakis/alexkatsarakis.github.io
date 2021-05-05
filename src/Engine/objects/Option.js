@@ -61,7 +61,7 @@ export default class OptionManager{
         const event = {
             type: 'setOption',
             objectID: this._parent,
-            information: {
+            data: {
                 type: opt,
                 value: val,
                 oldVal: this._regOptions[opt].val

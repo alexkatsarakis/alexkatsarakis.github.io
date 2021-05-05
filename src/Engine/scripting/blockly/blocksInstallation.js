@@ -104,6 +104,31 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
     return 'AK.callIn(()=>{'+argument1+'},[],'+argument0+');';
 };
 
+Blockly.Blocks['copy_object'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField('copy')
+            .appendField(new Blockly.FieldDropdown(this.getObjects()), 'MODE')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'ObjectCat');
+    },
+    getObjects(){
+        let map = objManager.objects;
+        let categs = [];
+        for(let i in map){
+                categs.push([map[i].name,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['copy_object'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    return `AK.copyObject(AK.getObjectByID('${obj_val}');`;
+};
+
 Blockly.Blocks['create_object'] = {
     init: function() {
         this.appendValueInput('Categ')
@@ -636,10 +661,10 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
 
     return `AK.playAnimation(
         {
-           object: ${argument1},
-           anim: '${argument0}',
-           onStart: ()=>{eval(${statements_onstart || ''})},
-           onFinish: ()=>{eval(${statements_onend || ''})}
+            object: ${argument1},
+            anim: '${argument0}',
+            onStart: ${statements_onstart || ''},
+            onFinish: ${statements_onend || ''}
         })`;
 };
 

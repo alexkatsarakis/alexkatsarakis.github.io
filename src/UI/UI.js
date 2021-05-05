@@ -13,7 +13,7 @@ const UIs = [
     'timewarp',
     'contextMenu',
     'dummyGameUI'
-]
+];
 
 const notDefaultUIs = [
     'dummyGameUI'

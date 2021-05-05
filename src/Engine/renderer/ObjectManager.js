@@ -54,12 +54,26 @@ class ObjectManager extends Manager{
         if(this._objects[obj.id] || this._objectByName[obj.name])return;
         this._objects[obj.id] = obj;
         this._objectByName[obj.name] = obj;
+        bb.fastSet('events','last',{
+            type: 'addObject',
+            objectID: obj.id,
+            data: {
+                object: obj
+            }
+        });
     }
 
     removeFromWorld(obj){
         if(!this._objects[obj.id])return;
         delete this._objects[obj.id];
         delete this._objectByName[obj.name];
+        bb.fastSet('events','last',{
+            type: 'removeObject',
+            objectID: obj.id,
+            data: {
+                object: obj
+            }
+        });
     }
 
     get objects(){

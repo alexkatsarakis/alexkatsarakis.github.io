@@ -58,6 +58,15 @@ function onSettingsInventoryLoaded(){
         showObjects(body);
     }
 
+    uiFactory.createElement({
+        classList: 'inventory-window-tabs-item',
+        innerHTML: 'Collisions',
+        parent: tabDiv
+    }).onclick = () => {
+        focusTab('Collisions');
+        showCollisions(body);
+    }
+
     if(Engine.hasManager('ClipboardManager')){
         uiFactory.createElement({
             classList: 'inventory-window-tabs-item',
@@ -87,6 +96,35 @@ function onSettingsInventoryLoaded(){
 
 function clear(){
     removeAllAnimators();
+}
+
+function showCollisions(objWrapper){
+    objWrapper.innerHTML = '';
+    const items = Engine.CollisionManager.getAllCollisions();
+
+    for(let i in items){
+        const wrap = uiFactory.createElement({
+            parent: objWrapper,
+            classList: 'inventory-window-itemWrapper'
+        });
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-objName',
+            innerHTML: i
+        });
+        
+        let str = '';
+        for(let colWith in items[i]){
+            str += colWith+'\n';
+        }
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-body',
+            innerHTML: str
+        });
+    }
 }
 
 function showSnapshots(objWrapper){
@@ -541,7 +579,7 @@ function showFilms(objWrapper){
             });
             const popuplistener = wrap.addEventListener('click',()=>{
                 createPopUp(items[i]);
-            })
+            });
     
             uiFactory.createElement({
                 classList: 'inventory-window-animationPreview_objName',

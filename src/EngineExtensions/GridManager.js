@@ -82,31 +82,37 @@ export default class GridManager extends Manager{
     }
 
     canMove(objID,action){
-        let obj = Engine.ObjectManager.objects[objID];
+        const obj = Engine.ObjectManager.objects[objID];
         if(!obj)return;
 
         if(obj.getOption('moveThroughGrid') === true)return; // === true on purpose
-        let boundingBox = obj.getPositional();
+        const boundingBox = obj.getPositional();
 
         let collisionRect;
         if(action.type === 'x'){
             if(action.oldVal > action.value){
-                let h = boundingBox.y + boundingBox.height;
-                for(let i = boundingBox.y; i < h; ++i){
+                const h = boundingBox.y + boundingBox.height;
+                for(let i = boundingBox.y + 1; i < h - 1; ++i){
                     if((collisionRect = this.isPointInGrid(boundingBox.x + 1,i))){
-                        //LEFT
                         if(this.sameArea(collisionRect,boundingBox))continue;
+                        // _________ _________
+                        // |        ||        |
+                        // | colRec || player |
+                        // |________||________|
                         obj.setValue('x',(collisionRect.x + collisionRect.width) - 1);
                         return;
                     }
                 }
             }else{
-                let h = boundingBox.y + boundingBox.height;
-                let w = boundingBox.x + boundingBox.width;
-                for(let i = boundingBox.y; i < h; ++i){
-                    if((collisionRect = this.isPointInGrid(w - 1,i))){
-                        //RIGHT
+                const h = boundingBox.y + boundingBox.height;
+                const w = boundingBox.x + boundingBox.width;
+                for(let i = boundingBox.y + 1; i < h - 1; ++i){
+                    if((collisionRect = this.isPointInGrid(w - 1, i))){
                         if(this.sameArea(collisionRect,boundingBox))continue;
+                        // ____y_____ _________
+                        // |        ||        |
+                        // x player w| colRec |
+                        // |___h____||________|
                         obj.setValue('x',(collisionRect.x - boundingBox.width) + 1);
                         return;
                     }
@@ -114,22 +120,36 @@ export default class GridManager extends Manager{
             }
         }else if(action.type === 'y'){
             if(action.oldVal > action.value){
-                let w = boundingBox.x + boundingBox.width;
+                const w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,boundingBox.y))){
-                        //UP
                         if(this.sameArea(collisionRect,boundingBox))continue;
+                        // _________
+                        // |        |
+                        // | colRec |
+                        // |________|
+                        // _________ 
+                        // |        |
+                        // | player |
+                        // |________|
                         obj.setValue('y',(collisionRect.y + collisionRect.height) - 1);
                         return;
                     }
                 }
             }else{
-                let h = boundingBox.y + boundingBox.height;
-                let w = boundingBox.x + boundingBox.width;
+                const h = boundingBox.y + boundingBox.height;
+                const w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,h))){
-                        //DOWN
                         if(this.sameArea(collisionRect,boundingBox))continue;
+                        // _________
+                        // |        |
+                        // | player |
+                        // |________|
+                        // _________ 
+                        // |        |
+                        // | colRec |
+                        // |________|
                         obj.setValue('y',(collisionRect.y - boundingBox.height) + 1);
                         return;
                     }
@@ -142,7 +162,7 @@ export default class GridManager extends Manager{
     *   e: {
     *       type: string,
     *       objectID: string
-    *       information: {
+    *       data: {
     *           oldVal: all
     *           type: string,
     *           value: all
@@ -154,13 +174,13 @@ export default class GridManager extends Manager{
            if(e.type === 'setValue'){
                 let obj = Engine.ObjectManager.getObject(e.objectID);
                 if(obj && obj.getOption('isPlatform')){
-                    if(e.information.type === 'x'){
-                        let diff = e.information.value - e.information.oldVal;
+                    if(e.data.type === 'x'){
+                        let diff = e.data.value - e.data.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(diff,0);
                         })
-                    } else if(e.information.type === 'y'){
-                        let diff = e.information.value - e.information.oldVal;
+                    } else if(e.data.type === 'y'){
+                        let diff = e.data.value - e.data.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(0,diff);
                         })
@@ -169,7 +189,7 @@ export default class GridManager extends Manager{
                 if(obj && obj.getOption('isSolid')){
                     this.calculateGrid();
                 }
-                this.canMove(e.objectID,e.information);
+                this.canMove(e.objectID,e.data);
             }
         }
 

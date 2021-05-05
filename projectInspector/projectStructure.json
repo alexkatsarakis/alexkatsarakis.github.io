@@ -1,1 +1,384 @@
-{".gitignore": ".gitignore", "CREDITS.md": "CREDITS.md", "editor.html": "editor.html", "index.css": "index.css", "index.html": "index.html", "README.md": "README.md", "TODO.txt": "TODO.txt", "wiki.html": "wiki.html", "assets": {"favicon.ico": "favicon.ico", "icons": {"attributes.svg": "attributes.svg", "closeX.svg": "closeX.svg", "collision.svg": "collision.svg", "copy.svg": "copy.svg", "delete.svg": "delete.svg", "dropDown.svg": "dropDown.svg", "edit.svg": "edit.svg", "events.svg": "events.svg", "flags.svg": "flags.svg", "lock.svg": "lock.svg", "states.svg": "states.svg"}, "images": {"code.png": "code.png", "dropdown_toggle.png": "dropdown_toggle.png", "hide.png": "hide.png", "load.png": "load.png", "mario_sprite.png": "mario_sprite.png", "mario_tileSet.png": "mario_tileSet.png", "play.png": "play.png", "save.png": "save.png", "scorpion_left_spritesheet.png": "scorpion_left_spritesheet.png", "scorpion_right_spritesheet.png": "scorpion_right_spritesheet.png", "settings.png": "settings.png", "subzero_left_spritesheet.png": "subzero_left_spritesheet.png", "subzero_right_spritesheet.png": "subzero_right_spritesheet.png"}, "json": {"AnimationFilmHolder.json": "AnimationFilmHolder.json", "AnimationManager.json": "AnimationManager.json", "EmptyMario.json": "EmptyMario.json", "EmptyMortal.json": "EmptyMortal.json", "Flappy.json": "Flappy.json", "init.js": "init.js", "keyToActions.js": "keyToActions.js", "MK_anims.json": "MK_anims.json", "MortalKombat.json": "MortalKombat.json", "pacman.json": "pacman.json", "savedState.json": "savedState.json", "scorpion_left_json_translated.json": "scorpion_left_json_translated.json", "scorpion_right_json_translated.json": "scorpion_right_json_translated.json", "subzero_left_json_translated.json": "subzero_left_json_translated.json", "subzero_right_json_translated.json": "subzero_right_json_translated.json"}, "sounds": {"coin-pick.mp3": "coin-pick.mp3", "demoSound.wav": "demoSound.wav"}, "textures": {"blueprint.jpg": "blueprint.jpg", "sky.jpeg": "sky.jpeg", "wood.jpeg": "wood.jpeg"}}, "indexPage": {"index.css": "index.css", "index.js": "index.js", "screens1.png": "screens1.png", "screens2.png": "screens2.png", "screens3.png": "screens3.png", "screens4.png": "screens4.png", "screens5.png": "screens5.png", "screens6.png": "screens6.png", "screens7.png": "screens7.png", "screens8.png": "screens8.png", "SuperMarioBG.png": "SuperMarioBG.png", "carouselTab": {"carouselTab.css": "carouselTab.css", "carouselTab.js": "carouselTab.js"}, "gamesTab": {"gamesTab.css": "gamesTab.css", "gamesTab.js": "gamesTab.js"}, "informationTab": {"informationTab.css": "informationTab.css", "informationTab.js": "informationTab.js"}, "QuickLinksTab": {"QuickLinksTab.css": "QuickLinksTab.css", "QuickLinksTab.js": "QuickLinksTab.js"}, "utils": {"UIFactory.js": "UIFactory.js"}}, "projectInspector": {"projectStructure.json": "projectStructure.json", "projectStructure.py": "projectStructure.py"}, "src": {"Engine.js": "Engine.js", "index.js": "index.js", "actions": {"actions.js": "actions.js", "copyPaste.js": "copyPaste.js", "createObject.js": "createObject.js", "dummyAction.js": "dummyAction.js", "objectSnapshot.js": "objectSnapshot.js", "pauseGame.js": "pauseGame.js", "playAnimation.js": "playAnimation.js", "printBlackboard.js": "printBlackboard.js", "printGrid.js": "printGrid.js", "saveToDatabase.js": "saveToDatabase.js", "onObject": {"changeColorObject.js": "changeColorObject.js", "moveObject.js": "moveObject.js", "removeObject.js": "removeObject.js", "renameObject.js": "renameObject.js"}}, "Engine": {"app.js": "app.js", "game.js": "game.js", "Manager.js": "Manager.js", "animations": {"animations.js": "animations.js", "Animations": {"Animation.js": "Animation.js", "AnimationFilm.js": "AnimationFilm.js", "AnimationFilmHolder.js": "AnimationFilmHolder.js", "AnimationManager.js": "AnimationManager.js", "AnimationCategories": {"FrameRangeAnimation.js": "FrameRangeAnimation.js", "MovingAnimation.js": "MovingAnimation.js"}}, "Animators": {"Animator.js": "Animator.js", "AnimatorManager.js": "AnimatorManager.js", "AnimatorCategories": {"FrameRangeAnimator.js": "FrameRangeAnimator.js", "MovingAnimator.js": "MovingAnimator.js"}}}, "clock": {"ClockManager.js": "ClockManager.js"}, "collisions": {"collisionHolder.js": "collisionHolder.js", "collisions.js": "collisions.js"}, "input": {"inputManager.js": "inputManager.js"}, "objects": {"Collision.js": "Collision.js", "Event.js": "Event.js", "Object.js": "Object.js", "Option.js": "Option.js", "State.js": "State.js", "Value.js": "Value.js"}, "renderer": {"EnvironmentObject.js": "EnvironmentObject.js", "KeyboardObject.js": "KeyboardObject.js", "ObjectManager.js": "ObjectManager.js", "454GameEngine": {"mouseEvents.js": "mouseEvents.js", "renderer.js": "renderer.js", "objects": {"Object454.js": "Object454.js", "Rectangle.js": "Rectangle.js", "Scene.js": "Scene.js"}}, "dom": {"mouseEvents.js": "mouseEvents.js", "renderer.js": "renderer.js", "objects": {"Circle.js": "Circle.js", "Humanoid.js": "Humanoid.js", "ObjectDom.js": "ObjectDom.js", "Scene.js": "Scene.js", "Square.js": "Square.js", "Text.js": "Text.js"}}}, "save": {"save.js": "save.js"}, "scripting": {"scripting.js": "scripting.js", "blockly": {"blockly.js": "blockly.js", "blocksCalculation.js": "blocksCalculation.js", "blocksCurrentObject.js": "blocksCurrentObject.js", "blocksInstallation.js": "blocksInstallation.js", "blocksMove.js": "blocksMove.js"}, "pureJS": {"pureJS.js": "pureJS.js"}, "pyodide": {"pyodide.js": "pyodide.js"}}, "sound": {"sound.js": "sound.js"}}, "EngineExtensions": {"ClipboardManager.js": "ClipboardManager.js", "DistanceManager.js": "DistanceManager.js", "EngineExtensions.js": "EngineExtensions.js", "GridManager.js": "GridManager.js", "ObjectSnapshotManager.js": "ObjectSnapshotManager.js", "PauseManager.js": "PauseManager.js", "QuantizerManager.js": "QuantizerManager.js", "TimewarpManager.js": "TimewarpManager.js", "TimewarpManagerDS.js": "TimewarpManagerDS.js", "physics": {"physics.js": "physics.js", "matter": {"matter.js": "matter.js"}}}, "UI": {"UI.js": "UI.js", "animationWorkshop": {"animationWorkshop.ahtml": "animationWorkshop.ahtml", "animationWorkshop.css": "animationWorkshop.css", "animationWorkshop.js": "animationWorkshop.js"}, "collisionPreview": {"collisionPreview.ahtml": "collisionPreview.ahtml", "collisionPreview.css": "collisionPreview.css", "collisionPreview.js": "collisionPreview.js"}, "contextMenu": {"contextMenu.ahtml": "contextMenu.ahtml", "contextMenu.css": "contextMenu.css", "contextMenu.js": "contextMenu.js"}, "createObjectMenu": {"createObjectMenu.ahtml": "createObjectMenu.ahtml", "createObjectMenu.css": "createObjectMenu.css", "createObjectMenu.js": "createObjectMenu.js"}, "gridView": {"gridView.ahtml": "gridView.ahtml", "gridView.css": "gridView.css", "gridView.js": "gridView.js"}, "hud": {"hud.ahtml": "hud.ahtml", "hud.css": "hud.css", "hud.js": "hud.js"}, "inventoryWindow": {"inventoryWindow.ahtml": "inventoryWindow.ahtml", "inventoryWindow.css": "inventoryWindow.css", "inventoryWindow.js": "inventoryWindow.js"}, "keyboard": {"keyboard.ahtml": "keyboard.ahtml", "keyboard.css": "keyboard.css", "keyboard.js": "keyboard.js"}, "objectFloatingInfo": {"objectFloatingInfo.ahtml": "objectFloatingInfo.ahtml", "objectFloatingInfo.css": "objectFloatingInfo.css", "objectFloatingInfo.js": "objectFloatingInfo.js"}, "objectInfo": {"objectInfo.ahtml": "objectInfo.ahtml", "objectInfo.css": "objectInfo.css", "objectInfo.js": "objectInfo.js"}, "objectMenu": {"objectMenu.ahtml": "objectMenu.ahtml", "objectMenu.css": "objectMenu.css", "objectMenu.js": "objectMenu.js"}, "settingsWindow": {"settingsWindow.ahtml": "settingsWindow.ahtml", "settingsWindow.css": "settingsWindow.css", "settingsWindow.js": "settingsWindow.js"}, "timewarp": {"timewarp.ahtml": "timewarp.ahtml", "timewarp.css": "timewarp.css", "timewarp.js": "timewarp.js"}, "toolbar": {"toolbar.ahtml": "toolbar.ahtml", "toolbar.css": "toolbar.css", "toolbar.js": "toolbar.js"}}, "utils": {"API.js": "API.js", "assert.js": "assert.js", "blackboard.js": "blackboard.js", "drag.js": "drag.js", "focusedObject.js": "focusedObject.js", "httpRequest.js": "httpRequest.js", "initializationManager.js": "initializationManager.js", "logs.js": "logs.js", "randomGenerator.js": "randomGenerator.js", "serverCommunication.js": "serverCommunication.js", "UIFactory.js": "UIFactory.js", "utils.js": "utils.js", "watches.js": "watches.js"}}, "wiki": {"blackboard.js": "blackboard.js", "index.css": "index.css", "index.js": "index.js", "TableOfContent.js": "TableOfContent.js", "Architecture": {"Engine Architecture.css": "Engine Architecture.css", "Engine Architecture.html": "Engine Architecture.html", "Macro-Arch1.png": "Macro-Arch1.png", "Macro-Arch2.png": "Macro-Arch2.png", "Macro-Arch3.png": "Macro-Arch3.png", "Macro-Arch4.png": "Macro-Arch4.png", "Macro-Arch5.png": "Macro-Arch5.png", "Macro-Architecture.css": "Macro-Architecture.css", "Macro-Architecture.html": "Macro-Architecture.html", "UI Manager Architecture.html": "UI Manager Architecture.html"}, "Engine": {"Animation Manager.html": "Animation Manager.html", "Clock Manager.html": "Clock Manager.html", "Collision Manager.html": "Collision Manager.html", "Input Manager.html": "Input Manager.html", "Object Manager.html": "Object Manager.html", "Save Manager.html": "Save Manager.html", "Scripting Manager.html": "Scripting Manager.html", "Sound Manager.html": "Sound Manager.html"}, "Engine Extension": {"Clipboard Manager.html": "Clipboard Manager.html", "Distance Manager.html": "Distance Manager.html", "Object Snapshot Manager.html": "Object Snapshot Manager.html", "Pause Manager.html": "Pause Manager.html", "Timewarp Manager (Delta State).html": "Timewarp Manager (Delta State).html", "Timewarp Manager (Snapshot).html": "Timewarp Manager (Snapshot).html"}, "General": {"External Libraries.html": "External Libraries.html", "Goals.html": "Goals.html", "Related Work.html": "Related Work.html", "Welcome.html": "Welcome.html"}, "Quick Start": {"Adding Objects.html": "Adding Objects.html", "code1.png": "code1.png", "code2.png": "code2.png", "Coding.html": "Coding.html", "intro.html": "intro.html", "intro1.png": "intro1.png", "intro2.png": "intro2.png", "obj1.png": "obj1.png", "obj2.png": "obj2.png"}, "UIs": {"Animation Workshop.html": "Animation Workshop.html", "animWork1.png": "animWork1.png", "animWork2.png": "animWork2.png", "animWork3.gif": "animWork3.gif", "Collision Registry.html": "Collision Registry.html", "Hud.html": "Hud.html", "hud1.png": "hud1.png", "invent1.png": "invent1.png", "Inventory Window.html": "Inventory Window.html", "Keyboard.html": "Keyboard.html", "keyboard1.png": "keyboard1.png", "Object Creation.html": "Object Creation.html", "Object Floating Information.html": "Object Floating Information.html", "Object Information.html": "Object Information.html", "obj_fl_in1.png": "obj_fl_in1.png", "obj_info1.png": "obj_info1.png"}}}
+{
+    ".gitignore": ".gitignore",
+    "CREDITS.md": "CREDITS.md",
+    "editor.html": "editor.html",
+    "index.css": "index.css",
+    "index.html": "index.html",
+    "README.md": "README.md",
+    "TODO.txt": "TODO.txt",
+    "wiki.html": "wiki.html",
+    "assets": {
+        "favicon.ico": "favicon.ico",
+        "icons": {
+            "attributes.svg": "attributes.svg",
+            "closeX.svg": "closeX.svg",
+            "collision.svg": "collision.svg",
+            "copy.svg": "copy.svg",
+            "delete.svg": "delete.svg",
+            "dropDown.svg": "dropDown.svg",
+            "edit.svg": "edit.svg",
+            "events.svg": "events.svg",
+            "flags.svg": "flags.svg",
+            "lock.svg": "lock.svg",
+            "states.svg": "states.svg"
+        },
+        "images": {
+            "code.png": "code.png",
+            "dropdown_toggle.png": "dropdown_toggle.png",
+            "hide.png": "hide.png",
+            "load.png": "load.png",
+            "mario_sprite.png": "mario_sprite.png",
+            "mario_tileSet.png": "mario_tileSet.png",
+            "play.png": "play.png",
+            "save.png": "save.png",
+            "scorpion_left_spritesheet.png": "scorpion_left_spritesheet.png",
+            "scorpion_right_spritesheet.png": "scorpion_right_spritesheet.png",
+            "settings.png": "settings.png",
+            "subzero_left_spritesheet.png": "subzero_left_spritesheet.png",
+            "subzero_right_spritesheet.png": "subzero_right_spritesheet.png"
+        },
+        "json": {
+            "AnimationFilmHolder.json": "AnimationFilmHolder.json",
+            "AnimationManager.json": "AnimationManager.json",
+            "EmptyMario.json": "EmptyMario.json",
+            "EmptyMortal.json": "EmptyMortal.json",
+            "Flappy.json": "Flappy.json",
+            "init.js": "init.js",
+            "keyToActions.js": "keyToActions.js",
+            "MK_anims.json": "MK_anims.json",
+            "MortalKombat.json": "MortalKombat.json",
+            "pacman.json": "pacman.json",
+            "presentation.json": "presentation.json",
+            "savedState.json": "savedState.json",
+            "scorpion_left_json_translated.json": "scorpion_left_json_translated.json",
+            "scorpion_right_json_translated.json": "scorpion_right_json_translated.json",
+            "subzero_left_json_translated.json": "subzero_left_json_translated.json",
+            "subzero_right_json_translated.json": "subzero_right_json_translated.json"
+        },
+        "sounds": {
+            "coin-pick.mp3": "coin-pick.mp3",
+            "demoSound.wav": "demoSound.wav"
+        },
+        "textures": {
+            "blueprint.jpg": "blueprint.jpg",
+            "sky.jpeg": "sky.jpeg",
+            "wood.jpeg": "wood.jpeg"
+        }
+    },
+    "indexPage": {
+        "index.css": "index.css",
+        "index.js": "index.js",
+        "screens1.png": "screens1.png",
+        "screens2.png": "screens2.png",
+        "screens3.png": "screens3.png",
+        "screens4.png": "screens4.png",
+        "screens5.png": "screens5.png",
+        "screens6.png": "screens6.png",
+        "screens7.png": "screens7.png",
+        "screens8.png": "screens8.png",
+        "SuperMarioBG.png": "SuperMarioBG.png",
+        "carouselTab": {
+            "carouselTab.css": "carouselTab.css",
+            "carouselTab.js": "carouselTab.js"
+        },
+        "gamesTab": {
+            "gamesTab.css": "gamesTab.css",
+            "gamesTab.js": "gamesTab.js"
+        },
+        "informationTab": {
+            "informationTab.css": "informationTab.css",
+            "informationTab.js": "informationTab.js"
+        },
+        "QuickLinksTab": {
+            "QuickLinksTab.css": "QuickLinksTab.css",
+            "QuickLinksTab.js": "QuickLinksTab.js"
+        },
+        "utils": {
+            "UIFactory.js": "UIFactory.js"
+        }
+    },
+    "projectInspector": {
+        "projectStructure.json": "projectStructure.json",
+        "projectStructure.py": "projectStructure.py"
+    },
+    "src": {
+        "Engine.js": "Engine.js",
+        "index.js": "index.js",
+        "actions": {
+            "actions.js": "actions.js",
+            "copyPaste.js": "copyPaste.js",
+            "createObject.js": "createObject.js",
+            "dummyAction.js": "dummyAction.js",
+            "objectSnapshot.js": "objectSnapshot.js",
+            "pauseGame.js": "pauseGame.js",
+            "playAnimation.js": "playAnimation.js",
+            "printBlackboard.js": "printBlackboard.js",
+            "printGrid.js": "printGrid.js",
+            "saveToDatabase.js": "saveToDatabase.js",
+            "onObject": {
+                "changeColorObject.js": "changeColorObject.js",
+                "moveObject.js": "moveObject.js",
+                "removeObject.js": "removeObject.js",
+                "renameObject.js": "renameObject.js"
+            }
+        },
+        "Engine": {
+            "app.js": "app.js",
+            "game.js": "game.js",
+            "Manager.js": "Manager.js",
+            "animations": {
+                "animations.js": "animations.js",
+                "Animations": {
+                    "Animation.js": "Animation.js",
+                    "AnimationFilm.js": "AnimationFilm.js",
+                    "AnimationFilmHolder.js": "AnimationFilmHolder.js",
+                    "AnimationManager.js": "AnimationManager.js",
+                    "AnimationCategories": {
+                        "FrameRangeAnimation.js": "FrameRangeAnimation.js",
+                        "MovingAnimation.js": "MovingAnimation.js"
+                    }
+                },
+                "Animators": {
+                    "Animator.js": "Animator.js",
+                    "AnimatorManager.js": "AnimatorManager.js",
+                    "AnimatorCategories": {
+                        "FrameRangeAnimator.js": "FrameRangeAnimator.js",
+                        "MovingAnimator.js": "MovingAnimator.js"
+                    }
+                }
+            },
+            "clock": {
+                "ClockManager.js": "ClockManager.js"
+            },
+            "collisions": {
+                "collisionHolder.js": "collisionHolder.js",
+                "collisions.js": "collisions.js"
+            },
+            "input": {
+                "inputManager.js": "inputManager.js"
+            },
+            "objects": {
+                "Collision.js": "Collision.js",
+                "Event.js": "Event.js",
+                "Object.js": "Object.js",
+                "Option.js": "Option.js",
+                "State.js": "State.js",
+                "Value.js": "Value.js"
+            },
+            "renderer": {
+                "EnvironmentObject.js": "EnvironmentObject.js",
+                "KeyboardObject.js": "KeyboardObject.js",
+                "ObjectManager.js": "ObjectManager.js",
+                "454GameEngine": {
+                    "mouseEvents.js": "mouseEvents.js",
+                    "renderer.js": "renderer.js",
+                    "objects": {
+                        "Object454.js": "Object454.js",
+                        "Rectangle.js": "Rectangle.js",
+                        "Scene.js": "Scene.js"
+                    }
+                },
+                "dom": {
+                    "mouseEvents.js": "mouseEvents.js",
+                    "renderer.js": "renderer.js",
+                    "objects": {
+                        "Circle.js": "Circle.js",
+                        "Humanoid.js": "Humanoid.js",
+                        "ObjectDom.js": "ObjectDom.js",
+                        "Scene.js": "Scene.js",
+                        "Square.js": "Square.js",
+                        "Text.js": "Text.js"
+                    }
+                }
+            },
+            "save": {
+                "save.js": "save.js"
+            },
+            "scripting": {
+                "scripting.js": "scripting.js",
+                "blockly": {
+                    "blockly.js": "blockly.js",
+                    "blocksCalculation.js": "blocksCalculation.js",
+                    "blocksCurrentObject.js": "blocksCurrentObject.js",
+                    "blocksInstallation.js": "blocksInstallation.js",
+                    "blocksMove.js": "blocksMove.js"
+                },
+                "pureJS": {
+                    "pureJS.js": "pureJS.js"
+                },
+                "pyodide": {
+                    "pyodide.js": "pyodide.js"
+                }
+            },
+            "sound": {
+                "sound.js": "sound.js"
+            }
+        },
+        "EngineExtensions": {
+            "ClipboardManager.js": "ClipboardManager.js",
+            "DistanceManager.js": "DistanceManager.js",
+            "EngineExtensions.js": "EngineExtensions.js",
+            "GridManager.js": "GridManager.js",
+            "ObjectSnapshotManager.js": "ObjectSnapshotManager.js",
+            "PauseManager.js": "PauseManager.js",
+            "QuantizerManager.js": "QuantizerManager.js",
+            "TimewarpManager.js": "TimewarpManager.js",
+            "TimewarpManagerDS.js": "TimewarpManagerDS.js",
+            "physics": {
+                "physics.js": "physics.js",
+                "matter": {
+                    "matter.js": "matter.js"
+                }
+            }
+        },
+        "UI": {
+            "UI.js": "UI.js",
+            "contextMenu": {
+                "contextMenu.ahtml": "contextMenu.ahtml",
+                "contextMenu.css": "contextMenu.css",
+                "contextMenu.js": "contextMenu.js"
+            },
+            "createObjectMenu": {
+                "createObjectMenu.ahtml": "createObjectMenu.ahtml",
+                "createObjectMenu.css": "createObjectMenu.css",
+                "createObjectMenu.js": "createObjectMenu.js"
+            },
+            "dummyGameUI": {
+                "dummyGameUI.ahtml": "dummyGameUI.ahtml",
+                "dummyGameUI.css": "dummyGameUI.css",
+                "dummyGameUI.js": "dummyGameUI.js"
+            },
+            "gridView": {
+                "gridView.ahtml": "gridView.ahtml",
+                "gridView.css": "gridView.css",
+                "gridView.js": "gridView.js"
+            },
+            "hud": {
+                "hud.ahtml": "hud.ahtml",
+                "hud.css": "hud.css",
+                "hud.js": "hud.js"
+            },
+            "inventoryWindow": {
+                "inventoryWindow.ahtml": "inventoryWindow.ahtml",
+                "inventoryWindow.css": "inventoryWindow.css",
+                "inventoryWindow.js": "inventoryWindow.js"
+            },
+            "keyboard": {
+                "keyboard.ahtml": "keyboard.ahtml",
+                "keyboard.css": "keyboard.css",
+                "keyboard.js": "keyboard.js"
+            },
+            "objectFloatingInfo": {
+                "objectFloatingInfo.ahtml": "objectFloatingInfo.ahtml",
+                "objectFloatingInfo.css": "objectFloatingInfo.css",
+                "objectFloatingInfo.js": "objectFloatingInfo.js"
+            },
+            "objectInfo": {
+                "objectInfo.ahtml": "objectInfo.ahtml",
+                "objectInfo.css": "objectInfo.css",
+                "objectInfo.js": "objectInfo.js"
+            },
+            "settingsWindow": {
+                "settingsWindow.ahtml": "settingsWindow.ahtml",
+                "settingsWindow.css": "settingsWindow.css",
+                "settingsWindow.js": "settingsWindow.js"
+            },
+            "timewarp": {
+                "timewarp.ahtml": "timewarp.ahtml",
+                "timewarp.css": "timewarp.css",
+                "timewarp.js": "timewarp.js"
+            },
+            "toolbar": {
+                "toolbar.ahtml": "toolbar.ahtml",
+                "toolbar.css": "toolbar.css",
+                "toolbar.js": "toolbar.js"
+            }
+        },
+        "utils": {
+            "API.js": "API.js",
+            "assert.js": "assert.js",
+            "blackboard.js": "blackboard.js",
+            "drag.js": "drag.js",
+            "focusedObject.js": "focusedObject.js",
+            "httpRequest.js": "httpRequest.js",
+            "initializationManager.js": "initializationManager.js",
+            "logs.js": "logs.js",
+            "randomGenerator.js": "randomGenerator.js",
+            "serverCommunication.js": "serverCommunication.js",
+            "UIFactory.js": "UIFactory.js",
+            "utils.js": "utils.js",
+            "watches.js": "watches.js"
+        }
+    },
+    "wiki": {
+        "blackboard.js": "blackboard.js",
+        "index.css": "index.css",
+        "index.js": "index.js",
+        "TableOfContent.js": "TableOfContent.js",
+        "Architecture": {
+            "Engine Architecture.css": "Engine Architecture.css",
+            "Engine Architecture.html": "Engine Architecture.html",
+            "Macro-Arch1.png": "Macro-Arch1.png",
+            "Macro-Arch2.png": "Macro-Arch2.png",
+            "Macro-Arch3.png": "Macro-Arch3.png",
+            "Macro-Arch4.png": "Macro-Arch4.png",
+            "Macro-Arch5.png": "Macro-Arch5.png",
+            "Macro-Architecture.css": "Macro-Architecture.css",
+            "Macro-Architecture.html": "Macro-Architecture.html",
+            "UI Manager Architecture.html": "UI Manager Architecture.html"
+        },
+        "Engine": {
+            "Animation Manager.html": "Animation Manager.html",
+            "Clock Manager.html": "Clock Manager.html",
+            "Collision Manager.html": "Collision Manager.html",
+            "Input Manager.html": "Input Manager.html",
+            "Object Manager.html": "Object Manager.html",
+            "Save Manager.html": "Save Manager.html",
+            "Scripting Manager.html": "Scripting Manager.html",
+            "Sound Manager.html": "Sound Manager.html"
+        },
+        "Engine Extension": {
+            "Clipboard Manager.html": "Clipboard Manager.html",
+            "Distance Manager.html": "Distance Manager.html",
+            "Object Snapshot Manager.html": "Object Snapshot Manager.html",
+            "Pause Manager.html": "Pause Manager.html",
+            "Timewarp Manager (Delta State).html": "Timewarp Manager (Delta State).html",
+            "Timewarp Manager (Snapshot).html": "Timewarp Manager (Snapshot).html"
+        },
+        "General": {
+            "External Libraries.html": "External Libraries.html",
+            "Goals.html": "Goals.html",
+            "Related Work.html": "Related Work.html",
+            "Welcome.html": "Welcome.html"
+        },
+        "Quick Start": {
+            "Adding Objects.html": "Adding Objects.html",
+            "code1.png": "code1.png",
+            "code2.png": "code2.png",
+            "Coding.html": "Coding.html",
+            "intro.html": "intro.html",
+            "intro1.png": "intro1.png",
+            "intro2.png": "intro2.png",
+            "obj1.png": "obj1.png",
+            "obj2.png": "obj2.png"
+        },
+        "UIs": {
+            "Animation Workshop.html": "Animation Workshop.html",
+            "animWork1.png": "animWork1.png",
+            "animWork2.png": "animWork2.png",
+            "animWork3.gif": "animWork3.gif",
+            "Collision Registry.html": "Collision Registry.html",
+            "Hud.html": "Hud.html",
+            "hud1.png": "hud1.png",
+            "invent1.png": "invent1.png",
+            "Inventory Window.html": "Inventory Window.html",
+            "Keyboard.html": "Keyboard.html",
+            "keyboard1.png": "keyboard1.png",
+            "Object Creation.html": "Object Creation.html",
+            "Object Floating Information.html": "Object Floating Information.html",
+            "Object Information.html": "Object Information.html",
+            "obj_fl_in1.png": "obj_fl_in1.png",
+            "obj_info1.png": "obj_info1.png"
+        }
+    }
+}

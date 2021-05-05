@@ -45,7 +45,7 @@ export default class ValueManager{
         const event = {
             type: 'setValue',
             objectID: this._parent,
-            information: {
+            data: {
                 type: val,
                 value: v,
                 oldVal: this._regValues[val].val

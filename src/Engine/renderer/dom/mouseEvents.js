@@ -4,16 +4,24 @@ import dragElement from '../../../utils/drag.js';
 
 import objManager from '../ObjectManager.js'
 
-var mouse = { x : 0, y : 0 };
-
+let mouse = { x : 0, y : 0 };
+let isClickThrough = false;
 function translator(ev){
     return [ev.offsetX,ev.offsetY]
 }
 
+
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
     let boundingBox = obj.getPositional();
-    return(boundingBox.x < x
+    if(isClickThrough)
+        return( bb.fastGet('state','focusedObject') !== obj 
+            && (boundingBox.x < x
+            && boundingBox.x + boundingBox.width > x
+            && boundingBox.y < y
+            && boundingBox.y + boundingBox.height > y));
+    else
+        return(boundingBox.x < x
         && boundingBox.x + boundingBox.width > x
         && boundingBox.y < y
         && boundingBox.y + boundingBox.height > y);
@@ -21,6 +29,7 @@ function focused(obj,x,y){
 
 function rightClick(e){
     e.preventDefault();
+    isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
     let aliveItems = objManager.objects;
     for(var it in aliveItems){
@@ -45,6 +54,7 @@ function mouseDown(e){
 
 function leftClick(e){
     e.preventDefault();
+    isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
     let aliveItems = objManager.objects;
     for(var it in aliveItems){

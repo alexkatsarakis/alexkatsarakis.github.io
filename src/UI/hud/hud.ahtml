@@ -54,6 +54,7 @@
       <block type="every_seconds_do"></block>
       <block type="after_seconds_do"></block>
       <block type="is_key_pressed"></block>
+      <block type="copy_object"></block>
     </category>
     <category name="%{BKY_LOGIC_TITLE}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>

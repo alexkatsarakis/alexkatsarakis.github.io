@@ -12,14 +12,15 @@ export default class QuantizerManager extends Manager{
     }
 
     move(object, x, y, ms){
+        if(!object)throw Error('Tried to move Quantizer without object');
         let Animator = Engine.AnimationManager.getAnimatorCategory('MovingAnimator');
         let an = new Animator();
+
 
         let reps = Number.parseInt(ms / this._QuantizeMS);
         let dx = x / reps;
         let dy = y / reps;
-        console.log({x,y},{dx: dx*reps, dy: dy*reps});
-
+        
         let Animation = Engine.AnimationManager.getAnimationCategory('MovingAnimation');
         let animation = new Animation(
             {
@@ -30,6 +31,8 @@ export default class QuantizerManager extends Manager{
                 delay: this._QuantizeMS
             }); 
             
+        const ogX = object.getValue('x');
+        const ogY = object.getValue('y');
         an.onStart = ()=>{
             if(!object.isAlive)
                 object = Engine.ObjectManager.objects[object.id];
@@ -39,6 +42,8 @@ export default class QuantizerManager extends Manager{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
+            if(dx !== 0)object.setValue('x',ogX + x);
+            if(dy !== 0)object.setValue('y',ogY + y);
         };
     
         an.start({

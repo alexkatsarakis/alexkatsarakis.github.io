@@ -126,7 +126,7 @@ export default class TimewarpManager extends Manager{
             let diff = this._timeWarping[ts[i]].diff;
             diff.forEach(ev=>{
                 if(ev.type === 'setValue'){
-                    let info = ev.information;
+                    let info = ev.data;
                     objState[ev.objectID].values[info.type].val = info.value;
                 }
             });

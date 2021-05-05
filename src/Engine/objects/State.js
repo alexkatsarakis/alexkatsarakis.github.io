@@ -1,5 +1,7 @@
 import Engine from '../../Engine.js'
 
+import bb from '../../utils/blackboard.js'
+
 class State {
     tag
     transitionFrom
@@ -35,13 +37,20 @@ export default class StateManager{
     setCurrentState(newState) {
         if (!this._regStates[newState]) 
             return;
-         // TODO
         let oldState = this.getState(this.getCurrentState());
         let nState = this.getState(newState);
+        const toUpdate = {
+            type: 'setCurrentState',
+            objectID: this._parent,
+            data: {
+                newState: nState,
+                oldState: oldState
+            }
+        };
         Engine.ScriptingManager.executeCode(oldState.transitionFrom, this._parent); // TODO
         this._currState = this._regStates[newState];
         Engine.ScriptingManager.executeCode(nState.transitionTo, this._parent); // TODO
-
+        bb.fastSet('events', 'last', toUpdate);
     }
 
     executeInState() {

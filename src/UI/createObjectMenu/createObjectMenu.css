@@ -1,7 +1,7 @@
 #createObjectMenu_makeBig {
     position: absolute;
     left:0;
-    bottom: 30px;
+    bottom: 0;
     height: 20px;
     font-size: 20px;
     cursor: pointer;

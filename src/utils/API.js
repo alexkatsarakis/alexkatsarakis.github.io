@@ -193,6 +193,13 @@ AK.prototype.isKeyPressed = (key) => {
 }
 
 
+////////////COPY//////////////
+AK.prototype.copyObject = (obj) => {
+    Engine.ClipboardManager.copy(obj, false);
+    return Engine.ClipboardManager.paste();
+}
+
+
 const ak = new AK();
 
 export default ak;

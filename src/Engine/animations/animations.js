@@ -115,7 +115,10 @@ export default class AnimationManager extends Manager{
             if(!object.isAlive){
                 object = Engine.ObjectManager.objects[object.id];
             }
-            if(onStart)onStart();
+            if(onStart){
+                if(typeof onStart === 'function') onStart();
+                else if(typeof onStart === 'string') Engine.ScriptingManager.executeCode({code:onStart},object.id);
+            }
             object.setAnimator(animator);
             oldFilm = object.getValue('film');
             let anim = Engine.AnimationManager.getAnimation(an.id);
@@ -128,7 +131,10 @@ export default class AnimationManager extends Manager{
         an.onFinish = ()=>{
             object.setFrame(0);
             object.setValue('film',oldFilm);
-            if(onFinish)onFinish();
+            if(onFinish){
+                if(typeof onFinish === 'function') onFinish();
+                else if(typeof onFinish === 'string') Engine.ScriptingManager.executeCode({code:onFinish},object.id);
+            }
         }
     
         an.start({
