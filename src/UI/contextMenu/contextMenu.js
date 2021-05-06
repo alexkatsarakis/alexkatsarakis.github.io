@@ -80,14 +80,24 @@ function onContextChange({objID,event}){
     }
 
 
-    if(Engine.hasManager('ObjectSnapshotManager')){
+    if(Engine.hasManager('SnapshotManager')){
         let but = uiFactory.createElement({
             parent: cMenu,
             classList: 'contextMenu-item',
             innerHTML: 'Take Object Snapshot'
         });
         but.onclick = ()=>{
-            Engine.ObjectSnapshotManager.snapshotObject(obj);
+            Engine.SnapshotManager.snapshotObject(obj);
+            bg.click();
+        }
+        
+        but = uiFactory.createElement({
+            parent: cMenu,
+            classList: 'contextMenu-item',
+            innerHTML: 'Take Scene Snapshot'
+        });
+        but.onclick = ()=>{
+            Engine.SnapshotManager.snapshotScene('defaultName');
             bg.click();
         }
     }

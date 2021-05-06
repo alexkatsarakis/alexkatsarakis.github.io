@@ -219,7 +219,7 @@
             "DistanceManager.js": "DistanceManager.js",
             "EngineExtensions.js": "EngineExtensions.js",
             "GridManager.js": "GridManager.js",
-            "ObjectSnapshotManager.js": "ObjectSnapshotManager.js",
+            "SnapshotManager.js": "SnapshotManager.js",
             "PauseManager.js": "PauseManager.js",
             "QuantizerManager.js": "QuantizerManager.js",
             "TimewarpManager.js": "TimewarpManager.js",

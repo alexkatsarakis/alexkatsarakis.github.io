@@ -1,7 +1,7 @@
 import Engine from '../Engine.js'
 
-import ObjectSnapshotManager from './ObjectSnapshotManager.js'
-Engine.installManager('ObjectSnapshotManager', new ObjectSnapshotManager());
+import SnapshotManager from './SnapshotManager.js'
+Engine.installManager('SnapshotManager', new SnapshotManager());
 
 import ClipboardManager from './ClipboardManager.js'
 Engine.installManager('ClipboardManager', new ClipboardManager());

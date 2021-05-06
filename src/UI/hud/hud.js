@@ -27,18 +27,7 @@ function hudState(){
 }
 
 function showHideCodeUI(show = 'block'){
-    let eventsTab = document.getElementById('eventsTab');
-    let infoBar = document.getElementById('infoBar');
-    let languageDiv = document.getElementById('languageDiv');
-    let playScriptButton = document.getElementById('playScriptButton');
-    let showScriptButton = document.getElementById('showScriptButton');
-    let saveScriptButton = document.getElementById('saveScriptButton');
-    languageDiv.style.display = show;
-    eventsTab.style.display = show;
-    infoBar.style.display = show;
-    playScriptButton.style.display = show;
-    saveScriptButton.style.display = show;
-    showScriptButton.style.display = show;
+    document.getElementById('codingArea').style.display = show;
 }
 
 function dragElement(elmnt,ev) {

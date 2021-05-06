@@ -78,7 +78,7 @@ function onSettingsInventoryLoaded(){
         }
     }
 
-    if(Engine.hasManager('ObjectSnapshotManager')){
+    if(Engine.hasManager('SnapshotManager')){
         uiFactory.createElement({
             classList: 'inventory-window-tabs-item',
             innerHTML: 'Snapshots',
@@ -89,7 +89,7 @@ function onSettingsInventoryLoaded(){
         }
     }
 
-    if(Engine.hasManager('ObjectSnapshotManager')){
+    if(Engine.hasManager('SnapshotManager')){
         uiFactory.createElement({
             classList: 'inventory-window-tabs-item',
             innerHTML: 'Scenes',
@@ -107,6 +107,31 @@ function onSettingsInventoryLoaded(){
 
 function showScenes(objWrapper){
     objWrapper.innerHTML = '';
+    const items = Engine.SnapshotManager.getAllSceneSnapshots();
+
+    for(let i in items){
+        const wrap = uiFactory.createElement({
+            parent: objWrapper,
+            classList: 'inventory-window-itemWrapper'
+        });
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-objName',
+            innerHTML: items[i].time
+        });
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-body',
+            innerHTML: 'Click to reset to scene ('+items[i].name+')'
+        });
+
+        wrap.onclick = ()=>{
+            Engine.SnapshotManager.resetSceneToSnapshot(i);
+            closeInventoryWindow();
+        }
+    }
 }
 
 
@@ -146,7 +171,7 @@ function showCollisions(objWrapper){
 function showSnapshots(objWrapper){
     objWrapper.innerHTML = '';
 
-    let allSnapshots = Engine.ObjectSnapshotManager.getAllSnapshots();
+    let allSnapshots = Engine.SnapshotManager.getAllSnapshots();
     for(let i in allSnapshots){
         let currSnapshots = allSnapshots[i];
         currSnapshots.forEach((snap,index)=>{
@@ -172,7 +197,7 @@ function showSnapshots(objWrapper){
             body.style.cursor = 'pointer';
             
             body.onclick = () => {
-                Engine.ObjectSnapshotManager.resetObjectToSnapshot(i,index);
+                Engine.SnapshotManager.resetObjectToSnapshot(i,index);
                 closeInventoryWindow();
             };
         });
