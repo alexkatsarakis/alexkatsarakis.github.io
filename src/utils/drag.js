@@ -20,7 +20,13 @@ export default function dragElement(elmnt,ev) {
     pos3 = e.clientX;
     pos4 = e.clientY;
 
-    elmnt.move(-pos1,-pos2);
+    if(e.ctrlKey){
+      elmnt.move(0,-pos2);
+    } else if(e.shiftKey) {
+      elmnt.move(-pos1,0);
+    }else{
+      elmnt.move(-pos1,-pos2);
+    }
 
   }
 

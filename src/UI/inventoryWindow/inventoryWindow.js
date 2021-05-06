@@ -105,9 +105,27 @@ function onSettingsInventoryLoaded(){
 
 }
 
+function checkAndAddEmpty(objWrapper,object){
+    const objKeys = Object.keys(object);
+    if(objKeys.length === 0){
+        uiFactory.createElement({
+            parent: objWrapper,
+            id: 'inventory-empty-text',
+            innerHTML: 'Nothing to be shown'
+        });
+    }
+}
+
+
+function clear(){
+    removeAllAnimators();
+}
+
 function showScenes(objWrapper){
     objWrapper.innerHTML = '';
     const items = Engine.SnapshotManager.getAllSceneSnapshots();
+    
+    checkAndAddEmpty(objWrapper,items);
 
     for(let i in items){
         const wrap = uiFactory.createElement({
@@ -134,14 +152,10 @@ function showScenes(objWrapper){
     }
 }
 
-
-function clear(){
-    removeAllAnimators();
-}
-
 function showCollisions(objWrapper){
     objWrapper.innerHTML = '';
     const items = Engine.CollisionManager.getAllCollisions();
+    checkAndAddEmpty(objWrapper,items);
 
     for(let i in items){
         const wrap = uiFactory.createElement({
@@ -172,6 +186,7 @@ function showSnapshots(objWrapper){
     objWrapper.innerHTML = '';
 
     let allSnapshots = Engine.SnapshotManager.getAllSnapshots();
+    checkAndAddEmpty(objWrapper,allSnapshots);
     for(let i in allSnapshots){
         let currSnapshots = allSnapshots[i];
         currSnapshots.forEach((snap,index)=>{
@@ -207,6 +222,7 @@ function showSnapshots(objWrapper){
 function showClipboard(objWrapper){
     objWrapper.innerHTML = '';
     let clipboardObjs = Engine.ClipboardManager.getCollection();
+    checkAndAddEmpty(objWrapper,clipboardObjs);
     clipboardObjs.reverse();
     clipboardObjs.forEach(item=>{
         let wrap = uiFactory.createElement({

@@ -31,6 +31,7 @@ function showHideCodeUI(show = 'block'){
 }
 
 function dragElement(elmnt,ev) {
+    if(!bb.fastGet('settings','moveUIWithControl'))return;
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     dragMouseDown();
   

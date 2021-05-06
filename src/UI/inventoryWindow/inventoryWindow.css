@@ -8,6 +8,13 @@
     z-index: 4;
 }
 
+#inventory-empty-text {
+    width: 100%;
+    font-size: x-large;
+    text-align: center;
+    color: #5b89a0;
+}
+
 #inventory-window {
     width: 80%;
     height: 80%;
