@@ -23,10 +23,7 @@ class InputManager extends Manager{
     }
 
     isCurrentlyPressed(key){
-        if(this.currentlyPressed[key]){ // This is on purpose because it will go into if even if it's another value
-            return true;
-        }
-        return false;
+        return (this.currentlyPressed[key] !== undefined); // This is on purpose because it will go into if even if it's another value
     }
     
     keyPressed(key,forever){

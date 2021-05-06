@@ -81,11 +81,22 @@ function onSettingsInventoryLoaded(){
     if(Engine.hasManager('ObjectSnapshotManager')){
         uiFactory.createElement({
             classList: 'inventory-window-tabs-item',
-            innerHTML: 'Object Snapshot',
+            innerHTML: 'Snapshots',
             parent: tabDiv
         }).onclick = () => {
-            focusTab('Object Snapshot');
+            focusTab('Snapshots');
             showSnapshots(body);
+        }
+    }
+
+    if(Engine.hasManager('ObjectSnapshotManager')){
+        uiFactory.createElement({
+            classList: 'inventory-window-tabs-item',
+            innerHTML: 'Scenes',
+            parent: tabDiv
+        }).onclick = () => {
+            focusTab('Scenes');
+            showScenes(body);
         }
     }
 
@@ -93,6 +104,11 @@ function onSettingsInventoryLoaded(){
     showFilms(body);
 
 }
+
+function showScenes(objWrapper){
+    objWrapper.innerHTML = '';
+}
+
 
 function clear(){
     removeAllAnimators();

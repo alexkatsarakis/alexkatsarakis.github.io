@@ -365,13 +365,15 @@
     <category name="%{BKY_VARIABLES_TITLE}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_FUNCTIONS_TITLE}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
-<div id="infoBar" class="hudChild"></div>
-<div id="eventsTab" class="hudChild"></div>
-<div id="languageDiv" class="hudChild"></div>
-<div id="openTab" class="hudChild"></div>
-<div id="playScriptButton" class="hudChild button"></div>
-<div id="showScriptButton" class="hudChild button"></div>
-<div id="saveScriptButton" class="hudChild button"></div>
+<div id="codingArea" class="hudChild">
+  <div id="infoBar" class="hudChild"></div>
+  <div id="eventsTab" class="hudChild"></div>
+  <div id="languageDiv" class="hudChild"></div>
+  <div id="openTab" class="hudChild"></div>
+  <div id="playScriptButton" class="hudChild button"></div>
+  <div id="showScriptButton" class="hudChild button"></div>
+  <div id="saveScriptButton" class="hudChild button"></div>
+</div>
 <!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 
 <!-- <div id="vid" category="Square" style="width: 500px; height: 300px; position: absolute; left:700px; top:500px;">

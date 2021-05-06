@@ -9,6 +9,14 @@
     overflow: hidden;
 }
 
+#codingArea {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 700px;
+    height: 520px;
+}
+
 #fpsCounter {
     position: absolute;
     color:white;
@@ -33,7 +41,7 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 80px;
+    top: 20px;
     left: 150px;
     overflow: hidden;
 }
@@ -43,7 +51,6 @@
     position: absolute;
     width: 650px;
     height: 20px;
-    top: 60px;
     background-color: var(--main-color);
     color: var(--main-color-text);
     border-bottom: 2px solid var(--main-color-text);
@@ -54,7 +61,7 @@
     position: absolute;
     width: 150px;
     height: 500px;
-    top: 80px;
+    top: 20px;
     background-color: var(--main-color);
     color: var(--main-text);
     overflow-x: hidden;
@@ -111,7 +118,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 80px;
+    top: 20px;
     left: 670px;
     background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
     background-position: center;
@@ -123,7 +130,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 180px;
+    top: 120px;
     left: 670px;
     background-image: url(../../../assets/images/code.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
@@ -135,7 +142,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 130px;
+    top: 70px;
     left: 670px;
     background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;

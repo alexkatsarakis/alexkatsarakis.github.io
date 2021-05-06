@@ -41,6 +41,38 @@ function showHideCodeUI(show = 'block'){
     showScriptButton.style.display = show;
 }
 
+function dragElement(elmnt,ev) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    dragMouseDown();
+  
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    }
+  
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+  
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+  
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + 'px';
+      elmnt.style.top  = (elmnt.offsetTop - pos2) + 'px';
+    }
+  
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+}
+
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
 
@@ -233,5 +265,18 @@ function onHudLoaded(){
     bb.installWatch('state','FPS',onFPSChange);
 
     ScriptManager.injectInDiv(document.getElementById('languageDiv'));
-    Engine.ClockManager.callIn(showHideCodeUI,'none',200);
+    setTimeout(()=>{
+        showHideCodeUI('none');
+        const codingArea = document.getElementById('codingArea');
+        codingArea.onmousedown = (ev)=>{
+            if(!ev.ctrlKey) return;
+            dragElement(codingArea);
+        }
+        
+        const mainInfoBox = document.getElementById('mainInfoBox');
+        mainInfoBox.onmousedown = (ev)=>{
+            if(!ev.ctrlKey) return;
+            dragElement(mainInfoBox);
+        }
+    },200);
 }
