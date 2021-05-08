@@ -123,8 +123,9 @@ class UIManager {
                         div: child
                     }
                 });
-                obj._x = child.offsetLeft;
-                obj._y = child.offsetTop;
+                obj.setPosition(child.offsetLeft,child.offsetTop);
+                child.style.left = 0;
+                child.style.top = 0;
             }
         })
     }

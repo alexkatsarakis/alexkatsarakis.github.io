@@ -150,6 +150,14 @@ let clickWrapper = document.createElement('div');
 
 let managers = objectManager.getRenderManagers();
 clickWrapper.addEventListener('click',(ev)=>{
+    const objects = objectManager.objects;
+    for(let i in objects){
+        let obj = objects[i];
+        if(obj.div){
+            obj.div.style.zIndex = '0';
+        }
+    }
+
     for(let i in managers){
         if(managers[i].mouseEvents.leftClick){
             let obj = managers[i].mouseEvents.leftClick(ev);
