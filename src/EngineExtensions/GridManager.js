@@ -170,7 +170,7 @@ export default class GridManager extends Manager{
     *   }
     */
     onEvent(e){
-       if(!Engine.ObjectManager.isSystemObject(e.objectID)){
+        if(!Engine.ObjectManager.isSystemObject(e.objectID)){
            if(e.type === 'setValue'){
                 let obj = Engine.ObjectManager.getObject(e.objectID);
                 if(obj && obj.getOption('isPlatform')){

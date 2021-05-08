@@ -47,14 +47,16 @@ export default class StateManager{
                 oldState: oldState
             }
         };
-        Engine.ScriptingManager.executeCode(oldState.transitionFrom, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(oldState.transitionFrom, this._parent);
         this._currState = this._regStates[newState];
-        Engine.ScriptingManager.executeCode(nState.transitionTo, this._parent); // TODO
-        bb.fastSet('events', 'last', toUpdate);
+        Engine.ScriptingManager.executeCode(nState.transitionTo, this._parent);
+        
+        if(bb.fastGet('state','mode') !== 'paused')
+            bb.fastSet('events', 'last', toUpdate);
     }
 
     executeInState() {
-        Engine.ScriptingManager.executeCode(this._currState.whileInState, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(this._currState.whileInState, this._parent);
     }
 
     getStates() {

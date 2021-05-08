@@ -68,7 +68,6 @@ Blockly.JavaScript['calc_obj_center'] = function(block) {
     return `AK.getObjectCenter(AK.getObjectByID("${obj1}"))`;
 };
 
-//TODO: distance two points
 Blockly.Blocks['calc_point_dist'] = {
     
     init: function() {

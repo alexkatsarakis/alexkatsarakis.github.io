@@ -55,9 +55,10 @@ export default class ValueManager{
         if (typeof this._regValues[val].onChange === 'function') 
         this._regValues[val].onChange(v);
         if (typeof this._regValues[val].onChange === 'object')
-        Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent); // TODO
+        Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent);
         
-        bb.fastSet('events', 'last', event );
+        if(bb.fastGet('state','mode') !== 'paused')
+            bb.fastSet('events', 'last', event);
     }
 
     setValueCode(val, code) {

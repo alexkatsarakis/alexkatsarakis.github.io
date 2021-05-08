@@ -60,6 +60,7 @@ export default class TimewarpManager extends Manager{
             Engine.ClockManager.cancelCallBack(this._playBackInter[i]);
         }
         this._playBackInter = {};
+        bb.fastSet('game','mode','timeWarp');
     }
 
     playForward(fromTimestamp,speedFactor = 1){

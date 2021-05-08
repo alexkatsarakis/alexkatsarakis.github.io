@@ -110,7 +110,6 @@ class UIManager {
     }
 
     convertHTMLtoObjects(node){
-        //TODO: UPDATE THIS FUNCTION
         let children = [ ...node.getElementsByTagName('*') ];
         children.map(child => {
             if(child.attributes.getNamedItem("category")){

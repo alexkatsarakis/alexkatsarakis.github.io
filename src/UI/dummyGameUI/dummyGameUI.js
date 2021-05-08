@@ -3,7 +3,7 @@ export default {
     link: './src/UI/dummyGameUI/dummyGameUI.ahtml',
     cb:onDummyGameUILoaded,
     removable: true, 
-    loadOnInstall: true
+    loadOnInstall: false
 };
 
 function onDummyGameUILoaded(){
