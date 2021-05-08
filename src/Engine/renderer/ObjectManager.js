@@ -157,7 +157,7 @@ clickWrapper.addEventListener('click',(ev)=>{
             obj.div.style.zIndex = '0';
         }
     }
-
+    window.focus();
     for(let i in managers){
         if(managers[i].mouseEvents.leftClick){
             let obj = managers[i].mouseEvents.leftClick(ev);

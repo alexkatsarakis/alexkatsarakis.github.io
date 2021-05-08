@@ -60,7 +60,9 @@ function leftClick(e){
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             aliveItems[it].div.click(e);
-            aliveItems[it].div.style.zIndex = '10000';
+            if(aliveItems[it].div.tagName === 'IFRAME'){
+                aliveItems[it].div.style.zIndex = '1';
+            }
             return aliveItems[it];
         }
     }
