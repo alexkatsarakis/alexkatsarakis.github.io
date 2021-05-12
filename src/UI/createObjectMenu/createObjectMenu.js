@@ -10,8 +10,8 @@ export default {
 
 
 function toggleObjectMenu(){
-    let wrapper = document.getElementById('createObjectMenuWrapper');
-    let toggleBut = document.getElementById('createObjectMenu_makeBig');
+    const wrapper = document.getElementById('createObjectMenuWrapper');
+    const toggleBut = document.getElementById('createObjectMenu_makeBig');
     if(wrapper.style.height === '200px'){
         wrapper.style.height = 0;
         toggleBut.style.bottom = '0';
@@ -23,31 +23,31 @@ function toggleObjectMenu(){
 }
 
 function updateObjectList(){
-    let items = bb.fastGet('Engine','ObjectManager').constr;
-    let objWrapper = document.getElementById('createObjectMenuWrapper');
+    const items = bb.fastGet('Engine','ObjectManager').constr;
+    const objWrapper = document.getElementById('createObjectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
-        let wrap = document.createElement('div');
+        const wrap = document.createElement('div');
         wrap.classList += 'createObjectMenu_itemWrapper';
         objWrapper.appendChild(wrap);
 
-        let title = document.createElement('div');
+        const title = document.createElement('div');
         title.classList += 'createObjectMenu_objName';
         title.innerHTML = i;
         wrap.appendChild(title);
         
 
-        let body = document.createElement('div');
+        const body = document.createElement('div');
         body.classList += 'createObjectMenu_body';
         
-        let inpNamePrompt = document.createElement('div');
+        const inpNamePrompt = document.createElement('div');
         inpNamePrompt.innerHTML = 'Name:';
         inpNamePrompt.style.width = "20%";
         inpNamePrompt.style.height = '20px';
         inpNamePrompt.style.float = 'left';
         body.appendChild(inpNamePrompt);
 
-        let inpName = document.createElement('input');
+        const inpName = document.createElement('input');
         inpName.type = 'text';
         inpName.style.width = "75%";
         inpName.style.height = '20px';
@@ -55,7 +55,7 @@ function updateObjectList(){
         body.appendChild(inpName);
 
 
-        let createBut = document.createElement('button');
+        const createBut = document.createElement('button');
         // body.innerHTML = 'Click to create an object of type '+i;
         createBut.onclick = () => {
             if(inpName.value === '')return;
@@ -71,7 +71,7 @@ function updateObjectList(){
 }
 
 function onCreateObjectMenuLoaded(){
-    let toggleBut = document.getElementById('createObjectMenu_makeBig');
+    const toggleBut = document.getElementById('createObjectMenu_makeBig');
     toggleBut.addEventListener('click',toggleObjectMenu)
 
 }

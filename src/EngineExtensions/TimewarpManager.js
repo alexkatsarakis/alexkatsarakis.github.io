@@ -20,10 +20,10 @@ export default class TimewarpManager extends Manager{
     }
 
     async saveTimeFrame(){
-        let gameTime = bb.fastGet('state','gameTime');
-        let objects = Engine.SaveManager.saveObjectsLocal();
+        const gameTime = bb.fastGet('state','gameTime');
+        const objects = Engine.SaveManager.saveObjectsLocal();
         
-        let animators = [];
+        const animators = [];
         Engine.AnimationManager.getAnimators().forEach((an)=>{
             animators.push({
                 _onAction: an._onAction,
@@ -65,9 +65,9 @@ export default class TimewarpManager extends Manager{
 
     playForward(fromTimestamp,speedFactor = 1){
         this.stopPlayback();
-        let ts = Object.keys(this._timeWarping);
+        const ts = Object.keys(this._timeWarping);
 
-        let index = ts.indexOf(fromTimestamp+'');
+        const index = ts.indexOf(fromTimestamp+'');
 
         if(index === -1) throw Error('Tried to play forward from a timestamp that doesn\'t exist');
         if(speedFactor === 0) throw Error('');
@@ -75,7 +75,7 @@ export default class TimewarpManager extends Manager{
         const factor = 1/speedFactor;
 
         for(let i = index; i < ts.length; i++){
-            let realTS = Number.parseInt(ts[i]);
+            const realTS = Number.parseInt(ts[i]);
             let dt = realTS - fromTimestamp;
             dt = dt * factor;
             this._playBackInter[realTS] = Engine.ClockManager.callIn(()=>this.showSnapshot(realTS,i),[],dt);
@@ -84,16 +84,16 @@ export default class TimewarpManager extends Manager{
 
     playBackward(fromTimestamp,speedFactor = 1){
         this.stopPlayback();
-        let ts = Object.keys(this._timeWarping);
+        const ts = Object.keys(this._timeWarping);
 
-        let index = ts.indexOf(fromTimestamp+'');
+        const index = ts.indexOf(fromTimestamp+'');
 
         if(index === -1) throw Error('Tried to play forward from a timestamp that doesn\'t exist');
         if(speedFactor === 0) throw Error('');
 
         const factor = 1/speedFactor;
         for(let i = index; i >= 0; --i){
-            let realTS = Number.parseInt(ts[i]);
+            const realTS = Number.parseInt(ts[i]);
             let dt = fromTimestamp - realTS;
             dt = dt * factor;
             this._playBackInter[realTS] = Engine.ClockManager.callIn(()=>this.showSnapshot(realTS,i),[],dt);
@@ -102,18 +102,18 @@ export default class TimewarpManager extends Manager{
     }
 
     showSnapshot(timeStamp,frame){
-        let timeWarp = this._timeWarping[timeStamp];
+        const timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
         
-        let objs = timeWarp.objects;
+        const objs = timeWarp.objects;
         // find if an object has been deleted; and if it has then delete if from map;
-        let liveObjs = Engine.ObjectManager.objects;
+        const liveObjs = Engine.ObjectManager.objects;
         for(let i in liveObjs){
             if(!objs[i])liveObjs[i].remove();
         }
 
         for(let i in objs){
-            let obj = objs[i];
+            const obj = objs[i];
             utils.resetObject(obj);
         }
         
@@ -133,20 +133,20 @@ export default class TimewarpManager extends Manager{
 
     resumeFromRecording(timeStamp){
 
-        let timeWarp = this._timeWarping[timeStamp];
+        const timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
 
         this.showSnapshot(timeStamp);
         Engine.PauseManager.resume();
 
-        let animators = Engine.AnimationManager.getAnimators();
+        const animators = Engine.AnimationManager.getAnimators();
         animators.forEach((animator)=>animator.destroy());
 
         timeWarp.animators.forEach((an)=>{
-            let Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
+            const Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
             if(!Animator)return;
         
-            let animator = new Animator();
+            const animator = new Animator();
 
 
             animator.onStart = an._onStart;

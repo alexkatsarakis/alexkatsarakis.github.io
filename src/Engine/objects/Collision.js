@@ -40,7 +40,7 @@ export default class CollisionManager {
     getCollision(colName) {
         return this._regCollisions[colName];
     }
-
+    
     getCollisions() {
         return this._regCollisions;
     }

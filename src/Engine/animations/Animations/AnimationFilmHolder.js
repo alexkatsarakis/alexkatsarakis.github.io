@@ -10,13 +10,12 @@ class AnimationFilmHolder {
             let id = i.split("_");
             id.length = id.length -1;
             id = id.join("_");
-            let item = json.boxes[i];
+            const item = json.boxes[i];
             if(!this._films[id]){
-                let animFilm = new AnimationFilm({
+                this._films[id] = new AnimationFilm({
                     id: id,
                     bitmap: item.sprite_url,
                 });
-                this._films[id] = animFilm;
             }
             this._assetsToLoad.add(item.sprite_url);
             this._films[id].append({x:item.x,y:item.y,width:item.width,height:item.height});

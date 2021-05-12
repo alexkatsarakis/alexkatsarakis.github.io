@@ -2,7 +2,7 @@ class UIFactory {
     constructor(){}
 
     createElement({parent,id,classList,type,innerHTML,inputType,value}){
-        let div = document.createElement((type)?type:'div');
+        const div = document.createElement((type)?type:'div');
 
         if(id) div.id = id;
         if(classList) div.classList = classList;

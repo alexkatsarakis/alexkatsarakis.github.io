@@ -74,15 +74,15 @@ class UIManager {
     }
 
     loadUI(name) {
-        let index = this._UILoaded.findIndex(item => item === name);
+        const index = this._UILoaded.findIndex(item => item === name);
         if(!this._UIInstalled[name] || index !== -1) throw Error('Trying to load a UI that isn\'t installed');
-        let info = this._UIInstalled[name];
+        const info = this._UIInstalled[name];
         this._UILoaded.push(name);
         this.readTextFile(name,info.link,info.cb);
     }
 
     hideUI(name) {
-        let index = this._UILoaded.findIndex(item => item === name);
+        const index = this._UILoaded.findIndex(item => item === name);
         if(!this._UIInstalled[name] || index === -1) throw Error('Trying to hide a UI that isn\'t installed');
         document.getElementById('_UIWRAPPER_'+name).remove();
         this._UILoaded.splice(index,1);
@@ -97,7 +97,7 @@ class UIManager {
                 if(rawFile.status === 200 || rawFile.status == 0)
                 {
                     var allText = rawFile.responseText;
-                    let UIwrapper = document.createElement('div');
+                    const UIwrapper = document.createElement('div');
                     UIwrapper.id = '_UIWRAPPER_'+name;
                     UIwrapper.insertAdjacentHTML('beforeend',allText);
                     document.body.appendChild(UIwrapper);
@@ -110,12 +110,12 @@ class UIManager {
     }
 
     convertHTMLtoObjects(node){
-        let children = [ ...node.getElementsByTagName('*') ];
+        const children = [ ...node.getElementsByTagName('*') ];
         children.map(child => {
             if(child.attributes.getNamedItem("category")){
-                let objCat = child.attributes["category"].nodeValue;
+                const objCat = child.attributes["category"].nodeValue;
                 child.remove();
-                let obj = utils.createObject({
+                const obj = utils.createObject({
                     _name: child.id,
                     _category: objCat,
                     extra:{

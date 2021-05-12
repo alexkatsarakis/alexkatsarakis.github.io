@@ -14,7 +14,7 @@ class AnimationManager {
             item.dy = item.dy || json.defaultValues.dy;
             item.delay = item.delay || json.defaultValues.delay;
             
-            let film = animationFilmHolder.getFilm(item.film);
+            const film = animationFilmHolder.getFilm(item.film);
             item.end = (item.end !== 'max')?item.end:film.totalFrames-1;
 
             this._animations[item.id] = {animation: new FrameRangeAnimation(item),film: film};

@@ -10,9 +10,9 @@ console.log(quickLinksTab);
 
 import uiFactory from './utils/UIFactory.js'
 
-let wrapper = document.getElementById('main-body');
+const wrapper = document.getElementById('main-body');
 
-let footer = uiFactory.createElement({
+const footer = uiFactory.createElement({
     parent: wrapper,
     id: 'footer'
 });

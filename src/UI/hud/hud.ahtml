@@ -14,7 +14,6 @@
   </category>  
   <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
       <block type="get_object_field"></block>
-      <block type="dropdown_obj"></block>
       <block type="object_flags"></block>
       <block type="object_state"></block>
       <block type="get_current_state"></block>
@@ -25,13 +24,17 @@
       <block type="create_object"></block>
       <block type="name_change_choose_object"></block>
       <!-- <block type="get_object"></block> -->
-      <block type="console_log"></block>
     </category>
     <category name="Animations" colour="%{BKY_MATH_HUE}">
       <block type="get_animation"></block>
       <block type="play_animation"></block>
+      <block type="stop_animation"></block>
       <block type="play_animation_extended"></block>
     </category>
+    <category name="Unnamed Objects" colour="%{BKY_COLOUR_HUE}">
+      <block type="set_unnamed_object_cstate"></block>
+      <block type="get_unnamed_object_field"></block>
+    </category> 
     <category name="Calculations" colour="%{BKY_COLOUR_HUE}">
       <block type="calc_distance_obj"></block>
       <block type="calc_obj_center"></block>
@@ -42,6 +45,7 @@
       <block type="moveTo_object"></block>
       <block type="moveByMS_object"></block>
       <block type="moveToMS_object"></block>
+      <block type="obj_is_solid_below"></block>
     </category> 
     <category name="Sounds" colour="%{BKY_LOOPS_HUE}">
       <block type="play_sound"></block>
@@ -54,7 +58,9 @@
       <block type="every_seconds_do"></block>
       <block type="after_seconds_do"></block>
       <block type="is_key_pressed"></block>
+      <block type="dropdown_obj"></block>
       <block type="copy_object"></block>
+      <block type="console_log"></block>
     </category>
     <category name="%{BKY_LOGIC_TITLE}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>

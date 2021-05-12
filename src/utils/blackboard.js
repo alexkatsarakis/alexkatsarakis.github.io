@@ -15,7 +15,7 @@ class BlackboardComponent{
 
   triggerWatch(itemName){
     if(this.watches[itemName] === undefined)return; // === undefined to avoid conversions
-    let callbacks = this.watches[itemName];
+    const callbacks = this.watches[itemName];
     delete this.watches[itemName];
     callbacks.forEach((cb)=>{
       cb(this.itemMap[itemName]);
@@ -101,7 +101,7 @@ class Blackboard {
 
   invoke(componentName,itemName,args){
     if(this.componentMap[componentName] === undefined)return undefined;
-    let func = this.componentMap[componentName].getItem(itemName);
+    const func = this.componentMap[componentName].getItem(itemName);
     if(typeof func === 'function'){
       return this.componentMap[componentName].getItem(itemName)(args);
     }

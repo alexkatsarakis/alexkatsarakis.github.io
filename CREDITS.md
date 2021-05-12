@@ -28,4 +28,6 @@ Close X Icon: <img width="20px" height="20px" src="./assets/icons/closeX.svg">  
 
 Copy Icon: <img width="20px" height="20px" src="./assets/icons/copy.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
+Snapshot Icon: <img width="20px" height="20px" src="./assets/icons/snapshot.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
 Lock Icon: <img width="20px" height="20px" src="./assets/icons/lock.svg">  ([Kiranshastry](https://www.flaticon.com/authors/kiranshastry))

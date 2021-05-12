@@ -3,10 +3,7 @@ import Object from './ObjectDom.js'
 export default class Text extends Object {
     
     constructor({name,texture,dim,defaultText,div},id){
-        super(name,id);
-        
-        if(div)this.div = div;
-        else this.createElement({name,texture,dim,defaultText});
+        super(name,id,{div,texture,dim,defaultText});
 
         this.data.valueHandler.registerValue('text',{
             tag: "x",

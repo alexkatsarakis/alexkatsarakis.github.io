@@ -81,7 +81,7 @@ export default class OptionManager{
     }
 
     getOptionCode(opt) {
-        let option = this._regOptions[opt];
+        const option = this._regOptions[opt];
         if(option)
             return option.onChange;
         return {text: "", code: ""}

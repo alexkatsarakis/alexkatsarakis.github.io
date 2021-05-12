@@ -10,8 +10,21 @@ export default class ObjectDom extends Object{
     _x
     _y
 
-    constructor(name,id){
+    constructor(name,id,extra){
         super(name,id);
+                
+        if(extra.div){
+            if(typeof extra.div === 'string'){
+                const temp = document.createElement('div');
+                temp.innerHTML = extra.div;
+                this.div = temp.firstChild;
+            }else{
+                this.div = extra.div;
+            }
+        }
+        else this.createElement({name,...extra});
+
+
         this.renderer = 'dom';
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
@@ -29,7 +42,7 @@ export default class ObjectDom extends Object{
             tag: "positional",
             onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
             getValue: () => {
-                let val = this.div.style.getPropertyValue("transform");
+                const val = this.div.style.getPropertyValue("transform");
                 return (val)?val.slice(7,-4):0;
             }
         });
@@ -43,6 +56,14 @@ export default class ObjectDom extends Object{
         this.data.optionHandler.registerOption('moveThroughGrid', 'user', true);
 
         this._stage = stage;
+    }
+
+    toString(){
+        const toSave = JSON.parse(super.toString());
+        toSave.extra = {
+            div: this.div.outerHTML
+        }
+        return JSON.stringify(toSave);
     }
 
     getObject(){

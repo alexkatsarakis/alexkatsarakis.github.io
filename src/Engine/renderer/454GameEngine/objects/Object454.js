@@ -48,6 +48,11 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
+        this.data.valueHandler.registerValue('zIndex',{
+            tag: 'render',
+            value: 0,
+            onChange: (val) => scene.sortObjects(this,val),
+        });
 
         this.data.valueHandler.registerValue('film',{
             tag: 'render',
@@ -71,7 +76,7 @@ export default class Object454 extends Object{
     }
 
     toString(){
-        let toSave = JSON.parse(super.toString());
+        const toSave = JSON.parse(super.toString());
         toSave._film = this._film;
         toSave._frame = this._frame;
         return JSON.stringify(toSave);

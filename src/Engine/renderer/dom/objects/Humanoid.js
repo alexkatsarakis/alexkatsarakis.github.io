@@ -3,17 +3,29 @@ import Object from './ObjectDom.js'
 export default class Humanoid extends Object {
     
     constructor({name,texture,dim},id){
-        super(name,id);
+        super(name,id,{texture,dim});
 
+        this._category = 'Humanoid';
+
+    }
+    
+    setColor(col){
+        const children = [ ...this.div.children ];
+        children.map(child => {
+            child.style.backgroundColor = col;
+        })
+    }
+
+    createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
-        let X = (dim&&dim.width)?dim.width:50;
-        // let Y = (dim&&dim.height)?dim.height: 10;
+        const X = (dim&&dim.width)?dim.width:50;
+        // const Y = (dim&&dim.height)?dim.height: 10;
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";
         this.div.style.position = "absolute";
 
-        let head = document.createElement('div');
+        const head = document.createElement('div');
         head.id = name+"_head";
         head.style.position = "absolute";
         head.style.width = "40%";
@@ -23,7 +35,7 @@ export default class Humanoid extends Object {
 
         this.div.appendChild(head);
 
-        let body = document.createElement('div');
+        const body = document.createElement('div');
         body.id = name+"body";
         body.style.position = "absolute";
         body.style.width = "50%";
@@ -34,7 +46,7 @@ export default class Humanoid extends Object {
 
         this.div.appendChild(body);
 
-        let leftArm = document.createElement('div');
+        const leftArm = document.createElement('div');
         leftArm.id = name+"leftArm";
         leftArm.style.position = "absolute";
         leftArm.style.width = "20%";
@@ -45,7 +57,7 @@ export default class Humanoid extends Object {
 
         this.div.appendChild(leftArm);
 
-        let rightArm = document.createElement('div');
+        const rightArm = document.createElement('div');
         rightArm.id = name+"rightArm";
         rightArm.style.position = "absolute";
         rightArm.style.width = "20%";
@@ -56,7 +68,7 @@ export default class Humanoid extends Object {
 
         this.div.appendChild(rightArm);
 
-        let leftLeg = document.createElement('div');
+        const leftLeg = document.createElement('div');
         leftLeg.id = name+"leftLeg";
         leftLeg.style.position = "absolute";
         leftLeg.style.width = "20%";
@@ -67,7 +79,7 @@ export default class Humanoid extends Object {
 
         this.div.appendChild(leftLeg);
 
-        let rightLeg = document.createElement('div');
+        const rightLeg = document.createElement('div');
         rightLeg.id = name+"rightLeg";
         rightLeg.style.position = "absolute";
         rightLeg.style.width = "20%";
@@ -105,16 +117,6 @@ export default class Humanoid extends Object {
 
 
         this.div.style.transform = 'rotate(45deg)';
-
-        this._category = 'Humanoid';
-
-    }
-    
-    setColor(col){
-        let children = [ ...this.div.children ];
-        children.map(child => {
-            child.style.backgroundColor = col;
-        })
     }
 
 }

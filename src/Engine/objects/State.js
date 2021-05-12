@@ -37,8 +37,8 @@ export default class StateManager{
     setCurrentState(newState) {
         if (!this._regStates[newState]) 
             return;
-        let oldState = this.getState(this.getCurrentState());
-        let nState = this.getState(newState);
+        const oldState = this.getState(this.getCurrentState());
+        const nState = this.getState(newState);
         const toUpdate = {
             type: 'setCurrentState',
             objectID: this._parent,

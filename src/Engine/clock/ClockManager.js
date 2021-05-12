@@ -64,7 +64,7 @@ export default class ClockManager extends Manager{
 
     constructor() {
         super();
-        let d = new Date();
+        const d = new Date();
         this._lastTime = d.getTime();
         this._sinceLastCount = 0;
 
@@ -74,7 +74,7 @@ export default class ClockManager extends Manager{
     }
 
     onLoad(){
-        this.update();
+        this.onUpdate();
 
         // Engine.PauseManager.addOnPause(()=>{
         //     this._checkForCB = false;
@@ -89,12 +89,12 @@ export default class ClockManager extends Manager{
     }
 
     getTime(){
-        let d = new Date();
+        const d = new Date();
         return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getDate()}/${d.getMonth()}`;
     }
 
-    update() {
-        let currTime = new Date().getTime();
+    onUpdate() {
+        const currTime = new Date().getTime();
         if(currTime > this._lastTime + 1000){
             this._lastTime = currTime;
             bb.fastSet('state','FPS',this._sinceLastCount);
@@ -108,7 +108,7 @@ export default class ClockManager extends Manager{
 
     checkForCallbacks(currTime){
         for(let i in this._callbacks){
-            let item = this._callbacks[i];
+            const item = this._callbacks[i];
             if(item.timeToFire <= currTime){
                 if(!item.isRepeated){
                     delete this._callbacks[i];
@@ -121,7 +121,7 @@ export default class ClockManager extends Manager{
     }
 
     callIn(callback, args, delay, repeat = false){
-        let cbObject = new Callback({cb: callback, args: args, delay: delay, repeat: repeat});
+        const cbObject = new Callback({cb: callback, args: args, delay: delay, repeat: repeat});
         this._callbacks[cbObject.id] = cbObject;
         return cbObject;
     }

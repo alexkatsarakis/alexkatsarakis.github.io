@@ -3,9 +3,7 @@ import Object from './ObjectDom.js'
 export default class Circle extends Object {
     
     constructor({name,texture,dim,div},id){
-        super(name,id);
-        if(div)this.div = div;
-        else this.createElement({name,texture,dim});
+        super(name,id,{div,texture,dim});
 
         this.data.valueHandler.registerValue('r',{
             tag: "positional",
@@ -20,8 +18,8 @@ export default class Circle extends Object {
     createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
-        let X = (dim&&dim.width)?dim.width:50;
-        // let Y = (dim&&dim.height)?dim.height: 5;
+        const X = (dim&&dim.width)?dim.width:50;
+        // const Y = (dim&&dim.height)?dim.height: 5;
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";
         this.div.style.position = "absolute";

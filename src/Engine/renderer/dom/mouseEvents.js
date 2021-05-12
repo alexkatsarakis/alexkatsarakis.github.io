@@ -13,7 +13,7 @@ function translator(ev){
 
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
-    let boundingBox = obj.getPositional();
+    const boundingBox = obj.getPositional();
     if(isClickThrough)
         return( bb.fastGet('state','focusedObject') !== obj 
             && (boundingBox.x < x
@@ -31,7 +31,7 @@ function rightClick(e){
     e.preventDefault();
     isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = objManager.objects;
+    const aliveItems = objManager.objects;
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             return aliveItems[it];
@@ -42,7 +42,7 @@ function rightClick(e){
 function mouseDown(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = objManager.objects;
+    const aliveItems = objManager.objects;
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             if(!aliveItems[it].getOption('isMovable'))return false;
@@ -56,7 +56,7 @@ function leftClick(e){
     e.preventDefault();
     isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = objManager.objects;
+    const aliveItems = objManager.objects;
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             aliveItems[it].div.click(e);

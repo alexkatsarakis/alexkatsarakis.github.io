@@ -7,7 +7,7 @@ import bb from '../../../utils/blackboard.js'
 <script src="./libs/pyodide.js"></script>
 */
 
-let inputArea = document.createElement('textarea');
+const inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
 inputArea.style.height = "100%";
 inputArea.style.resize = "none";

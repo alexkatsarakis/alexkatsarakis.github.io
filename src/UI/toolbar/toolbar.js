@@ -4,6 +4,8 @@ import focusedObject from '../../utils/focusedObject.js'
 
 import Engine from '../../Engine.js'
 
+import uiFactory from '../../utils/UIFactory.js'
+
 export default {
     name:'toolbar',
     link: './src/UI/toolbar/toolbar.ahtml',
@@ -16,7 +18,7 @@ function actionsDropdown(){
     let isVisible = false;
 
     function getActions(){
-        let actions = [];
+        const actions = [];
         for(let action in bb.getComponent('actions').itemMap){
             actions.push(action);
         }
@@ -24,14 +26,14 @@ function actionsDropdown(){
     }
 
     function createDropdown(){
-        let actions = getActions();
-        let dropdown = document.createElement('div');
+        const actions = getActions();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_actions_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_actions').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         actions.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_action_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
@@ -43,7 +45,7 @@ function actionsDropdown(){
 
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_actions_dropdown');
+        const dropdown = document.getElementById('toolbar_actions_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -60,7 +62,7 @@ function objectsDropdown(){
     let isVisible = false;
 
     function getObjects(){
-        let objects = [];
+        const objects = [];
         const liveObjects = Engine.ObjectManager.objects;
         for(let object in liveObjects){
             objects.push(liveObjects[object]);
@@ -69,14 +71,14 @@ function objectsDropdown(){
     }
 
     function createDropdown(){
-        let objects = getObjects();
-        let dropdown = document.createElement('div');
+        const objects = getObjects();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_liveobjects_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_liveobjects').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item.id;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item.name;
@@ -88,7 +90,7 @@ function objectsDropdown(){
   
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_liveobjects_dropdown');
+        const dropdown = document.getElementById('toolbar_liveobjects_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -105,8 +107,8 @@ function eventsDropdown(){
     let isVisible = false;
 
     function getEvents(){
-        let events = [];
-        let focused = bb.fastGet('state','focusedObject');
+        const events = [];
+        const focused = bb.fastGet('state','focusedObject');
         if(!focused)return [];
         for(let event in focused.getEvents()){
             events.push(event);
@@ -115,14 +117,14 @@ function eventsDropdown(){
     }
 
     function createDropdown(){
-        let events = getEvents();
-        let dropdown = document.createElement('div');
+        const events = getEvents();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_events_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_events').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         events.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
@@ -134,7 +136,7 @@ function eventsDropdown(){
   
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_events_dropdown');
+        const dropdown = document.getElementById('toolbar_events_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -161,8 +163,46 @@ function openInventory(){
     bb.fastGet('UI','loadUI')(invWindow.name);
 }
 
+function onSearch(ev){
+    if(document.getElementById('toolbar_search_result'))document.getElementById('toolbar_search_result').remove();
+    const query = ev.target.value;
+
+    if(query === '')return;
+
+    const objects = Engine.ObjectManager.objects;
+
+    const arr = [];
+    for(let i in objects){
+        if(objects[i].name.toLowerCase().includes(query.toLowerCase()))arr.push(objects[i].name);
+    }
+
+    const searchRes = uiFactory.createElement({
+        parent: document.body,
+        id: 'toolbar_search_result',
+        classList: 'toolbar_dropdown'
+    });
+
+    const searchBar = document.getElementById('toolbar_search');
+
+    searchRes.style.top = searchBar.offsetTop + searchBar.offsetHeight + 'px';
+    searchRes.style.left = searchBar.offsetLeft + 'px';
+
+    arr.forEach((name)=>{
+        uiFactory.createElement({
+            parent: searchRes,
+            classList: 'toolbar_dropdown_item',
+            innerHTML: name
+        }).onclick = ()=>{
+            searchRes.remove();
+            searchBar.value = '';
+            const obj = Engine.ObjectManager.getObjectByName(name);
+            focusedObject(obj.id);
+        };
+    });
+}
+
 function onToolbarLoaded(){
-    let backBut = document.getElementById('toolbar-logo-img');
+    const backBut = document.getElementById('toolbar-logo-img');
     backBut.onclick = (() => {
         window.location = '/';
     });
@@ -184,5 +224,7 @@ function onToolbarLoaded(){
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
+
+    document.getElementById('toolbar_search').onkeyup = onSearch;
 
 }

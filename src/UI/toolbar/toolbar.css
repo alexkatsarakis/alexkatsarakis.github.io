@@ -94,3 +94,23 @@
     color: white;
     text-align: center;
 }
+
+#toolbar_search {
+    border: 0;
+    width: 150px;
+}
+
+#toolbar_search_result {
+    position: absolute;
+    width: 150px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.toolbar_item_right {
+    float: right;
+    padding-top: 5px;
+    padding-bottom: 7px;
+    margin-right: 10px;
+    color: var(--main-color);
+}

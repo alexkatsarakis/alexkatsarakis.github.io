@@ -12,8 +12,8 @@ export default {
 
 function updateInfo(obj){
     if(!document.getElementById('objectFloatingInfo_box'))return;
-    let dom = document.getElementById('objectFloatingInfo_box');
-    let info = document.getElementById('objectFloatingInfo_info');
+    const dom = document.getElementById('objectFloatingInfo_box');
+    const info = document.getElementById('objectFloatingInfo_info');
     dom.style.display = 'block';
     info.style.display = 'block';
     if(!obj){
@@ -23,13 +23,13 @@ function updateInfo(obj){
         return;
     }
     
-    let positional = obj.getPositional();
-    let stage = Engine.ObjectManager.getObjectByName('Stage');
-    let offsetX = stage.getValue('x');
-    let offsetY = stage.getValue('y');
+    const positional = obj.getPositional();
+    const stage = Engine.ObjectManager.getObjectByName('Stage');
+    const offsetX = stage.getValue('x');
+    const offsetY = stage.getValue('y');
 
-    let scripts = Object.keys(obj.getEvents());
-    let fields = Object.keys(obj.getValues());
+    const scripts = Object.keys(obj.getEvents());
+    const fields = Object.keys(obj.getValues());
 
     info.innerText = `  Name: ${obj.name}
                         Category: ${obj.getCategory()}
@@ -52,6 +52,6 @@ function updateInfo(obj){
 }
 
 function onObjectInfoLoaded(){
-    let focObj = bb.fastGet('state','focusedObject');
+    const focObj = bb.fastGet('state','focusedObject');
     updateInfo((focObj)?focObj:undefined);
 }

@@ -2,6 +2,7 @@ import './blocksInstallation.js'
 import './blocksCurrentObject.js'
 import './blocksMove.js'
 import './blocksCalculation.js'
+import './blocksUnnamed.js'
 
 import bb from '../../../utils/blackboard.js'
 import AK from '../../../utils/API.js' //THIS IS ON PURPOSE SO IT WILL BE ON EVAL
@@ -19,7 +20,7 @@ function currentScriptAsCode() {
 function executeCode(codes,currentObject) {
     if(!codes)
         return;
-    let prevObject = currObject;
+    const prevObject = currObject;
     currObject = currentObject;
     eval(codes.code);
     currObject = prevObject;
@@ -31,6 +32,14 @@ function clearAndLoadFromText(codes) {
             return;
         }
     Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(codes.text),Blockly.mainWorkspace);
+}
+
+function printInfo(){
+    console.log({
+        id: 'blockly',
+        API: AK,
+        Blackboard: bb
+    });
 }
 
 function injectInDiv(div) {
@@ -57,5 +66,6 @@ export default {
     currentScriptAsCode,
     executeCode,
     clearAndLoadFromText,
-    injectInDiv
+    injectInDiv,
+    printInfo
 }

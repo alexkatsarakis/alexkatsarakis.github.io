@@ -27,18 +27,18 @@ export default class ClipboardManager extends Manager{
 
     copy(obj = bb.fastGet('state', 'focusedObject'),saveToCollection){
         if(!obj || Engine.ObjectManager.isSystemObject(obj.id))return;
-        let newObj = JSON.parse(obj+'');
+        const newObj = JSON.parse(obj+'');
         delete newObj._id;
         newObj._time = Engine.ClockManager.getTime();
         this.push(newObj,saveToCollection);
     }
 
     paste(){
-        let obj = this.top();
-        let oldName = obj._name;
+        const obj = this.top();
+        const oldName = obj._name;
         obj._name = obj._name.replace(/\(.*\)/,'');
         obj._name = obj._name+'('+Math.floor(Math.random() * 1000000)+')';
-        let newObj = utils.createObject(obj);
+        const newObj = utils.createObject(obj);
         newObj.triggerEvent('onGameStart');
         obj._name = oldName;
         return newObj;

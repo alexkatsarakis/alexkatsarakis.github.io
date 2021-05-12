@@ -27,6 +27,3 @@ Engine.installManager('DummyManager', new DummyManager());
 
 // import PhysicsManager from './physics/physics.js'
 // Engine.installManager('PhysicsManager', new PhysicsManager());
-// Engine.game.physics = ()=>{
-//     Engine.PhysicsManager.update();
-// };

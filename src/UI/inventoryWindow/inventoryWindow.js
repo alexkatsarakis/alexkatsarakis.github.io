@@ -14,15 +14,22 @@ export default {
     loadOnInstall: true
 };
 
+
+let lastGameState;
+
 function closeInventoryWindow(){
     removeAllAnimators();
     bb.fastGet('UI','hideUI')('inventoryWindow');
     bb.fastGet('UI','removeUI')('inventoryWindow');
+
+    if(lastGameState){
+        bb.fastSet('state','mode',lastGameState);
+    }
 }
 
 function focusTab(tabName){
     clear();
-    let tabs = document.getElementsByClassName('inventory-window-tabs-item');
+    const tabs = document.getElementsByClassName('inventory-window-tabs-item');
     for(let i = 0; i < tabs.length; i++){
         tabs[i].classList = 'inventory-window-tabs-item';
         if(tabs[i].innerHTML === tabName){
@@ -35,9 +42,12 @@ function onSettingsInventoryLoaded(){
     document.getElementById('inventory-window-background').addEventListener('click',closeInventoryWindow);
     document.getElementById('inventory-window-head-close').addEventListener('click',closeInventoryWindow);
     
-    let tabDiv = document.getElementById('inventory-window-tabs');
+    lastGameState = bb.fastGet('state','mode');
+    bb.fastSet('state','mode','popUpOpen');
 
-    let body = document.getElementById('inventory-window-body');
+    const tabDiv = document.getElementById('inventory-window-tabs');
+
+    const body = document.getElementById('inventory-window-body');
     body.innerHTML = '';
 
     uiFactory.createElement({
@@ -185,12 +195,12 @@ function showCollisions(objWrapper){
 function showSnapshots(objWrapper){
     objWrapper.innerHTML = '';
 
-    let allSnapshots = Engine.SnapshotManager.getAllSnapshots();
+    const allSnapshots = Engine.SnapshotManager.getAllSnapshots();
     checkAndAddEmpty(objWrapper,allSnapshots);
     for(let i in allSnapshots){
-        let currSnapshots = allSnapshots[i];
+        const currSnapshots = allSnapshots[i];
         currSnapshots.forEach((snap,index)=>{
-            let wrap = uiFactory.createElement({
+            const wrap = uiFactory.createElement({
                 classList: 'inventory-window-itemWrapper',
                 parent: objWrapper
             });
@@ -201,7 +211,7 @@ function showSnapshots(objWrapper){
                 parent: wrap
             });
             
-            let body = uiFactory.createElement({
+            const body = uiFactory.createElement({
                 classList: 'inventory-window-body',
                 innerHTML: `Category: ${snap._category}
                 Name: ${snap._name}
@@ -221,11 +231,11 @@ function showSnapshots(objWrapper){
 
 function showClipboard(objWrapper){
     objWrapper.innerHTML = '';
-    let clipboardObjs = Engine.ClipboardManager.getCollection();
+    const clipboardObjs = Engine.ClipboardManager.getCollection();
     checkAndAddEmpty(objWrapper,clipboardObjs);
     clipboardObjs.reverse();
     clipboardObjs.forEach(item=>{
-        let wrap = uiFactory.createElement({
+        const wrap = uiFactory.createElement({
             classList: 'inventory-window-itemWrapper',
             parent: objWrapper
         });
@@ -237,7 +247,7 @@ function showClipboard(objWrapper){
         });
         
 
-        let body = uiFactory.createElement({
+        const body = uiFactory.createElement({
             classList: 'inventory-window-body',
             innerHTML: `Category: ${item._category}
             Name: ${item._name}
@@ -257,7 +267,7 @@ function showClipboard(objWrapper){
 
 function showObjects(objWrapper){
     objWrapper.innerHTML = '';
-    let items = Engine.ObjectManager.objects;
+    const items = Engine.ObjectManager.objects;
 
     objWrapper = uiFactory.createElement({
         classList: 'inventory-window-body-grid',
@@ -265,8 +275,8 @@ function showObjects(objWrapper){
     });
 
     for(let i in items){
-        let item = items[i];
-        let wrap = uiFactory.createElement({
+        const item = items[i];
+        const wrap = uiFactory.createElement({
             classList: 'inventory-window-itemWrapper',
             parent: objWrapper
         });
@@ -278,15 +288,15 @@ function showObjects(objWrapper){
         });
         
 
-        let body = uiFactory.createElement({
+        const body = uiFactory.createElement({
             classList: 'inventory-window-body',
             parent: wrap
         });
 
         if(item.renderer === 'dom'){
-            let newItem = item.getObject().cloneNode(true);
+            const newItem = item.getObject().cloneNode(true);
             body.appendChild(newItem);
-            let oldCSS = document.defaultView.getComputedStyle(item.getObject(), "");
+            const oldCSS = document.defaultView.getComputedStyle(item.getObject(), "");
             newItem.id = newItem.id+'_objectMenu_inventory';
             newItem.style.color = oldCSS.getPropertyValue('color');
             newItem.classList = '';
@@ -296,21 +306,21 @@ function showObjects(objWrapper){
             newItem.style.transform = 'rotate(0)';
 
         }else if(item.renderer === '454'){
-            let pos = item.getPositional();
+            const pos = item.getPositional();
             if(item._film){
-                let info = item._getFilm(item._film);
-                let box = info.getFrameBox(item._frame);
-                let img = info.bitmap;
-                let canv = uiFactory.createElement({
+                const info = item._getFilm(item._film);
+                const box = info.getFrameBox(item._frame);
+                const img = info.bitmap;
+                const canv = uiFactory.createElement({
                     type: 'canvas',
                     id: item.id+'_objectMenu_inventory',
                     parent: body
                 });
                 canv.style.width = '100%';
                 canv.style.height = '100%';
-                let ctx = canv.getContext('2d');
-                let x = canv.width/2 - pos.width/2;
-                let y = canv.height/2 - pos.height/2;
+                const ctx = canv.getContext('2d');
+                const x = canv.width/2 - pos.width/2;
+                const y = canv.height/2 - pos.height/2;
                 ctx.drawImage(bb.fastGet('assets',img),
                 box.x,box.y,box.width,box.height,
                 x, y, pos.width, pos.height);
@@ -324,56 +334,56 @@ function showObjects(objWrapper){
 }
 
 
-let animatorsForPreview = [];
+const animatorsForPreview = [];
 
 function removeAllAnimators(){
     animatorsForPreview.forEach((an)=>an());
 }
 
 function createPopUp(film){
-    let wrap = document.createElement('div');
+    const wrap = document.createElement('div');
     wrap.id = 'animationWorkshopCreateWrapper';
     document.body.appendChild(wrap);
 
-    let popUpCloseBack = document.createElement('div');
+    const popUpCloseBack = document.createElement('div');
     popUpCloseBack.id = 'animationWorkshopCreate_popup_close_back';
     wrap.appendChild(popUpCloseBack);
 
-    let popUp = document.createElement('div');
+    const popUp = document.createElement('div');
     popUp.id = 'animationWorkshopCreate_popup';
     wrap.appendChild(popUp);
 
-    let toolbar = document.createElement('div');
+    const toolbar = document.createElement('div');
     toolbar.id = 'animationWorkshopCreate_popup_toolbar';
     toolbar.innerHTML = 'Animation Workshop';
     popUp.appendChild(toolbar);
 
-    let popUpClose = document.createElement('div');
+    const popUpClose = document.createElement('div');
     popUpClose.id = 'animationWorkshopCreate_popup_close';
     popUpClose.innerHTML = 'X';
     toolbar.appendChild(popUpClose);
 
-    let mainArea = document.createElement('div');
+    const mainArea = document.createElement('div');
     mainArea.id = 'animationWorkshopCreate_popup_mainarea';
     popUp.appendChild(mainArea);
 
-    let mainAreaCanvas = document.createElement('canvas');
+    const mainAreaCanvas = document.createElement('canvas');
     mainAreaCanvas.id = 'animationWorkshopCreate_popup_mainarea_canvas';
     mainArea.appendChild(mainAreaCanvas);
 
-    let filmArea = document.createElement('div');
+    const filmArea = document.createElement('div');
     filmArea.id = 'animationWorkshopCreate_popup_filmarea';
     popUp.appendChild(filmArea);
 
     
     for(let i = 0; i < film.totalFrames; ++i){
-        let box = film.getFrameBox(i);
-        let preview = document.createElement('canvas');
-        let width = filmArea.offsetWidth-2;
+        const box = film.getFrameBox(i);
+        const preview = document.createElement('canvas');
+        const width = filmArea.offsetWidth-2;
         preview.style.width = width;
         preview.style.height = width;
         preview.classList = 'animationWorkshopCreate_popup_filmarea_box';
-        let previewCtx = preview.getContext('2d');
+        const previewCtx = preview.getContext('2d');
         previewCtx.canvas.width = width;
         previewCtx.canvas.height = width;
         previewCtx.drawImage(bb.fastGet('assets',film.bitmap),
@@ -387,20 +397,20 @@ function createPopUp(film){
 
 
 
-    let editArea = document.createElement('div');
+    const editArea = document.createElement('div');
     editArea.id = 'animationWorkshopCreate_popup_editarea';
     popUp.appendChild(editArea);
 
-    let delayWrapper = document.createElement('div');
+    const delayWrapper = document.createElement('div');
     delayWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(delayWrapper);
 
-    let delaySliderPrompt = document.createElement('div');
+    const delaySliderPrompt = document.createElement('div');
     delaySliderPrompt.innerHTML = 'Delay: ';
     delaySliderPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     delayWrapper.appendChild(delaySliderPrompt);
 
-    let delaySlider = document.createElement('input');
+    const delaySlider = document.createElement('input');
     delaySlider.type = 'range';
     delaySlider.id = 'animationWorkshopCreate_popup_editarea_delaySlider';
     delaySlider.min = '20';
@@ -410,16 +420,16 @@ function createPopUp(film){
     delaySlider.classList += 'animationWorkshopCreate_popup_editarea_value';
     delayWrapper.appendChild(delaySlider);
 
-    let dxWrapper = document.createElement('div');
+    const dxWrapper = document.createElement('div');
     dxWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(dxWrapper);
 
-    let dxPrompt = document.createElement('div');
+    const dxPrompt = document.createElement('div');
     dxPrompt.innerHTML = 'Dx: ';
     dxPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dxWrapper.appendChild(dxPrompt);
 
-    let dxInput = document.createElement('input');
+    const dxInput = document.createElement('input');
     dxInput.type = 'number';
     dxInput.min = '-50';
     dxInput.max = '50';
@@ -427,16 +437,16 @@ function createPopUp(film){
     dxInput.value = '0';
     dxWrapper.appendChild(dxInput);    
     
-    let dyWrapper = document.createElement('div');
+    const dyWrapper = document.createElement('div');
     dyWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(dyWrapper);
 
-    let dyPrompt = document.createElement('div');
+    const dyPrompt = document.createElement('div');
     dyPrompt.innerHTML = 'Dy: ';
     dyPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dyWrapper.appendChild(dyPrompt);
 
-    let dyInput = document.createElement('input');
+    const dyInput = document.createElement('input');
     dyInput.type = 'number';
     dyInput.min = '-50';
     dyInput.max = '50';
@@ -444,16 +454,16 @@ function createPopUp(film){
     dyInput.value = '0';
     dyWrapper.appendChild(dyInput);
 
-    let repsWrapper = document.createElement('div');
+    const repsWrapper = document.createElement('div');
     repsWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(repsWrapper);
 
-    let repsPrompt = document.createElement('div');
+    const repsPrompt = document.createElement('div');
     repsPrompt.innerHTML = 'Repetitions: ';
     repsPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     repsWrapper.appendChild(repsPrompt);
 
-    let repsInput = document.createElement('input');
+    const repsInput = document.createElement('input');
     repsInput.type = 'number';
     repsInput.min = '-1';
     repsInput.max = '100';
@@ -461,27 +471,27 @@ function createPopUp(film){
     repsInput.value = '-1';
     repsWrapper.appendChild(repsInput);
 
-    let idWrapper = document.createElement('div');
+    const idWrapper = document.createElement('div');
     idWrapper.classList += 'animationWorkshopCreate_popup_editarea_wrap';
     editArea.appendChild(idWrapper);
 
-    let idPrompt = document.createElement('div');
+    const idPrompt = document.createElement('div');
     idPrompt.innerHTML = 'Animation ID: ';
     idPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     idWrapper.appendChild(idPrompt);
 
-    let idInput = document.createElement('input');
+    const idInput = document.createElement('input');
     idInput.type = 'text';
     idInput.classList = 'animationWorkshopCreate_popup_editarea_value';
     idInput.placeholder = 'my animation';
     idWrapper.appendChild(idInput);
 
-    let startAnim = document.createElement('div');
+    const startAnim = document.createElement('div');
     startAnim.id = 'animationWorkshopCreate_popup_editarea_play';
     startAnim.innerHTML = 'Reset Position';
     editArea.appendChild(startAnim);
 
-    let createAnim = document.createElement('div');
+    const createAnim = document.createElement('div');
     createAnim.id = 'animationWorkshopCreate_popup_editarea_create';
     createAnim.innerHTML = 'Create Animation';
     editArea.appendChild(createAnim);
@@ -496,7 +506,7 @@ function createPopUp(film){
         reps: -1,
         delay: 90
     });
-    let ctx = mainAreaCanvas.getContext('2d');
+    const ctx = mainAreaCanvas.getContext('2d');
     ctx.width = mainAreaCanvas.width;
     ctx.height = mainAreaCanvas.height;
     let firstBox = film.getFrameBox(0);
@@ -586,10 +596,10 @@ function createPopUp(film){
 }
 
 function showFilms(objWrapper){
-    let items = Engine.AnimationManager.getAllFilms();
+    const items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
 
-    let pageSwapWrap = uiFactory.createElement({
+    const pageSwapWrap = uiFactory.createElement({
         parent: objWrapper,
         classList: 'inventory-window-body-page-swap'
     });
@@ -601,14 +611,14 @@ function showFilms(objWrapper){
 
     const itemsPerPage = 24;
 
-    let keys = Object.keys(items);
-    let pages = Math.ceil((keys.length-1) / itemsPerPage);
+    const keys = Object.keys(items);
+    const pages = Math.ceil((keys.length-1) / itemsPerPage);
     let currPage = 1;
 
     
     function currFilmsShowing(){
         
-        let starting = (currPage - 1) * itemsPerPage;
+        const starting = (currPage - 1) * itemsPerPage;
         let ending = (currPage) * itemsPerPage;
         if(ending > (keys.length)) ending = keys.length;
         pageSwapWrap.innerHTML = '';
@@ -629,8 +639,8 @@ function showFilms(objWrapper){
         }
 
         for(let j = starting; j < ending; ++j){
-            let i = keys[j];
-            let wrap = uiFactory.createElement({
+            const i = keys[j];
+            const wrap = uiFactory.createElement({
                 classList: 'inventory-window-animationPreview_itemWrapper',
                 parent: objWrapper
             });
@@ -644,20 +654,20 @@ function showFilms(objWrapper){
                 parent: wrap
             });
     
-            let body = uiFactory.createElement({
+            const body = uiFactory.createElement({
                 classList: 'inventory-window-animationPreview_body',
                 parent: wrap
             });
     
-            let anim = uiFactory.createElement({
+            const anim = uiFactory.createElement({
                 type: 'canvas',
                 classList: 'inventory-window-animationPreview_film',
                 parent: body
             });
-            let ctx = anim.getContext('2d');
+            const ctx = anim.getContext('2d');
             
-            let animator = new FRAnimator();
-            let animation = new FRAnimation({
+            const animator = new FRAnimator();
+            const animation = new FRAnimation({
                 id: '_prev_'+i,
                 start: 0,
                 end: items[i].totalFrames - 1,
@@ -666,7 +676,7 @@ function showFilms(objWrapper){
             });
     
             animator.onAction = (th)=>{
-                let firstBox = items[i].getFrameBox(th.currentFrame);
+                const firstBox = items[i].getFrameBox(th.currentFrame);
                 ctx.clearRect(0,0,anim.width,anim.height);
                 ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
                     firstBox.x,firstBox.y,firstBox.width,firstBox.height,

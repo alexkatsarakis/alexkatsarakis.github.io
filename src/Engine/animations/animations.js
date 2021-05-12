@@ -104,11 +104,11 @@ export default class AnimationManager extends Manager{
         if(!anim)return;
         if(!object)return;
         
-        let Animator = this.getAnimatorCategory(animator);
+        const Animator = this.getAnimatorCategory(animator);
         if(!Animator)return;
     
-        let an = new Animator();
-        let animation = this.getAnimation(anim);
+        const an = new Animator();
+        const animation = this.getAnimation(anim);
     
         let oldFilm;
         an.onStart = (animator,an)=>{
@@ -121,7 +121,7 @@ export default class AnimationManager extends Manager{
             }
             object.setAnimator(animator);
             oldFilm = object.getValue('film');
-            let anim = Engine.AnimationManager.getAnimation(an.id);
+            const anim = Engine.AnimationManager.getAnimation(an.id);
             object.setValue('film',anim.film.id);
         }
         an.onAction = (animator)=>{

@@ -14,15 +14,18 @@ export default class GridManager extends Manager{
 
     onLoad(){
         this.calculateGrid();
-        bb.installWatch('events', 'last', (e)=>this.onEvent(e));
+        
+        bb.installWatch('events','setValue_x',(e)=>{this.onEvent(e);});
+        bb.installWatch('events','setValue_y',(e)=>{this.onEvent(e);});
+        bb.installWatch('events','removeObject',()=>{this.onObjectDeletion();});
     }
 
     calculateGrid(){
-        let objs = Engine.ObjectManager.objects;
+        const objs = Engine.ObjectManager.objects;
 
         this._gridRectangles = [];
         for(let i in objs){
-            let obj = objs[i];
+            const obj = objs[i];
             if(obj.getOption('isSolid') === true 
             && obj.getOption('moveWithScroll') === true){ // === true on purpose to prevent auto conversions
                 this._gridRectangles.push(obj.getPositional());
@@ -36,13 +39,13 @@ export default class GridManager extends Manager{
 
     objectsOnPlatform(platFormObj){
         const objManager = Engine.ObjectManager;
-        let objs = objManager.objects;
+        const objs = objManager.objects;
 
         
         let isAttached = [];
         
         for(let i in objs){
-            let obj = objs[i];
+            const obj = objs[i];
             if(objManager.isSystemObject(obj.id) || obj === platFormObj)
             continue;
             
@@ -71,7 +74,7 @@ export default class GridManager extends Manager{
 
     isPointInGrid(x,y){
         for(let i in this._gridRectangles){
-            let rect = this._gridRectangles[i];
+            const rect = this._gridRectangles[i];
             if(rect.x < x 
             && rect.x + rect.width > x
             && rect.y < y
@@ -158,6 +161,11 @@ export default class GridManager extends Manager{
         }
     }
 
+    onObjectDeletion(){
+        this.calculateGrid();
+        bb.installWatch('events','removeObject',()=>{this.onObjectDeletion();});
+    }
+
     /*
     *   e: {
     *       type: string,
@@ -171,29 +179,30 @@ export default class GridManager extends Manager{
     */
     onEvent(e){
         if(!Engine.ObjectManager.isSystemObject(e.objectID)){
-           if(e.type === 'setValue'){
-                let obj = Engine.ObjectManager.getObject(e.objectID);
-                if(obj && obj.getOption('isPlatform')){
-                    if(e.data.type === 'x'){
-                        let diff = e.data.value - e.data.oldVal;
-                        this.objectsOnPlatform(obj).forEach((objOnP)=>{
-                            objOnP.move(diff,0);
-                        })
-                    } else if(e.data.type === 'y'){
-                        let diff = e.data.value - e.data.oldVal;
-                        this.objectsOnPlatform(obj).forEach((objOnP)=>{
-                            objOnP.move(0,diff);
-                        })
-                    }
+            const obj = Engine.ObjectManager.getObject(e.objectID);
+            if(obj && obj.getOption('isPlatform')){
+                const diff = e.data.value - e.data.oldVal;
+                if(e.data.type === 'x'){
+                    this.objectsOnPlatform(obj).forEach((objOnP)=>{
+                        objOnP.move(diff,0);
+                    })
+                } else if(e.data.type === 'y'){
+                    this.objectsOnPlatform(obj).forEach((objOnP)=>{
+                        objOnP.move(0,diff);
+                    })
                 }
-                if(obj && obj.getOption('isSolid')){
-                    this.calculateGrid();
-                }
-                this.canMove(e.objectID,e.data);
             }
+            if(obj && obj.getOption('isSolid')){
+                this.calculateGrid();
+            }
+            this.canMove(e.objectID,e.data);
         }
 
-        bb.installWatch('events','last',(e)=>{this.onEvent(e);});
+        if(e.data.type === 'x'){
+            bb.installWatch('events','setValue_x',(e)=>{this.onEvent(e);});
+        }else{
+            bb.installWatch('events','setValue_y',(e)=>{this.onEvent(e);});
+        }
 
     }
 }

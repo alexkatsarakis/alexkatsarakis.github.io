@@ -44,8 +44,8 @@ Blockly.Blocks['this_object_flags'] = {
     },
 
     getFlags: function() {
-        let opts = bb.fastGet('state','focusedObject').getOptions();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getOptions();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -54,8 +54,8 @@ Blockly.Blocks['this_object_flags'] = {
 };
 
 Blockly.JavaScript['this_object_flags'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
-    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    const field_val = block.getFieldValue('FIELD');
+    const val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.getObjectByID(currObject).setOption('${field_val}',${val_val});`;
 };
@@ -81,8 +81,8 @@ Blockly.Blocks['this_object_value'] = {
     },
 
     getFields: function() {
-        let opts = bb.fastGet('state','focusedObject').getValues();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getValues();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -91,8 +91,8 @@ Blockly.Blocks['this_object_value'] = {
 };
 
 Blockly.JavaScript['this_object_value'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
-    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    const field_val = block.getFieldValue('FIELD');
+    const val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.getObjectByID(currObject).setValue('${field_val}',${val_val});`;
 };
@@ -116,8 +116,8 @@ Blockly.Blocks['this_object_state'] = {
     },
 
     getStates: function() {
-        let opts = bb.fastGet('state','focusedObject').getStates();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getStates();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -126,7 +126,7 @@ Blockly.Blocks['this_object_state'] = {
 };
 
 Blockly.JavaScript['this_object_state'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return `AK.getObjectByID(currObject).setCurrentState('${field_val}');`;
 };
 
@@ -147,8 +147,8 @@ Blockly.Blocks['this_object_event'] = {
     },
 
     getEvents(){
-        let opts = bb.fastGet('state','focusedObject').getEvents();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getEvents();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -157,7 +157,7 @@ Blockly.Blocks['this_object_event'] = {
 };
 
 Blockly.JavaScript['this_object_event'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return `AK.getObjectByID(currObject).triggerEvent('${field_val}');`;
 };
 
@@ -179,8 +179,8 @@ Blockly.Blocks['get_this_object_value'] = {
     },
 
     getFields: function() {
-        let opts = bb.fastGet('state','focusedObject').getValues();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getValues();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -189,7 +189,7 @@ Blockly.Blocks['get_this_object_value'] = {
 };
 
 Blockly.JavaScript['get_this_object_value'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return [`AK.getObjectByID(currObject).getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
@@ -209,8 +209,8 @@ Blockly.Blocks['get_this_object_flags'] = {
     },
 
     getFlags: function() {
-        let opts = bb.fastGet('state','focusedObject').getOptions();
-        let categs = [];
+        const opts = bb.fastGet('state','focusedObject').getOptions();
+        const categs = [];
         for(let i in opts){
                 categs.push([i,i]);
         }
@@ -219,7 +219,7 @@ Blockly.Blocks['get_this_object_flags'] = {
 };
 
 Blockly.JavaScript['get_this_object_flags'] = function(block) {
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return [`AK.getObjectByID(currObject).getOption('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 

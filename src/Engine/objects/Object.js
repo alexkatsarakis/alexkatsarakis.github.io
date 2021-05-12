@@ -41,7 +41,7 @@ export default class Object {
     }
 
     toString(){
-        let toSave = {
+        const toSave = {
             events:     this.getEvents(),        
             states:     this.getStates(),
             options:    this.getOptions(),
@@ -64,7 +64,7 @@ export default class Object {
     }
 
     getPositional() {
-        let handler = this.data.valueHandler;
+        const handler = this.data.valueHandler;
         let toReturn = {};
         for (let i in handler.getValues()) { 
             if (handler.getValueTag(i) === "positional") 
@@ -77,7 +77,7 @@ export default class Object {
     getCodes() {
         let toReturn = {};
 
-        let events = this.getEvents();
+        const events = this.getEvents();
         toReturn.events = {};
         for (let i in events) {
             toReturn.events[i] = {};
@@ -89,10 +89,10 @@ export default class Object {
             }
         }
 
-        let states = this.getStates();
+        const states = this.getStates();
         toReturn.states = {};
         for(let i in states){
-            let state = this.getState(i);
+            const state = this.getState(i);
             toReturn.states[i] = {};
             toReturn.states[i]['out of '+i] = {};
             toReturn.states[i]['out of '+i].get = () => {
@@ -117,7 +117,7 @@ export default class Object {
             }
         }
 
-        let values = this.getValues();
+        const values = this.getValues();
         toReturn.values = {};
         for(let i in values){
             if(this.getValueTag(i) === 'user'){
@@ -131,7 +131,7 @@ export default class Object {
             }
         }
 
-        let options = this.getOptions();
+        const options = this.getOptions();
         toReturn.options = {};
         for(let i in options){
             if(this.getOptionTag(i) === 'user'){
@@ -145,7 +145,7 @@ export default class Object {
             }
         }
 
-        let collisions = this.getCollisions();
+        const collisions = this.getCollisions();
         toReturn.collisions = {};
         for(let i in collisions){
             toReturn.collisions[i] = {};
@@ -227,7 +227,13 @@ export default class Object {
     }
 
     clear() {
-        delete this.data.eventHandler;
+        for (let i in this.data.stateHandler) {
+            delete this.data.stateHandler[i];
+        }
+        
+        for (let i in this.data.eventHandler) {
+            delete this.data.eventHandler[i];
+        }
 
         for (let i in this.data.optionHandler) {
             delete this.data.optionHandler[i];
@@ -235,6 +241,10 @@ export default class Object {
 
         for (let i in this.data.valueHandler) {
             delete this.data.valueHandler[i];
+        }
+
+        for (let i in this.data.collisionHandler.getCollisions()) {
+            this.data.collisionHandler.removeCollision(i);
         }
 
     }

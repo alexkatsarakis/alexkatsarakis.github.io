@@ -16,11 +16,11 @@ export default class SnapshotManager extends Manager{
     }
 
     snapshotObject(item = bb.fastGet('state','focusedObject')){
-        let objCollection = this._collection[item.id];
+        const objCollection = this._collection[item.id];
         if(!objCollection){
             this._collection[item.id] = [];
         }
-        let snap = JSON.parse(item.toString());
+        const snap = JSON.parse(item.toString());
         snap._time = Engine.ClockManager.getTime();
         this._collection[item.id].push(snap);
     }
@@ -38,10 +38,10 @@ export default class SnapshotManager extends Manager{
     }
 
     snapshotScene(optName){
-        let gameTime = bb.fastGet('state','gameTime');
-        let objects = Engine.SaveManager.saveObjectsLocal();
+        const gameTime = bb.fastGet('state','gameTime');
+        const objects = Engine.SaveManager.saveObjectsLocal();
         
-        let animators = [];
+        const animators = [];
         Engine.AnimationManager.getAnimators().forEach((an)=>{
             animators.push({
                 _onAction: an._onAction,
@@ -64,29 +64,29 @@ export default class SnapshotManager extends Manager{
     }
 
     resetSceneToSnapshot(timeStamp){
-        let timeWarp = this._sceneCollection[timeStamp];
+        const timeWarp = this._sceneCollection[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
 
-        let objs = timeWarp.objects;
+        const objs = timeWarp.objects;
         // find if an object has been deleted; and if it has then delete if from map;
-        let liveObjs = Engine.ObjectManager.objects;
+        const liveObjs = Engine.ObjectManager.objects;
         for(let i in liveObjs){
             if(!objs[i])liveObjs[i].remove();
         }
 
         for(let i in objs){
-            let obj = objs[i];
+            const obj = objs[i];
             utils.resetObject(obj);
         }
 
-        let animators = Engine.AnimationManager.getAnimators();
+        const animators = Engine.AnimationManager.getAnimators();
         animators.forEach((animator)=>animator.destroy());
 
         timeWarp.animators.forEach((an)=>{
-            let Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
+            const Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
             if(!Animator)return;
         
-            let animator = new Animator();
+            const animator = new Animator();
 
 
             animator.onStart = an._onStart;

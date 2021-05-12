@@ -56,7 +56,7 @@ export default class PauseManager extends Manager{
 
     resume(){
         if(!this._timePaused) throw Error('Resume without pause');
-        let timePassed = bb.fastGet('state','gameTime') - this._timePaused;
+        const timePassed = bb.fastGet('state','gameTime') - this._timePaused;
 
         Engine.AnimationManager.timeShift(timePassed);
         

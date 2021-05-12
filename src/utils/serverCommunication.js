@@ -64,11 +64,11 @@ class CommunicationManager {
 
 }
 
-let comMan = new CommunicationManager();
+const comMan = new CommunicationManager();
 
 export default comMan;
 
-// let struc = [
+// const struc = [
 //     {
 //         name: 'id',
 //         type: 'TEXT PRIMARY KEY',

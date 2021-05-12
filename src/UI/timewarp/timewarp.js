@@ -26,9 +26,9 @@ function onTimewarpLoad(){
     const timeWrapper = document.getElementById('timewarp-wrapper');
 
 
-    let recBut = document.getElementById('timewarp-record');
+    const recBut = document.getElementById('timewarp-record');
 
-    let recBut2 = uiFactory.createElement({
+    const recBut2 = uiFactory.createElement({
         parent: timeWrapper,
         id: 'timewarp-record',
         classList: 'timewarp-button'
@@ -45,7 +45,7 @@ function onTimewarpLoad(){
         recBut.style.backgroundColor = 'grey';
         Engine.TimewarpManager.startRecording(0);
 
-        let stopRecBut = uiFactory.createElement({
+        const stopRecBut = uiFactory.createElement({
             parent: timeWrapper,
             classList: 'timewarp-button'
         });
@@ -60,24 +60,24 @@ function onTimewarpLoad(){
             let recordedTimes = Engine.TimewarpManager.getRecordedTimestamps();
             if(!recordedTimes) throw Error('No recorded times on stop');
 
-            let currFrame = uiFactory.createElement({
+            const currFrame = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-currFrame', 
                 classList: 'timewarp-text',
                 innerHTML: `Frame: ${recordedTimes.length - 1}`
             });
 
-            let currFrameTime = uiFactory.createElement({
+            const currFrameTime = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-currFrameTime', 
                 classList: 'timewarp-text'
             });
 
 
-            let firstTime = Number.parseInt(recordedTimes[0]);
+            const firstTime = Number.parseInt(recordedTimes[0]);
             recordedTimes = recordedTimes.map((time)=>time - firstTime);
 
-            let range = uiFactory.createElement({
+            const range = uiFactory.createElement({
                 parent: timeWrapper,
                 type: 'input',
                 inputType: 'range',
@@ -89,14 +89,14 @@ function onTimewarpLoad(){
             range.value = recordedTimes[recordedTimes.length - 1];
 
             range.onchange = (ev) => {
-                let number = Number.parseInt(ev.target.value);
-                let realNumber = getLowerNumber(recordedTimes,number);
-                let frameIndex = recordedTimes.indexOf(realNumber);
+                const number = Number.parseInt(ev.target.value);
+                const realNumber = getLowerNumber(recordedTimes,number);
+                const frameIndex = recordedTimes.indexOf(realNumber);
                 if(frameIndex === -1) throw Error('Error translating range to frame');
                 Engine.TimewarpManager.showSnapshot(firstTime+realNumber, frameIndex);
             }
 
-            let factor = uiFactory.createElement({
+            const factor = uiFactory.createElement({
                 parent: timeWrapper,
                 type: 'input',
                 inputType: 'number',
@@ -108,19 +108,19 @@ function onTimewarpLoad(){
             factor.style.border = '0';
             factor.style.backgroundColor = 'white';
 
-            let showBackward = uiFactory.createElement({
+            const showBackward = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-showBackward', 
                 classList: 'timewarp-button'
             });
 
             showBackward.onclick = ()=>{
-                let number = Number.parseInt(range.value);
-                let realNumber = getLowerNumber(recordedTimes,number);
+                const number = Number.parseInt(range.value);
+                const realNumber = getLowerNumber(recordedTimes,number);
                 Engine.TimewarpManager.playBackward(firstTime+realNumber,factor.value);
             }  
 
-            let pausePlayBut = uiFactory.createElement({
+            const pausePlayBut = uiFactory.createElement({
                 parent: timeWrapper,
                 classList: 'timewarp-text',
                 innerHTML: 'Pause'
@@ -129,19 +129,19 @@ function onTimewarpLoad(){
                 Engine.TimewarpManager.stopPlayback();
             }          
             
-            let showForward = uiFactory.createElement({
+            const showForward = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-showForward', 
                 classList: 'timewarp-button'
             });
 
             showForward.onclick = ()=>{
-                let number = Number.parseInt(range.value);
-                let realNumber = getLowerNumber(recordedTimes,number);
+                const number = Number.parseInt(range.value);
+                const realNumber = getLowerNumber(recordedTimes,number);
                 Engine.TimewarpManager.playForward(firstTime+realNumber,factor.value);
             }
 
-            let resumeBut = uiFactory.createElement({
+            const resumeBut = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-resume', 
                 classList: 'timewarp-text',
@@ -150,8 +150,8 @@ function onTimewarpLoad(){
 
             resumeBut.onclick = ()=>{
                 recBut.style.backgroundColor = 'red';                
-                let number = Number.parseInt(range.value);
-                let realNumber = getLowerNumber(recordedTimes,number);
+                const number = Number.parseInt(range.value);
+                const realNumber = getLowerNumber(recordedTimes,number);
                 Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
                 range.remove();
                 factor.remove();

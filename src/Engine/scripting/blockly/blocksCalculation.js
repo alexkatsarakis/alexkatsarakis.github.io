@@ -23,8 +23,8 @@ Blockly.Blocks['calc_distance_obj'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -33,8 +33,8 @@ Blockly.Blocks['calc_distance_obj'] = {
 };
 
 Blockly.JavaScript['calc_distance_obj'] = function(block) {
-    let obj1 = block.getFieldValue('OBJ1');
-    let obj2 = block.getFieldValue('OBJ2');
+    const obj1 = block.getFieldValue('OBJ1');
+    const obj2 = block.getFieldValue('OBJ2');
     return `AK.distanceObjects(AK.getObjectByID("${obj1}"), AK.getObjectByID("${obj2}"))`;
 };
 
@@ -54,8 +54,8 @@ Blockly.Blocks['calc_obj_center'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -64,7 +64,7 @@ Blockly.Blocks['calc_obj_center'] = {
 };
 
 Blockly.JavaScript['calc_obj_center'] = function(block) {
-    let obj1 = block.getFieldValue('OBJ1');
+    const obj1 = block.getFieldValue('OBJ1');
     return `AK.getObjectCenter(AK.getObjectByID("${obj1}"))`;
 };
 
@@ -87,9 +87,9 @@ Blockly.Blocks['calc_point_dist'] = {
 };
 
 Blockly.JavaScript['calc_point_dist'] = function(block) {
-    let point1 = Blockly.JavaScript.valueToCode (block, 'point1',
+    const point1 = Blockly.JavaScript.valueToCode (block, 'point1',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    let point2 = Blockly.JavaScript.valueToCode (block, 'point2',
+    const point2 = Blockly.JavaScript.valueToCode (block, 'point2',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.distanceTwoPoints(${point1}, ${point2})`;
 };

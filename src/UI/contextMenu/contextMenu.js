@@ -13,32 +13,39 @@ export default {
 };
 
 function onContextChange({objID,event}){
-    let obj = Engine.ObjectManager.objects[objID];
+    const obj = Engine.ObjectManager.objects[objID];
     
-    let wrapper = document.getElementById('contextMenu-wrapper');
+    const wrapper = document.getElementById('contextMenu-wrapper');
 
-    let bg = uiFactory.createElement({
+    const bg = uiFactory.createElement({
         parent: wrapper,
         id: 'contextMenu-background'
     });
 
-    let cMenu = uiFactory.createElement({
+    const cMenu = uiFactory.createElement({
         parent: wrapper,
         id: 'contextMenu-window'
     });
 
     cMenu.style.top =  event.clientY+'px';
     cMenu.style.left = event.clientX+'px';
-    
 
     bg.onclick = ()=>{
         bg.remove();
         cMenu.remove();
     };
 
+
+    uiFactory.createElement({
+        parent: cMenu,
+        id: 'contextMenu-name',
+        innerHTML: obj.name
+    });
+
+
     if(Engine.hasManager('ClipboardManager')){
         if(!Engine.ObjectManager.isSystemObject(objID)){
-            let but = uiFactory.createElement({
+            const but = uiFactory.createElement({
                 parent: cMenu,
                 classList: 'contextMenu-item',
                 innerHTML: 'Copy Object'
@@ -49,14 +56,14 @@ function onContextChange({objID,event}){
             }
         }
         if(Engine.ClipboardManager.top()){
-            let but = uiFactory.createElement({
+            const but = uiFactory.createElement({
                 parent: cMenu,
                 classList: 'contextMenu-item',
                 innerHTML: 'Paste Object'
             });
             but.onclick = ()=>{
-                let newObj = Engine.ClipboardManager.paste();
-                let envObj = Engine.ObjectManager.getObjectByName('Stage');
+                const newObj = Engine.ClipboardManager.paste();
+                const envObj = Engine.ObjectManager.getObjectByName('Stage');
                 newObj.setPosition(
                     event.clientX+envObj.getValue('x'),
                     event.clientY+envObj.getValue('y')
@@ -68,7 +75,7 @@ function onContextChange({objID,event}){
 
 
     if(obj.getOption('isRemovable')){
-        let but = uiFactory.createElement({
+        const but = uiFactory.createElement({
             parent: cMenu,
             classList: 'contextMenu-item',
             innerHTML: 'Remove Object'
@@ -103,6 +110,12 @@ function onContextChange({objID,event}){
     }
 
     
+    if(cMenu.offsetTop + cMenu.offsetHeight > window.innerHeight){
+        cMenu.style.top = event.clientY - cMenu.offsetHeight + 'px';
+    }
+    if(cMenu.offsetLeft + cMenu.offsetWidth > window.innerWidth){
+        cMenu.style.left = event.clientX - cMenu.offsetWidth + 'px';
+    }
 
     bb.installWatch('events','contextMenu',onContextChange);
 }

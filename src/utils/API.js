@@ -88,6 +88,10 @@ AK.prototype.playAnimation = ({object, anim, onStart, onFinish})=>{
         });
 }
 
+AK.prototype.stopAnimation = (obj)=>{
+    obj.destroyAnimator();
+}
+
 AK.prototype.moveObject = (obj,x,y)=>{
     bb.fastGet('actions','move')(obj,x,y);
 }
@@ -155,6 +159,19 @@ AK.prototype.distanceTwoPoints = (p1, p2) => {
 
 AK.prototype.getObjectCenter = (obj1) => {
     return Engine.DistanceManager.getObjectCenter(obj1);
+}
+
+AK.prototype.isSolidBelow = (obj) => {
+    if(!Engine.hasManager('GridManager'))return false;
+    const pos = obj.getPositional();
+    const w = pos.x + pos.width;
+    const h = pos.y + pos.height;
+
+    for(let i = pos.x; i < w; ++i){
+        if(Engine.GridManager.isPointInGrid(i,h+1))return true;
+    }
+
+    return false;
 }
 
 /////////////CLONES/////////////

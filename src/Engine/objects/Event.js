@@ -48,7 +48,7 @@ export default class EventsManager {
     }
 
     getEvent(ev) {
-        let event = this._regEvents[ev];
+        const event = this._regEvents[ev];
         if (!event) { // log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
             return;
         }
@@ -59,7 +59,7 @@ export default class EventsManager {
     }
 
     setEvent(ev, code) {
-        let event = this._regEvents[ev];
+        const event = this._regEvents[ev];
         if (!event) {
             this.registerEvent(ev, code);
             return;

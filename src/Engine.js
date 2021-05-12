@@ -15,11 +15,23 @@ import ClockManager from './Engine/clock/ClockManager.js'
 import ScriptingManager from './Engine/scripting/scripting.js'
 import SaveManager from './Engine/save/save.js'
 
-
+/**
+ * @class _Engine is a syntactic sugar for setters/getters
+ */
 class _Engine {
+
+    /**
+     * @private _manager local variable that stores all the installed managers
+     * @private _app is a local variable that saves the app (gameloop and etc)
+     */
     _managers
     _app
 
+
+    /**
+     * @method constructor initialise the local variables and 
+     * install all the Core Managers needed for the application to run
+     */
     constructor(){
         this._managers = {};
         this._app = new App();
@@ -41,6 +53,12 @@ class _Engine {
         this.installManager('SaveManager', new SaveManager());
     }
 
+
+    /**
+     * 
+     * @param {string} name: Will remove the Manager with that name
+     * @throws Error if the name doesn't correspond to an installed manager 
+     */
     removeManager(name){
         assert.check(this._managers[name],'Removing a manager that doesn\'t exist');
         delete this._managers[name]
@@ -48,6 +66,12 @@ class _Engine {
         bb.fastRemove('Engine',name);
     }
 
+    /**
+     * 
+     * @param {string} name: Will register a manager with that name
+     * @param {Manager} manager: The Manager that will be stored
+     * @throws Error if the given name is already binded by another Manager
+     */
     installManager(name, manager){
         assert.check(!this._managers[name],'Installing a manager that already exists');
         this._managers[name] = manager;
@@ -55,15 +79,23 @@ class _Engine {
         bb.fastInstall('Engine',name,manager);
     }
 
+    /**
+     * 
+     * @param {string} name: the name of a manager 
+     * @returns {boolean} if there is a Manager with that name installed
+     */
     hasManager(name){
         return name in this._managers;
     }
 
+    /**
+     * Responsible to start the game loop.
+     */
     start(){
         this.app.main();
         bb.fastInstall('Engine','Self',this);
     
-        let aliveItems = this.ObjectManager.objects;
+        const aliveItems = this.ObjectManager.objects;
         for(let i in aliveItems)
             aliveItems[i].triggerEvent('onGameStart');
     
@@ -86,11 +118,6 @@ const app = Engine.app;
 const game = app.game;
 
 app.addInitialiseFunction(()=>{
-    let init = Engine.initInfo;
-
-    for(let i in init.objects){
-        utils.createObject(init.objects[i]);
-    }
 });
 
 app.addLoadFunction(()=>{
@@ -114,7 +141,11 @@ game.render = ()=>{
 };
 
 game.input = ()=>{
-    Engine.InputManager.pollKeys();
+    if(bb.fastGet('state','mode') !== 'editing'
+    && bb.fastGet('state','mode') !== 'play'
+    && bb.fastGet('state','mode') !== 'paused')
+        return;
+    // Engine.InputManager.pollKeys();
     Engine.InputManager.getReleasedKeys().forEach((key)=>utils.inputHandler('Unpressed'+key));
     Engine.InputManager.getPressedKeys().forEach((key)=>utils.inputHandler('Pressed'+key));
 };
@@ -130,7 +161,7 @@ game.physics = ()=>{
 };
 
 game.collisions = ()=>{
-    Engine.CollisionManager.checkAndInvoke(Engine.ObjectManager.objects);
+    Engine.CollisionManager.checkAndInvoke();
 };
 
 game.userCode = ()=>{
@@ -141,7 +172,9 @@ game.userCode = ()=>{
 };
 
 game.extra = ()=>{
-    Engine.ClockManager.update();
+    for(let i in Engine._managers){
+        Engine._managers[i].onUpdate();
+    }
 };
 
 export default Engine;

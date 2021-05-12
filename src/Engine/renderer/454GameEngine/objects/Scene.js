@@ -10,47 +10,40 @@ class Scene {
         this._canvas = document.createElement('canvas');
         this._canvas.id = '454Scene';
         this._canvas.style.position = 'absolute';
-        this._canvas.style.width = 1920+'px';// window.innerWidth+'px';
-        this._canvas.style.height = 1080+'px';// window.innerHeight+'px';
+        this._canvas.style.width  = window.innerWidth+'px';
+        this._canvas.style.height = window.innerHeight+'px';
         this._canvasCTX = this._canvas.getContext("2d");
-        this._canvasCTX.canvas.width = 1920;// window.innerWidth;
-        this._canvasCTX.canvas.height = 1080;// window.innerHeight;
+        this._canvasCTX.canvas.width  = window.innerWidth;
+        this._canvasCTX.canvas.height = window.innerHeight;
         document.body.appendChild(this._canvas);
 
-        // This is better but it doesn't work on mozilla at the moment
-        // Because OffscreenCanvas.getContext is not implemented
-    //     this._offScreenCanvas = new OffscreenCanvas(1920,1080);
-    //     this._offScreenCanvasCTX = this._offScreenCanvas.getContext('2d');
-    //     this._offScreenCanvasCTX.canvas.width = 1920;
-    //     this._offScreenCanvasCTX.canvas.height = 1080;
+    }
 
-        // this._offScreenCanvas = document.createElement('canvas');
-        // this._offScreenCanvas.style.width = 1920+'px';// window.innerWidth+'px';
-        // this._offScreenCanvas.style.height = 1080+'px';// window.innerHeight+'px';
-        // this._offScreenCanvasCTX = this._offScreenCanvas.getContext("2d");
-        // this._offScreenCanvasCTX.canvas.width = 1920;// window.innerWidth;
-        // this._offScreenCanvasCTX.canvas.height = 1080;// window.innerHeight;
+    sortObjects(){
+        this._items.sort((obj1,obj2)=>{
+            let index1 = obj1.getValue('zIndex');
+            let index2 = obj2.getValue('zIndex');
+            if(!index1)index1 = 0;
+            if(!index2)index2 = 0;
+            return index1 - index2;
+        });
     }
 
     addItem(id){
         this._items.push(id);
+        this.sortObjects(); //TODO: Instead of sort each time change the way
+                            // I store objects -> based on zIndex
     }
+    
 
     removeItem(id){
-        let i = this._items.indexOf(id);
+        const i = this._items.indexOf(id);
         this._items.splice(i,1);
     }
 
-
-    // renderObjects(){
-    //     this._offScreenCanvasCTX.clearRect(0, 0, this._offScreenCanvas.width, this._offScreenCanvas.height);
-    //     this._items.forEach((obj)=>obj.render(this._offScreenCanvasCTX));
-    //     this._canvasCTX.clearRect(0,0,this._canvas.width,this._canvas.height);
-    //     this._canvasCTX.drawImage(this._offScreenCanvas,0,0);
-    // }
-
     renderObjects(){
         this._canvasCTX.clearRect(0,0,this._canvas.width,this._canvas.height);
+        
         this._items.forEach((obj)=>obj.render(this._canvasCTX));
     }
 

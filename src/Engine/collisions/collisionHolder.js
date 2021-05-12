@@ -4,6 +4,22 @@ class CollisionHolder {
     constructor(){
     }
 
+    updateObjectName(objName,newName){
+        for(let i in this._collisionReactions){
+            const split = i.split('_');
+            const obj1Name = split[0];
+            const obj2Name = split[1];
+            // console.log(this._collisionReactions[i]);
+            if(obj1Name === objName){
+                this._collisionReactions[`${newName}_${obj2Name}`] = this._collisionReactions[i];
+                delete this._collisionReactions[i];
+            }else if(obj2Name === objName){
+                this._collisionReactions[`${obj1Name}_${newName}`] = this._collisionReactions[i];
+                delete this._collisionReactions[i];
+            }
+        }
+    }
+
     installCollision(first,second,code){
         if(this._collisionReactions[`${first}_${second}`] || this._collisionReactions[`${second}_${first}`])return false;
         this._collisionReactions[`${first}_${second}`] = code || {text: "",code: ""};
@@ -13,9 +29,9 @@ class CollisionHolder {
     getAllCollisions(){
         let toReturn = {};
         for(let i in this._collisionReactions){
-            let split = i.split('_');
-            let obj1Name = split[0];
-            let obj2Name = split[1];
+            const split = i.split('_');
+            const obj1Name = split[0];
+            const obj2Name = split[1];
             if(!toReturn[obj1Name]){
                 toReturn[obj1Name] = [];
             }
@@ -32,9 +48,9 @@ class CollisionHolder {
     getCollisions(objId){
         let toReturn = [];
         for(let i in this._collisionReactions){
-            let split = i.split('_');
-            let obj1Name = split[0];
-            let obj2Name = split[1];
+            const split = i.split('_');
+            const obj1Name = split[0];
+            const obj2Name = split[1];
             if(obj1Name === objId){
                 toReturn.push({collisionWith:obj2Name, code: this._collisionReactions[i]});
             }else if(obj2Name === objId){
@@ -54,16 +70,16 @@ class CollisionHolder {
 
     setCollision(first,second,code){
         if(!code)return false;
-        let combined = `${first}_${second}`;
-        let combinedRev = `${second}_${first}`;
+        const combined = `${first}_${second}`;
+        const combinedRev = `${second}_${first}`;
         if(this._collisionReactions[combinedRev] !== undefined)
             delete this._collisionReactions[combinedRev]
         this._collisionReactions[combined] = code;
     }
 
     removeCollision(first,second){
-        let combined = `${first}_${second}`;
-        let combinedRev = `${second}_${first}`;
+        const combined = `${first}_${second}`;
+        const combinedRev = `${second}_${first}`;
         if(this._collisionReactions[combined] !== undefined)
             delete this._collisionReactions[combined];
         else if(this._collisionReactions[combinedRev] !== undefined)
@@ -73,8 +89,8 @@ class CollisionHolder {
     collided(obj1,obj2){
         if(obj1 === obj2)return false;
         if(!obj1.getOption('isCollidable') || !obj2.getOption('isCollidable'))return;
-        let pos1 = obj1.getPositional();
-        let pos2 = obj2.getPositional();
+        const pos1 = obj1.getPositional();
+        const pos2 = obj2.getPositional();
         if(pos1.x >= pos2.x + pos2.width || pos2.x >= pos1.x + pos1.width){
             return false;
         }
@@ -108,9 +124,9 @@ class CollisionHolder {
         }
 
         for(let i in this._collisionReactions){
-            let split = i.split('_');
-            let obj1Name = split[0];
-            let obj2Name = split[1];
+            const split = i.split('_');
+            const obj1Name = split[0];
+            const obj2Name = split[1];
             if(!nameTranslator[obj1Name] || !nameTranslator[obj2Name])continue;
             if(this.collided(nameTranslator[obj1Name], nameTranslator[obj2Name])){
                 // aliveItems[obj1Name].triggerEvent('onCollision');

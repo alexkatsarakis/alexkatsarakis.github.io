@@ -33,7 +33,7 @@ class InputManager extends Manager{
 
         for(let combo in this.keyCombos){
             let isCombo = true;
-            let keysForCombo = this.keyCombos[combo];
+            const keysForCombo = this.keyCombos[combo];
             for(let key in keysForCombo){
                 if(!this.currentlyPressed[keysForCombo[key]])
                     isCombo = false;
@@ -50,7 +50,7 @@ class InputManager extends Manager{
     }
     
     getReleasedKeys(){
-        let toReturn = this.releasedKeys;
+        const toReturn = this.releasedKeys;
         this.releasedKeys = [];
         return toReturn;
     }
@@ -59,7 +59,7 @@ class InputManager extends Manager{
         this.pollKeys();
         let keysPressed = [];
         for(let i in this.currentlyPressed){
-            let currP = this.currentlyPressed[i];
+            const currP = this.currentlyPressed[i];
             if(currP === InputState.TOTRIGGER 
             || currP === InputState.FOREVER){
                 // logManager.logAction(`Action for input ${i}`);
@@ -126,51 +126,64 @@ class GamepadController {
     }
     var controller = this._gamepad;
 
+    const keyMap = {
+        0:  'KeyW',
+        8:  'resumeGame',
+        9:  'pauseGame',
+        // 13: 'KeyS',
+        // 14: 'KeyA',
+        // 15: 'KeyD',
+        100: 'KeyD',
+        102: 'KeyS',
+        104: 'KeyA',
+        // 106: 'KeyW',
+    }
+
+    const arePressed = {};
+
+    for(let i in keyMap){
+        arePressed[i] = false;
+    }
+
     for (let i = 0; i < controller.buttons.length; i++) {
-      var val = controller.buttons[i];
-      var pressed = false;
-      if (typeof(val) == "object") {
-        pressed = val.pressed;
-      }
-
-      if (pressed) {
-        if(controller.vibrationActuator)
-          controller.vibrationActuator.playEffect("dual-rumble", {
-            startDelay: 0,
-            duration: 50,
-            weakMagnitude: 0.5,
-            strongMagnitude: 1.0
-          });
-
-        if(!inputManager.isPressed('controller'+i)){
-            inputManager.keyPressed('controller'+i,true);
+        var val = controller.buttons[i];
+        var pressed = false;
+        if (typeof(val) == "object") {
+            pressed = val.pressed;
         }
-      } else {
-        if(inputManager.isPressed('controller'+i)){
-            inputManager.keyReleased('controller'+i);
-        }
-      }
-  
-        //   var axes = d.getElementsByClassName("axis");
-        for (let i = 0; i < controller.axes.length; i++) {
-            if(controller.axes[i] >= 0.5){
-                if(!inputManager.isPressed('controller'+(20+i))){
-                    inputManager.keyPressed('controller'+(20+i),true);
-                }
-            }else if(controller.axes[i] <= -0.5){
-                if(!inputManager.isPressed('controller'+(20+4+i))){
-                    inputManager.keyPressed('controller'+(20+4+i),true);
-                }
-            }else{
-                if(inputManager.isPressed('controller'+(20+i))){
-                    inputManager.keyReleased('controller'+(20+i));
-                }
-                if(inputManager.isPressed('controller'+(20+4+i))){
-                    inputManager.keyReleased('controller'+(20+4+i));
-                }
-            }
+
+        // if(controller.vibrationActuator)
+        //     controller.vibrationActuator.playEffect("dual-rumble", {
+        //     startDelay: 0,
+        //     duration: 50,
+        //     weakMagnitude: 0.5,
+        //     strongMagnitude: 1.0
+        // });
+        if (pressed){
+            // console.log(i);
+            arePressed[i] = true;
         }
     }
+    for (let i = 0; i < controller.axes.length; i++) {
+        const index = 100 + i;
+        if(controller.axes[i] > 0.5){
+            arePressed[index+i] = true;
+        }else if(controller.axes[i] < -0.5){
+            arePressed[index+i+4] = true;
+        }
+    }
+
+    Object.keys(arePressed).forEach((val)=>{
+        if(arePressed[val] === true){
+            if(!inputManager.isPressed(keyMap[val])){
+                inputManager.keyPressed(keyMap[val]);
+            }
+        }else{
+            if(inputManager.isPressed(keyMap[val])){
+                inputManager.keyReleased(keyMap[val]);
+            }
+        }
+    })
   }
 }
 

@@ -17,7 +17,7 @@ function hudState(){
     function toggleVisibility(){
         isVisible = !isVisible;
         bb.fastSet('state','mode',(isVisible)?"editing":"play");
-        let hudChildren = document.querySelectorAll('.hudChild');
+        const hudChildren = document.querySelectorAll('.hudChild');
         hudChildren.forEach(element => {
             element.style.visibility = (isVisible)?"visible":"hidden";
             element.style.opacity = (isVisible)?"0.9":"0";
@@ -73,13 +73,13 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = ScriptManager.currentScriptAsCode();
-        let currObj = bb.fastGet('state','focusedObject');
+        const code = ScriptManager.currentScriptAsCode();
+        const currObj = bb.fastGet('state','focusedObject');
         ScriptManager.executeCode({text: code, code: code},currObj.id);
     });
     
     document.getElementById('showScriptButton').addEventListener('click',()=>{
-        let code = codes.stripped[tabOpen].get();
+        const code = codes.stripped[tabOpen].get();
         if(ScriptManager.getCurrentEditorID() === 'pureJS'){
             ScriptManager.setNewEditor('blockly');
         }else{
@@ -89,21 +89,21 @@ function onHudLoaded(){
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = ScriptManager.currentScriptAsText();
-        let code = ScriptManager.currentScriptAsCode();
+        const text = ScriptManager.currentScriptAsText();
+        const code = ScriptManager.currentScriptAsCode();
         codes.stripped[tabOpen].set({text:text,code:code});
     });
 
     function tabInfo(id,cb){
         return ()=>{
-            let codes = cb();
+            const codes = cb();
             ScriptManager.clearAndLoadFromText(codes);
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
         };
     }
 
-    // let consoleArea = document.getElementById('consoleArea');
+    // const consoleArea = document.getElementById('consoleArea');
     // function onActionChange(newMessage){
     //     consoleArea.value += '\n'+newMessage;
     //     consoleArea.scrollTop = consoleArea.scrollHeight;
@@ -113,8 +113,8 @@ function onHudLoaded(){
 
     // bb.installWatch('state','lastAction',onActionChange);
     function onFocusChange(obj){
-        let eventsTab = document.getElementById('eventsTab');
-        let infoBar = document.getElementById('infoBar');
+        const eventsTab = document.getElementById('eventsTab');
+        const infoBar = document.getElementById('infoBar');
         showHideCodeUI('block');
         eventsTab.innerHTML = "";
         infoBar.innerHTML = "";
@@ -132,20 +132,20 @@ function onHudLoaded(){
         codes = obj.getCodes();
         codes.stripped = {};
 
-        let events  = codes.events;
-        let states  = codes.states;
-        let values  = codes.values;
-        let options = codes.options;
-        let collisi = codes.collisions;
+        const events  = codes.events;
+        const states  = codes.states;
+        const values  = codes.values;
+        const options = codes.options;
+        const collisi = codes.collisions;
         
-        let eventSplit = document.createElement('div');
+        const eventSplit = document.createElement('div');
         eventSplit.classList = 'tabSplitter';
         eventSplit.innerHTML = 'Events';
         eventsTab.appendChild(eventSplit);
 
         for(let i in events){
             codes.stripped[i] = events[i];
-            let elem = document.createElement('div');
+            const elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
@@ -170,7 +170,7 @@ function onHudLoaded(){
             eventsTab.appendChild(stateSplit);
             for(let st in states[i]){
                 codes.stripped[st] = states[i][st];
-                let elem = document.createElement('div');
+                const elem = document.createElement('div');
                 elem.classList = "eventTab";
                 elem.innerHTML = st;
                 elem.style.marginLeft = '20%';
@@ -183,14 +183,14 @@ function onHudLoaded(){
             }
         }
 
-        let valueSplit = document.createElement('div');
+        const valueSplit = document.createElement('div');
         valueSplit.classList = 'tabSplitter';
         valueSplit.innerHTML = 'Attributes';
         eventsTab.appendChild(valueSplit);
 
         for(let i in values){
             codes.stripped[i] = values[i];
-            let elem = document.createElement('div');
+            const elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
@@ -202,14 +202,14 @@ function onHudLoaded(){
             }
         }
 
-        let optionSplit = document.createElement('div');
+        const optionSplit = document.createElement('div');
         optionSplit.classList = 'tabSplitter';
         optionSplit.innerHTML = 'Flags';
         eventsTab.appendChild(optionSplit);
 
         for(let i in options){
             codes.stripped[i] = options[i];
-            let elem = document.createElement('div');
+            const elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
@@ -221,14 +221,14 @@ function onHudLoaded(){
             }
         }
 
-        let collSplit = document.createElement('div');
+        const collSplit = document.createElement('div');
         collSplit.classList = 'tabSplitter';
         collSplit.innerHTML = 'Collisions';
         eventsTab.appendChild(collSplit);
 
         for(let i in collisi){
             codes.stripped[i] = collisi[i];
-            let elem = document.createElement('div');
+            const elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
@@ -245,7 +245,7 @@ function onHudLoaded(){
 
     bb.installWatch('state','focusedObject',onFocusChange);
 
-    let fpsCounter = document.getElementById('fpsCounter');
+    const fpsCounter = document.getElementById('fpsCounter');
 
     function onFPSChange(newFPS){
         fpsCounter.innerHTML = "FPS:"+newFPS;

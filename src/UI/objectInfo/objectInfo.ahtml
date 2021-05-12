@@ -12,6 +12,9 @@
       <div id="mainInfoBox-head-categ">
         Category: categ
       </div>
+      <div id="mainInfoBox-head-id">
+        ID: id
+      </div>
     </div>
     <div id="mainInfoBox-body">
       <div id="mainInfoBox-body-states" class="mainInfoBox-shard">

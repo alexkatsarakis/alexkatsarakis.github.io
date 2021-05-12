@@ -5,6 +5,8 @@ import Engine from '../../Engine.js'
 
 import Manager from '../Manager.js'
 
+import utils from '../../utils/utils.js'
+
 
 export default class SaveManager extends Manager{
     _DBName = 'superMarioReal';
@@ -20,7 +22,7 @@ export default class SaveManager extends Manager{
         super();
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        let gameName = urlParams.get('game');
+        const gameName = urlParams.get('game');
         if(gameName){
             this._DBName = gameName;
             this._localState = `./assets/json/${gameName}.json`
@@ -82,14 +84,14 @@ export default class SaveManager extends Manager{
     }
 
     saveObjectsDB(){
-        let tableName = serverCommuncator.tableName;
-        let objects = Engine.ObjectManager.objects;
+        const tableName = serverCommuncator.tableName;
+        const objects = Engine.ObjectManager.objects;
         
         console.log(objects);
         
         serverCommuncator.clearTable(tableName).then( () => {
             for(let i in objects){
-                let obj = objects[i];
+                const obj = objects[i];
                 for(let i in obj.getValues()){
                     obj.setValue(i,obj.getValue(i));
                 }
@@ -115,8 +117,8 @@ export default class SaveManager extends Manager{
     }
 
     saveObjectsLocal(){
-        let liveObj = Engine.ObjectManager.objects;
-        let toSave = {};
+        const liveObj = Engine.ObjectManager.objects;
+        const toSave = {};
         for(let i in liveObj){
             toSave[i] = JSON.parse(liveObj[i].toString());
         }
@@ -132,8 +134,8 @@ export default class SaveManager extends Manager{
     getSavedAnimations(){
         return new Promise((resolve, reject) => {
             httpRequest('GET',this._localState,null).then((resp)=>{
-                let res = JSON.parse(resp);
-                let arr = [];
+                const res = JSON.parse(resp);
+                const arr = [];
         
                 for(let i in res){
                     arr.push(res[i]);
@@ -144,23 +146,23 @@ export default class SaveManager extends Manager{
     }
 
     async getGame(){
-        let gameInfo = await this.getObjects();
+        const gameInfo = await this.getObjects();
 
-        let all = {
+        const all = {
             objects: gameInfo.objects,
             films: [],
             preSet: []
         };
         
-        let films = gameInfo.info.films;
+        const films = gameInfo.info.films;
         for(let i in films){
-            let f = await this.getAnimationFilms(films[i]);
+            const f = await this.getAnimationFilms(films[i]);
             all.films.push(f);
         }
 
-        let preSet = gameInfo.info.preSet;
+        const preSet = gameInfo.info.preSet;
         for(let i in preSet){
-            let f = await this.getPreSettedAnim(preSet[i]);
+            const f = await this.getPreSettedAnim(preSet[i]);
             all.preSet.push(f);
         }
 
@@ -168,7 +170,7 @@ export default class SaveManager extends Manager{
     }
 
     saveGame(){
-        let toSave = {};
+        const toSave = {};
         toSave.objects = this.saveObjects();
         toSave.info = {
             name: this._DBName,
@@ -197,11 +199,13 @@ export default class SaveManager extends Manager{
 
     async setEngine(callback){
 
-        let game = await this.getGame();
-        
-        Engine.initInfo = {
-            objects: game.objects
-        };
+        const game = await this.getGame();
+
+        Engine.app.addInitialiseFunction(()=>{
+            for(let i in game.objects){
+                utils.createObject(game.objects[i]);
+            }
+        });
 
         game.films.forEach((film)=>{
             Engine.AnimationManager.setAnimationFilms(film);
