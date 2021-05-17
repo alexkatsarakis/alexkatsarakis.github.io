@@ -172,9 +172,31 @@ function onSearch(ev){
     const objects = Engine.ObjectManager.objects;
 
     const arr = [];
+    const tempArray = [];
+    const onlyObjects = bb.fastGet('settings','Only show objects in search');
     for(let i in objects){
-        if(objects[i].name.toLowerCase().includes(query.toLowerCase()))arr.push(objects[i].name);
+        const obj = objects[i];
+        if(obj.name.toLowerCase().includes(query.toLowerCase()))arr.push(obj.name);
+        if(onlyObjects)continue;
+        const states = obj.getStates();
+        for(let j in states){
+            if(j.toLowerCase().includes(query.toLowerCase()))tempArray.push(obj.name+'#'+j);
+        }
+        const values = obj.getValues();
+        for(let j in values){
+            if(j.toLowerCase().includes(query.toLowerCase()))tempArray.push(obj.name+'#'+j);
+        }
+        const events = obj.getEvents();
+        for(let j in events){
+            if(j.toLowerCase().includes(query.toLowerCase()))tempArray.push(obj.name+'#'+j);
+        }
+        const options = obj.getOptions();
+        for(let j in options){
+            if(j.toLowerCase().includes(query.toLowerCase()))tempArray.push(obj.name+'#'+j);
+        }
     }
+
+    arr.push(...tempArray);
 
     const searchRes = uiFactory.createElement({
         parent: document.body,
@@ -188,13 +210,17 @@ function onSearch(ev){
     searchRes.style.left = searchBar.offsetLeft + 'px';
 
     arr.forEach((name)=>{
-        uiFactory.createElement({
+        const item = uiFactory.createElement({
             parent: searchRes,
             classList: 'toolbar_dropdown_item',
-            innerHTML: name
-        }).onclick = ()=>{
+        });
+
+        item.insertAdjacentHTML('beforeend',name.replace(query,'<b style="color:var(--secondary-color);">'+escape(query)+'</b>'));
+
+        item.onclick = ()=>{
             searchRes.remove();
             searchBar.value = '';
+            if(name.includes('#'))name = name.split('#')[0];
             const obj = Engine.ObjectManager.getObjectByName(name);
             focusedObject(obj.id);
         };
@@ -227,4 +253,9 @@ function onToolbarLoaded(){
 
     document.getElementById('toolbar_search').onkeyup = onSearch;
 
+    document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
+    document.getElementById('toolbar_saveLocal').onclick = ()=>{bb.fastGet('actions','saveToLocal')()};
+    
+    document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
+    document.getElementById('toolbar_downloadState').onclick = ()=>{bb.fastGet('actions','saveToDatabase')()};
 }

@@ -17,6 +17,8 @@ function onContextChange({objID,event}){
     
     const wrapper = document.getElementById('contextMenu-wrapper');
 
+    wrapper.innerHTML = ''
+
     const bg = uiFactory.createElement({
         parent: wrapper,
         id: 'contextMenu-background'
@@ -34,6 +36,22 @@ function onContextChange({objID,event}){
         bg.remove();
         cMenu.remove();
     };
+
+
+    cMenu.oncontextmenu = (e)=>{
+        e.preventDefault();
+    }
+
+    bg.oncontextmenu = (e)=>{
+        e.preventDefault();
+        bg.remove();
+        cMenu.remove();
+        const mEvent = new MouseEvent('contextmenu', {
+            clientX: e.clientX,
+            clientY: e.clientY
+        });
+        document.getElementById('clickWrapper').dispatchEvent(mEvent);
+    }
 
 
     uiFactory.createElement({

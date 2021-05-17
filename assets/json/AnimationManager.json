@@ -77,6 +77,25 @@
             "film": "goomba_walking",
             "dx": 10,
             "delay": 90
+        },
+        {
+            "id": "piranha_down",
+            "film": "piranha_green",
+            "dy": 6,
+            "delay": 100,
+            "reps": 10
+        },
+        {
+            "id": "piranha_up",
+            "film": "piranha_green",
+            "dy": -6,
+            "delay": 100,
+            "reps": 10
+        },
+        {
+            "id": "piranha_idle",
+            "film": "piranha_green",
+            "delay": 100
         }
     ]
 

@@ -185,9 +185,7 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
             const obj = managers[i].mouseEvents.mouseDown(ev);
-            if(obj){
-                return;
-            }
+            if(obj)return;
         }
     }
 });

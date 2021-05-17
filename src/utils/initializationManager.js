@@ -15,7 +15,8 @@ urlParams.forEach((val,key)=>{
 bb.fastSet('settings','Dragging Objects', !urlParams.get('play'));
 bb.fastSet('settings','highlightInvisibleObjects',false);
 bb.fastSet('settings','Clicking Through Objects',false);
-bb.fastSet('settings','moveUIWithControl',true);
+bb.fastSet('settings','Move UI with Control',true);
+bb.fastSet('settings','Only show objects in search', false);
 // <Engine>
 import '../Engine.js'
     // <EngineExtra>

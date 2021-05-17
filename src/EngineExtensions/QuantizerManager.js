@@ -31,8 +31,8 @@ export default class QuantizerManager extends Manager{
                 delay: this._QuantizeMS
             }); 
             
-        const ogX = object.getValue('x');
-        const ogY = object.getValue('y');
+        // const ogX = object.getValue('x');
+        // const ogY = object.getValue('y');
         an.onStart = ()=>{
             if(!object.isAlive)
                 object = Engine.ObjectManager.objects[object.id];
@@ -42,8 +42,8 @@ export default class QuantizerManager extends Manager{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
-            if(dx !== 0)object.setValue('x',ogX + x);
-            if(dy !== 0)object.setValue('y',ogY + y);
+            // if(dx !== 0)object.setValue('x',ogX + x);
+            // if(dy !== 0)object.setValue('y',ogY + y);
         };
     
         an.start({

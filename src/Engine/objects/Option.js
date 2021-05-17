@@ -72,7 +72,10 @@ export default class OptionManager{
         if(this._regOptions[opt].onChange.code !== "")
             Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent);
     
-        bb.fastSet('events', 'last', event );
+        if(bb.fastGet('state','mode') !== 'paused'){
+            bb.fastSet('events', 'last', event );
+            bb.fastSet('events', 'setOption_'+opt);
+        }
     }
 
     setOptionCode(opt, code) {

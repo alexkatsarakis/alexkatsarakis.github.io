@@ -30,8 +30,8 @@ function showHideCodeUI(show = 'block'){
     document.getElementById('codingArea').style.display = show;
 }
 
-function dragElement(elmnt,ev) {
-    if(!bb.fastGet('settings','moveUIWithControl'))return;
+function dragElement(elmnt) {
+    if(!bb.fastGet('settings','Move UI with Control'))return;
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     dragMouseDown();
   

@@ -1,5 +1,7 @@
 import Engine from '../../Engine.js';
 
+import bb from '../../utils/blackboard.js'
+
 export default {
     name:'gridView',
     link: './src/UI/gridView/gridView.ahtml',
@@ -8,16 +10,13 @@ export default {
     loadOnInstall: false
 };
 
-function onGridViewLoaded(){
+function drawGrid(stage,grid){
     const wrapper = document.getElementById('gridView-wrap');
-    const stage = Engine.ObjectManager.getObjectByName('Stage');
+    if(!wrapper)return;
+    wrapper.innerHTML = '';
     const offsetX = stage.getValue('x');
     const offsetY = stage.getValue('y');
-    console.log(offsetX,offsetY);
-    wrapper.innerHTML = '';
-    const grid = Engine.GridManager.getGrid();
     grid.forEach(element => {
-        console.log(element);
         const item = document.createElement('div');
         item.classList = 'gridView-v';
         item.style.top    = (element.y - offsetY) +'px';
@@ -25,5 +24,19 @@ function onGridViewLoaded(){
         item.style.width  = element.width+'px';
         item.style.height = element.height+'px';
         wrapper.appendChild(item);
+    });
+    console.log('grid!');
+    bb.installWatch('events','gridUpdated',(grid)=>{
+        drawGrid(stage, grid);
+    });
+}
+
+function onGridViewLoaded(){
+    const stage = Engine.ObjectManager.getObjectByName('Stage');
+    const grid = Engine.GridManager.getGrid();
+    drawGrid(stage,grid);
+
+    bb.installWatch('events','gridUpdated',(grid)=>{
+        drawGrid(stage, grid);
     });
 }

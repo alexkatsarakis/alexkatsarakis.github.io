@@ -17,7 +17,14 @@ export default class GridManager extends Manager{
         
         bb.installWatch('events','setValue_x',(e)=>{this.onEvent(e);});
         bb.installWatch('events','setValue_y',(e)=>{this.onEvent(e);});
+        bb.installWatch('events','setOption_isSolid',()=>{this.onIsSolidChange();});
         bb.installWatch('events','removeObject',()=>{this.onObjectDeletion();});
+    }
+
+
+    onIsSolidChange(){
+        this.calculateGrid();
+        bb.installWatch('events','setOption_isSolid',()=>{this.onIsSolidChange();});
     }
 
     calculateGrid(){
@@ -31,6 +38,8 @@ export default class GridManager extends Manager{
                 this._gridRectangles.push(obj.getPositional());
             }
         }
+
+        bb.fastSet('events', 'gridUpdated',this._gridRectangles);
     }
 
     getGrid(){

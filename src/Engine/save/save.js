@@ -52,6 +52,7 @@ export default class SaveManager extends Manager{
 
     getObjectsLocal(){
         return new Promise((resolve, reject) => {
+            if(this._localState !== `./assets/json/local.json`)
                 httpRequest('GET',this._localState,null).then((resp)=>{
                     let res;
                     try{
@@ -61,6 +62,22 @@ export default class SaveManager extends Manager{
                     }
                     resolve(res);
                 });
+            else{
+                const game = localStorage.getItem('saved');
+                if(!game){
+                    httpRequest('GET','./assets/json/savedState.json',null).then((resp)=>{
+                        let res;
+                        try{
+                            res = JSON.parse(resp);
+                        }catch(err){
+                            res = [];
+                        }
+                        resolve(res);
+                    });
+                }else{
+                    resolve(JSON.parse(game));
+                }
+            }
         });
     }
 
@@ -195,6 +212,21 @@ export default class SaveManager extends Manager{
         }
     
         downloadLink.click();
+    }
+
+    saveToLocal(){
+        const toSave = {};
+        toSave.objects = this.saveObjects();
+        toSave.info = {
+            name: this._DBName,
+            preSet: [
+                this._localPreSettedAnim
+            ],
+            films: [
+                this._localAnimationFilms
+            ]
+        };
+        localStorage.setItem('saved',JSON.stringify(toSave));
     }
 
     async setEngine(callback){
