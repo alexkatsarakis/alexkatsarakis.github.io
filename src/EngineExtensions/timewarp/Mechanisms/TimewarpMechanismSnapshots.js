@@ -1,10 +1,8 @@
-import utils from '../utils/utils.js'
-import bb from '../utils/blackboard.js'
-import Engine from '../Engine.js';
+import utils from '../../../utils/utils.js'
+import bb from '../../../utils/blackboard.js'
+import Engine from '../../../Engine.js';
 
-import Manager from '../Engine/Manager.js'
-
-export default class TimewarpManager extends Manager{
+export default class TimewarpMechanism {
     _timeWarping;
 
     _inter;
@@ -12,11 +10,16 @@ export default class TimewarpManager extends Manager{
 
     _startedRecordedTime;
 
+    _timelines;
+
+    _currTimeline
+
     constructor(){
-        super();
         this._playBackInter = {};
         this._timeWarping = {};
+        this._timelines = [];
         this._startedRecordedTime = undefined;
+        this._currTimeline = -1;
     }
 
     async saveTimeFrame(){
@@ -52,6 +55,7 @@ export default class TimewarpManager extends Manager{
 
     stopRecording(){
         Engine.ClockManager.cancelCallBack(this._inter);
+        this.saveTimeline();
         Engine.PauseManager.pause();
     }
 
@@ -163,6 +167,37 @@ export default class TimewarpManager extends Manager{
 
         });
         Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
+    }
+
+    get isReoccuring(){
+        return true;
+    }
+
+    saveTimeline(){
+        this._currTimeline++;
+        this._timelines.push(this._timeWarping);
+    }
+
+    getTimelines(){
+        return this._timelines;
+    }
+
+    clearTimelines(index){
+        if(!index)
+            this._timelines = [];
+        else 
+            this._timelines.length = Number.parseInt(index)+1;
+    }
+
+    get currentTimeline(){
+        return Number.parseInt(this._currTimeline);
+    }
+
+    setTimeline(index){
+        if(index < 0 || index > (this._timelines.length - 1))return;
+        this._currTimeline = index;
+        this._timeWarping = this._timelines[index];
+        this._startedRecordedTime = Number.parseInt(this.getRecordedTimestamps()[0]);
     }
 
 }

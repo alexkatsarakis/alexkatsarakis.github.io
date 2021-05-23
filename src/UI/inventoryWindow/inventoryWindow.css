@@ -83,7 +83,7 @@
     top: 50px;
     width: 100%;
     height: calc(100% - 50px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .inventory-window-body-grid {

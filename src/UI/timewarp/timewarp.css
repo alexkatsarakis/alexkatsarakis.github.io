@@ -8,6 +8,11 @@
     background-color: var(--main-color);
 }
 
+.timewarp-record-prompt {
+    float: left; 
+    color: var(--main-color-text);
+}
+
 #timewarp-record {
     background-color: red;
     width: 15px;
@@ -137,4 +142,22 @@
     margin: 20px;
     /* margin-top: 15px;
     margin-bottom: 15px; */
+}
+
+#timewarp-rerecord {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    float: left;
+}
+
+#timewarp-timelines-wrapper-label {
+    color: var(--main-color-text);
+    margin-left: 20px;
+}
+
+#timewarp-timelines-wrapper {
+    width: 40px;
+    color: var(--main-color);
 }

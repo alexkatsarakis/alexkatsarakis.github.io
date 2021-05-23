@@ -1,10 +1,8 @@
-import utils from '../utils/utils.js'
-import bb from '../utils/blackboard.js'
-import Engine from '../Engine.js';
+import utils from '../../../utils/utils.js'
+import bb from '../../../utils/blackboard.js'
+import Engine from '../../../Engine.js';
 
-import Manager from '../Engine/Manager.js'
-
-export default class TimewarpManager extends Manager{
+export default class TimewarpMechanism {
     _timeWarping;
     _currDiff;
 
@@ -17,7 +15,6 @@ export default class TimewarpManager extends Manager{
     _startedRecordedTime;
 
     constructor(){
-        super();
         this._playBackInter = {};
         this._timeWarping = {};
         this._currDiff = [];
@@ -225,4 +222,9 @@ export default class TimewarpManager extends Manager{
         }
         bb.installWatch('events','last',this.log.bind(this));
     }
+
+    get isReoccuring(){
+        return false;
+    }
+
 }

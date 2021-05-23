@@ -18,7 +18,7 @@ Engine.installManager('DistanceManager', new DistanceManager());
 import QuantizerManager from './QuantizerManager.js'
 Engine.installManager('QuantizerManager', new QuantizerManager());
 
-import TimewarpManager from './TimewarpManagerDS.js'
+import TimewarpManager from './timewarp/TimewarpManager.js'
 Engine.installManager('TimewarpManager', new TimewarpManager());
 
 
