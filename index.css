@@ -1,4 +1,4 @@
-:root {
+/* :root {
 	--main-color: #1d3557;
 	--main-color-hover: #457b9d;
 	--main-color-text: #ffffff;
@@ -9,7 +9,35 @@
 	--secondary-color-hover: #a8dadc;
 	--secondary-color-text: #ffffff;
 	--canvas-default-bg-color: lightgrey;
+} */
+
+/* :root {
+	--main-color: #1d1d1d;
+    --main-color-hover: #7d7d7d;
+    --main-color-text: #e4e4e4;
+    --main-buttons-background-color: #1241ab;
+    --main-buttons-text-color: #ffffff;
+    --main-buttons-background-color-hover: #164fd2;
+    --secondary-color: #a50606;
+    --secondary-color-hover: #c50707;
+    --secondary-color-text: #ffffff;
+    --canvas-default-bg-color: lightgrey;
+} */
+
+:root {
+	--main-color: #1E1E1E;
+    --main-color-hover: #252526;
+    --main-color-text: #dddddd;
+    --main-buttons-background-color: #007ACC;
+    --main-buttons-text-color: #ffffff;
+    --main-buttons-background-color-hover: #0590ec;
+    --secondary-color: #DD782C;
+    --secondary-color-hover: #c50707;
+    --secondary-color-text: #ffffff;
+    --canvas-default-bg-color: lightgrey;
 }
+
+
 
 .goog-menuitem-highlight{
 	background-color:var(--main-color);
@@ -24,6 +52,8 @@
 
 ::-webkit-scrollbar-thumb {
     background: var(--main-color);
+	border-radius: 1ex;
+	box-shadow: 0px 1px 2px var(--main-color-hover);
     -webkit-border-radius: 1ex;
     -webkit-box-shadow: 0px 1px 2px var(--main-color-hover);
 }
@@ -42,7 +72,7 @@ canvas {
 #scene { 
 	overflow: hidden; 
 }
-
+/* 
 div { 
 	user-select: none; 
-}
+} */

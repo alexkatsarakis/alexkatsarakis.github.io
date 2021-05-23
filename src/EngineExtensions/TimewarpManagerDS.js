@@ -58,6 +58,7 @@ export default class TimewarpManager extends Manager{
         bb.installWatch('events','last',this.log.bind(this));
         this._inter = Engine.ClockManager.callIn(this.saveTimeFrame.bind(this),[],interval,true);
         this._startedRecordedTime = bb.fastGet('state','gameTime');
+        this.saveTimeFrame();
     }
 
     stopRecording(){
@@ -124,11 +125,35 @@ export default class TimewarpManager extends Manager{
 
         for(let i = 0; i !== index; ++i){
             const diff = this._timeWarping[ts[i]].diff;
+
+            const toClear = [];
             diff.forEach(ev=>{
-                if(ev.type === 'setValue'){
-                    const info = ev.data;
-                    objState[ev.objectID].values[info.type].val = info.value;
+                const info = ev.data;
+                switch(ev.type){
+                    case 'setValue':
+                        objState[ev.objectID].values[info.type].val = info.value;
+                        break;
+                    case 'setCurrentState':
+                        objState[ev.objectID]._currState = info.newState.tag;
+                        break;
+                    case 'setOption':
+                        objState[ev.objectID].options[info.type].val = info.value;
+                        break;
+                    case 'addObject':
+                        objState[ev.objectID] = info.object;
+                        break;
+                    case 'removeObject':
+                        toClear.push(ev);
+                        delete objState[ev.objectID];
+                        break;
+                    default:
+                        debugger;
                 }
+            });
+
+            toClear.forEach(ev=>{
+                if(!Engine.ObjectManager.objects[ev.objectID])return;
+                Engine.ObjectManager.objects[ev.objectID].remove();
             });
         }
         
@@ -147,9 +172,9 @@ export default class TimewarpManager extends Manager{
 
         document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
     
-        document.getElementById('timewarp-currFrame').innerHTML = `Frame: ${frame}`;
+        document.getElementById('timewarp-current-frame').innerHTML = `Frame: ${frame}`;
 
-        document.getElementById('timewarp-currFrameTime').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
+        document.getElementById('timewarp-current-frame-time').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
     
     }
 
@@ -193,7 +218,11 @@ export default class TimewarpManager extends Manager{
 
     log(arg) {
         if(!this._isRecording)return;
-        this._currDiff.push(arg);
+        if(arg.type === 'addObject'){
+            this._currDiff.unshift(arg);
+        }else{
+            this._currDiff.push(arg);
+        }
         bb.installWatch('events','last',this.log.bind(this));
     }
 }

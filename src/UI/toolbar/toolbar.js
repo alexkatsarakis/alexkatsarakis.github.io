@@ -30,7 +30,7 @@ function actionsDropdown(){
         const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_actions_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_actions').offsetLeft + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_actions').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
         actions.forEach((item)=>{
             const ddItem = document.createElement('div');
@@ -46,7 +46,7 @@ function actionsDropdown(){
     function closeDropdown(){
         isVisible = false;
         const dropdown = document.getElementById('toolbar_actions_dropdown');
-        if(dropdown)dropdown.remove();
+        dropdown?.remove();
     }
 
     function toggleDropdown(){
@@ -75,7 +75,7 @@ function objectsDropdown(){
         const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_liveobjects_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_liveobjects').offsetLeft + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_liveobjects').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
             const ddItem = document.createElement('div');
@@ -91,7 +91,7 @@ function objectsDropdown(){
     function closeDropdown(){
         isVisible = false;
         const dropdown = document.getElementById('toolbar_liveobjects_dropdown');
-        if(dropdown)dropdown.remove();
+        dropdown?.remove();
     }
 
     function toggleDropdown(){
@@ -103,32 +103,40 @@ function objectsDropdown(){
     return toggleDropdown;
 }
 
-function eventsDropdown(){
+function objCreationDropdown(){
     let isVisible = false;
 
-    function getEvents(){
-        const events = [];
-        const focused = bb.fastGet('state','focusedObject');
-        if(!focused)return [];
-        for(let event in focused.getEvents()){
-            events.push(event);
+    function getConstructors(){
+        const consts = [];
+        for(let constr in Engine.ObjectManager._constructors){
+            consts.push(constr);
         }
-        return events;
+        return consts;
     }
 
     function createDropdown(){
-        const events = getEvents();
+        const constructors = getConstructors();
         const dropdown = document.createElement('div');
-        dropdown.id = 'toolbar_events_dropdown';
+        dropdown.id = 'toolbar_objCreation_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_events').offsetLeft + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_objCreation').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
-        events.forEach((item)=>{
+        constructors.forEach((item)=>{
             const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>bb.fastGet('state','focusedObject').triggerEvent(item));
+            ddItem.addEventListener('click',()=>{
+                bb.fastGet('actions','createObject')({
+                    category:item,
+                    name:'unnamed'+'('+Math.floor(Math.random() * 1000000)+')',
+                    colour: 'white',
+                    position:{
+                        x:700,
+                        y:700
+                    }
+                });
+            });
             dropdown.appendChild(ddItem);
         });
         bb.installWatch('state','focusedObject',closeDropdown);
@@ -136,8 +144,8 @@ function eventsDropdown(){
   
     function closeDropdown(){
         isVisible = false;
-        const dropdown = document.getElementById('toolbar_events_dropdown');
-        if(dropdown)dropdown.remove();
+        const dropdown = document.getElementById('toolbar_objCreation_dropdown');
+        dropdown?.remove();
     }
 
     function toggleDropdown(){
@@ -164,7 +172,7 @@ function openInventory(){
 }
 
 function onSearch(ev){
-    if(document.getElementById('toolbar_search_result'))document.getElementById('toolbar_search_result').remove();
+    document.getElementById('toolbar_search_result')?.remove();
     const query = ev.target.value;
 
     if(query === '')return;
@@ -243,10 +251,10 @@ function onToolbarLoaded(){
     dropdown.addEventListener('click',toggle);
     document.getElementById('toolbar_liveobjects').addEventListener('click',toggle);
 
-    dropdown = document.getElementById('toolbar_events_dropdown_button');
-    toggle = eventsDropdown();
+    dropdown = document.getElementById('toolbar_objCreation_dropdown_button');
+    toggle = objCreationDropdown();
     dropdown.addEventListener('click',toggle);
-    document.getElementById('toolbar_events').addEventListener('click',toggle);
+    document.getElementById('toolbar_objCreation').addEventListener('click',toggle);
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);

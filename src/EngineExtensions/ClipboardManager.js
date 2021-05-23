@@ -12,6 +12,14 @@ export default class ClipboardManager extends Manager{
         this._collection = [];
     }
 
+    onSave(){
+        return JSON.stringify(this._collection);
+    }
+
+    onRetrieve(data){
+        this._collection = JSON.parse(data);
+    }
+
     push(item,saveToCollection){
         this._clipboard = item;
         if(saveToCollection)this._collection.push(item);
@@ -33,8 +41,10 @@ export default class ClipboardManager extends Manager{
         this.push(newObj,saveToCollection);
     }
 
-    paste(){
-        const obj = this.top();
+    paste(index = -1){
+        let obj;
+        if(index === -1)obj = this.top();
+        else obj = this._collection[index];
         const oldName = obj._name;
         obj._name = obj._name.replace(/\(.*\)/,'');
         obj._name = obj._name+'('+Math.floor(Math.random() * 1000000)+')';

@@ -15,6 +15,20 @@ export default class SnapshotManager extends Manager{
         this._sceneCollection = {};
     }
 
+
+    onSave(){
+        return JSON.stringify({
+            collection: this._collection,
+            scenes: this._sceneCollection
+        });
+    }
+
+    onRetrieve(data){
+        const newData = JSON.parse(data);
+        this._collection = newData.collection;
+        // this._sceneCollection = newData.scenes;
+    }
+
     snapshotObject(item = bb.fastGet('state','focusedObject')){
         const objCollection = this._collection[item.id];
         if(!objCollection){

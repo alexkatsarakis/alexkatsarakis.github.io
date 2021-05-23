@@ -14,11 +14,13 @@ Remove Button: <img width="20px" height="20px" src="./assets/icons/delete.svg"> 
 
 Drop down Icon: <img width="20px" height="20px" src="./assets/icons/dropDown.svg">  ([Google](https://www.flaticon.com/authors/google))
 
-State Icon: <img width="20px" height="20px" src="./assets/icons/states.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
-
 Attributes Icon: <img width="20px" height="20px" src="./assets/icons/attributes.svg">  ([Becrils](https://www.flaticon.com/authors/becris))
 
 Events Icon: <img width="20px" height="20px" src="./assets/icons/events.svg">  ([Kiranshastry](https://www.flaticon.com/authors/kiranshastry))
+
+Lock Icon: <img width="20px" height="20px" src="./assets/icons/lock.svg">  ([Kiranshastry](https://www.flaticon.com/authors/kiranshastry))
+
+State Icon: <img width="20px" height="20px" src="./assets/icons/states.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
 Flags Icon: <img width="20px" height="20px" src="./assets/icons/collision.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
@@ -34,4 +36,13 @@ Save Icon: <img width="20px" height="20px" src="./assets/icons/save.svg">  ([Fre
 
 Download Icon: <img width="20px" height="20px" src="./assets/icons/download.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
-Lock Icon: <img width="20px" height="20px" src="./assets/icons/lock.svg">  ([Kiranshastry](https://www.flaticon.com/authors/kiranshastry))
+Object Icon: <img width="20px" height="20px" src="./assets/icons/object.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Settings Icon: <img width="20px" height="20px" src="./assets/icons/settings.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Inventory Icon: <img width="20px" height="20px" src="./assets/icons/backpack.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Plus Icon: <img width="20px" height="20px" src="./assets/icons/plus.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Action Icon: <img width="20px" height="20px" src="./assets/icons/action.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+

@@ -2,5 +2,33 @@
 
 
 <div id="timewarp-wrapper" class="hudChild">
-  <div id="timewarp-record" class="timewarp-button"></div>
+  <div id="timewarp-idle">
+    <div id="timewarp-record" class="timewarp-button"></div>
+    <div id="timewarp-record2" class="timewarp-button"></div>
+  </div>
+  <div id="timewarp-recording">
+    <div id="timewarp-stop-record" class="timewarp-button"></div>
+  </div>
+  <div id="timewarp-active">
+    <input id="timewarp-showRecords" type="range">
+    <div id="timewarp-playbackControl">
+      <div id="timewarp-showBackward" class="timewarp-button timewarp-showManipulation"></div>
+      <div id="timewarp-showBackwardSingle" class="timewarp-button timewarp-showManipulation"></div>
+      <div id="timewarp-pause" class="timewarp-text timewarp-showManipulation">Pause</div>
+      <div id="timewarp-resume" class="timewarp-text timewarp-showManipulation">Continue</div>
+      <div id="timewarp-showForwardSingle" class="timewarp-button timewarp-showManipulation"></div>
+      <div id="timewarp-showForward" class="timewarp-button timewarp-showManipulation"></div>
+    </div>
+    <div id="timewarp-inputWrapper">
+      <div id="timewarp-playback-speed-prompt" class="timewarp-text-simple" style="float: left;">Playback speed</div>
+      <input id="timewarp-playback-speed" class="timewarp-button" type="number" style="padding: 0px; margin: 0px; border: 0px; width: 50px; float: left; background-color: white;">
+      <div class="timewarp-text-simple" style="float: left;">%</div>
+    </div>
+    <div id="timewarp-infoWrapper">
+      <div id="timewarp-current-frame" class="timewarp-text-simple" style="float: left;"></div>
+      <div id="timewarp-max-frame" class="timewarp-text-simple"></div>
+      <div id="timewarp-current-frame-time" class="timewarp-text-simple" style="float: left;"></div>
+      <div id="timewarp-max-frame-time" class="timewarp-text-simple"></div>
+    </div>
+  </div>
 </div>

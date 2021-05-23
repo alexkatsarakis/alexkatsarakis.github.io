@@ -121,9 +121,9 @@ export default class TimewarpManager extends Manager{
 
         document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
 
-        document.getElementById('timewarp-currFrame').innerHTML = `Frame: ${frame}`;
+        document.getElementById('timewarp-current-frame').innerHTML = `Frame: ${frame}`;
     
-        document.getElementById('timewarp-currFrameTime').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
+        document.getElementById('timewarp-current-frame-time').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
     
     }
 

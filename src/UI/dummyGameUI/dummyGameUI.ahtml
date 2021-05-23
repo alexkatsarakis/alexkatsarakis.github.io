@@ -16,11 +16,19 @@
 <!-- <iframe id="testststs" category="Square" style="width: 1920px; height: 108a0px; position: absolute; left:0; top:0; border:0" src="demo_iframe.htm">
 </iframe>  -->
 
-<iframe 
+<!-- <iframe 
     id="testststs" 
     category="Square" 
     style="width: 1000px; height: 700px; position: absolute; left:500px; top:0; border:0" 
     src="https://github1s.com/alexkatsarakis/GameEnvironment"
+    >
+</iframe>  -->
+
+<iframe 
+    id="mySite" 
+    category="Square" 
+    style="width: 500px; height: 350px; position: absolute; left:700px; top:0; border:0" 
+    src="http://alex-ka.com"
     >
 </iframe> 
 <!-- src="http://www.alex-ka.com" -->

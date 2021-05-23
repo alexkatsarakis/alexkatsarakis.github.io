@@ -13,7 +13,14 @@ function translator(ev){
 
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
-    const boundingBox = obj.getPositional();
+    
+    const mapCoords = obj.getMapCoords();
+    const boundingBox = {
+        x: mapCoords[0],
+        y: mapCoords[1],
+        width: obj.getValue('width'),
+        height: obj.getValue('height')
+    };
     if(isClickThrough)
         return( bb.fastGet('state','focusedObject') !== obj 
             && (boundingBox.x < x

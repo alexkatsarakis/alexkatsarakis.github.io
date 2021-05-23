@@ -61,7 +61,7 @@ class ObjectManager extends Manager{
                 type: 'addObject',
                 objectID: obj.id,
                 data: {
-                    object: obj
+                    object: JSON.parse(obj.toString())
                 }
             };
             bb.fastSet('events','last',ev);

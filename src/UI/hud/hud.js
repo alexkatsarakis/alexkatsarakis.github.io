@@ -268,5 +268,11 @@ function onHudLoaded(){
             if(!ev.ctrlKey) return;
             dragElement(mainInfoBox);
         }
+
+        // const timeWarp = document.getElementById('timewarp-wrapper');
+        // if(timeWarp)timeWarp.onmousedown = (ev)=>{
+        //     if(!ev.ctrlKey) return;
+        //     dragElement(timeWarp);
+        // }
     },200);
 }

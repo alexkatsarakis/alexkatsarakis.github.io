@@ -1,14 +1,12 @@
 #contextMenu-background {
     width: 100%;
     height: 100vh;
-    background-color: black;
     opacity: 1%;
 }
 
 #contextMenu-window {
     position: absolute;
     width: 200px;
-    background-color: white;
 }
 
 #contextMenu-name {
@@ -16,7 +14,7 @@
     height: 30px;
     line-height: 30px;
     background-color: var(--secondary-color);
-    color: var(--main-color-text);
+    color: var(--secondary-color-text);
     text-align: center;
 }
 

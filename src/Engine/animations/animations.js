@@ -67,6 +67,33 @@ export default class AnimationManager extends Manager{
         });
     }
 
+    onSave(){
+        const allAnimations = animationManager._animations;
+        return JSON.stringify(allAnimations);
+    }
+
+    onRetrieve(data){
+        const anims = JSON.parse(data);
+        const items = {
+            animations: []
+        };
+        for(let i in anims){
+            const anim = anims[i];
+            const newF = {
+                id: anim.animation._id,
+                film: anim.film._id,
+                start: anim.animation._start,
+                end: anim.animation._end,
+                reps: anim.animation._reps,
+                dx: anim.animation._dx,
+                dy: anim.animation._dy,
+                delay: anim.animation._delay,
+            };
+            items.animations.push(newF);
+        }
+        this.setAnimationManagement((items));
+    }
+
     progress(gameTime){
         animatorManager.progress(gameTime);
     }

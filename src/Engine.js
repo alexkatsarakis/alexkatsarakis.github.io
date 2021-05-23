@@ -87,6 +87,13 @@ class _Engine {
     hasManager(name){
         return name in this._managers;
     }
+    
+
+    forEachManager(cb){
+        for(let i in this._managers){
+            cb(i,this._managers[i]);
+        }
+    }
 
     /**
      * Responsible to start the game loop.

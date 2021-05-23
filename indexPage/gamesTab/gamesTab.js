@@ -2,6 +2,12 @@ import uiFactory from '../utils/UIFactory.js'
 
 const games = [
     {
+        id: 'local',
+        displayName: 'Local Save',
+        defaultParameters: {
+        }
+    },
+    {
         id: 'savedState',
         displayName: 'Super Mario Example',
         defaultParameters: {

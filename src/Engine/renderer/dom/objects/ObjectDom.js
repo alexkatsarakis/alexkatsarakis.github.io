@@ -29,13 +29,13 @@ export default class ObjectDom extends Object{
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this._x = value;},
-            getValue: () => {return this.getMapCoords()[0];}
+            getValue: () => {return this._x;}//return this.getMapCoords()[0];}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this._y = value;},
-            getValue: () => {return this.getMapCoords()[1]}
+            getValue: () => {return this._y;}//return this.getMapCoords()[1]}
         });
 
         this.data.valueHandler.registerValue('rotation',{

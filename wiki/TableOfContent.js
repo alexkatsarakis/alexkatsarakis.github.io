@@ -7,6 +7,9 @@ const tableOfContent ={
         'Quick Start/Intro',
         'Quick Start/Adding Objects',
         'Quick Start/Coding',
+        'Quick Start/Value Manipulation',
+        'Quick Start/Debugging',
+        'Quick Start/Save and Load',
     ],
     'dev': [
         'general/Welcome',

@@ -3,16 +3,16 @@
  * Provides the hook-methods the engine can use to interact with the Manager
  */
 export default class Manager{
-    constructor(){
-    }
+    constructor(){}
 
-    onLoad(){
-    }
+    onLoad(){}
 
-    onUpdate(){
-    }
+    onUpdate(){}
 
-    onClose(){
-    }
+    onClose(){}
+
+    onSave(){return '';}
+
+    onRetrieve(){}
 
 }

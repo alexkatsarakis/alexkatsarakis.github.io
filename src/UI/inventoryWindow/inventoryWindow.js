@@ -234,7 +234,7 @@ function showClipboard(objWrapper){
     const clipboardObjs = Engine.ClipboardManager.getCollection();
     checkAndAddEmpty(objWrapper,clipboardObjs);
     clipboardObjs.reverse();
-    clipboardObjs.forEach(item=>{
+    clipboardObjs.forEach((item,index)=>{
         const wrap = uiFactory.createElement({
             classList: 'inventory-window-itemWrapper',
             parent: objWrapper
@@ -258,7 +258,7 @@ function showClipboard(objWrapper){
         body.style.cursor = 'pointer';
         
         body.onclick = () => {
-            Engine.ClipboardManager.paste(item);
+            Engine.ClipboardManager.paste((clipboardObjs.length -  1) - index);
             closeInventoryWindow();
         };
 
