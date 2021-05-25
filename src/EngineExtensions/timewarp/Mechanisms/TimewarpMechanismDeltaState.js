@@ -8,8 +8,6 @@ export default class TimewarpMechanism {
 
     _objectState;
 
-    _isRecording;
-
     _inter;
     _playBackInter;
     _startedRecordedTime;
@@ -49,7 +47,6 @@ export default class TimewarpMechanism {
 
     startRecording(interval) {
         if(this._isRecording)return;
-        this._isRecording = true;
         this._timeWarping = {};
         this._objectState['onStart'] = Engine.SaveManager.saveObjectsLocal(); 
         bb.installWatch('events','last',this.log.bind(this));
@@ -61,8 +58,12 @@ export default class TimewarpMechanism {
     stopRecording(){
         this._objectState['onEnd'] = Engine.SaveManager.saveObjectsLocal(); 
         Engine.ClockManager.cancelCallBack(this._inter);
+        this._inter = undefined;
         Engine.PauseManager.pause();
-        this._isRecording = false;
+    }
+
+    get isRecording(){
+        return (this._inter !== undefined);
     }
 
     stopPlayback(){
@@ -158,14 +159,6 @@ export default class TimewarpMechanism {
             const obj = objState[i];
             utils.resetObject(obj);
         }
-        // const objs = timeWarp.objects;
-        // TODO:find if an object has been deleted; and if it has then delete if from map;
-        // const liveObjs = Engine.ObjectManager.objects;
-        // for(let i in liveObjs){
-        //     if(!objs[i])liveObjs[i].remove();
-        // }
-        
-        // if(this._playBackInter[timeStamp])delete this._playBackInter[timeStamp];
 
         document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
     
@@ -214,7 +207,7 @@ export default class TimewarpMechanism {
     }
 
     log(arg) {
-        if(!this._isRecording)return;
+        if(!this.isRecording)return;
         if(arg.type === 'addObject'){
             this._currDiff.unshift(arg);
         }else{

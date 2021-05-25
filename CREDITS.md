@@ -46,3 +46,7 @@ Plus Icon: <img width="20px" height="20px" src="./assets/icons/plus.svg">  ([Fre
 
 Action Icon: <img width="20px" height="20px" src="./assets/icons/action.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
+Pause Icon: <img width="20px" height="20px" src="./assets/icons/pause.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Continue Icon: <img width="20px" height="20px" src="./assets/icons/continue.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+

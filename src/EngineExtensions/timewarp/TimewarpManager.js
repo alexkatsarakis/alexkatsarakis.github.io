@@ -36,6 +36,10 @@ export default class TimewarpManager extends Manager{
         this._currentTimewarp.stopRecording();
     }
 
+    isRecording(){
+        return this._currentTimewarp.isRecording;
+    }
+
     stopPlayback(){
         this._currentTimewarp.stopPlayback();
     }
@@ -85,7 +89,7 @@ export default class TimewarpManager extends Manager{
     }
 
     getCurrentTimeline(){
-        if(!this._currentTimewarp.isReoccuring)return;
+        if(!this._currentTimewarp.isReoccuring)return -1;
         return this._currentTimewarp.currentTimeline;
     }
 }

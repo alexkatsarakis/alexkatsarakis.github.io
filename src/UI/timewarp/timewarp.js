@@ -151,11 +151,13 @@ function renderPlaybackUI(){
             parent: timelinesWrapper,
             type: 'option',
             value: i,
-            innerHTML: i
+            innerHTML: '#'+(Number.parseInt(i)+1)
         });
     }
-
+    
     timelinesWrapper.value = Engine.TimewarpManager.getCurrentTimeline();
+
+    document.getElementById('timewarp-current-recording').innerHTML = `Current recording (#${Number.parseInt(timelinesWrapper.value)+1})`;
 
     timelinesWrapper.onchange = (ev)=>{
         Engine.TimewarpManager.setTimeline(timelinesWrapper.value);
@@ -167,8 +169,17 @@ function renderPlaybackUI(){
         Engine.PauseManager.resume();
         changeTimewarpState('recording');
         Engine.TimewarpManager.startRecording(0);
+        renderRecordingUI();
     }
         
+}
+
+function renderRecordingUI(){
+    const recNumber = document.getElementById('timewarp-stop-numofrec');
+
+    const currTimeline = Engine.TimewarpManager.getCurrentTimeline();
+    recNumber.innerHTML = '(Recording #'+(currTimeline+2)+')';
+
 }
 
 function onTimewarpLoad(){
@@ -183,14 +194,16 @@ function onTimewarpLoad(){
         Engine.TimewarpManager.setTimewarpMechanism('Snapshot');
         changeTimewarpState('recording');
         Engine.TimewarpManager.startRecording(0);
+        renderRecordingUI();
     }
 
     recBut.onclick = ()=> {
         Engine.TimewarpManager.setTimewarpMechanism('DS');
         changeTimewarpState('recording');
         Engine.TimewarpManager.startRecording(0);
+        renderRecordingUI();
     }
-
+    
     const stopRecBut = document.getElementById('timewarp-stop-record');
 
     stopRecBut.style.backgroundColor = 'red';
@@ -198,6 +211,8 @@ function onTimewarpLoad(){
         changeTimewarpState('active');
         Engine.TimewarpManager.stopRecording();
         renderPlaybackUI();
+        stopRecBut.onkeypress = null;
     }
+
 
 }

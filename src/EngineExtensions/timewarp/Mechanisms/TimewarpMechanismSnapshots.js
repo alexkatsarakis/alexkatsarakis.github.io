@@ -55,8 +55,14 @@ export default class TimewarpMechanism {
 
     stopRecording(){
         Engine.ClockManager.cancelCallBack(this._inter);
+        this._inter = undefined;
         this.saveTimeline();
+        this._currTimeline++;
         Engine.PauseManager.pause();
+    }
+
+    get isRecording(){
+        return (this._inter !== undefined);
     }
 
     stopPlayback(){
@@ -64,7 +70,6 @@ export default class TimewarpMechanism {
             Engine.ClockManager.cancelCallBack(this._playBackInter[i]);
         }
         this._playBackInter = {};
-        bb.fastSet('game','mode','timeWarp');
     }
 
     playForward(fromTimestamp,speedFactor = 1){
@@ -174,7 +179,6 @@ export default class TimewarpMechanism {
     }
 
     saveTimeline(){
-        this._currTimeline++;
         this._timelines.push(this._timeWarping);
     }
 
@@ -183,10 +187,13 @@ export default class TimewarpMechanism {
     }
 
     clearTimelines(index){
-        if(!index)
+        if(!index){
             this._timelines = [];
-        else 
+            this._currTimeline = -1;
+        } else { 
             this._timelines.length = Number.parseInt(index)+1;
+            this._currTimeline = Number.parseInt(index);
+        }
     }
 
     get currentTimeline(){

@@ -161,3 +161,17 @@
     width: 40px;
     color: var(--main-color);
 }
+
+#timewarp-pause {
+    fill: var(--main-color-text);
+}
+
+#timewarp-current-recording {
+    color: var(--main-color-text);
+    margin-left: 20px;
+    text-align: left;
+}
+
+#timewarp-resume {
+    fill: var(--main-color-text);
+}
