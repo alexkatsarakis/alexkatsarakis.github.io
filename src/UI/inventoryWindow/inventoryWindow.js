@@ -156,8 +156,19 @@ function showScenes(objWrapper){
         });
 
         wrap.onclick = ()=>{
-            Engine.SnapshotManager.resetSceneToSnapshot(i);
-            closeInventoryWindow();
+            if(bb.fastGet('settings','Show Prompt On Actions')){
+                bb.fastSet('events','openPrompt',{
+                    title: 'Reset Scene to Scene Snapshot',
+                    description: `If you accept you will reset the scene to given snapshot`,
+                    onAccept: ()=>{ 
+                        Engine.SnapshotManager.resetSceneToSnapshot(i);
+                        closeInventoryWindow();
+                    }
+                });
+            }else{
+                Engine.SnapshotManager.resetSceneToSnapshot(i);
+                closeInventoryWindow();
+            }
         }
     }
 }
@@ -222,8 +233,19 @@ function showSnapshots(objWrapper){
             body.style.cursor = 'pointer';
             
             body.onclick = () => {
-                Engine.SnapshotManager.resetObjectToSnapshot(i,index);
-                closeInventoryWindow();
+                if(bb.fastGet('settings','Show Prompt On Actions')){
+                    bb.fastSet('events','openPrompt',{
+                        title: 'Reset Object to Snapshot',
+                        description: `If you accept the object ${snap._name} will be resetted to this snapshot`,
+                        onAccept: ()=>{
+                            Engine.SnapshotManager.resetObjectToSnapshot(i,index);
+                            closeInventoryWindow();
+                        }
+                    });
+                }else{
+                    Engine.SnapshotManager.resetObjectToSnapshot(i,index);
+                    closeInventoryWindow();
+                }
             };
         });
     }
@@ -258,8 +280,19 @@ function showClipboard(objWrapper){
         body.style.cursor = 'pointer';
         
         body.onclick = () => {
-            Engine.ClipboardManager.paste((clipboardObjs.length -  1) - index);
-            closeInventoryWindow();
+            if(bb.fastGet('settings','Show Prompt On Actions')){
+                bb.fastSet('events','openPrompt',{
+                    title: 'Create a New Object With Copy',
+                    description: `If you accept you will create a copy of ${item._name}`,
+                    onAccept: ()=>{ 
+                        Engine.ClipboardManager.paste((clipboardObjs.length -  1) - index);
+                        closeInventoryWindow();
+                    }
+                });
+            }else{
+                Engine.ClipboardManager.paste((clipboardObjs.length -  1) - index);
+                closeInventoryWindow();
+            }
         };
 
     });

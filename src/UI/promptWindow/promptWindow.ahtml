@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="./src/UI/promptWindow/promptWindow.css">
+
+<div id='promptWindow-wrap'>
+    <div id='promptWindow-BG'></div>
+    <div id='promptWindow-content'>
+        <div id='promptWindow-title'>Title</div>
+        <div id='promptWindow-description'>Description small that will explain what will happen</div>
+        <div id='promptWindow-accept' class='promptWindow-button'>Accept</div>
+        <div id='promptWindow-decline' class='promptWindow-button'>Decline</div>
+    </div>
+</div>

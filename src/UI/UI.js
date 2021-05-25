@@ -11,6 +11,7 @@ const UIs = [
     'objectFloatingInfo',
     'timewarp',
     'contextMenu',
+    'promptWindow',
     'dummyGameUI'
 ];
 
