@@ -14,9 +14,9 @@
 #promptWindow-content {
     position: absolute;
     width: 30%;
-    left: 40%;
+    left: 35%;
     height: 30%;
-    top: 40%;
+    top: 35%;
     background-color: var(--main-color);
     z-index: 101;
     box-shadow: 1px 1px 5px 5px var(--main-color-text);

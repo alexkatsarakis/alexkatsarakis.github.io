@@ -264,18 +264,55 @@ function showClipboard(objWrapper){
 
         uiFactory.createElement({
             classList: 'inventory-window-objName',
-            innerHTML: item._name,
+            innerHTML: `${item._name} (${item._time})`,
             parent: wrap
         });
         
 
         const body = uiFactory.createElement({
             classList: 'inventory-window-body',
-            innerHTML: `Category: ${item._category}
-            Name: ${item._name}
-            Time: ${item._time}`,
+            // innerHTML: `Category: ${item._category}
+            // Name: ${item._name}
+            // Time: ${item._time}`,
             parent: wrap
         });
+        if(item.extra?.div){
+            const temp = document.createElement('div');
+            temp.innerHTML = item.extra.div;
+            const newItem = temp.firstChild;
+            newItem.id = Number.parseInt(Math.random()*1000)+'_objectMenu_inventory';
+            newItem.style.color = item.values.colour.val;
+            newItem.classList = '';
+            newItem.style.top = '';
+            newItem.style.left = '';
+            newItem.style.position = '';
+            newItem.style.transform = 'rotate(0)';
+            body.appendChild(newItem);
+
+        }else if(item._film){
+            const pos = {
+                width: item.values.width.val,
+                height: item.values.height.val
+            };
+            const info = Engine.AnimationManager.getFilm(item._film);
+            const box = info.getFrameBox(item._frame);
+            const img = info.bitmap;
+            const canv = uiFactory.createElement({
+                type: 'canvas',
+                id: Number.parseInt(Math.random()*100000)+'_objectMenu_inventory',
+                parent: body
+            });
+            canv.style.width = '100%';
+            canv.style.height = '100%';
+            const ctx = canv.getContext('2d');
+            const x = canv.width/2 - pos.width/2;
+            const y = canv.height/2 - pos.height/2;
+            ctx.drawImage(bb.fastGet('assets',img),
+            box.x,box.y,box.width,box.height,
+            x, y, pos.width, pos.height);
+        }else {
+            body.innerHTML = 'Preview for '+item.name+' isn\'t possible';
+        }
 
         body.style.cursor = 'pointer';
         
