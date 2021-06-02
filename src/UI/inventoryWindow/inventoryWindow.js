@@ -280,7 +280,7 @@ function showClipboard(objWrapper){
             const temp = document.createElement('div');
             temp.innerHTML = item.extra.div;
             const newItem = temp.firstChild;
-            newItem.id = Number.parseInt(Math.random()*1000)+'_objectMenu_inventory';
+            newItem.id = Number.parseInt(Math.random()*100000)+'_objectMenu_inventory';
             newItem.style.color = item.values.colour.val;
             newItem.classList = '';
             newItem.style.top = '';
@@ -305,8 +305,10 @@ function showClipboard(objWrapper){
             canv.style.width = '100%';
             canv.style.height = '100%';
             const ctx = canv.getContext('2d');
-            const x = canv.width/2 - pos.width/2;
-            const y = canv.height/2 - pos.height/2;
+            const x = canv.offsetWidth/2 - pos.width/2;
+            const y = canv.offsetHeight/2 - pos.height/2;
+            ctx.canvas.width = canv.offsetWidth;
+            ctx.canvas.height = canv.offsetHeight;
             ctx.drawImage(bb.fastGet('assets',img),
             box.x,box.y,box.width,box.height,
             x, y, pos.width, pos.height);
@@ -389,8 +391,10 @@ function showObjects(objWrapper){
                 canv.style.width = '100%';
                 canv.style.height = '100%';
                 const ctx = canv.getContext('2d');
-                const x = canv.width/2 - pos.width/2;
-                const y = canv.height/2 - pos.height/2;
+                const x = canv.offsetWidth/2 - pos.width/2;
+                const y = canv.offsetHeight/2 - pos.height/2;
+                ctx.canvas.width = canv.offsetWidth;
+                ctx.canvas.height = canv.offsetHeight;
                 ctx.drawImage(bb.fastGet('assets',img),
                 box.x,box.y,box.width,box.height,
                 x, y, pos.width, pos.height);
