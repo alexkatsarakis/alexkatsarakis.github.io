@@ -15,7 +15,7 @@ class EnvironmentObject extends Object {
 
         this._x = 0;
         this._y = 0;
-        this._width = 8000;
+        this._width = 15000;
         this._height = 1080;
 
         this._windowWidth = window.innerWidth;
@@ -47,6 +47,7 @@ class EnvironmentObject extends Object {
         this.data.valueHandler.registerValue('width',{
             tag: "positional",
             onChange: (value) => {
+                this._width = value;
                 // log.logError('Can\'t change width value of Stage');
             },
             getValue: () => {return this._width;}
@@ -55,6 +56,7 @@ class EnvironmentObject extends Object {
         this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {
+                this._height = value;
                 // log.logError('Can\'t change height value of Stage');
             },
             getValue: () => {return this._height;}
