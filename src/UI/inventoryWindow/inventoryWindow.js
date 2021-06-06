@@ -739,7 +739,9 @@ function showFilms(objWrapper){
                 parent: body
             });
             const ctx = anim.getContext('2d');
-            
+            ctx.canvas.width = anim.offsetWidth;
+            ctx.canvas.height = anim.offsetHeight;
+
             const animator = new FRAnimator();
             const animation = new FRAnimation({
                 id: '_prev_'+i,
