@@ -39,7 +39,7 @@
 #languageDiv {
     /* visibility: hidden; */
     position: absolute;
-    width: 500px;
+    width: 750px;
     height: 500px;
     top: 20px;
     left: 150px;
@@ -49,7 +49,7 @@
 #infoBar {
     /* visibility: hidden; */
     position: absolute;
-    width: 650px;
+    width: 900px;
     height: 20px;
     background-color: var(--main-color);
     color: var(--main-color-text);
@@ -107,19 +107,19 @@
     width: 350px;
     overflow: hidden;
     top: 30px;
-    left: 270px;
+    left: 520px;
     text-align: right;
     font-size: 20px;
     pointer-events: none;
 }
 
 #playScriptButton {
-    /* visibility: hidden; */
+    opacity: 0 !important; 
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 20px;
-    left: 670px;
+    top: 120px;
+    left: 920px;
     background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
     background-position: center;
     background-size: contain;
@@ -130,8 +130,8 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 120px;
-    left: 670px;
+    top: 70px;
+    left: 920px;
     background-image: url(../../../assets/images/code.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
     background-size: contain;
@@ -142,26 +142,11 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 70px;
-    left: 670px;
+    top: 20px;
+    left: 920px;
     background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
     background-size: contain;
-}
-
-#consoleArea {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 500px;
-    height: 200px;
-    top: 580px;
-    font-size: 20px;
-    color: white;
-    background-color: rgba(255,255,255,0.1);
-    border: 0;
-    overflow: hidden;
-    outline: none;
-    resize: none;
 }
 
 #hudToggle {

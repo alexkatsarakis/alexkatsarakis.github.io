@@ -59,10 +59,6 @@ export default class Animator {
         this._onAction = f;
     }
 
-    get animation(){
-        return this._anim;
-    }
-
     notifyAction(){
         if(this._onAction)this._onAction(this, this._anim);
     }

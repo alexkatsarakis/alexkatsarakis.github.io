@@ -94,25 +94,25 @@ export default class Object {
         for(let i in states){
             const state = this.getState(i);
             toReturn.states[i] = {};
-            toReturn.states[i]['out of '+i] = {};
-            toReturn.states[i]['out of '+i].get = () => {
+            toReturn.states[i]['on state exit: '+i] = {};
+            toReturn.states[i]['on state exit: '+i].get = () => {
                 return state.transitionFrom;
             } 
-            toReturn.states[i]['out of '+i].set = (code) => {
+            toReturn.states[i]['on state exit: '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
-            toReturn.states[i]['while in '+i] = {};
-            toReturn.states[i]['while in '+i].get = () => {
+            toReturn.states[i]['on state: '+i] = {};
+            toReturn.states[i]['on state: '+i].get = () => {
                 return state.whileInState;
             } 
-            toReturn.states[i]['while in '+i].set = (code) => {
+            toReturn.states[i]['on state: '+i].set = (code) => {
                 this.setState(i,undefined,undefined,code);
             }
-            toReturn.states[i]['go to '+i] = {};
-            toReturn.states[i]['go to '+i].get = () => {
+            toReturn.states[i]['on state enter: '+i] = {};
+            toReturn.states[i]['on state enter: '+i].get = () => {
                 return state.transitionTo;
             } 
-            toReturn.states[i]['go to '+i].set = (code) => {
+            toReturn.states[i]['on state enter: '+i].set = (code) => {
                 this.setState(i,undefined,code);
             }
         }

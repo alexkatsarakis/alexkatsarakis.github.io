@@ -119,6 +119,15 @@ export default class AnimationManager extends Manager{
     }
 
     registerNewAnimation(anim,filmID){
+        const installed = animationManager.getAnimation(anim.id);
+        if(installed){
+            const runningAnims = animatorManager.getAnimators();
+            runningAnims.forEach((animator)=>{
+                if(animator.animation.id === anim.id){
+                    animator.animation = anim;
+                }
+            })
+        }
         return animationManager.register(anim,filmID);
     }
 

@@ -20,7 +20,6 @@ class AnimationManager {
 
     load(item){
         if(!item.id || !item.film)throw Error('given animation doesn\'t have id/film');
-        if(this._animations[item.id])return;
         item.start = item.start || this._defValues.start;
         item.end = item.end || this._defValues.end;
         item.reps = item.reps || this._defValues.reps;

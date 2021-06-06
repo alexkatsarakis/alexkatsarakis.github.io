@@ -262,8 +262,14 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_search').onkeyup = onSearch;
 
     document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
-    document.getElementById('toolbar_saveLocal').onclick = ()=>{bb.fastGet('actions','saveToLocal')()};
+    document.getElementById('toolbar_saveLocal').onclick = ()=>{
+        bb.fastGet('actions','saveToLocal')()
+        bb.fastSet('events','showFeedback',`Saved Game Locally`);
+    };
     
     document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
-    document.getElementById('toolbar_downloadState').onclick = ()=>{bb.fastGet('actions','saveToDatabase')()};
+    document.getElementById('toolbar_downloadState').onclick = ()=>{
+        bb.fastGet('actions','saveToDatabase')();
+        bb.fastSet('events','showFeedback',`Game Downloaded`);
+    };
 }

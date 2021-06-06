@@ -47,6 +47,19 @@ export default class SnapshotManager extends Manager{
         return this._collection;
     }
 
+    removeAllObjectSnapshots(){
+        this._collection = {};
+    }
+
+    removeObjectSnapshot(objID,snapID){
+        if(!this._collection[objID][snapID]) throw Error('Tried to remove Snapshot that doesnt exist');
+
+        this._collection[objID].splice(snapID, 1);
+        
+        if(this._collection[objID].length === 0)delete this._collection[objID];
+
+    }
+
     resetObjectToSnapshot(objID,snapID){
         utils.resetObject(this._collection[objID][snapID]);
     }

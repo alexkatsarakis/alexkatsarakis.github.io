@@ -148,10 +148,6 @@ game.render = ()=>{
 };
 
 game.input = ()=>{
-    if(bb.fastGet('state','mode') !== 'editing'
-    && bb.fastGet('state','mode') !== 'play'
-    && bb.fastGet('state','mode') !== 'paused')
-        return;
     // Engine.InputManager.pollKeys();
     Engine.InputManager.getReleasedKeys().forEach((key)=>utils.inputHandler('Unpressed'+key));
     Engine.InputManager.getPressedKeys().forEach((key)=>utils.inputHandler('Pressed'+key));

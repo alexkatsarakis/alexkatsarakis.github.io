@@ -43,8 +43,8 @@ function printInfo(){
 }
 
 function injectInDiv(div) {
-    div.style.height = "500px";
-    div.style.width = "500px";
+    div.style.height = 500 + 'px';
+    div.style.width = 750 + 'px';
     
     Blockly.inject(div.id,{
         toolbox: document.getElementById('toolbox'),

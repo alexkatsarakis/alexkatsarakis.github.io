@@ -37,6 +37,10 @@ export default class PauseManager extends Manager{
         this._onResumeCB.push(cb);
     }
 
+    isPaused(){
+        return this._timePaused;
+    }
+
     pause(){
         if(this._timePaused) throw Error('Pause while paused');
         this._timePaused = bb.fastGet('state','gameTime');

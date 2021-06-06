@@ -376,9 +376,9 @@
   <div id="eventsTab" class="hudChild"></div>
   <div id="languageDiv" class="hudChild"></div>
   <div id="openTab" class="hudChild"></div>
-  <div id="playScriptButton" class="hudChild button"></div>
   <div id="showScriptButton" class="hudChild button"></div>
   <div id="saveScriptButton" class="hudChild button"></div>
+  <div id="playScriptButton" class="hudChild button"></div>
 </div>
 <!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 

@@ -82,8 +82,10 @@ function onHudLoaded(){
         const code = codes.stripped[tabOpen].get();
         if(ScriptManager.getCurrentEditorID() === 'pureJS'){
             ScriptManager.setNewEditor('blockly');
+            bb.fastSet('events','showFeedback',`New Scripting Language Blockly`);
         }else{
             ScriptManager.setNewEditor('pureJS');
+            bb.fastSet('events','showFeedback',`New Scripting Language Javascript`);
         }
         ScriptManager.clearAndLoadFromText(code);
     });
@@ -92,6 +94,9 @@ function onHudLoaded(){
         const text = ScriptManager.currentScriptAsText();
         const code = ScriptManager.currentScriptAsCode();
         codes.stripped[tabOpen].set({text:text,code:code});
+        
+        const currObj = bb.fastGet('state','focusedObject');
+        bb.fastSet('events','showFeedback',`Saved code "${tabOpen}" for object ${currObj.name}`);
     });
 
     function tabInfo(id,cb){

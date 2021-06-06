@@ -114,6 +114,37 @@
     color: var(--main-color-text);
 }
 
+.inventory-window-body-page-item-delete {
+    fill: var(--main-buttons-text-color);
+    background-color: var(--main-buttons-background-color);
+    border-radius: 50px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.inventory-window-body-page-button-wrapper {
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.inventory-window-body-page-item-button {
+    background-color: var(--secondary-color);
+    color: var(--secondary-color-text);
+    cursor: pointer;
+    text-align: center;
+    height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 50px;
+    float: left;
+}
 
 /* for Animations */
 
@@ -267,7 +298,7 @@
     background-color: var(--canvas-default-bg-color);
 }
 
-#animationWorkshopCreate_popup_editarea_play {
+.animationWorkshopCreate_popup_editarea_button {
     cursor: pointer;
     text-align: center;
     padding: 5px;
@@ -276,21 +307,8 @@
     color: var(--main-color-text);
 }
 
-#animationWorkshopCreate_popup_editarea_create {
-    cursor: pointer;
-    text-align: center;
-    padding: 5px;
-    margin: 5px;
-    background-color: var(--main-color);
-    color: var(--main-color-text);
-}
 
-#animationWorkshopCreate_popup_editarea_play:hover {
-    text-decoration: underline;
-    background-color: var(--main-color-hover);
-}
-
-#animationWorkshopCreate_popup_editarea_create:hover {
+.animationWorkshopCreate_popup_editarea_button:hover {
     text-decoration: underline;
     background-color: var(--main-color-hover);
 }

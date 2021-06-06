@@ -136,10 +136,15 @@ function inputHandler(key) {
     || key === 'PressedPaste' 
     || key === 'PresseddummyAction'
     || key === 'PressedpauseGame' 
-    || key === 'PressedresumeGame'){
+    || key === 'PressedresumeGame'
+    || key === 'PressedtogglePause'){
         console.log(key);
         bb.fastGet('actions',key.substring(7))();
     }else {
+        if(bb.fastGet('state','mode') !== 'editing'
+        && bb.fastGet('state','mode') !== 'play'
+        && bb.fastGet('state','mode') !== 'paused')
+            return;
         Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent(key);
     }
     // if(bb.fastGet('state','mode') === 'editing')return;

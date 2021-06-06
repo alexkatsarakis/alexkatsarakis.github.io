@@ -12,6 +12,7 @@ const UIs = [
     'timewarp',
     'contextMenu',
     'promptWindow',
+    'actionFeedback',
     'dummyGameUI'
 ];
 

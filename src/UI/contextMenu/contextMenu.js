@@ -71,6 +71,7 @@ function onContextChange({objID,event}){
             but.onclick = ()=>{
                 Engine.ClipboardManager.copy(obj,true);
                 bg.click();
+                bb.fastSet('events','showFeedback',`${obj.name} Copied`);
             }
         }
         if(Engine.ClipboardManager.top()){
@@ -86,7 +87,8 @@ function onContextChange({objID,event}){
                     event.clientX+envObj.getValue('x'),
                     event.clientY+envObj.getValue('y')
                 );
-                bg.click();
+                bg.click();    
+                bb.fastSet('events','showFeedback',`${newObj.name} Created`);
             }
         }
     }
@@ -99,8 +101,21 @@ function onContextChange({objID,event}){
             innerHTML: 'Remove Object'
         });
         but.onclick = ()=>{
-            obj.remove();
-            bg.click();
+            if(bb.fastGet('settings','Show Prompt On Actions')){
+                bb.fastSet('events','openPrompt',{
+                    title: 'Remove Object',
+                    description: `If you accept ${obj.name} will be removed`,
+                    onAccept: ()=>{
+                        obj.remove();
+                        bg.click();
+                        bb.fastSet('events','showFeedback',`${obj.name} Removed`);
+                    }
+                });
+            }else{
+                obj.remove();
+                bg.click();
+                bb.fastSet('events','showFeedback',`${obj.name} Removed`);
+            }
         }
     }
 
@@ -114,6 +129,7 @@ function onContextChange({objID,event}){
         but.onclick = ()=>{
             Engine.SnapshotManager.snapshotObject(obj);
             bg.click();
+            bb.fastSet('events','showFeedback',`Took a snapshot of ${obj.name}`);
         }
         
         but = uiFactory.createElement({
@@ -124,6 +140,7 @@ function onContextChange({objID,event}){
         but.onclick = ()=>{
             Engine.SnapshotManager.snapshotScene('defaultName');
             bg.click();
+            bb.fastSet('events','showFeedback',`Took a scene snapshot`);
         }
     }
 

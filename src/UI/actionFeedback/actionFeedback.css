@@ -1,0 +1,22 @@
+#actionFeedback-wrap {
+    visibility: hidden;
+    opacity: 0;
+
+    background-color: var(--main-color);
+    position: absolute;
+    width: 50%;
+    top: 200px;
+    left: 25%;
+    z-index: 10;
+    border-radius: 50px;
+    transition: 1s linear opacity;
+
+    pointer-events: none;
+}
+
+#actionFeedback-text {
+    color: var(--main-color-text);
+    text-align: center;
+    font-size: x-large;
+    padding: 20px;
+}

@@ -13,7 +13,7 @@ class InputManager extends Manager{
     keyCombos = {
         'Copy': ['ControlLeft', 'AltLeft', 'KeyC'],
         'Paste': ['ControlLeft', 'AltLeft', 'KeyV'],
-        'pauseGame': ['Escape'],
+        'togglePause': ['Escape'],
         'resumeGame': ['ControlLeft', 'ShiftLeft', 'Digit2'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }

@@ -33,6 +33,14 @@ export default class ClipboardManager extends Manager{
         return [...this._collection];
     }
 
+    clearClipboard(){
+        this._collection = [];
+    }
+
+    removeItem(index){
+        this._collection.splice(index, 1);
+    }
+
     copy(obj = bb.fastGet('state', 'focusedObject'),saveToCollection){
         if(!obj || Engine.ObjectManager.isSystemObject(obj.id))return;
         const newObj = JSON.parse(obj+'');

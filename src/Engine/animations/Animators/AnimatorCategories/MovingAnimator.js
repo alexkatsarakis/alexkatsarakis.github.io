@@ -10,6 +10,15 @@ export default class MovingAnimator extends Animator {
         this._currentRep = 0;
     }
 
+    set animation(an){
+        this._anim = an;
+        this._currentRep = 0;
+    }
+
+    get animation(){
+        return this._anim;
+    }
+
     progress(currTime){
         if(this.hasFinished())return;
         while(currTime > this._lastTime && (currTime - this._lastTime) >= this._anim.delay){
