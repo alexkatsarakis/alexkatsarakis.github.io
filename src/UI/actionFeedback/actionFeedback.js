@@ -25,7 +25,7 @@ function showFeedback(feedbackInfo){
         callback = Engine.ClockManager.callIn(()=>{
             callback = undefined;
             block.style.opacity = '0';
-        },undefined,1000);
+        },undefined,1000+ feedbackInfo.split(' ').length * 100);
     }
 
     bb.installWatch('events', 'showFeedback', (feedbackInfo) => showFeedback(feedbackInfo));

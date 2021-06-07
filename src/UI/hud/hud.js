@@ -108,15 +108,14 @@ function onHudLoaded(){
         };
     }
 
-    // const consoleArea = document.getElementById('consoleArea');
-    // function onActionChange(newMessage){
-    //     consoleArea.value += '\n'+newMessage;
-    //     consoleArea.scrollTop = consoleArea.scrollHeight;
-    //     // logAllActions += newMessage+'\n';
-    //     bb.installWatch('state','lastAction',onActionChange);
-    // }
+    function swapDisplayOnClass(className){
+        const items = document.getElementsByClassName(className);
+        for(let i = 0; i < items.length; ++i){
+            const item = items.item(i);
+            item.style.display = (item.style.display === 'none')?'block':'none';
+        }
+    }
 
-    // bb.installWatch('state','lastAction',onActionChange);
     function onFocusChange(obj){
         const eventsTab = document.getElementById('eventsTab');
         const infoBar = document.getElementById('infoBar');
@@ -147,11 +146,14 @@ function onHudLoaded(){
         eventSplit.classList = 'tabSplitter';
         eventSplit.innerHTML = 'Events';
         eventsTab.appendChild(eventSplit);
+        eventSplit.onclick = ()=>{
+            swapDisplayOnClass('eventTabItem');
+        }
 
         for(let i in events){
             codes.stripped[i] = events[i];
             const elem = document.createElement('div');
-            elem.classList = "eventTab";
+            elem.classList = "eventTab eventTabItem";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,events[i].get));
@@ -166,6 +168,9 @@ function onHudLoaded(){
         stateSplit.classList = 'tabSplitter';
         stateSplit.innerHTML = 'States';
         eventsTab.appendChild(stateSplit);
+        stateSplit.onclick = ()=>{
+            swapDisplayOnClass('stateTabItem');
+        }
 
         for(let i in states){
             stateSplit = document.createElement('div');
@@ -173,10 +178,13 @@ function onHudLoaded(){
             stateSplit.innerHTML = i;
             stateSplit.style.marginLeft = '10%';
             eventsTab.appendChild(stateSplit);
+            stateSplit.onclick = ()=>{
+                swapDisplayOnClass('stateTabItem'+i);
+            }
             for(let st in states[i]){
                 codes.stripped[st] = states[i][st];
                 const elem = document.createElement('div');
-                elem.classList = "eventTab";
+                elem.classList = "eventTab stateTabItem "+ 'stateTabItem'+i;
                 elem.innerHTML = st;
                 elem.style.marginLeft = '20%';
                 elem.addEventListener('click',tabInfo(st,states[i][st].get));
@@ -192,11 +200,14 @@ function onHudLoaded(){
         valueSplit.classList = 'tabSplitter';
         valueSplit.innerHTML = 'Attributes';
         eventsTab.appendChild(valueSplit);
+        valueSplit.onclick = ()=>{
+            swapDisplayOnClass('valueTabItem');
+        }
 
         for(let i in values){
             codes.stripped[i] = values[i];
             const elem = document.createElement('div');
-            elem.classList = "eventTab";
+            elem.classList = "eventTab valueTabItem";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,values[i].get));
@@ -211,11 +222,14 @@ function onHudLoaded(){
         optionSplit.classList = 'tabSplitter';
         optionSplit.innerHTML = 'Flags';
         eventsTab.appendChild(optionSplit);
+        optionSplit.onclick = ()=>{
+            swapDisplayOnClass('optionTabItem');
+        }
 
         for(let i in options){
             codes.stripped[i] = options[i];
             const elem = document.createElement('div');
-            elem.classList = "eventTab";
+            elem.classList = "eventTab optionTabItem";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,options[i].get));
@@ -230,11 +244,14 @@ function onHudLoaded(){
         collSplit.classList = 'tabSplitter';
         collSplit.innerHTML = 'Collisions';
         eventsTab.appendChild(collSplit);
+        collSplit.onclick = ()=>{
+            swapDisplayOnClass('collisionTabItem');
+        }
 
         for(let i in collisi){
             codes.stripped[i] = collisi[i];
             const elem = document.createElement('div');
-            elem.classList = "eventTab";
+            elem.classList = "eventTab collisionTabItem";
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,collisi[i].get));

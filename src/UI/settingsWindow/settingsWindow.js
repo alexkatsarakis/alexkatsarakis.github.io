@@ -1,5 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
+import uiFactory from '../../utils/UIFactory.js'
+
 export default {
     name:'settingsWindow',
     link: './src/UI/settingsWindow/settingsWindow.ahtml',
@@ -75,14 +77,14 @@ const settings = {
     AddOns: {
         
     },
-    Settings: {
+    Options: {
     }
 }
 
 function fillSettings(){
     const set = bb.getComponent('settings').itemMap;
     for(let i in set){
-        settings.Settings[i] = {
+        settings.Options[i] = {
             onChange: (ev)=>{
                 bb.fastSet('settings', i, ev.target.checked);
             },
@@ -112,45 +114,83 @@ function fillUIsSettings(){
     });
 }
 
+function showCategorySettings(wrapper,catItems){
+
+    for(let item in catItems){   
+        const setting = catItems[item];
+
+        const itemWrapper = uiFactory.createElement({
+            parent: wrapper,
+            classList: 'settings-window-category-item-wrap'
+        });
+        
+        uiFactory.createElement({
+            parent: itemWrapper,
+            classList: 'settings-window-category-item-name',
+            innerHTML: setting.name
+        });
+
+        const itemInput = uiFactory.createElement({
+            parent: itemWrapper,
+            classList: 'settings-window-category-item-input',
+            type: 'input',
+            onChange: settings.onChange
+        });
+        itemInput.type = setting.inputType;
+        if(setting.inputType === 'checkbox'){
+            itemInput.checked = setting.initValue;
+        }
+        itemInput.value = setting.initValue;
+        itemInput.onchange = setting.onChange;
+
+        uiFactory.createElement({
+            parent: itemWrapper,
+            classList: 'settings-window-category-item-description',
+            innerHTML: setting.description || 'No description provided'
+        });
+    }
+}
+
 function onSettingsWindowLoaded(){
     document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
 
     lastGameState = bb.fastGet('state','mode');
     bb.fastSet('state','mode','popUpOpen');
 
-    const setWindow = document.getElementById('settings-window');
+    const catWindow = document.getElementById('settings-window-categories-list');
+    const panel = document.getElementById('settings-window-settings-panel');
     fillSettings();
     fillUIsSettings();
     
     for(let cat in settings){
         const catItems = settings[cat];
 
-        const wrapper = document.createElement('div');
-        wrapper.classList = 'settings_category';
-        setWindow.appendChild(wrapper);
+        const catBut = uiFactory.createElement({
+            parent: catWindow,
+            classList: 'settings-window-category',
+            innerHTML: cat
+        });
 
-        const catNameElem = document.createElement('div');
-        catNameElem.classList = 'settings_category_name';
-        catNameElem.innerHTML = cat;
-        wrapper.appendChild(catNameElem);
+        const catPanel = uiFactory.createElement({
+            parent: panel,
+            classList: 'settings-window-category-panel',
+            id: 'settings-window-category-panel-'+cat,
+            innerHTML: cat
+        });
 
-        for(let item in catItems){
-            const setting = catItems[item];
-            const itemWrapper = document.createElement('div');
-            itemWrapper.classList = 'objectItem';
-            itemWrapper.innerHTML = setting.name;
-            wrapper.appendChild(itemWrapper);
-
-            const itemInput = document.createElement('input');
-            itemInput.type = setting.inputType;
-            if(setting.inputType === 'checkbox'){
-                itemInput.checked = setting.initValue;
-            }
-            itemInput.value = setting.initValue;
-            itemInput.onchange = setting.onChange;
-            itemWrapper.appendChild(itemInput);
+        catBut.onclick = () => {
+            panel.scrollTo({
+                top: catPanel.offsetTop,
+                left:0,
+                behavior: 'smooth'
+            });
         }
 
-        
+        showCategorySettings(panel,catItems);
+
+        uiFactory.createElement({
+            parent: panel,
+            classList: 'settings-window-category-splitter'
+        });
     }
 }

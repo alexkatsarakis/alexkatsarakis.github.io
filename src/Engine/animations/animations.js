@@ -118,6 +118,12 @@ export default class AnimationManager extends Manager{
         return animationManager._animations;
     }
 
+    removeAnimation(animID){
+        const installed = animationManager.getAnimation(animID);
+        if(!installed)return;
+        animationManager.remove(animID);
+    }
+
     registerNewAnimation(anim,filmID){
         const installed = animationManager.getAnimation(anim.id);
         if(installed){

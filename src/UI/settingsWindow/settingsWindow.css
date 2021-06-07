@@ -22,9 +22,86 @@
     color: var(--main-color-text);
 }
 
-.settings_category_name {
-    padding-top: 20px;
-    font-size: 2em;
-    text-decoration: underline;
+#settings-window-settings-panel {
+    width: 90%;
+    height: 80vh;
+    float: right;
+    overflow: auto;
+}
+
+#settings-window-categories-list {
+    float: left;
+    width: calc(10% - 3px);
+    height: 80vh;
+    border-right: 3px solid var(--main-color-hover);
+}
+
+.settings-window-category-panel {
+    font-size: x-large;
+    width: calc(100% - 20px);
+    padding: 10px;
     color: var(--main-color-text);
+    text-decoration: underline;
+    text-align: center;
+}
+
+.settings-window-category {
+    font-size: x-large;
+    width: calc(100% - 20px);
+    padding: 10px;
+    cursor: pointer;
+    color: var(--main-color-text);
+}
+
+.settings-window-category:hover {
+    font-size: x-large;
+    width: calc(100% - 20px);
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--main-color-hover);
+}
+
+.settings-window-category-splitter {
+    width: 100%;
+    height: 2px;
+    margin-top: 10px;
+    background-color: var(--main-color-text);
+}
+
+.settings-window-category-item-wrap {
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid var(--main-color-text);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.settings-window-category-item-name {
+    color: var(--main-color-text);
+    width: 33%;
+    font-size: large;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+}
+
+.settings-window-category-item-input {
+    color: var(--main-color-text);
+    width: 10%;
+    margin-left: 11.5%;
+    margin-right: 11.5%;
+    margin-top: 10px;
+    height: 20px;
+    border:0;
+    float: left;
+}
+
+.settings-window-category-item-description {
+    color: var(--main-color-text);
+    text-align: center;
+    height: 50px;
+    overflow-y: auto;
 }

@@ -50,3 +50,5 @@ Pause Icon: <img width="20px" height="20px" src="./assets/icons/pause.svg">  ([F
 
 Continue Icon: <img width="20px" height="20px" src="./assets/icons/continue.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
+TransitionTo Icon: <img width="20px" height="20px" src="./assets/icons/transitionTo.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+

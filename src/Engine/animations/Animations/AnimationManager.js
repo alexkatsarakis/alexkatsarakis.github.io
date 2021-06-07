@@ -33,6 +33,11 @@ class AnimationManager {
         this._animations[item.id] = {animation: new FrameRangeAnimation(item),film: film};
     }
 
+    remove(animID){
+        if(!this._animations[animID])return;
+        delete this._animations[animID];
+    }
+
     register(anim,film){ // class Animation
         this._animations[anim.id] = {animation:anim,film:animationFilmHolder.getFilm(film)};
     }

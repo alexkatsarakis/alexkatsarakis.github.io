@@ -238,7 +238,17 @@ function onSearch(ev){
 function onToolbarLoaded(){
     const backBut = document.getElementById('toolbar-logo-img');
     backBut.onclick = (() => {
-        window.location = '/';
+        if(bb.fastGet('settings','Show Prompt On Actions')){
+            bb.fastSet('events','openPrompt',{
+                title: 'Go To Homepage',
+                description: `If you accept you will be redirected and you will lose all the progress if you haven't saved`,
+                onAccept: ()=>{
+                    window.location = '/';
+                }
+            });
+        }else{
+            window.location = '/';
+        }
     });
 
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');

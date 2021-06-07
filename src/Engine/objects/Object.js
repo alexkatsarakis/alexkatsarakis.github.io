@@ -121,11 +121,11 @@ export default class Object {
         toReturn.values = {};
         for(let i in values){
             if(this.getValueTag(i) === 'user'){
-                toReturn.values['on '+i+' Change'] = {};
-                toReturn.values['on '+i+' Change'].get = () => {
+                toReturn.values['on '+i+' change'] = {};
+                toReturn.values['on '+i+' change'].get = () => {
                     return this.getValueCode(i);
                 }
-                toReturn.values['on '+i+' Change'].set = (code) => {
+                toReturn.values['on '+i+' change'].set = (code) => {
                     this.setValueCode(i, code);
                 };
             }
@@ -135,11 +135,11 @@ export default class Object {
         toReturn.options = {};
         for(let i in options){
             if(this.getOptionTag(i) === 'user'){
-                toReturn.options['on '+i+' Change'] = {};
-                toReturn.options['on '+i+' Change'].set = (code) => {
+                toReturn.options['on '+i+' change'] = {};
+                toReturn.options['on '+i+' change'].set = (code) => {
                     this.setOptionCode(i, code);
                 };
-                toReturn.options['on '+i+' Change'].get = () => {
+                toReturn.options['on '+i+' change'].get = () => {
                     return this.getOptionCode(i).text;
                 }
             }
@@ -286,7 +286,7 @@ Object.prototype.removeEvent = function(ev) {
 }
 
 Object.prototype.getEventTag = function(ev) {
-    this.data.eventHandler.getEventTag(ev);
+    return this.data.eventHandler.getEventTag(ev);
 }
 
 

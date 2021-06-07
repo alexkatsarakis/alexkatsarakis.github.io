@@ -1,10 +1,8 @@
 <link rel="stylesheet" href="./src/UI/settingsWindow/settingsWindow.css">
 <div id='settings-window-background'></div>
 <div id='settings-window'>
-  <!-- <settings-category
-      v-for="(category,name) in settings"
-      v-bind:settings= "category"
-      v-bind:catname = "name"
-      v-bind:key= "name"
-  /> -->
+  <div id='settings-window-categories-list'>
+  </div>
+  <div id='settings-window-settings-panel'>
+  </div>
 </div>

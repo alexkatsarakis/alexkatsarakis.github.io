@@ -44,6 +44,7 @@ function addStateButtonHandler(){
         focusedObj.addState(textValue);
         transition(undefined);
         transition(focusedObj.id);
+        bb.fastSet('events','showFeedback',`${textValue} state was added to ${focusedObj.name}`);
     }
 }
 
@@ -58,12 +59,29 @@ function createStatesView(states,currentState){
         const text = document.createElement('div');
         text.classList = 'mainInfoBox-shard-main-text';
         text.innerHTML = i;
-        if(i === currentState)text.style.color = 'var(--secondary-color)';
-        item.insertAdjacentHTML('beforeend', `<svg id="mainInfoBox-body-states-attributes-remove-${i}" class="mainInfoBox-shard-main-remove" height="448pt" viewBox="-69 0 448 448.00446" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m283.429688 45.714844h-73.140626v-18.285156c0-15.125-12.304687-27.429688-27.429687-27.429688h-54.855469c-15.125 0-27.429687 12.304688-27.429687 27.429688v18.285156h-73.144531c-15.125 0-27.42578175 12.304687-27.42578175 27.429687v45.710938h18.28515575v301.71875c0 15.125 12.300782 27.429687 27.425782 27.429687h219.429687c15.125 0 27.429688-12.304687 27.429688-27.429687v-301.71875h18.285156v-45.710938c0-15.125-12.304687-27.429687-27.429687-27.429687zm-164.570313-18.285156c0-5.042969 4.097656-9.144532 9.144531-9.144532h54.855469c5.046875 0 9.144531 4.101563 9.144531 9.144532v18.285156h-73.144531zm155.429687 393.144531c0 5.046875-4.097656 9.144531-9.144531 9.144531h-219.429687c-5.042969 0-9.140625-4.097656-9.140625-9.144531v-301.71875h237.714843zm18.285157-320.003907h-274.285157v-27.425781c0-5.042969 4.097657-9.144531 9.140626-9.144531h256c5.046874 0 9.144531 4.101562 9.144531 9.144531zm0 0"/><path d="m210.289062 384.003906c5.054688 0 9.140626-4.089844 9.140626-9.140625v-201.148437c0-5.050782-4.085938-9.144532-9.140626-9.144532-5.054687 0-9.144531 4.09375-9.144531 9.144532v201.148437c0 5.050781 4.089844 9.140625 9.144531 9.140625zm0 0"/><path d="m155.429688 384.003906c5.054687 0 9.144531-4.089844 9.144531-9.140625v-201.148437c0-5.050782-4.089844-9.144532-9.144531-9.144532-5.050782 0-9.140626 4.09375-9.140626 9.144532v201.148437c0 5.050781 4.089844 9.140625 9.140626 9.140625zm0 0"/><path d="m100.574219 384.003906c5.054687 0 9.140625-4.089844 9.140625-9.140625v-201.148437c0-5.050782-4.085938-9.144532-9.140625-9.144532-5.054688 0-9.144531 4.09375-9.144531 9.144532v201.148437c0 5.050781 4.089843 9.140625 9.144531 9.140625zm0 0"/></svg>`);
-        
-        item.appendChild(text);
+        item.insertAdjacentHTML('beforeend', `<svg id="mainInfoBox-body-states-main-remove-${i}" class="mainInfoBox-shard-main-remove" height="448pt" viewBox="-69 0 448 448.00446" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m283.429688 45.714844h-73.140626v-18.285156c0-15.125-12.304687-27.429688-27.429687-27.429688h-54.855469c-15.125 0-27.429687 12.304688-27.429687 27.429688v18.285156h-73.144531c-15.125 0-27.42578175 12.304687-27.42578175 27.429687v45.710938h18.28515575v301.71875c0 15.125 12.300782 27.429687 27.425782 27.429687h219.429687c15.125 0 27.429688-12.304687 27.429688-27.429687v-301.71875h18.285156v-45.710938c0-15.125-12.304687-27.429687-27.429687-27.429687zm-164.570313-18.285156c0-5.042969 4.097656-9.144532 9.144531-9.144532h54.855469c5.046875 0 9.144531 4.101563 9.144531 9.144532v18.285156h-73.144531zm155.429687 393.144531c0 5.046875-4.097656 9.144531-9.144531 9.144531h-219.429687c-5.042969 0-9.140625-4.097656-9.140625-9.144531v-301.71875h237.714843zm18.285157-320.003907h-274.285157v-27.425781c0-5.042969 4.097657-9.144531 9.140626-9.144531h256c5.046874 0 9.144531 4.101562 9.144531 9.144531zm0 0"/><path d="m210.289062 384.003906c5.054688 0 9.140626-4.089844 9.140626-9.140625v-201.148437c0-5.050782-4.085938-9.144532-9.140626-9.144532-5.054687 0-9.144531 4.09375-9.144531 9.144532v201.148437c0 5.050781 4.089844 9.140625 9.144531 9.140625zm0 0"/><path d="m155.429688 384.003906c5.054687 0 9.144531-4.089844 9.144531-9.140625v-201.148437c0-5.050782-4.089844-9.144532-9.144531-9.144532-5.050782 0-9.140626 4.09375-9.140626 9.144532v201.148437c0 5.050781 4.089844 9.140625 9.140626 9.140625zm0 0"/><path d="m100.574219 384.003906c5.054687 0 9.140625-4.089844 9.140625-9.140625v-201.148437c0-5.050782-4.085938-9.144532-9.140625-9.144532-5.054688 0-9.144531 4.09375-9.144531 9.144532v201.148437c0 5.050781 4.089843 9.140625 9.144531 9.140625zm0 0"/></svg>`);
+        item.insertAdjacentHTML('beforeend', `<svg id="mainInfoBox-body-states-main-edit-${i}" class="mainInfoBox-shard-main-edit" x="0px" y="0px" width="60.731px" height="60.73px" viewBox="0 0 60.731 60.73" style="enable-background:new 0 0 60.731 60.73;" xml:space="preserve"><g><g><path d="M17.778,44.857v11.026L0,38.105l17.778-17.781v11.163c20.952-1.58,37.88-12.49,41.993-26.64 c0.627,2.158,0.96,4.393,0.96,6.682C60.731,28.812,41.931,43.037,17.778,44.857z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>`);
 
+        item.appendChild(text);
         statesInfo.appendChild(item);
+
+
+        const gotoState = document.getElementById(`mainInfoBox-body-states-main-edit-${i}`);
+        if(i === currentState){
+            gotoState.remove();
+            text.style.color = 'var(--secondary-color)';
+        }else{
+            gotoState.style.fill = 'white';
+            gotoState.onclick = ()=>{
+                const focusedObj = bb.fastGet('state','focusedObject');
+                focusedObj.setCurrentState(i);
+                transition(undefined);
+                transition(focusedObj.id);
+                bb.fastSet('events','showFeedback',`${focusedObj.name} transitioned to ${i} state`);
+            }
+        }
+
+
     }
 }
 
@@ -95,6 +113,7 @@ function addAttributeButtonHandler(){
         focusedObj.addValue(textValue);
         transition(undefined);
         transition(focusedObj.id);
+        bb.fastSet('events','showFeedback',`${textValue} attribute was added to ${focusedObj.name}`);
     }
 }
 
@@ -120,7 +139,11 @@ function createAttributesView(attrs){
         if(focusedObj.getValueTag(i) === 'user'){
             rmBut.style.fill = 'red';
             rmBut.style.cursor = 'pointer';
-            rmBut.onclick = (() => {focusedObj.removeValue(i);refreshInfoBox(focusedObj.id);});
+            rmBut.onclick = (() => {
+                focusedObj.removeValue(i);
+                refreshInfoBox(focusedObj.id);
+                bb.fastSet('events','showFeedback',`Removed attribute ${i} from ${focusedObj.name}`);
+            });
         }else{
             rmBut.style.fill = 'grey';
             rmBut.style.cursor = 'normal';
@@ -139,7 +162,9 @@ function createAttributesView(attrs){
                 if(isNaN(val) || val === '')
                     focusedObj.setValue(i, val);
                 else
-                    focusedObj.setValue(i, Number.parseFloat(val))
+                    focusedObj.setValue(i, Number.parseFloat(val));
+
+                bb.fastSet('events','showFeedback',`${focusedObj.name} attribute ${i} changed to ${val}`);
             }
             text.appendChild(inp);
         });
@@ -174,6 +199,7 @@ function addEventsButtonHandler(){
         focusedObj.addEvent(textValue);
         transition(undefined);
         transition(focusedObj.id);
+        bb.fastSet('events','showFeedback',`${textValue} event was added to ${focusedObj.name}`);
     }
 }
 
@@ -201,6 +227,7 @@ function createEventsView(events){
             rmBut.onclick = (() => {
                 focusedObj.removeEvent(i);
                 refreshInfoBox(focusedObj.id);
+                bb.fastSet('events','showFeedback',`Removed Event ${i} from ${focusedObj.name}`);
             });
         }
     }
@@ -233,6 +260,7 @@ function addFlagsButtonHandler(){
         const focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addOption(textValue);
         refreshInfoBox(focusedObj.id);
+        bb.fastSet('events','showFeedback',`${textValue} flag was added to ${focusedObj.name}`);
     }
 }
 
@@ -261,6 +289,7 @@ function createFlagsView(flags){
             rmBut.onclick = () => {
                 obj.removeOption(i);
                 refreshInfoBox(obj.id);
+                bb.fastSet('events','showFeedback',`Removed flag ${i} from ${obj.name}`);
             }
         }
 
@@ -293,6 +322,7 @@ function createFlagsView(flags){
                     obj.setOption(i,false);
                 }
                 refreshInfoBox(obj.id);
+                bb.fastSet('events','showFeedback',`${obj.name} flag ${i} changed to ${ev.target.value}`);
             });
 
             text.innerHTML = i + ": ";
@@ -329,6 +359,7 @@ function addCollisionsButtonHandler(){
         const focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addCollision(textValue);
         refreshInfoBox(focusedObj.id);
+        bb.fastSet('events','showFeedback',`${textValue} collision was added to ${focusedObj.name}`);
     }
 }
 
@@ -355,6 +386,7 @@ function createCollisionsView(cols){
         rmBut.onclick = (() => {
             obj.removeCollision(name)
             refreshInfoBox(obj.id);
+            bb.fastSet('events','showFeedback',`Removed collision ${name} from ${obj.name}`);
         });
 
     };

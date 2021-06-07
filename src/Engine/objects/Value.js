@@ -70,7 +70,6 @@ export default class ValueManager{
 
     getValueCode(val) {
         let value = this._regValues[val];
-        console.log(value);
         if(value)
             return value.onChange;
         return {text: "", code: ""}
