@@ -4,16 +4,16 @@ import Engine from '../Engine.js'
 
 
 if(Engine.hasManager('PauseManager')){
-    bb.fastInstall('actions', 'pauseGame', ()=>{
+    bb.fastInstall('actions', 'Pause Game', ()=>{
         if(Engine.TimewarpManager?.isRecording()){
             Engine.TimewarpManager.stopRecording();
         }else{
             Engine.PauseManager.pause();
         }
     });
-    bb.fastInstall('actions', 'resumeGame', ()=>Engine.PauseManager.resume());
+    bb.fastInstall('actions', 'Resume Game', ()=>Engine.PauseManager.resume());
 
-    bb.fastInstall('actions', 'togglePause', ()=>{
+    bb.fastInstall('actions', 'Pause/Resume Toggle', ()=>{
         if(Engine.PauseManager.isPaused()){
             bb.fastSet('events','showFeedback',`Resume`);
             Engine.PauseManager.resume();

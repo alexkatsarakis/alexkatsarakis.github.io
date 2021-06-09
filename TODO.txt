@@ -11,6 +11,8 @@ IDE:
 
     - make the user able to change frame order on animation creation.
 
+    - Add keybinds on options so user can change them (for example pause on Escape)
+
 
 ENGINE:
 
@@ -91,7 +93,7 @@ Extra:
 
 KNOWN BUGS:
     - (Fixed) A DOM render object position is wrong with relative position
-    - When I move I check the grid but I must also move the object next to the grid
+    - (Fixed) When I move I check the grid but I must also move the object next to the grid
 
 
 

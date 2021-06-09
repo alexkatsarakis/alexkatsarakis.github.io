@@ -52,3 +52,9 @@ Continue Icon: <img width="20px" height="20px" src="./assets/icons/continue.svg"
 
 TransitionTo Icon: <img width="20px" height="20px" src="./assets/icons/transitionTo.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
 
+Films Icon: <img width="20px" height="20px" src="./assets/icons/film.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Animation Icon: <img width="20px" height="20px" src="./assets/icons/animation.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+
+Scene Icon: <img width="20px" height="20px" src="./assets/icons/scene.svg">  ([Freepik](https://www.flaticon.com/authors/freepik))
+

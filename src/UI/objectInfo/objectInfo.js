@@ -78,7 +78,7 @@ function createStatesView(states,currentState){
                 transition(undefined);
                 transition(focusedObj.id);
                 bb.fastSet('events','showFeedback',`${focusedObj.name} transitioned to ${i} state`);
-            }
+            };
         }
 
 

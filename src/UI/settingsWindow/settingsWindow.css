@@ -89,10 +89,10 @@
 }
 
 .settings-window-category-item-input {
-    color: var(--main-color-text);
-    width: 10%;
-    margin-left: 11.5%;
-    margin-right: 11.5%;
+    color: var(--main-color);
+    width: 20%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
     margin-top: 10px;
     height: 20px;
     border:0;

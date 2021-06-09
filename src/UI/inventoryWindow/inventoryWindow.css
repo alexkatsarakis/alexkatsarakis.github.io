@@ -67,9 +67,26 @@
     font-size: large;
     color: var(--main-buttons-text-color);
 }
+
 .inventory-window-tabs-item-selected {
+    background-color: var(--secondary-color);
+}
+
+.inventory-window-tabs-item:hover {
     background-color: var(--main-color-hover);
-    /* background-color: red; */
+}
+
+.inventory-window-tabs-item-selected:hover {
+    background-color: var(--secondary-color);
+}
+
+
+.inventory-window-tabs-item-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    float: left;
+    fill: var(--main-buttons-text-color);
 }
 
 #inventory-window-body {
@@ -113,6 +130,7 @@
     margin-left: 5px;
     margin-top: 5px;
     width: 15px;
+    position: absolute;
     height: 15px;
     cursor: pointer;
     float:left;
@@ -174,6 +192,7 @@
 /* for Objects */
 
 .inventory-window-itemWrapper {
+    position: relative;
     width: 200px;
     margin: 0 20px 40px 20px;
     float: left;

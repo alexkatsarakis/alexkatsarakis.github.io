@@ -15,7 +15,6 @@ export default {
 };
 
 function actionsDropdown(){
-    let isVisible = false;
 
     function getActions(){
         const actions = [];
@@ -40,26 +39,21 @@ function actionsDropdown(){
             ddItem.addEventListener('click',()=>bb.fastGet('actions',item)());
             dropdown.appendChild(ddItem);
         });
-        bb.installWatch('state','focusedObject',closeDropdown);
     }
 
-    function closeDropdown(){
-        isVisible = false;
-        const dropdown = document.getElementById('toolbar_actions_dropdown');
-        dropdown?.remove();
-    }
-
-    function toggleDropdown(){
-        isVisible = !isVisible;
-        if(isVisible)createDropdown();
-        else closeDropdown();
+    function toggleDropdown(forceClose){
+        const dropdowns = document.getElementsByClassName('toolbar_dropdown');
+        const isOpen = document.getElementById('toolbar_actions_dropdown');
+        for(let i = 0; i < dropdowns.length; i++){
+            dropdowns.item(i).remove();
+        }
+        if(!isOpen && forceClose)createDropdown();
     }
 
     return toggleDropdown;
 }
 
 function objectsDropdown(){
-    let isVisible = false;
 
     function getObjects(){
         const objects = [];
@@ -85,26 +79,21 @@ function objectsDropdown(){
             ddItem.addEventListener('click',()=>focusedObject(item.id));
             dropdown.appendChild(ddItem);
         });
-        bb.installWatch('state','focusedObject',closeDropdown);
-    }
-  
-    function closeDropdown(){
-        isVisible = false;
-        const dropdown = document.getElementById('toolbar_liveobjects_dropdown');
-        dropdown?.remove();
     }
 
-    function toggleDropdown(){
-        isVisible = !isVisible;
-        if(isVisible)createDropdown();
-        else closeDropdown();
+    function toggleDropdown(forceClose){
+        const dropdowns = document.getElementsByClassName('toolbar_dropdown');
+        const isOpen = document.getElementById('toolbar_liveobjects_dropdown');
+        for(let i = 0; i < dropdowns.length; i++){
+            dropdowns.item(i).remove();
+        }
+        if(!isOpen && forceClose)createDropdown();
     }
 
     return toggleDropdown;
 }
 
 function objCreationDropdown(){
-    let isVisible = false;
 
     function getConstructors(){
         const consts = [];
@@ -139,19 +128,15 @@ function objCreationDropdown(){
             });
             dropdown.appendChild(ddItem);
         });
-        bb.installWatch('state','focusedObject',closeDropdown);
-    }
-  
-    function closeDropdown(){
-        isVisible = false;
-        const dropdown = document.getElementById('toolbar_objCreation_dropdown');
-        dropdown?.remove();
     }
 
-    function toggleDropdown(){
-        isVisible = !isVisible;
-        if(isVisible)createDropdown();
-        else closeDropdown();
+    function toggleDropdown(forceClose){
+        const dropdowns = document.getElementsByClassName('toolbar_dropdown');
+        const isOpen = document.getElementById('toolbar_objCreation_dropdown');
+        for(let i = 0; i < dropdowns.length; i++){
+            dropdowns.item(i).remove();
+        }
+        if(!isOpen && forceClose)createDropdown();
     }
 
     return toggleDropdown;
@@ -203,6 +188,8 @@ function onSearch(ev){
             if(j.toLowerCase().includes(query.toLowerCase()))tempArray.push(obj.name+'#'+j);
         }
     }
+
+
 
     arr.push(...tempArray);
 
@@ -270,16 +257,22 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
     document.getElementById('toolbar_search').onkeyup = onSearch;
+    document.getElementById('toolbar_search').onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            const res = document.getElementsByClassName('toolbar_dropdown_item');
+            res.item(0)?.click();
+        }
+    }
 
     document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
     document.getElementById('toolbar_saveLocal').onclick = ()=>{
-        bb.fastGet('actions','saveToLocal')()
+        bb.fastGet('actions','Save(locally)')()
         bb.fastSet('events','showFeedback',`Saved Game Locally`);
     };
     
     document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
     document.getElementById('toolbar_downloadState').onclick = ()=>{
-        bb.fastGet('actions','saveToDatabase')();
+        bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };
 }

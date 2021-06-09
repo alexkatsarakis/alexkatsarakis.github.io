@@ -1,5 +1,5 @@
 import bb from '../../utils/blackboard.js'
-
+import Engine from '../../Engine.js'
 import uiFactory from '../../utils/UIFactory.js'
 
 export default {
@@ -30,7 +30,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color').substring(1),
-            name: 'mainColor',
+            name: 'Main Color',
             inputType:'color'
         },
         mainColorHover: {
@@ -38,7 +38,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color-hover', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color-hover').substring(1),
-            name: 'mainColorHover',
+            name: 'Main Color (Hover)',
             inputType:'color'
         },
         mainColorText: {
@@ -46,7 +46,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color-text', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color-text').substring(1),
-            name: 'mainColorText',
+            name: 'Main Color (Text)',
             inputType:'color'
         },
         secondaryColor: {
@@ -54,7 +54,7 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color').substring(1),
-            name: 'secondaryColor',
+            name: 'Secondary Color',
             inputType:'color'
         },
         secondaryColorHover: {
@@ -62,7 +62,7 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color-hover', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color-hover').substring(1),
-            name: 'secondaryColorHover',
+            name: 'Secondary Color (Hover)',
             inputType:'color'
         },
         secondaryColorText: {
@@ -70,12 +70,14 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color-text', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color-text').substring(1),
-            name: 'secondaryColorText',
+            name: 'Secondary Color (Text)',
             inputType:'color'
         }
     },
     AddOns: {
         
+    },
+    KeyBinds: {
     },
     Options: {
     }
@@ -112,6 +114,27 @@ function fillUIsSettings(){
             inputType:'checkbox'
         }
     });
+}
+
+function fillKeyBindsSettings(){
+    
+    const actions = bb.getComponent('actions').itemMap;
+    const filtered = [];
+    for(let i in actions){
+        if(actions[i].length === 0)filtered.push(i);
+    }
+
+    filtered.forEach((combo)=>{
+        const inps = Engine.InputManager.getCombo(combo);
+        settings.KeyBinds[combo] = {
+            onChange: (ev)=>{
+                Engine.InputManager.setCombo(combo,ev.target.value.split(','));
+            },
+            initValue: inps?.join(',') || '',
+            name: combo,
+            inputType:'text'
+        }
+    })
 }
 
 function showCategorySettings(wrapper,catItems){
@@ -161,7 +184,8 @@ function onSettingsWindowLoaded(){
     const panel = document.getElementById('settings-window-settings-panel');
     fillSettings();
     fillUIsSettings();
-    
+    fillKeyBindsSettings();
+
     for(let cat in settings){
         const catItems = settings[cat];
 
@@ -184,7 +208,7 @@ function onSettingsWindowLoaded(){
                 left:0,
                 behavior: 'smooth'
             });
-        }
+        };
 
         showCategorySettings(panel,catItems);
 

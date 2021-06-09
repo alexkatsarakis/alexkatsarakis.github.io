@@ -132,12 +132,7 @@ function resetObject(item){
 }
 
 function inputHandler(key) {
-    if(key === 'PressedCopy' 
-    || key === 'PressedPaste' 
-    || key === 'PresseddummyAction'
-    || key === 'PressedpauseGame' 
-    || key === 'PressedresumeGame'
-    || key === 'PressedtogglePause'){
+    if(bb.fastGet('actions',key.substring(7))){
         console.log(key);
         bb.fastGet('actions',key.substring(7))();
     }else {

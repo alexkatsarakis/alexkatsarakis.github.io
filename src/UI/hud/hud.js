@@ -148,7 +148,7 @@ function onHudLoaded(){
         eventsTab.appendChild(eventSplit);
         eventSplit.onclick = ()=>{
             swapDisplayOnClass('eventTabItem');
-        }
+        };
 
         for(let i in events){
             codes.stripped[i] = events[i];
@@ -170,7 +170,7 @@ function onHudLoaded(){
         eventsTab.appendChild(stateSplit);
         stateSplit.onclick = ()=>{
             swapDisplayOnClass('stateTabItem');
-        }
+        };
 
         for(let i in states){
             stateSplit = document.createElement('div');
@@ -180,7 +180,7 @@ function onHudLoaded(){
             eventsTab.appendChild(stateSplit);
             stateSplit.onclick = ()=>{
                 swapDisplayOnClass('stateTabItem'+i);
-            }
+            };
             for(let st in states[i]){
                 codes.stripped[st] = states[i][st];
                 const elem = document.createElement('div');
@@ -202,7 +202,7 @@ function onHudLoaded(){
         eventsTab.appendChild(valueSplit);
         valueSplit.onclick = ()=>{
             swapDisplayOnClass('valueTabItem');
-        }
+        };
 
         for(let i in values){
             codes.stripped[i] = values[i];
@@ -224,7 +224,7 @@ function onHudLoaded(){
         eventsTab.appendChild(optionSplit);
         optionSplit.onclick = ()=>{
             swapDisplayOnClass('optionTabItem');
-        }
+        };
 
         for(let i in options){
             codes.stripped[i] = options[i];
@@ -246,7 +246,7 @@ function onHudLoaded(){
         eventsTab.appendChild(collSplit);
         collSplit.onclick = ()=>{
             swapDisplayOnClass('collisionTabItem');
-        }
+        };
 
         for(let i in collisi){
             codes.stripped[i] = collisi[i];

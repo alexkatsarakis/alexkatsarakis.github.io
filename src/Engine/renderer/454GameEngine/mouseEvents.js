@@ -40,7 +40,6 @@ function rightClick(e){
 }
 
 function mouseDown(e){
-    e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
     const aliveItems = objManager.objects;
     for(var it in aliveItems){
@@ -53,7 +52,6 @@ function mouseDown(e){
 }
 
 function leftClick(e){
-    e.preventDefault();
     isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
     const aliveItems = objManager.objects;
