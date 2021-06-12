@@ -3,6 +3,8 @@ import bb from '../../utils/blackboard.js'
 import transition from '../../utils/focusedObject.js'
 import Engine from '../../Engine.js';
 
+import tr from '../../utils/translator.js'
+
 export default {
     name:'objectInfo',
     link: './src/UI/objectInfo/objectInfo.ahtml',
@@ -51,6 +53,8 @@ function addStateButtonHandler(){
 function createStatesView(states,currentState){
     const statesInfo = document.getElementById('mainInfoBox-body-states-main');
     statesInfo.innerHTML = "";
+
+    document.getElementById('mainInfoBox-body-states-title-text').innerHTML = tr.get('States');
 
     for(let i in states){
         const item = document.createElement('div');
@@ -120,6 +124,9 @@ function addAttributeButtonHandler(){
 function createAttributesView(attrs){
     const attributesInfo = document.getElementById('mainInfoBox-body-attributes-main');
     attributesInfo.innerHTML = "";
+
+    document.getElementById('mainInfoBox-body-attributes-title-text').innerHTML = tr.get('Attributes');
+
     const focusedObj = bb.fastGet('state', 'focusedObject');
     for(let i in attrs){
         const item = document.createElement('div');
@@ -206,6 +213,9 @@ function addEventsButtonHandler(){
 function createEventsView(events){
     const eventsInfo = document.getElementById('mainInfoBox-body-events-main');
     eventsInfo.innerHTML = "";
+    
+    document.getElementById('mainInfoBox-body-events-title-text').innerHTML = tr.get('Events');
+
     const focusedObj = bb.fastGet('state', 'focusedObject');
     for(let i in events){
         const item = document.createElement('div');
@@ -267,6 +277,9 @@ function addFlagsButtonHandler(){
 function createFlagsView(flags){
     const flagsInfo = document.getElementById('mainInfoBox-body-flags-main');
     flagsInfo.innerHTML = "";
+    
+    document.getElementById('mainInfoBox-body-flags-title-text').innerHTML = tr.get('Flags');
+
     const obj = bb.fastGet('state', 'focusedObject');
     for(let i in flags){
         const item = document.createElement('div');
@@ -366,6 +379,9 @@ function addCollisionsButtonHandler(){
 function createCollisionsView(cols){
     const collsInfo = document.getElementById('mainInfoBox-body-collisions-main');
     collsInfo.innerHTML = "";
+    
+    document.getElementById('mainInfoBox-body-collisions-title-text').innerHTML = tr.get('Collisions');
+
     const obj = bb.fastGet('state', 'focusedObject');
     for(let name in cols){
         const item = document.createElement('div');
@@ -454,7 +470,7 @@ function updateInfo(obj){
     }
     document.getElementById('mainInfoBox').style.display = 'block';
     const nameBox = document.getElementById('mainInfoBox-head-name');
-    nameBox.innerHTML = 'Name: '+obj.name;
+    nameBox.innerHTML = `${tr.get('Name')}: ${obj.name}`;
     
     
     if(!Engine.ObjectManager.isSystemObject(obj.id)){
@@ -462,7 +478,7 @@ function updateInfo(obj){
 
         const changeNameBut = document.getElementById('mainInfoBox-body-name-edit');
         changeNameBut.onclick = (()=>{
-            nameBox.innerHTML = 'Name: ';
+            nameBox.innerHTML = `${tr.get('Name')}: `;
             const newNameInput = document.createElement('input');
             newNameInput.type = 'text';
             newNameInput.value = obj.name;
@@ -475,7 +491,7 @@ function updateInfo(obj){
         });
     }
 
-    document.getElementById('mainInfoBox-head-categ').innerHTML = 'Category: '+obj.getCategory();
+    document.getElementById('mainInfoBox-head-categ').innerHTML = `${tr.get('Category')}: ${tr.get(obj.getCategory())}`;
     document.getElementById('mainInfoBox-head-id').innerHTML = 'ID: '+obj.id;
     fillObjectActions(obj);
 

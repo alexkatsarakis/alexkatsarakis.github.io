@@ -5,6 +5,7 @@ import focusedObject from '../../utils/focusedObject.js'
 import Engine from '../../Engine.js'
 
 import uiFactory from '../../utils/UIFactory.js'
+import tr from '../../utils/translator.js'
 
 export default {
     name:'toolbar',
@@ -114,7 +115,7 @@ function objCreationDropdown(){
             const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
-            ddItem.innerHTML = item;
+            ddItem.innerHTML = tr.get(item);
             ddItem.addEventListener('click',()=>{
                 bb.fastGet('actions','createObject')({
                     category:item,
@@ -256,8 +257,10 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
-    document.getElementById('toolbar_search').onkeyup = onSearch;
-    document.getElementById('toolbar_search').onkeypress = (key)=>{
+    const searchBar = document.getElementById('toolbar_search');
+    searchBar.onkeyup = onSearch;
+    searchBar.placeholder = tr.get('Search');
+    searchBar.onkeypress = (key)=>{
         if(key.code === 'Enter'){
             const res = document.getElementsByClassName('toolbar_dropdown_item');
             res.item(0)?.click();

@@ -5,6 +5,7 @@ export default {
 }
 
 import Engine from '../../../Engine.js'
+import tr from '../../../utils/translator.js'
 import uiFactory from '../../../utils/UIFactory.js'
 import bb from '../../../utils/blackboard.js'
 
@@ -37,7 +38,7 @@ function showObjects(objWrapper){
             removeBut.onclick = () => {
                 if(bb.fastGet('settings','Show Prompt On Actions')){
                     bb.fastSet('events','openPrompt',{
-                        title: 'Remove Item',
+                        title: 'Remove Object',
                         description: `If you accept the item ${item._name} will get removed`,
                         onAccept: ()=>{
                             item.remove();
@@ -90,7 +91,7 @@ function showObjects(objWrapper){
                 x, y, pos.width, pos.height);
             }
         }else {
-            body.innerHTML = 'Preview for '+item.name+' isn\'t possible';
+            body.innerHTML = tr.get(`Preview of this object isn't possible`);
         }
 
     }

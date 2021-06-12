@@ -47,6 +47,16 @@ class UIManager {
         }
     }
 
+    reloadUI(){
+        const loadedUIs = [...this._UILoaded];
+        loadedUIs.forEach((ui)=>{
+            this.hideUI(ui);
+        })
+        loadedUIs.forEach((ui)=>{
+            this.loadUI(ui);
+        })
+    }
+
     getUIs(){
         return Object.keys(this._removable);
     }
@@ -140,3 +150,4 @@ bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());
 bb.fastInstall('UI','hideUI',(name)=>uiManager.hideUI(name));
 bb.fastInstall('UI','getLoadedUIs',()=>uiManager.getLoaded());
+bb.fastInstall('UI','reloadUI',()=>uiManager.reloadUI());

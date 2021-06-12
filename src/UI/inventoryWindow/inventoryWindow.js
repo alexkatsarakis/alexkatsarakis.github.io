@@ -1,6 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-import Engine from '../../Engine.js'
+import tr from '../../utils/translator.js'
 import uiFactory from '../../utils/UIFactory.js'
 
 import filmsT from './films/inventoryFilms.js'
@@ -65,7 +65,7 @@ function createTab({name,icon,callback,restriction = true}){
     const tabDiv = document.getElementById('inventory-window-tabs');
     const tab = uiFactory.createElement({
         classList: 'inventory-window-tabs-item',
-        innerHTML: name,
+        innerHTML: tr.get(name),
         value: name,
         parent: tabDiv
     });
@@ -80,7 +80,7 @@ function createTab({name,icon,callback,restriction = true}){
 function onSettingsInventoryLoaded(){
     document.getElementById('inventory-window-background').addEventListener('click',closeInventoryWindow);
     document.getElementById('inventory-window-head-close').addEventListener('click',closeInventoryWindow);
-    
+    document.getElementById('inventory-window-head-title').innerHTML = tr.get('Live Assets');
     lastGameState = bb.fastGet('state','mode');
     bb.fastSet('state','mode','popUpOpen');
     

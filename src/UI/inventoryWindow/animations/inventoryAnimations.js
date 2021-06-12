@@ -6,6 +6,7 @@ export default {
 }
 
 import Engine from '../../../Engine.js'
+import tr from '../../../utils/translator.js'
 import uiFactory from '../../../utils/UIFactory.js'
 import bb from '../../../utils/blackboard.js'
 
@@ -33,7 +34,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
 
     const toolbar = document.createElement('div');
     toolbar.id = 'animationWorkshopCreate_popup_toolbar';
-    toolbar.innerHTML = 'Animation Workshop';
+    toolbar.innerHTML = tr.get('Animation Workshop');
     popUp.appendChild(toolbar);
 
     const popUpClose = document.createElement('div');
@@ -84,7 +85,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(delayWrapper);
 
     const delaySliderPrompt = document.createElement('div');
-    delaySliderPrompt.innerHTML = 'Delay: ';
+    delaySliderPrompt.innerHTML = `${tr.get('Delay')}: `;
     delaySliderPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     delayWrapper.appendChild(delaySliderPrompt);
 
@@ -103,7 +104,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(dxWrapper);
 
     const dxPrompt = document.createElement('div');
-    dxPrompt.innerHTML = 'Dx: ';
+    dxPrompt.innerHTML = `${tr.get('Dx')}: `;
     dxPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dxWrapper.appendChild(dxPrompt);
 
@@ -120,7 +121,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(dyWrapper);
 
     const dyPrompt = document.createElement('div');
-    dyPrompt.innerHTML = 'Dy: ';
+    dyPrompt.innerHTML = `${tr.get('Dy')}: `;
     dyPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     dyWrapper.appendChild(dyPrompt);
 
@@ -137,7 +138,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(repsWrapper);
 
     const repsPrompt = document.createElement('div');
-    repsPrompt.innerHTML = 'Repetitions: ';
+    repsPrompt.innerHTML = `${tr.get('Repetitions')}: `;
     repsPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     repsWrapper.appendChild(repsPrompt);
 
@@ -154,7 +155,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(idWrapper);
 
     const idPrompt = document.createElement('div');
-    idPrompt.innerHTML = 'Animation ID: ';
+    idPrompt.innerHTML = `${tr.get('Animation')} ID: `;
     idPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     idWrapper.appendChild(idPrompt);
 
@@ -170,23 +171,23 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
 
     const startAnim = document.createElement('div');
     startAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
-    startAnim.innerHTML = 'Reset Position';
+    startAnim.innerHTML = tr.get('Reset Position');
     editArea.appendChild(startAnim);
 
     const replayAnim = document.createElement('div');
     replayAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
-    replayAnim.innerHTML = 'Replay Animation';
+    replayAnim.innerHTML = tr.get('Replay Animation');
     editArea.appendChild(replayAnim);
 
     const createAnim = document.createElement('div');
     createAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
-    createAnim.innerHTML = (id)?'Update Animation':'Create Animation';
+    createAnim.innerHTML = tr.get('Update Animation');
     editArea.appendChild(createAnim);
 
     if(id){
         const remAnim = document.createElement('div');
         remAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
-        remAnim.innerHTML = 'Remove Animation';
+        remAnim.innerHTML = tr.get('Remove Animation');
         remAnim.style.backgroundColor = 'var(--secondary-color)';
         editArea.appendChild(remAnim);
         remAnim.onclick = ()=>{

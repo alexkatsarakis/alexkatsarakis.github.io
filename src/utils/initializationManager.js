@@ -1,6 +1,7 @@
 'use strict';
 
 import bb from './blackboard.js'
+import './translator.js'
 
 bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);

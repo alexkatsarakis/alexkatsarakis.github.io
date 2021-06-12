@@ -1,5 +1,6 @@
 import bb from '../../utils/blackboard.js'
 import Engine from '../../Engine.js'
+import tr from '../../utils/translator.js'
 import uiFactory from '../../utils/UIFactory.js'
 
 export default {
@@ -30,7 +31,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color').substring(1),
-            name: 'Main Color',
+            name: 'Main color',
             inputType:'color'
         },
         mainColorHover: {
@@ -38,7 +39,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color-hover', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color-hover').substring(1),
-            name: 'Main Color (Hover)',
+            name: 'Main color (hover)',
             inputType:'color'
         },
         mainColorText: {
@@ -46,7 +47,7 @@ const settings = {
                 document.documentElement.style.setProperty('--main-color-text', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--main-color-text').substring(1),
-            name: 'Main Color (Text)',
+            name: 'Main color (text)',
             inputType:'color'
         },
         secondaryColor: {
@@ -54,7 +55,7 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color').substring(1),
-            name: 'Secondary Color',
+            name: 'Secondary color',
             inputType:'color'
         },
         secondaryColorHover: {
@@ -62,7 +63,7 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color-hover', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color-hover').substring(1),
-            name: 'Secondary Color (Hover)',
+            name: 'Secondary color (hover)',
             inputType:'color'
         },
         secondaryColorText: {
@@ -70,7 +71,7 @@ const settings = {
                 document.documentElement.style.setProperty('--secondary-color-text', ev.target.value);
             },
             initValue: computedStyle.getPropertyValue('--secondary-color-text').substring(1),
-            name: 'Secondary Color (Text)',
+            name: 'Secondary color (text)',
             inputType:'color'
         }
     },
@@ -80,6 +81,15 @@ const settings = {
     KeyBinds: {
     },
     Options: {
+        language: {
+            onChange: (ev)=>{
+                const successful = tr.setCurrentLanguage(ev.target.value);
+                if(successful)bb.fastGet('UI','reloadUI')();
+            },
+            initValue: '',
+            name: 'System Language',
+            inputType:'text'
+        }
     }
 }
 
@@ -150,7 +160,7 @@ function showCategorySettings(wrapper,catItems){
         uiFactory.createElement({
             parent: itemWrapper,
             classList: 'settings-window-category-item-name',
-            innerHTML: setting.name
+            innerHTML: tr.get(setting.name)
         });
 
         const itemInput = uiFactory.createElement({
@@ -169,7 +179,7 @@ function showCategorySettings(wrapper,catItems){
         uiFactory.createElement({
             parent: itemWrapper,
             classList: 'settings-window-category-item-description',
-            innerHTML: setting.description || 'No description provided'
+            innerHTML: tr.get(setting.description || 'No description provided')
         });
     }
 }
@@ -192,14 +202,14 @@ function onSettingsWindowLoaded(){
         const catBut = uiFactory.createElement({
             parent: catWindow,
             classList: 'settings-window-category',
-            innerHTML: cat
+            innerHTML: tr.get(cat)
         });
 
         const catPanel = uiFactory.createElement({
             parent: panel,
             classList: 'settings-window-category-panel',
             id: 'settings-window-category-panel-'+cat,
-            innerHTML: cat
+            innerHTML: tr.get(cat)
         });
 
         catBut.onclick = () => {

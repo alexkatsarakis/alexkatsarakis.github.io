@@ -4,6 +4,8 @@ import uiFactory from '../../utils/UIFactory.js'
 
 import bb from '../../utils/blackboard.js'
 
+import tr from '../../utils/translator.js'
+
 export default {
     name:'timewarp',
     link: './src/UI/timewarp/timewarp.ahtml',
@@ -140,14 +142,14 @@ function renderPlaybackUI(){
         factor.value = 100;
 
     const currFrame = document.getElementById('timewarp-current-frame');
-        currFrame.innerHTML = `Frame: ${recordedTimes.length - 1}`;
+        currFrame.innerHTML = `${tr.get('Frame')}: ${recordedTimes.length - 1}`;
         currFrame.style.textAlign = 'left';
     const maxFrame = document.getElementById('timewarp-max-frame');
         maxFrame.innerHTML = '/'+(recordedTimes.length - 1);
         maxFrame.style.textAlign = 'left';
     
     const currFrameTime = document.getElementById('timewarp-current-frame-time');
-        currFrameTime.innerHTML = `Time: ${(recordedTimes[recordedTimes.length - 1] - recordedTimes[0])/1000}s`;
+        currFrameTime.innerHTML = `${tr.get('Time')}: ${(recordedTimes[recordedTimes.length - 1] - recordedTimes[0])/1000}s`;
         currFrameTime.style.textAlign = 'left';
     const maxFrameTime = document.getElementById('timewarp-max-frame-time');
         maxFrameTime.innerHTML = '/'+(recordedTimes[recordedTimes.length - 1] - recordedTimes[0])/1000+'s';
@@ -175,7 +177,7 @@ function renderPlaybackUI(){
     
     timelinesWrapper.value = Engine.TimewarpManager.getCurrentTimeline();
 
-    document.getElementById('timewarp-current-recording').innerHTML = `Current recording (#${Number.parseInt(timelinesWrapper.value)+1})`;
+    document.getElementById('timewarp-current-recording').innerHTML = `${tr.get('Current Recording')}: (#${Number.parseInt(timelinesWrapper.value)+1})`;
 
     timelinesWrapper.onchange = (ev)=>{
         Engine.TimewarpManager.setTimeline(timelinesWrapper.value);
@@ -211,13 +213,19 @@ function renderRecordingUI(){
     const recNumber = document.getElementById('timewarp-stop-numofrec');
 
     const currTimeline = Engine.TimewarpManager.getCurrentTimeline();
-    recNumber.innerHTML = '(Recording #'+(currTimeline+2)+')';
+    recNumber.innerHTML = `${tr.get("Recording")} #${currTimeline+2}`;
 
 }
 
 function onTimewarpLoad(){
     if(!Engine.hasManager('TimewarpManager')) throw Error('Trying to install UI that requires Timewarp Manager but it\'s not installed');
     changeTimewarpState('idle');
+    document.getElementById('timewarp-record-prompt-ds').innerHTML = tr.get('Delta State') + ':';
+    document.getElementById('timewarp-record-prompt-snap').innerHTML = tr.get('Snapshot') + ':';
+    document.getElementById('timewarp-stop-prompt').innerHTML = tr.get('Click to Stop Recording');
+    document.getElementById('timewarp-playback-speed-prompt').innerHTML = tr.get('Playback Speed');
+    document.getElementById('timewarp-timelines-wrapper-label').innerHTML = tr.get('Jump to recording');
+    document.getElementById('timewarp-rerecord').innerHTML = tr.get('Continue with new recording');
 
     const recBut = document.getElementById('timewarp-record');
 

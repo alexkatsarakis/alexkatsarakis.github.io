@@ -13,6 +13,10 @@
     height: 700px;
 }
 
+.mainInfoBox-body-title-text{
+    float:left;
+}
+
 .mainInfoBox-shard {
     padding-top: 30px;
     padding-bottom: 30px;

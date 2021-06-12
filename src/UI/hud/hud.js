@@ -2,6 +2,8 @@ import bb from '../../utils/blackboard.js'
 
 import Engine from '../../Engine.js'
 
+import tr from '../../utils/translator.js'
+
 export default {
     name:'hud',
     link: './src/UI/hud/hud.ahtml',
@@ -131,7 +133,7 @@ function onHudLoaded(){
         }
         let firstObject = true;
 
-        infoBar.innerHTML = 'Scripts for Object ('+obj.name+')';
+        infoBar.innerHTML = `${tr.get('Scripts for object')} ${obj.name}`;
 
         codes = obj.getCodes();
         codes.stripped = {};
@@ -144,7 +146,7 @@ function onHudLoaded(){
         
         const eventSplit = document.createElement('div');
         eventSplit.classList = 'tabSplitter';
-        eventSplit.innerHTML = 'Events';
+        eventSplit.innerHTML = tr.get('Events');
         eventsTab.appendChild(eventSplit);
         eventSplit.onclick = ()=>{
             swapDisplayOnClass('eventTabItem');
@@ -166,7 +168,7 @@ function onHudLoaded(){
 
         let stateSplit = document.createElement('div');
         stateSplit.classList = 'tabSplitter';
-        stateSplit.innerHTML = 'States';
+        stateSplit.innerHTML = tr.get('States');
         eventsTab.appendChild(stateSplit);
         stateSplit.onclick = ()=>{
             swapDisplayOnClass('stateTabItem');
@@ -198,7 +200,7 @@ function onHudLoaded(){
 
         const valueSplit = document.createElement('div');
         valueSplit.classList = 'tabSplitter';
-        valueSplit.innerHTML = 'Attributes';
+        valueSplit.innerHTML = tr.get('Attributes');
         eventsTab.appendChild(valueSplit);
         valueSplit.onclick = ()=>{
             swapDisplayOnClass('valueTabItem');
@@ -220,7 +222,7 @@ function onHudLoaded(){
 
         const optionSplit = document.createElement('div');
         optionSplit.classList = 'tabSplitter';
-        optionSplit.innerHTML = 'Flags';
+        optionSplit.innerHTML = tr.get('Flags');
         eventsTab.appendChild(optionSplit);
         optionSplit.onclick = ()=>{
             swapDisplayOnClass('optionTabItem');
@@ -242,7 +244,7 @@ function onHudLoaded(){
 
         const collSplit = document.createElement('div');
         collSplit.classList = 'tabSplitter';
-        collSplit.innerHTML = 'Collisions';
+        collSplit.innerHTML = tr.get('Collisions');
         eventsTab.appendChild(collSplit);
         collSplit.onclick = ()=>{
             swapDisplayOnClass('collisionTabItem');

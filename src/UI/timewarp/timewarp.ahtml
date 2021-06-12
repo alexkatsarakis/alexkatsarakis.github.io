@@ -3,13 +3,13 @@
 
 <div id="timewarp-wrapper" class="hudChild">
   <div id="timewarp-idle">
-    <div class="timewarp-record-prompt">Delta State:</div>
+    <div id="timewarp-record-prompt-ds" class="timewarp-record-prompt">Delta State:</div>
     <div id="timewarp-record" class="timewarp-button"></div>
-    <div class="timewarp-record-prompt">Snapshot:</div>
+    <div id="timewarp-record-prompt-snap" class="timewarp-record-prompt">Snapshot:</div>
     <div id="timewarp-record2" class="timewarp-button"></div>
   </div>
   <div id="timewarp-recording">
-    <div class="timewarp-text-simple" style="float: left;">Click to stop Recording:</div>
+    <div id="timewarp-stop-prompt" class="timewarp-text-simple" style="float: left;">Click to stop Recording:</div>
     <div id="timewarp-stop-record" class="timewarp-button"style="float: left;"></div>
     <div id="timewarp-stop-numofrec" class="timewarp-text-simple" style="float: left;">(Recording #1)</div>
   </div>

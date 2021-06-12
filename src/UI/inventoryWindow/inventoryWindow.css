@@ -247,7 +247,7 @@
 #animationWorkshopCreate_popup_toolbar {
     top: 0;
     width: 100%;
-    height: 30px;
+    line-height: 30px;
     background-color: var(--main-color);
     color: var(--main-color-text);
     text-align: center;
@@ -255,7 +255,6 @@
 }
 
 #animationWorkshopCreate_popup_close {
-    padding: 5px;
     padding-right: 8px;
     background-color: var(--main-color);
     color: var(--main-color-text);
