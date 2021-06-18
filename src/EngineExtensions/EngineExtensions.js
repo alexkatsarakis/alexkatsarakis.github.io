@@ -21,6 +21,8 @@ Engine.installManager('QuantizerManager', new QuantizerManager());
 import TimewarpManager from './timewarp/TimewarpManager.js'
 Engine.installManager('TimewarpManager', new TimewarpManager());
 
+import InputAutomationManager from './InputAutomationManager.js'
+Engine.installManager('InputAutomationManager', new InputAutomationManager());
 
 import DummyManager from './DummyManager.js'
 Engine.installManager('DummyManager', new DummyManager());

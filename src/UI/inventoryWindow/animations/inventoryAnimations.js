@@ -85,7 +85,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     editArea.appendChild(delayWrapper);
 
     const delaySliderPrompt = document.createElement('div');
-    delaySliderPrompt.innerHTML = `${tr.get('Delay')}: `;
+    delaySliderPrompt.innerHTML = `${tr.get('Delay')}: ${delay}`;
     delaySliderPrompt.classList += 'animationWorkshopCreate_popup_editarea_prompt';
     delayWrapper.appendChild(delaySliderPrompt);
 
@@ -193,8 +193,8 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
         remAnim.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove Animation',
-                    description: `If you accept animation ${id} will get removed`,
+                    title: tr.get('Remove Animation'),
+                    description: `${tr.get('If you accept')} ${tr.get('animation')} ${id} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         animator.stop();
                         wrap.remove();
@@ -297,7 +297,10 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     dxInput.addEventListener('change',restartAnimation);
     dyInput.addEventListener('change',restartAnimation);
     repsInput.addEventListener('change',restartAnimation);
-    delaySlider.addEventListener('change',restartAnimation);
+    delaySlider.addEventListener('change',()=>{
+        delaySliderPrompt.innerHTML = `${tr.get('Delay')}: ${escape(delaySlider.value)}`;
+        restartAnimation()
+    });
     startAnim.addEventListener('click',()=>{
         currPos = {
             x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),

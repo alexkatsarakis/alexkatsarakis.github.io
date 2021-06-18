@@ -89,11 +89,18 @@ export default class Object454 extends Object{
     getObject(){
         return this;
     }
-    
+
+    // THE FOLLOWING FUNC IS JUST FOR PERFORMANCE REASONS
+    // INSTEAD OF
+            // getMapCoords(){
+            //     if(!this.getOption('moveWithScroll'))
+            //         return [this._x, this._y];
+            //     return [this._x - this._stage.getValue('x'),this._y- this._stage.getValue('y')];
+            // }
     getMapCoords(){
-        if(!this.getOption('moveWithScroll'))
+        if(!this.data.optionHandler._regOptions['moveWithScroll']?.val)
             return [this._x, this._y];
-        return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
+        return [this._x - this._stage._x,this._y - this._stage._y];
     }
 
     animate(){}

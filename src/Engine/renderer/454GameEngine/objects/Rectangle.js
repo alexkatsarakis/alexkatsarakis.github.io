@@ -25,21 +25,24 @@ export default class Rectangle extends Object {
     }
 
     render(ctx){
-        const film = this.getValue('film');
-        if(!this.getOption('isVisible'))return;
+        //for performance reasons instead of
+        // if(!this.getOption('isVisible))return;
+        if(!this.data.optionHandler._regOptions['isVisible']?.val)return;
+
+        const film = this._film;
         
         const [drawX,drawY] = this.getMapCoords();
-        if(drawX + this.getValue('width') <= 0
-        || drawX > this._stage.getValue('windowWidth')
-        || drawY + this.getValue('height') <= 0
-        || drawY > this._stage.getValue('windowHeight')) return;
+        if(drawX + this._width <= 0
+        || drawX > this._stage._windowWidth
+        || drawY + this._height <= 0
+        || drawY > this._stage._windowHeight) return;
         if(!film){
             ctx.fillStyle = this._color;
             ctx.fillRect(drawX, drawY, this._width, this._height);
             ctx.fillStyle = "#ffffff";
         }else{
             const info = this._getFilm(film);
-            const box = info.getFrameBox(this.getValue('frame'));
+            const box = info.getFrameBox(this._frame);
             const img = info.bitmap;
             ctx.drawImage(bb.fastGet('assets',img),
             box.x,box.y,box.width,box.height,

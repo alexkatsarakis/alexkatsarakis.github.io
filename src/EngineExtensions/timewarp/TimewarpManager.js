@@ -92,4 +92,8 @@ export default class TimewarpManager extends Manager{
         if(!this._currentTimewarp.isReoccuring)return -1;
         return this._currentTimewarp.currentTimeline;
     }
+
+    getDiffs(){
+        return this._currentTimewarp.getDiffs();
+    }
 }

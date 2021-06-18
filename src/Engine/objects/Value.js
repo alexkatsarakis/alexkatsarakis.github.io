@@ -42,13 +42,15 @@ export default class ValueManager{
             this.registerValue(val, {value:v});
             return;
         }
+        const oldVal = this._regValues[val].val;
+        if(oldVal+'' === v+'')return;
         const event = {
             type: 'setValue',
             objectID: this._parent,
             data: {
                 type: val,
                 value: v,
-                oldVal: this._regValues[val].val
+                oldVal: oldVal
             }
         };
         this._regValues[val].val = v;

@@ -189,8 +189,10 @@ export default class Object {
     }
 
     destroyAnimator(){
-        if(this._animator !== undefined)this._animator.destroy();
-        this._animator = undefined;
+        if(this._animator !== undefined){
+            this._animator.destroy();
+            this._animator = undefined;
+        }
     }
 
     get id() {

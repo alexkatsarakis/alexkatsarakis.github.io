@@ -84,8 +84,8 @@ function showSnapshots(objWrapper){
         }).onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove All Snapshot',
-                    description: `If you accept *ALL* snapshot will be removed`,
+                    title: tr.get('Remove All Snapshot'),
+                    description: `${tr.get('If you accept')} *${tr.get('every')}* ${tr.get('snapshot')} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         Engine.SnapshotManager.removeAllObjectSnapshots();
                         focusTab('Snapshots');
@@ -105,8 +105,8 @@ function showSnapshots(objWrapper){
     function removeSnapshot(objID,snapID){
         if(bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
-                title: 'Remove Snapshot',
-                description: `If you accept the current snapshot will be removed`,
+                title: tr.get('Remove Snapshot'),
+                description: `${tr.get('If you accept')} ${tr.get('the current')} ${tr.get('snapshot')} ${tr.get('will get removed')}`,
                 onAccept: ()=>{
                     Engine.SnapshotManager.removeObjectSnapshot(objID,snapID);
                     focusTab('Snapshots');
@@ -153,8 +153,8 @@ function showSnapshots(objWrapper){
             body.onclick = () => {
                 if(bb.fastGet('settings','Show Prompt On Actions')){
                     bb.fastSet('events','openPrompt',{
-                        title: 'Reset Object to Snapshot',
-                        description: `If you accept the object ${snap._name} will be resetted to this snapshot`,
+                        title: tr.get('Reset Object'),
+                        description: `${tr.get('If you accept')} ${tr.get('object')} ${snap._name} ${tr.get('will get resetted')}`,
                         onAccept: ()=>{
                             Engine.SnapshotManager.resetObjectToSnapshot(i,index);
                             closeInventoryWindow();

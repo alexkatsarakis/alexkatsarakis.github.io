@@ -27,6 +27,10 @@ export default class GridManager extends Manager{
         bb.installWatch('events','setOption_isSolid',()=>{this.onIsSolidChange();});
     }
 
+    mergeNeighborRectangles(){
+
+    }
+
     calculateGrid(){
         const objs = Engine.ObjectManager.objects;
 
@@ -38,7 +42,7 @@ export default class GridManager extends Manager{
                 this._gridRectangles.push(obj.getPositional());
             }
         }
-
+        console.log(this._gridRectangles);
         bb.fastSet('events', 'gridUpdated',this._gridRectangles);
     }
 
@@ -82,8 +86,7 @@ export default class GridManager extends Manager{
     }
 
     isPointInGrid(x,y){
-        for(let i in this._gridRectangles){
-            const rect = this._gridRectangles[i];
+        for(let rect of this._gridRectangles){
             if(rect.x < x 
             && rect.x + rect.width > x
             && rect.y < y

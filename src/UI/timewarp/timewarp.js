@@ -14,6 +14,8 @@ export default {
     loadOnInstall: Engine.hasManager('TimewarpManager')
 };
 
+let firstTime;
+
 function getClosestFrame(array,number){
     for(let i = 1; i < array.length; ++i){
         if(number < array[i]) return i-1;
@@ -49,13 +51,106 @@ function changeTimewarpState(newState){
     }
 }
 
+function getDiffsForObject(obj){
+    const diffs = Engine.TimewarpManager.getDiffs();
+    const diffForObject = {};
+    for(let timestamp in diffs){
+        diffs[timestamp].forEach((action)=>{
+            if(action.objectID !== obj.id)return;
+            if(!diffForObject[timestamp])diffForObject[timestamp] = [];
+
+            diffForObject[timestamp].push(action);
+        });
+    }
+    return diffForObject;
+}
+
+function translateAction(action){
+    let type = action.type;
+    if(action.type === 'setValue'){
+        type = 'Attribute';
+    }else if(action.type === 'setCurrentState'){
+        type = 'State change';
+    }
+
+    const extraType = action.data.type || '';
+    let from = '';
+    if(action.data.oldState?.tag !== undefined) from = action.data.oldState.tag;
+    if(action.data.oldVal !== undefined) from = action.data.oldVal;
+    let to = '';
+    if(action.data.newState?.tag !== undefined) to = action.data.newState.tag;
+    if(action.data.value !== undefined) to = action.data.value;
+    return {
+        type,
+        extraType,
+        from,
+        to
+    };
+
+
+    // return {
+    //     type: action.type,
+    //     extraType: action.data.type || '',
+    //     from: action.data.oldVal || action.data.oldState?.tag || '',
+    //     to: action.data.value || action.data.newState?.tag || ''
+    // }
+}
+
+function showFocusedObjectHistory(){
+    const wrap = document.getElementById('timewarp-object-history');
+    if(!wrap)return;
+    wrap.innerHTML = '';
+
+    const focusedObject = bb.fastGet('state','focusedObject');
+    if(!focusedObject){
+        bb.installWatch('state','focusedObject',showFocusedObjectHistory);
+        return;
+    }
+    
+    const currTimeShowing = document.getElementById('timewarp-current-timestamp').innerHTML;
+
+    const diffs = getDiffsForObject(focusedObject);
+    uiFactory.createElement({
+        parent: wrap,
+        id: 'timewarp-object-history-head',
+        innerHTML: focusedObject.name
+    });
+
+    const keys = Object.keys(diffs).reverse();
+    
+    for(let i of keys){
+        diffs[i].forEach(action=>{
+            const actionData = translateAction(action);
+            const item = uiFactory.createElement({
+                parent: wrap,
+                classList: 'timewarp-object-history-item',
+                innerHTML: `[${i-firstTime}ms] ${actionData.type} ${actionData.extraType} ${actionData.from} → ${actionData.to}`
+            });
+            item.onclick = ()=>{
+                Engine.TimewarpManager.showSnapshot(i);
+                bb.fastSet('state','focusedObject',focusedObject);
+            }
+            if(currTimeShowing === i){
+                item.style.backgroundColor = 'var(--secondary-color)';
+            }
+        });
+    }
+    
+
+    bb.installWatch('state','focusedObject',showFocusedObjectHistory);
+}
+
 function renderPlaybackUI(){
     let recordedTimes = Engine.TimewarpManager.getRecordedTimestamps();
     if(!recordedTimes) throw Error('No recorded times on stop');
 
-    const firstTime = Number.parseInt(recordedTimes[0]);
+    
+    firstTime = Number.parseInt(recordedTimes[0]);
     recordedTimes = recordedTimes.map((time)=>time - firstTime);
     Engine.TimewarpManager.showSnapshot(firstTime+recordedTimes[recordedTimes.length-1],recordedTimes.length-1);
+    
+    document.getElementById('timewarp-current-timestamp').innerHTML = firstTime+recordedTimes[recordedTimes.length-1];
+    showFocusedObjectHistory();
 
     const range = document.getElementById('timewarp-showRecords');
         range.min = recordedTimes[0];
@@ -97,8 +192,8 @@ function renderPlaybackUI(){
         resumeBut.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Continue From Recording',
-                    description: 'If you accept you will lose all the current recordings and you will continue from the current stop point',
+                    title: tr.get('Continue From Recording'),
+                    description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('every')} ${tr.get('recording')} ${tr.get('and')} ${tr.get('continue from stop point')}`,
                     onAccept: ()=>{
                         changeTimewarpState('idle'); 
                         const number = Number.parseInt(range.value);
@@ -188,8 +283,8 @@ function renderPlaybackUI(){
         const currTimeline = (Number.parseInt(timelinesWrapper.value)+1);
         if(currTimeline < timelines.length && bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
-                title: 'New Recording',
-                description: 'If you accept you will lose all the extra recordings after timeline #'+currTimeline,
+                title: tr.get('New Recording'),
+                description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('all the recordings')} ${tr.get("after timeline")} #${currTimeline}`,
                 onAccept: ()=>{
                     Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
                     Engine.PauseManager.resume();

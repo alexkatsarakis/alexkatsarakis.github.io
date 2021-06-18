@@ -83,8 +83,8 @@ function showClipboard(objWrapper){
         }).onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Clear Clipboard',
-                    description: `If you accept *ALL* clipboard will be cleared`,
+                    title: tr.get('Clear Clipboard'),
+                    description: `${tr.get('If you accept')} *${tr.get('ALL')}* ${tr.get('clipboard')} ${tr.get('will get cleared')}`,
                     onAccept: ()=>{
                         Engine.ClipboardManager.clearClipboard();
                         showClipboard(objWrapper);
@@ -119,8 +119,8 @@ function showClipboard(objWrapper){
         removeBut.onclick = () => {
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove Item from Clipboard',
-                    description: `If you accept the item ${item._name} (${item._time}) will be removed`,
+                    title: tr.get('Remove Item'),
+                    description: `${tr.get('If you accept')} ${tr.get('item')} ${item._name} (${item._time}) ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         Engine.ClipboardManager.removeItem(clipboardObjs.length - 1 - index);
                         showClipboard(objWrapper);
@@ -143,8 +143,8 @@ function showClipboard(objWrapper){
         body.onclick = () => {
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Create a New Object With Copy',
-                    description: `If you accept you will create a copy of ${item._name}`,
+                    title: tr.get('Create Object'),
+                    description: `${tr.get('If you accept')} ${tr.get('a')} ${tr.get('copy')} ${tr.get('of')} ${item._name} ${tr.get('will be created')}`,
                     onAccept: ()=>{ 
                         Engine.ClipboardManager.paste((clipboardObjs.length -  1) - index);
                         closeInventoryWindow();

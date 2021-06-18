@@ -1,4 +1,5 @@
 import bb from '../../utils/blackboard.js'
+import tr from '../../utils/translator.js'
 
 export default {
     name:'promptWindow',
@@ -49,6 +50,8 @@ function openPrompt({title, description, onAccept, onDecline}){
 
 
 function onPromptViewLoaded(){
+    document.getElementById('promptWindow-accept').innerHTML = tr.get('Accept');
+    document.getElementById('promptWindow-decline').innerHTML = tr.get('Decline');
     bb.fastSet('settings', 'Show Prompt On Actions', true);
     bb.installWatch('events', 'openPrompt', (promptInfo) => openPrompt(promptInfo));
 }

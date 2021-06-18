@@ -14,6 +14,9 @@
     <div id="timewarp-stop-numofrec" class="timewarp-text-simple" style="float: left;">(Recording #1)</div>
   </div>
   <div id="timewarp-active">
+    <div id="timewarp-object-history">
+
+    </div>
     <input id="timewarp-showRecords" type="range">
     <div id="timewarp-playbackControl">
       <div id="timewarp-showBackward" class="timewarp-button timewarp-showManipulation"></div>
@@ -29,6 +32,7 @@
       <div class="timewarp-text-simple" style="float: left;">%</div>
     </div>
     <div id="timewarp-infoWrapper">
+      <div id="timewarp-current-timestamp" class="timewarp-text-simple" style="display:none"></div>
       <div id="timewarp-current-frame" class="timewarp-text-simple" style="float: left;"></div>
       <div id="timewarp-max-frame" class="timewarp-text-simple"></div>
       <div id="timewarp-current-frame-time" class="timewarp-text-simple" style="float: left;"></div>

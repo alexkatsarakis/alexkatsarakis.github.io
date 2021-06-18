@@ -8,6 +8,7 @@ import './pauseGame.js'
 import './saveToDatabase.js'
 import './copyPaste.js'
 import './objectSnapshot.js'
+import './inputAutomation.js'
 
 
 import './dummyAction.js'

@@ -51,8 +51,8 @@ function showScenes(objWrapper){
         wrap.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Reset Scene to Scene Snapshot',
-                    description: `If you accept you will reset the scene to given snapshot`,
+                    title: tr.get('Reset Scene'),
+                    description: `${tr.get('If you accept')} ${tr.get('scene')} ${tr.get('will get resetted')}`,
                     onAccept: ()=>{ 
                         Engine.SnapshotManager.resetSceneToSnapshot(i);
                         closeInventoryWindow();

@@ -35,6 +35,12 @@ export default class Text extends Object {
             getValue: () => {return this.div.offsetHeight;}
         });
 
+        this.data.valueHandler.registerValue('font',{
+            tag: "appearance",
+            onChange: (value) => {this.div.style.fontFamily = value;},
+            getValue: () => {return this.div.style.fontFamily;}
+        });
+
         this.data.valueHandler.registerValue('fontSize',{
             tag: "appearance",
             onChange: (value) => {this.div.style.fontSize = value+"px";},

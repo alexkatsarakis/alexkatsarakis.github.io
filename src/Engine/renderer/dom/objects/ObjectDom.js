@@ -13,6 +13,7 @@ export default class ObjectDom extends Object{
     constructor(name,id,extra){
         super(name,id);
                 
+        this._state = 'loaded';
         if(extra.div){
             if(typeof extra.div === 'string'){
                 const temp = document.createElement('div');
@@ -74,30 +75,53 @@ export default class ObjectDom extends Object{
         throw Error("createElement must be implemented for every Dom object")
     }    
     
+    // THE FOLLOWING FUNC IS JUST FOR PERFORMANCE REASONS
+    // INSTEAD OF
+            // getMapCoords(){
+            //     if(!this.getOption('moveWithScroll'))
+            //         return [this._x, this._y];
+            //     return [this._x - this._stage.getValue('x'),this._y- this._stage.getValue('y')];
+            // }
     getMapCoords(){
-        if(!this.getOption('moveWithScroll'))
+        if(!this.data.optionHandler._regOptions['moveWithScroll']?.val)
             return [this._x, this._y];
-        return [this._x - this._stage.getValue('x'),this._y- this._stage.getValue('y')];
+        return [this._x - this._stage._x,this._y - this._stage._y];
     }
 
     animate(){}
 
     add(){
+        this._state = 'alive';
         objectManager.addToWorld(this);
         scene.addItem(this);
     }
 
     remove(){
+        this._state = 'removed';
         super.remove();
         objectManager.removeFromWorld(this);
         scene.remove(this);
     }
 
-    render(){
+    addDivToScene(){
+        scene.addItem(this);
+    }
+
+    removeDivFromScene(){
+        if(this._state === 'alive')
+            scene.remove(this);
+    }
+
+    render(){        
+        if(!this.data.optionHandler._regOptions['isVisible']?.val){
+            this.div.style.visibility = 'hidden';
+            return;
+        }
+
         const [X,Y] = this.getMapCoords();
         this.div.style.left = X + 'px';
         this.div.style.top  = Y + 'px';
-        this.div.style.visibility = (this.getOption('isVisible')?'visible':'hidden');
+        this.div.style.visibility = 'visible';
     }
 
 }

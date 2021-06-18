@@ -38,8 +38,8 @@ function showObjects(objWrapper){
             removeBut.onclick = () => {
                 if(bb.fastGet('settings','Show Prompt On Actions')){
                     bb.fastSet('events','openPrompt',{
-                        title: 'Remove Object',
-                        description: `If you accept the item ${item._name} will get removed`,
+                        title: tr.get('Remove Object'),
+                        description: `${tr.get('If you accept')} ${tr.get('item')} ${item._name} ${tr.get('will get removed')}`,
                         onAccept: ()=>{
                             item.remove();
                             showObjects(objWrapper);

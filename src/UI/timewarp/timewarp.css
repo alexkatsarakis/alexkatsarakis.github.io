@@ -182,3 +182,35 @@
 #timewarp-resume {
     fill: var(--main-color-text);
 }
+
+#timewarp-object-history {
+    position: absolute;
+    bottom: 0;
+    right: 305px;
+    width: 300px;
+    height: 300px;
+    overflow: auto;
+    background-color: var(--main-color);
+}
+
+#timewarp-object-history-head {
+    color: var(--main-color-text);
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    border-bottom: 2px solid var(--main-color-text);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.timewarp-object-history-item {
+    color: var(--main-color-text);
+    padding: 5px;
+    width: calc(100% - 10px);
+    cursor: pointer;
+    border-bottom: 1s solid var(--main-color-text);
+}
+
+.timewarp-object-history-item:hover {
+    background-color: var(--main-color-hover);
+}

@@ -19,6 +19,25 @@ export default class Square extends Object {
             getValue: () => {return Number.parseFloat(this.div.style.height.slice(0,-2));}
         });
 
+        this.data.valueHandler.registerValue('HTML',{
+            tag: "div",
+            onChange: (value) => {
+                const width = Number.parseFloat(this.div.style.width.slice(0,-2));
+                const height = Number.parseFloat(this.div.style.height.slice(0,-2));
+                const temp = document.createElement('div');
+                temp.innerHTML = value;
+                this.removeDivFromScene();
+                this.div = temp.firstChild;
+                this.div.style.width = width +'px';
+                this.div.style.height = height +'px';
+                this.div.style.position = 'absolute';
+                this.div.style.left = this._x;
+                this.div.style.top = this._y;
+                this.addDivToScene();
+            },
+            getValue: () => {return ''}
+        });
+
         this._category = 'Square';
 
     }

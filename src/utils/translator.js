@@ -6,15 +6,21 @@ class Translator {
     currentLanguageID;
     map;
 
+    defaultLanguage = 'EN';
+
     constructor(){
         this.map = {}
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if(urlParams.get('lang'))this.defaultLanguage = urlParams.get('lang');
         this.loadLanguage('GR');
         this.loadLanguage('EN');
+        // this.loadLanguage('FR');
     }
     
     async loadLanguage(lang){
         this.map[lang] = JSON.parse(await httpRequest('GET',`../../assets/json/${lang}.json`,null));
-        if(lang == 'EN'){
+        if(lang == this.defaultLanguage){
             this.currentLanguage = this.map[lang];
             this.currentLanguageID = lang;
         }

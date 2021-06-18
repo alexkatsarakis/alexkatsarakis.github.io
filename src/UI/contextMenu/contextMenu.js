@@ -3,6 +3,7 @@ import bb from '../../utils/blackboard.js'
 import Engine from '../../Engine.js'
 
 import uiFactory from '../../utils/UIFactory.js'
+import tr from '../../utils/translator.js'
 
 export default {
     name:'contextMenu',
@@ -66,7 +67,7 @@ function onContextChange({objID,event}){
             const but = uiFactory.createElement({
                 parent: cMenu,
                 classList: 'contextMenu-item',
-                innerHTML: 'Copy Object'
+                innerHTML: tr.get('Copy Object')
             });
             but.onclick = ()=>{
                 Engine.ClipboardManager.copy(obj,true);
@@ -78,7 +79,7 @@ function onContextChange({objID,event}){
             const but = uiFactory.createElement({
                 parent: cMenu,
                 classList: 'contextMenu-item',
-                innerHTML: 'Paste Object'
+                innerHTML: tr.get('Paste Object')
             });
             but.onclick = ()=>{
                 const newObj = Engine.ClipboardManager.paste();
@@ -98,13 +99,13 @@ function onContextChange({objID,event}){
         const but = uiFactory.createElement({
             parent: cMenu,
             classList: 'contextMenu-item',
-            innerHTML: 'Remove Object'
+            innerHTML: tr.get('Remove Object')
         });
         but.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove Object',
-                    description: `If you accept ${obj.name} will be removed`,
+                    title: tr.get('Remove Object'),
+                    description: `${tr.get('If you accept')} ${tr.get('object')} ${obj.name} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         obj.remove();
                         bg.click();
@@ -124,7 +125,7 @@ function onContextChange({objID,event}){
         let but = uiFactory.createElement({
             parent: cMenu,
             classList: 'contextMenu-item',
-            innerHTML: 'Take Object Snapshot'
+            innerHTML: tr.get('Take Object Snapshot')
         });
         but.onclick = ()=>{
             Engine.SnapshotManager.snapshotObject(obj);
@@ -135,7 +136,7 @@ function onContextChange({objID,event}){
         but = uiFactory.createElement({
             parent: cMenu,
             classList: 'contextMenu-item',
-            innerHTML: 'Take Scene Snapshot'
+            innerHTML: tr.get('Take Scene Snapshot')
         });
         but.onclick = ()=>{
             Engine.SnapshotManager.snapshotScene('defaultName');

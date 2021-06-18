@@ -15,6 +15,12 @@ export default {
     loadOnInstall: true
 };
 
+const actionTooltip = 'Choose an action to be triggered';
+const createObjTooltip = 'Choose a category to create new object';
+const chooseObjTooltip = 'Choose an object to focus';
+const inventoryTooltip = 'Click to open live assets tab';
+const settingsTooltip  = 'Click to open settings tab';
+
 function actionsDropdown(){
 
     function getActions(){
@@ -30,7 +36,7 @@ function actionsDropdown(){
         const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_actions_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_actions').getBoundingClientRect().x + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_actions-icon').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
         actions.forEach((item)=>{
             const ddItem = document.createElement('div');
@@ -70,7 +76,7 @@ function objectsDropdown(){
         const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_liveobjects_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_liveobjects').getBoundingClientRect().x + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_liveobjects-icon').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
             const ddItem = document.createElement('div');
@@ -109,7 +115,7 @@ function objCreationDropdown(){
         const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_objCreation_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
-        dropdown.style.left = document.getElementById('toolbar_objCreation').getBoundingClientRect().x + 'px'; 
+        dropdown.style.left = document.getElementById('toolbar_objCreation-icon').getBoundingClientRect().x + 'px'; 
         document.body.appendChild(dropdown);
         constructors.forEach((item)=>{
             const ddItem = document.createElement('div');
@@ -222,14 +228,18 @@ function onSearch(ev){
         };
     });
 }
-
+// const actionTooltip = 'Choose an action to be triggered';
+// const createObjTooltip = 'Choose a category to create new object';
+// const chooseObjTooltip = 'Choose an object to focus';
+// const inventoryTooltip = 'Click to open live assets tab';
+// const settingsTooltip  = 'Click to open settings tab';
 function onToolbarLoaded(){
     const backBut = document.getElementById('toolbar-logo-img');
     backBut.onclick = (() => {
         if(bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
-                title: 'Go To Homepage',
-                description: `If you accept you will be redirected and you will lose all the progress if you haven't saved`,
+                title: tr.get('Go To Homepage'),
+                description: `${tr.get('If you accept')} ${tr.get('you will be redirected')} ${tr.get('and')} ${tr.get('you will lose')} ${tr.get('all the progress')} ${tr.get("if you haven't saved")}`,
                 onAccept: ()=>{
                     window.location = '/';
                 }
@@ -241,21 +251,30 @@ function onToolbarLoaded(){
 
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');
     let toggle = actionsDropdown();
-    dropdown.addEventListener('click',toggle);
-    document.getElementById('toolbar_actions').addEventListener('click',toggle);
+    dropdown.onclick = toggle;
+    dropdown.title = actionTooltip;
+    document.getElementById('toolbar_actions').onclick = toggle;
+    document.getElementById('toolbar_actions').title = actionTooltip;
 
     dropdown = document.getElementById('toolbar_liveobjects_dropdown_button');
     toggle = objectsDropdown();
-    dropdown.addEventListener('click',toggle);
-    document.getElementById('toolbar_liveobjects').addEventListener('click',toggle);
+    dropdown.onclick = toggle;
+    dropdown.title = chooseObjTooltip;
+    document.getElementById('toolbar_liveobjects').onclick = toggle;
+    document.getElementById('toolbar_liveobjects').title = chooseObjTooltip;
 
     dropdown = document.getElementById('toolbar_objCreation_dropdown_button');
     toggle = objCreationDropdown();
-    dropdown.addEventListener('click',toggle);
-    document.getElementById('toolbar_objCreation').addEventListener('click',toggle);
+    dropdown.onclick = toggle;
+    dropdown.title = createObjTooltip;
+    document.getElementById('toolbar_objCreation').onclick = toggle;
+    document.getElementById('toolbar_objCreation').title = createObjTooltip;
 
-    document.getElementById('toolbar_settings').addEventListener('click',openSettings);
-    document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
+    document.getElementById('toolbar_settings').onclick = openSettings;
+    document.getElementById('toolbar_settings').title = settingsTooltip;
+
+    document.getElementById('toolbar_inventory').onclick = openInventory;
+    document.getElementById('toolbar_inventory').title = inventoryTooltip;
 
     const searchBar = document.getElementById('toolbar_search');
     searchBar.onkeyup = onSearch;
@@ -265,16 +284,18 @@ function onToolbarLoaded(){
             const res = document.getElementsByClassName('toolbar_dropdown_item');
             res.item(0)?.click();
         }
-    }
+    };
 
-    document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
-    document.getElementById('toolbar_saveLocal').onclick = ()=>{
+    document.getElementById('toolbar_saveLocal').title = 'Save the current game and go to game "local" to continue';
+    document.getElementById('toolbar_saveLocal-icon').style.cursor = 'pointer';
+    document.getElementById('toolbar_saveLocal-icon').onclick = ()=>{
         bb.fastGet('actions','Save(locally)')()
         bb.fastSet('events','showFeedback',`Saved Game Locally`);
     };
-    
-    document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
-    document.getElementById('toolbar_downloadState').onclick = ()=>{
+
+    document.getElementById('toolbar_downloadState').title = 'Download the current game state for later use';
+    document.getElementById('toolbar_downloadState-icon').style.cursor = 'pointer';
+    document.getElementById('toolbar_downloadState-icon').onclick = ()=>{
         bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };

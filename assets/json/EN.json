@@ -56,6 +56,7 @@
     "Secondary color": "Secondary color",
     "Secondary color (hover)": "Secondary color (hover)",
     "Secondary color (text)": "Secondary color (text)",
+    "System Language": "System Language",
     "No description provided": "No description provided",
     "Preview of this object isn't possible": "Preview of this object isn't possible",
     "Dragging Objects": "Dragging Objects",
@@ -63,5 +64,10 @@
     "Move UI with Control": "Move UI with Control",
     "Only show objects in search": "Only show objects in search",
     "Show Prompt On Actions": "Show Prompt On Actions",
-    "Show Action Feedback": "Show Action Feedback"
+    "Show Action Feedback": "Show Action Feedback",
+    "Copy Object": "Copy object",
+    "Paste Object": "Paste object",
+    "Remove Object": "Remove object",
+    "Take Object Snapshot": "Take object snapshot",
+    "Take Scene Snapshot": "Take scene snapshot"
 }

@@ -20,6 +20,8 @@ export default class TimewarpMechanism {
         this._timelines = [];
         this._startedRecordedTime = undefined;
         this._currTimeline = -1;
+        this._currDiff = [];
+        this._currFrame = 0;
     }
 
     async saveTimeFrame(){
@@ -42,12 +44,16 @@ export default class TimewarpMechanism {
         this._timeWarping[gameTime] = {
             timeStamp: gameTime,
             objects: objects,
-            animators: animators
+            animators: animators,
+            diffs: this._currDiff,
+            frame: this._currFrame++
         }
+        this._currDiff = [];
     }
 
     startRecording(interval) {
         this._timeWarping = {};
+        bb.installWatch('events','last',this.log.bind(this));
         this._inter = Engine.ClockManager.callIn(this.saveTimeFrame.bind(this),[],interval,true);
         this.saveTimeFrame();
         this._startedRecordedTime = bb.fastGet('state','gameTime');
@@ -110,7 +116,7 @@ export default class TimewarpMechanism {
     
     }
 
-    showSnapshot(timeStamp,frame){
+    showSnapshot(timeStamp){
         const timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
         
@@ -130,8 +136,8 @@ export default class TimewarpMechanism {
 
         document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
 
-        document.getElementById('timewarp-current-frame').innerHTML = `Frame: ${frame}`;
-    
+        document.getElementById('timewarp-current-frame').innerHTML = `Frame: ${timeWarp.frame}`;
+        document.getElementById('timewarp-current-timestamp').innerHTML = timeStamp;
         document.getElementById('timewarp-current-frame-time').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
     
     }
@@ -205,6 +211,24 @@ export default class TimewarpMechanism {
         this._currTimeline = index;
         this._timeWarping = this._timelines[index];
         this._startedRecordedTime = Number.parseInt(this.getRecordedTimestamps()[0]);
+    }
+
+    log(arg) {
+        if(!this.isRecording)return;
+        if(arg.type === 'addObject'){
+            this._currDiff.unshift(arg);
+        }else{
+            this._currDiff.push(arg);
+        }
+        bb.installWatch('events','last',this.log.bind(this));
+    }
+
+    getDiffs(){
+        const diffs = {}
+        for(let i in this._timeWarping){
+            diffs[i] = this._timeWarping[i].diffs
+        }
+        return diffs;
     }
 
 }

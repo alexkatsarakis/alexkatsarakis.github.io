@@ -19,7 +19,7 @@ export default {
     loadOnInstall: true
 };
 
-const inventoryTabs = {}
+const inventoryTabs = {};
 
 
 inventoryTabs[filmsT.name] = filmsT;
