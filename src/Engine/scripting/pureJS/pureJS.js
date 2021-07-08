@@ -69,9 +69,6 @@ function printInfo(){
 }
 
 function injectInDiv(div) {
-    div.style.height = 500 + 'px';
-    div.style.width = 750 + 'px';
-    
     div.appendChild(inputArea);
 }
 

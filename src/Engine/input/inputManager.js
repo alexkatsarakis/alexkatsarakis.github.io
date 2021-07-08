@@ -9,6 +9,8 @@ const InputState = {
 class InputManager extends Manager{
     currentlyPressed = {};
     releasedKeys = [];
+    onKeyPress = {};
+    onKeyRelease = {};
 
     // DEFAULTS
     keyCombos = {
@@ -16,6 +18,30 @@ class InputManager extends Manager{
         'Paste Object': ['ControlLeft', 'KeyV'],
         'Pause/Resume Toggle': ['Escape'],
         'dummyAction': ['ControlLeft', 'KeyB']
+    }
+
+    addOnKeyPress(cb){
+        const num = Math.floor(Math.random() * 10000);
+        this.onKeyPress[num] = cb;
+        return num;
+    }
+
+    removeOnKeyPress(id){
+        if(!this.onKeyPress[id])return; //TODO;
+
+        delete this.onKeyPress[id];
+    }
+
+    addOnKeyRelease(cb){
+        const num = Math.floor(Math.random() * 10000);
+        this.onKeyRelease[num] = cb;
+        return num;
+    }
+
+    removeOnKeyRelease(id){
+        if(!this.onKeyRelease[id])return; //TODO;
+
+        delete this.onKeyRelease[id];
     }
 
     onSave(){
@@ -53,6 +79,10 @@ class InputManager extends Manager{
         if(forever) this.currentlyPressed[key] = InputState.FOREVER;
         else this.currentlyPressed[key] = InputState.TOTRIGGER;
 
+        for(let i in this.onKeyPress){
+            this.onKeyPress[i](key);
+        }
+
         for(let combo in this.keyCombos){
             let isCombo = true;
             const keysForCombo = this.keyCombos[combo];
@@ -68,6 +98,10 @@ class InputManager extends Manager{
     keyReleased(key){
         delete this.currentlyPressed[key];
         this.releasedKeys.push(key);
+        
+        for(let i in this.onKeyRelease){
+            this.onKeyRelease[i](key);
+        }
         // logManager.logAction(`Released Key ${key}`);
     }
     

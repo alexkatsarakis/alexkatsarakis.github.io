@@ -84,8 +84,8 @@ export default class ObjectDom extends Object{
             // }
     getMapCoords(){
         if(!this.data.optionHandler._regOptions['moveWithScroll']?.val)
-            return [this._x, this._y];
-        return [this._x - this._stage._x,this._y - this._stage._y];
+            return [this._x/scene._aspectRatio, this._y/scene._aspectRatio];
+        return [this._x/scene._aspectRatio - this._stage._x/scene._aspectRatio,this._y/scene._aspectRatio - this._stage._y/scene._aspectRatio];
     }
 
     animate(){}

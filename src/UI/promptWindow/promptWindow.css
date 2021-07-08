@@ -62,3 +62,9 @@
     left: 20px;
     background-color: red;
 }
+
+@media screen and (max-width: 1250px) {
+    #promptWindow-description {
+        display: none;
+    }
+}

@@ -27,6 +27,12 @@ function addStateButtonHandler(){
     addStateBut.style.display = 'none';
     accept.style.display = 'block';
     text.style.width = '92px';
+
+    text.onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            accept.click();
+        }
+    };
     close.onclick = ()=>{
         close.style.display = 'none';
         text.style.width = '0';
@@ -97,7 +103,12 @@ function addAttributeButtonHandler(){
     close.style.display = 'block';
     addAttrBut.style.display = 'none';
     accept.style.display = 'block';
-    text.style.width = '68px';
+    text.style.width = '68px';    
+    text.onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            accept.click();
+        }
+    };
     close.onclick = ()=>{
         close.style.display = 'none';
         text.style.width = '0';
@@ -187,6 +198,11 @@ function addEventsButtonHandler(){
     addEventBut.style.display = 'none';
     accept.style.display = 'block';
     text.style.width = '87px';
+    text.onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            accept.click();
+        }
+    };
     close.onclick = ()=>{
         close.style.display = 'none';
         text.style.width = '0';
@@ -252,6 +268,11 @@ function addFlagsButtonHandler(){
     addFlagBut.style.display = 'none';
     accept.style.display = 'block';
     text.style.width = '94px';
+    text.onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            accept.click();
+        }
+    };
     close.onclick = ()=>{
         close.style.display = 'none';
         text.style.width = '0';
@@ -354,6 +375,11 @@ function addCollisionsButtonHandler(){
     addFlagBut.style.display = 'none';
     accept.style.display = 'block';
     text.style.width = '70px';
+    text.onkeypress = (key)=>{
+        if(key.code === 'Enter'){
+            accept.click();
+        }
+    };
     close.onclick = ()=>{
         close.style.display = 'none';
         text.style.width = '0';

@@ -1,12 +1,16 @@
 import bb from '../../../utils/blackboard.js'
 
 import dragElement from '../../../utils/drag.js';
-import objManager from '../ObjectManager.js'
+import objManager from '../ObjectManager.js';
+
+import env from '../EnvironmentObject.js';
 
 var mouse = { x : 0, y : 0 };
 let isClickThrough = false;
 function translator(ev){
-    return [ev.offsetX,ev.offsetY]
+    const x = ev.offsetX*env._aspectRatio;
+    const y = ev.offsetY*env._aspectRatio;
+    return [x,y];
 }
 
 function focused(obj,x,y){

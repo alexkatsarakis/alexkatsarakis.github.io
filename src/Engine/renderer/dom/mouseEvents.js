@@ -7,7 +7,7 @@ import objManager from '../ObjectManager.js'
 let mouse = { x : 0, y : 0 };
 let isClickThrough = false;
 function translator(ev){
-    return [ev.offsetX,ev.offsetY]
+    return [ev.offsetX,ev.offsetY];
 }
 
 

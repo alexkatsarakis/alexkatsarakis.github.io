@@ -9,6 +9,17 @@ import tr from '../../../utils/translator.js'
 import uiFactory from '../../../utils/UIFactory.js'
 import bb from '../../../utils/blackboard.js'
 
+function clearAllObjects(){
+    const objs = Engine.ObjectManager.objects;
+
+    for(let i in objs){
+        const obj = objs[i];
+        if(!Engine.ObjectManager.isSystemObject(obj.id)){
+            obj.remove();
+        }
+    }
+}
+
 function showObjects(objWrapper){
     objWrapper.innerHTML = '';
     const items = Engine.ObjectManager.objects;
@@ -17,6 +28,29 @@ function showObjects(objWrapper){
         classList: 'inventory-window-body-grid',
         parent: objWrapper
     });
+    const buttonWrapper = uiFactory.createElement({
+        parent: objWrapper,
+        classList: 'inventory-window-body-page-button-wrapper'
+    });
+    uiFactory.createElement({
+        parent: buttonWrapper,
+        classList: 'inventory-window-body-page-item-button',
+        innerHTML: tr.get('Remove All')
+    }).onclick = ()=>{
+        if(bb.fastGet('settings','Show Prompt On Actions')){
+            bb.fastSet('events','openPrompt',{
+                title: tr.get('Remove All Snapshot'),
+                description: `${tr.get('If you accept')} *${tr.get('every')}* ${tr.get('object')} ${tr.get('will get removed')}`,
+                onAccept: ()=>{
+                    clearAllObjects();
+                    showObjects(objWrapper);
+                }
+            });
+        }else{
+            clearAllObjects();
+            showObjects(objWrapper);
+        }
+    };
 
     for(let i in items){
         const item = items[i];

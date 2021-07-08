@@ -37,7 +37,7 @@ export default class ValueManager{
         });
     }
 
-    setValue(val, v) {
+    setValue(val, v, extra) {
         if (!this._regValues[val]) {
             this.registerValue(val, {value:v});
             return;
@@ -53,6 +53,7 @@ export default class ValueManager{
                 oldVal: oldVal
             }
         };
+        if(extra?.explanation)event.data.explanation = extra.explanation;
         this._regValues[val].val = v;
         if (typeof this._regValues[val].onChange === 'function') 
         this._regValues[val].onChange(v);

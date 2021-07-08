@@ -3,8 +3,8 @@ class Scene {
     _items = [];
     _canvas;
     _canvasCTX;
-    _offScreenCanvas;
-    _offScreenCanvasCTX;
+
+    _aspectRatio
 
     constructor(){
         this._canvas = document.createElement('canvas');
@@ -13,8 +13,11 @@ class Scene {
         this._canvas.style.width  = window.innerWidth+'px';
         this._canvas.style.height = window.innerHeight+'px';
         this._canvasCTX = this._canvas.getContext("2d");
-        this._canvasCTX.canvas.width  = window.innerWidth;
-        this._canvasCTX.canvas.height = window.innerHeight;
+
+        this._aspectRatio = 1920/window.innerWidth;
+
+        this._canvasCTX.canvas.width  = 1920;
+        this._canvasCTX.canvas.height = window.innerHeight*this._aspectRatio;
         document.body.appendChild(this._canvas);
 
     }

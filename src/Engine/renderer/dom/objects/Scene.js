@@ -1,5 +1,6 @@
 class Scene {
     _items;
+    _aspectRatio;
 
     constructor(){
         this.div = document.createElement("div");
@@ -7,9 +8,12 @@ class Scene {
         this._items = {};
 
         this.div.style.position = "absolute";
-        this.div.id = 'scene';
-        this.div.style.width = 1920 + 'px';
-        this.div.style.height = 1080 + 'px';
+        this.div.id = 'scene';     
+        this.div.style.width  = window.innerWidth+'px';
+        this.div.style.height = window.innerHeight+'px';
+
+        this._aspectRatio = 1920/window.innerWidth;
+
 
         document.body.appendChild(this.div);
 

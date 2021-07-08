@@ -124,3 +124,9 @@
     height: 18px;
     fill: var(--main-color-text);
 }
+
+#toolbar-dummyButton {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

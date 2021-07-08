@@ -367,8 +367,8 @@ Object.prototype.addValue = function(val, v = "") {
     this.data.valueHandler.registerValue(val,{value:v});
 }
 
-Object.prototype.setValue = function(val, v) {
-    this.data.valueHandler.setValue(val, v);
+Object.prototype.setValue = function(val, v, extra) {
+    this.data.valueHandler.setValue(val, v, extra);
 }
 
 Object.prototype.getValue = function(val) {

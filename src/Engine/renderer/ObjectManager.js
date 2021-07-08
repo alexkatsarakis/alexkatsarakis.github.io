@@ -159,7 +159,7 @@ const clickWrapper = document.createElement('div');
     document.body.appendChild(clickWrapper);
 
 const managers = objectManager.getRenderManagers();
-clickWrapper.addEventListener('click',(ev)=>{
+clickWrapper.onclick = (ev)=>{
     const objects = objectManager.objects;
     for(let i in objects){
         const obj = objects[i];
@@ -179,18 +179,29 @@ clickWrapper.addEventListener('click',(ev)=>{
         }
     }
     changeFocus(undefined);
-});
+};
 
-clickWrapper.addEventListener('mousedown',(ev)=>{
+clickWrapper.ontouchstart = (ev)=>{
+    ev.offsetX = ev.touches[0].clientX;
+    ev.offsetY = ev.touches[0].clientY;
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
             const obj = managers[i].mouseEvents.mouseDown(ev);
             if(obj)return;
         }
     }
-});
+}
 
-clickWrapper.addEventListener('contextmenu',(ev) => {
+clickWrapper.onmousedown = (ev)=>{
+    for(let i in managers){
+        if(managers[i].mouseEvents.mouseDown){
+            const obj = managers[i].mouseEvents.mouseDown(ev);
+            if(obj)return;
+        }
+    }
+};
+
+clickWrapper.oncontextmenu = (ev) => {
     for(let i in managers){
         if(managers[i].mouseEvents.rightClick){
             const obj = managers[i].mouseEvents.rightClick(ev);
@@ -202,4 +213,4 @@ clickWrapper.addEventListener('contextmenu',(ev) => {
         }
     }
     bb.fastSet('events','contextMenu',{objID: envObj.id,event: ev});
-});
+};

@@ -220,4 +220,11 @@ export default class TimewarpMechanism {
         return false;
     }
 
+    getDiffs(){
+        const diffs = {}
+        for(let i in this._timeWarping){
+            diffs[i] = this._timeWarping[i].diff
+        }
+        return diffs;
+    }
 }

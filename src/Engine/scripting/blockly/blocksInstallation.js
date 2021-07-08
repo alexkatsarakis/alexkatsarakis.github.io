@@ -319,7 +319,7 @@ Blockly.JavaScript['object_field'] = function(block) {
     const field_val = block.getFieldValue('FIELD');
     const val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `AK.setAttribute(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val});`;
+    return `AK.setAttribute(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val}, {explanation: "Action from code in object "+AK.getObjectByID(currObject).name});`;
 };
 
 Blockly.Blocks['object_state'] = {

@@ -1,26 +1,30 @@
 import Manager from '../Engine/Manager.js'
 
+import bb from '../utils/blackboard.js'
+
 import Engine from '../Engine.js'
 
 function pressKey(key){
-    let code;
-    if(isNaN(key)){
-        code = 'Key'+key;
-    }else{
-        code = 'Digit'+key;
-    }
+    let code = key;
+    // let code;
+    // if(isNaN(key)){
+    //     code = 'Key'+key;
+    // }else{
+    //     code = 'Digit'+key;
+    // }
     return (()=>{
         return Engine.InputManager.keyPressed(code);
     });
 }
 
 function releaseKey(key){
-    let code;
-    if(isNaN(key)){
-        code = 'Key'+key;
-    }else{
-        code = 'Digit'+key;
-    }
+    let code = key;
+    // let code;
+    // if(isNaN(key)){
+    //     code = 'Key'+key;
+    // }else{
+    //     code = 'Digit'+key;
+    // }
     return (()=>{
         return Engine.InputManager.keyReleased(code);
     });
@@ -31,19 +35,22 @@ export default class InputAutomationManager extends Manager{
     _actions
     _actionsCB
 
+    _onKeyPressCB
+    _onKeyReleaseCB
+
     constructor() {
         super();
         this._actions = [];
         this._actionsCB = [];
 
-        this.addAction('W',500,true);
-        this.addAction('D',600,true);
-        this.addAction('D',5000,false);
-        this.addAction('A',700,true);
-        this.addAction('A',800,false);
-        this.addAction('W',1000,false);
-        this.addAction('M',2000,true);
-        this.addAction('M',2050,false);
+        // this.addAction('W',500,true);
+        // this.addAction('D',600,true);
+        // this.addAction('D',5000,false);
+        // this.addAction('A',700,true);
+        // this.addAction('A',800,false);
+        // this.addAction('W',1000,false);
+        // this.addAction('M',2000,true);
+        // this.addAction('M',2050,false);
         
         
         // this.addAction('D',200,true);
@@ -68,12 +75,38 @@ export default class InputAutomationManager extends Manager{
         // this.addAction('W',25020,false);
         // this.addAction('W',25500,true);
         // this.addAction('W',25520,false);
+
+
     }
 
+    startRecording(){
+        const currTime = bb.fastGet('state','gameTime');
+        this._actions = [];
+        this._onKeyPressCB = Engine.InputManager.addOnKeyPress((key)=>{
+            this.addAction(key,bb.fastGet('state','gameTime') - currTime, true);
+        });
+        this._onKeyReleaseCB = Engine.InputManager.addOnKeyRelease((key)=>{
+            this.addAction(key,bb.fastGet('state','gameTime') - currTime, false);
+        });
+    }
+
+    stopRecording(){
+        Engine.InputManager.removeOnKeyPress(this._onKeyPressCB);
+        Engine.InputManager.removeOnKeyRelease(this._onKeyReleaseCB);
+        this._onKeyPressCB = undefined;
+        this._onKeyReleaseCB = undefined;
+        console.log(this._actions);
+    }
+
+
+    onUpdate(){
+        // console.log(Engine.InputManager.getPressedKeys());
+    }
 
     addAction(key,delay,pressed = true){
         this._actions.push({
             delay: delay,
+            pressed: pressed,
             action: (pressed)?pressKey(key):releaseKey(key)
         });
     }

@@ -41,7 +41,7 @@
 
 .goog-menuitem-highlight{
 	background-color:var(--main-color);
-	color:var(--main-color);
+	color:var(--main-color-text);
 }
 
 ::-webkit-scrollbar {

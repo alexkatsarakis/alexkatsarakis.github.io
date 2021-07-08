@@ -10,6 +10,8 @@ class EnvironmentObject extends Object {
     _width;
     _height;
 
+    _aspectRatio;
+
     constructor(){
         super('Stage','BpAoTcBMfklfGm6');
 
@@ -20,6 +22,8 @@ class EnvironmentObject extends Object {
 
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
+
+        this._aspectRatio = 1920/window.innerWidth;
 
         this.data.valueHandler.registerValue('x',{
             tag: "positional",

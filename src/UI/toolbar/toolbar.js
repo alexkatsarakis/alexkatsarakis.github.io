@@ -43,7 +43,10 @@ function actionsDropdown(){
             ddItem.id = 'toolbar_action_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>bb.fastGet('actions',item)());
+            ddItem.addEventListener('click',()=>{
+                bb.fastGet('actions',item)();
+                toggleDropdown();
+            });
             dropdown.appendChild(ddItem);
         });
     }
@@ -83,7 +86,10 @@ function objectsDropdown(){
             ddItem.id = 'toolbar_object_'+item.id;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item.name;
-            ddItem.addEventListener('click',()=>focusedObject(item.id));
+            ddItem.addEventListener('click',()=>{
+                focusedObject(item.id);
+                toggleDropdown();
+            });
             dropdown.appendChild(ddItem);
         });
     }
@@ -132,6 +138,7 @@ function objCreationDropdown(){
                         y:700
                     }
                 });
+                toggleDropdown();
             });
             dropdown.appendChild(ddItem);
         });
@@ -299,4 +306,8 @@ function onToolbarLoaded(){
         bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };
+
+    document.getElementById('toolbar-dummyButton').onclick = ()=>{
+        console.log(Engine.SaveManager.getGameProjection());
+    }
 }

@@ -20,8 +20,8 @@ AK.prototype.getAttribute = (obj,fieldName)=>{
     return obj.getValue(fieldName);
 }
 
-AK.prototype.setAttribute = (obj,fieldName, newValue)=>{
-    return obj.setValue(fieldName, newValue);
+AK.prototype.setAttribute = (obj,fieldName, newValue, extra)=>{
+    return obj.setValue(fieldName, newValue, extra);
 }
 
 AK.prototype.getCurrentState = (obj)=>{
@@ -38,10 +38,6 @@ AK.prototype.getFlags = (obj)=>{
 
 AK.prototype.setFlag = (obj, flag, value) => {
     obj.setOption(flag, value);
-}
-
-AK.prototype.setAttribute = (obj, attr, value) => {
-    obj.setValue(attr, value);
 }
 
 AK.prototype.setCurrentState = (obj, newState) => {

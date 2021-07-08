@@ -88,34 +88,30 @@ function showSnapshots(objWrapper){
                     description: `${tr.get('If you accept')} *${tr.get('every')}* ${tr.get('snapshot')} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         Engine.SnapshotManager.removeAllObjectSnapshots();
-                        focusTab('Snapshots');
                         showSnapshots(objWrapper);
                         bb.fastSet('events','showFeedback',`All Removed Snapshots`);
                     }
                 });
             }else{
                 Engine.SnapshotManager.removeAllObjectSnapshots();
-                focusTab('Snapshots');
                 showSnapshots(objWrapper);
                 bb.fastSet('events','showFeedback',`All Removed Snapshots`);
             }
         };
     }
 
-    function removeSnapshot(objID,snapID){
+    function removeSnapshot(objID,snapID,objWrapper){
         if(bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
                 title: tr.get('Remove Snapshot'),
                 description: `${tr.get('If you accept')} ${tr.get('the current')} ${tr.get('snapshot')} ${tr.get('will get removed')}`,
                 onAccept: ()=>{
                     Engine.SnapshotManager.removeObjectSnapshot(objID,snapID);
-                    focusTab('Snapshots');
                     showSnapshots(objWrapper);
                 }
             });
         }else{
             Engine.SnapshotManager.removeObjectSnapshot(objID,snapID);
-            focusTab('Snapshots');
             showSnapshots(objWrapper);
         }
     }
@@ -138,7 +134,7 @@ function showSnapshots(objWrapper){
             const removeBut = document.getElementById(`inventory-delete-item-${i}-${index}`);
             
             removeBut.onclick = () => {
-                removeSnapshot(i,index);
+                removeSnapshot(i,index,objWrapper);
             }
         
             const body = uiFactory.createElement({
@@ -157,7 +153,6 @@ function showSnapshots(objWrapper){
                         description: `${tr.get('If you accept')} ${tr.get('object')} ${snap._name} ${tr.get('will get resetted')}`,
                         onAccept: ()=>{
                             Engine.SnapshotManager.resetObjectToSnapshot(i,index);
-                            closeInventoryWindow();
                         }
                     });
                 }else{

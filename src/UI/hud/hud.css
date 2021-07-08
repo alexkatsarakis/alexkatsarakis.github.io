@@ -13,8 +13,6 @@
     position: absolute;
     top: 60px;
     left: 0;
-    width: 650px;
-    height: 520px;
 }
 
 #fpsCounter {
@@ -169,4 +167,40 @@
 
 .button {
     cursor: pointer;
+}
+
+
+@media only screen and (max-height: 700px) {
+    #codingArea {
+        top: 30px;
+    }
+    
+    #languageDiv {
+        height: calc(100vh - 50px);
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    #openTab {
+        left: calc(100vw - 720px);
+    }
+    
+    #playScriptButton {
+        top: 130px;
+        left: calc(100vw - 330px);
+    }
+    
+    #showScriptButton {
+        top: 80px;
+        left: calc(100vw - 330px);
+    }
+    
+    #saveScriptButton {
+        top: 30px;
+        left: calc(100vw - 330px);
+    }
+
+    #eventsTab {
+        height: calc(100%-60px);
+    }
 }

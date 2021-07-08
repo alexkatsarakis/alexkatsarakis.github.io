@@ -153,7 +153,7 @@ export default class AnimationManager extends Manager{
         const animation = this.getAnimation(anim);
     
         let oldFilm;
-        an.onStart = (animator,an)=>{
+        an.onStart = (animator,ani)=>{
             if(!object.isAlive){
                 object = Engine.ObjectManager.objects[object.id];
             }
@@ -163,16 +163,20 @@ export default class AnimationManager extends Manager{
             }
             object.setAnimator(animator);
             oldFilm = object.getValue('film');
-            const anim = Engine.AnimationManager.getAnimation(an.id);
-            object.setValue('film',anim.film.id);
+            const anim = Engine.AnimationManager.getAnimation(ani.id);
+            object.setValue('film',anim.film.id,{explanation: `Action from animation ${an.animation._id}`});
         }
         an.onAction = (animator)=>{
-            object.setFrame(animator.currentFrame);
-            object.move(animator.animation.dx,animator.animation.dy);
+            object.setValue('frame',animator.currentFrame,{explanation: `Action from animation ${an.animation._id}`});
+            const x = animator.animation.dx;
+            const y = animator.animation.dy;
+            if(x !== 0) object.setValue('x', object._x + x,{explanation: `Action from animation ${animator.animation._id}`});
+            if(y !== 0) object.setValue('y', object._y + y,{explanation: `Action from animation ${animator.animation._id}`});
+            // object.move(animator.animation.dx,animator.animation.dy);
         };
         an.onFinish = ()=>{
-            object.setFrame(0);
-            object.setValue('film',oldFilm);
+            object.setValue('frame',0,{explanation: `Action from animation ${an.animation._id}`});
+            object.setValue('film',oldFilm,{explanation: `Action from animation ${an.animation._id}`});
             if(onFinish){
                 if(typeof onFinish === 'function') onFinish();
                 else if(typeof onFinish === 'string') Engine.ScriptingManager.executeCode({code:onFinish},object.id);

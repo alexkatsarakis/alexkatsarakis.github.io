@@ -80,11 +80,16 @@ function translateAction(action){
     let to = '';
     if(action.data.newState?.tag !== undefined) to = action.data.newState.tag;
     if(action.data.value !== undefined) to = action.data.value;
+
+    let explanation = '';
+    if(action.data.explanation)explanation = action.data.explanation;
+        
     return {
         type,
         extraType,
         from,
-        to
+        to,
+        explanation
     };
 
 
@@ -126,6 +131,8 @@ function showFocusedObjectHistory(){
                 classList: 'timewarp-object-history-item',
                 innerHTML: `[${i-firstTime}ms] ${actionData.type} ${actionData.extraType} ${actionData.from} → ${actionData.to}`
             });
+            if(actionData.explanation)item.title = actionData.explanation;
+            
             item.onclick = ()=>{
                 Engine.TimewarpManager.showSnapshot(i);
                 bb.fastSet('state','focusedObject',focusedObject);
