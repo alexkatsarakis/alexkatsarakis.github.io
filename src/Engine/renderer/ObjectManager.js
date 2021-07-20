@@ -56,34 +56,34 @@ class ObjectManager extends Manager{
         if(this._objects[obj.id] || this._objectByName[obj.name])return;
         this._objects[obj.id] = obj;
         this._objectByName[obj.name] = obj;
-        if(bb.fastGet('state','mode') !== 'paused'){
-            const ev = {
-                type: 'addObject',
-                objectID: obj.id,
-                data: {
-                    object: JSON.parse(obj.toString())
-                }
-            };
-            bb.fastSet('events','last',ev);
-            bb.fastSet('events','addObject',ev);
-        }
+        // if(bb.fastGet('state','mode') !== 'paused'){
+        // }
+        const ev = {
+            type: 'addObject',
+            objectID: obj.id,
+            data: {
+                object: JSON.parse(obj.toString())
+            }
+        };
+        bb.fastSet('events','last',ev);
+        bb.fastSet('events','addObject',ev);
     }
 
     removeFromWorld(obj){
         if(!this._objects[obj.id])return;
         delete this._objects[obj.id];
         delete this._objectByName[obj.name];
-        if(bb.fastGet('state','mode') !== 'paused'){
-            const ev = {
-                type: 'removeObject',
-                objectID: obj.id,
-                data: {
-                    object: obj
-                }
-            };
-            bb.fastSet('events','last',ev);
-            bb.fastSet('events','removeObject',ev);
-        }
+        // if(bb.fastGet('state','mode') !== 'paused'){
+        // }
+        const ev = {
+            type: 'removeObject',
+            objectID: obj.id,
+            data: {
+                object: obj
+            }
+        };
+        bb.fastSet('events','last',ev);
+        bb.fastSet('events','removeObject',ev);
     }
 
     get objects(){
@@ -92,9 +92,19 @@ class ObjectManager extends Manager{
 
     rename(obj,newName){
         if(this._objectByName[newName] || !this._objects[obj.id])return;
+        const event = {
+            type: 'renameObject',
+            objectID: obj.id,
+            data: {
+                newName: newName,
+                oldName: obj.name
+            }
+        };
         Engine.CollisionManager.updateObjectName(obj.name,newName);
         obj.name = newName;
         this._objectByName[newName] = obj;
+        bb.fastSet('events','last',event);
+        bb.fastSet('events','renameObject',event);
     }
 
     getObject(i){
@@ -150,11 +160,11 @@ objectManager.addSystemObject(keyObj.id);
 
 const clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
-    clickWrapper.style.width = '100vw';
-    clickWrapper.style.height = '100vh';
+    clickWrapper.style.width = (envObj._windowWidth/envObj._aspectRatio) + 'px';
+    clickWrapper.style.height = (envObj._windowHeight/envObj._aspectRatio) + 'px';
     clickWrapper.style.opacity = 0;
     clickWrapper.style.position = 'absolute';
-    clickWrapper.style.top = 0;
+    clickWrapper.style.top = ((window.innerHeight - (envObj._windowHeight/envObj._aspectRatio) )/2) + 'px';
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
@@ -182,15 +192,15 @@ clickWrapper.onclick = (ev)=>{
 };
 
 clickWrapper.ontouchstart = (ev)=>{
-    ev.offsetX = ev.touches[0].clientX;
-    ev.offsetY = ev.touches[0].clientY;
+    ev.offsetX = ev.touches[0].offsetX;
+    ev.offsetY = ev.touches[0].offsetY;
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
             const obj = managers[i].mouseEvents.mouseDown(ev);
             if(obj)return;
         }
     }
-}
+};
 
 clickWrapper.onmousedown = (ev)=>{
     for(let i in managers){

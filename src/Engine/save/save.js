@@ -244,7 +244,7 @@ export default class SaveManager extends Manager{
 
         const game = await this.getGame();
 
-        Engine.app.addInitialiseFunction(()=>{
+        Engine.app.addLoadFunction(()=>{
             for(let i in game.objects){
                 utils.createObject(game.objects[i]);
             }

@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="./src/UI/tutorial/tutorial.css">
+
+<div id='tutorial-wrap'>
+    <div id='tutorial-title'>First Tutorial (1/5)</div>
+    <div id='tutorial-description'>This is the task needed to be done in order to move on to the next part</div>
+    <div id='tutorial-buttons'>
+        <div id='tutorial-close' class='tutorial-button'>Close Tutorial</div>
+        <!-- <div id='tutorial-next' class='tutorial-button'>Next</div>
+        <div id='tutorial-prev' class='tutorial-button'>Previous</div> -->
+    </div>
+</div>

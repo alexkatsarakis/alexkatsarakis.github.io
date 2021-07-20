@@ -2,8 +2,9 @@
  ### [Blockly](https://developers.google.com/blockly)
 Blockly is used as visual programming language so the user can code without the need to learn an API.
  ### [Matter.js](https://brm.io/matter-js/)
- MatterJS is used as a physics engine for the game
-
+ MatterJS is used as a physics engine for the game.
+ ### [Beautify-web](https://beautifier.io/)
+ Beautify web is used to render Javascript code in a readable form.
 # Icons
 
 ### [Flaticon](https://www.flaticon.com/)

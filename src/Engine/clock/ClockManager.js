@@ -90,7 +90,7 @@ export default class ClockManager extends Manager{
 
     getTime(){
         const d = new Date();
-        return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getDate()}/${d.getMonth()}`;
+        return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getDate()}/${d.getMonth()+1}`;
     }
 
     onUpdate() {

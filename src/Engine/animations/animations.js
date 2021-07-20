@@ -65,6 +65,14 @@ export default class AnimationManager extends Manager{
         this._animationManagement.forEach((manag)=>{
             animationManager.loadAll(manag);
         });
+
+        animationFilmHolder.getAssetsToLoad().forEach((asset)=>{
+            if(!bb.fastGet('assets',asset)){
+                let img = new Image();
+                img.src = asset;
+                bb.fastInstall('assets',asset,img);
+            }
+        });
     }
 
     onSave(){
@@ -135,10 +143,6 @@ export default class AnimationManager extends Manager{
             })
         }
         return animationManager.register(anim,filmID);
-    }
-
-    requiredAssets(){
-        return animationFilmHolder.getAssetsToLoad();
     }
 
     playAnimation = ({object,anim,onStart,onFinish,animator = 'FrameRangeAnimator'}) => {

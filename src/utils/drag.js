@@ -9,13 +9,13 @@ export default function dragElement(elmnt,ev) {
   function dragMouseDown(e) {
     e = e || window.event;
     if(e instanceof TouchEvent){    
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
+      e.offsetX = e.touches[0].offsetX;
+      e.offsetY = e.touches[0].offsetY;
     }else{
       e.preventDefault();
     }
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos3 = e.offsetX;
+    pos4 = e.offsetY;
 
     document.ontouchend = closeDragElement;
     document.ontouchmove = elementDrag;
@@ -27,16 +27,16 @@ export default function dragElement(elmnt,ev) {
   function elementDrag(e) {
     e = e || window.event;
     if(e instanceof TouchEvent){    
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
+      e.offsetX = e.touches[0].offsetX;
+      e.offsetY = e.touches[0].offsetY;
     }else{
       e.preventDefault();
     }
 
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos1 = pos3 - e.offsetX;
+    pos2 = pos4 - e.offsetY;
+    pos3 = e.offsetX;
+    pos4 = e.offsetY;
 
     if(e.ctrlKey){
       elmnt.move(0,-pos2*ratio);

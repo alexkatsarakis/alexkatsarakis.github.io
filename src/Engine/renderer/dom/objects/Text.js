@@ -1,7 +1,10 @@
 import Object from './ObjectDom.js'
 
+import scene from './Scene.js'
+
 export default class Text extends Object {
-    
+    _fontSize
+
     constructor({name,texture,dim,defaultText,div},id){
         super(name,id,{div,texture,dim,defaultText});
 
@@ -23,18 +26,6 @@ export default class Text extends Object {
             onChange: (newVal) => this.div.style.fontWeight = (newVal)?"bold":"normal"
         });
 
-        this.data.valueHandler.registerValue('width',{
-            tag: "positional",
-            onChange: (value) => {this.div.style.width = value+"px";},
-            getValue: () => {return this.div.offsetWidth;}
-        });
-
-        this.data.valueHandler.registerValue('height',{
-            tag: "positional",
-            onChange: (value) => {this.div.style.height = value+"px";},
-            getValue: () => {return this.div.offsetHeight;}
-        });
-
         this.data.valueHandler.registerValue('font',{
             tag: "appearance",
             onChange: (value) => {this.div.style.fontFamily = value;},
@@ -43,8 +34,11 @@ export default class Text extends Object {
 
         this.data.valueHandler.registerValue('fontSize',{
             tag: "appearance",
-            onChange: (value) => {this.div.style.fontSize = value+"px";},
-            getValue: () => {return this.div.style.fontSize.slice(0,-2);}
+            onChange: (value) => {
+                this._fontSize = value;
+                this.div.style.fontSize = (value/scene._aspectRatio)+"px";
+            },
+            getValue: () => {return this._fontSize;}
         });
 
         this._category = 'Text';

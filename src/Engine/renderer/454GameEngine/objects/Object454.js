@@ -5,6 +5,9 @@ import stage from '../../EnvironmentObject.js'
 import scene from './Scene.js'
 import objectManager from '../../ObjectManager.js'
 
+import Engine from '../../../../Engine.js'
+import bb from '../../../../utils/blackboard.js'
+
 export default class Object454 extends Object{
     _x;
     _y;
@@ -57,6 +60,11 @@ export default class Object454 extends Object{
         this.data.valueHandler.registerValue('film',{
             tag: 'render',
             onChange: (value) => {
+                if(!value)return
+                if(!Engine.AnimationManager.getFilm(value)){
+                    bb.fastSet('events','showFeedback',`Failed to update film to ${value}`);
+                    return;
+                }
                 this._frame = 0;
                 this._film = value;
             },
@@ -66,6 +74,12 @@ export default class Object454 extends Object{
         this.data.valueHandler.registerValue('frame',{
             tag: 'render',
             onChange: (value) => {
+                const f = Engine.AnimationManager.getFilm(this._film);
+                if(value === undefined || !f)return;
+                if(isNaN(value) || value < 0 || value > f.totalFrames-1){
+                    bb.fastSet('events','showFeedback',`Failed to update frame to ${value}`);
+                    return;
+                }
                 this._frame = value;
             },
             getValue: () => {return this._frame;}

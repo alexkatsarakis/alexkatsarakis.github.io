@@ -24,6 +24,9 @@ Engine.installManager('TimewarpManager', new TimewarpManager());
 import InputAutomationManager from './InputAutomationManager.js'
 Engine.installManager('InputAutomationManager', new InputAutomationManager());
 
+import TutorialManager from './TutorialManager.js'
+Engine.installManager('TutorialManager', new TutorialManager());
+
 import DummyManager from './DummyManager.js'
 Engine.installManager('DummyManager', new DummyManager());
 

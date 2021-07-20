@@ -6,19 +6,6 @@ export default class Square extends Object {
     constructor({name,texture,dim,div},id){
         super(name,id,{div,texture,dim});
 
-        
-        this.data.valueHandler.registerValue('width',{
-            tag: "positional",
-            onChange: (value) => {this.div.style.width = value+"px";},
-            getValue: () => {return Number.parseFloat(this.div.style.width.slice(0,-2));}
-        });
-
-        this.data.valueHandler.registerValue('height',{
-            tag: "positional",
-            onChange: (value) => {this.div.style.height = value+"px";},
-            getValue: () => {return Number.parseFloat(this.div.style.height.slice(0,-2));}
-        });
-
         this.data.valueHandler.registerValue('HTML',{
             tag: "div",
             onChange: (value) => {

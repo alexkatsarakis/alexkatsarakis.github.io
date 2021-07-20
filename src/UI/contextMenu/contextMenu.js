@@ -30,8 +30,8 @@ function onContextChange({objID,event}){
         id: 'contextMenu-window'
     });
 
-    cMenu.style.top =  event.clientY+'px';
-    cMenu.style.left = event.clientX+'px';
+    cMenu.style.top =  event.offsetY+'px';
+    cMenu.style.left = event.offsetX+'px';
 
     bg.onclick = ()=>{
         bg.remove();
@@ -48,8 +48,8 @@ function onContextChange({objID,event}){
         bg.remove();
         cMenu.remove();
         const mEvent = new MouseEvent('contextmenu', {
-            clientX: e.clientX,
-            clientY: e.clientY
+            offsetX: e.offsetX,
+            offsetY: e.offsetY
         });
         document.getElementById('clickWrapper').dispatchEvent(mEvent);
     }
@@ -85,8 +85,8 @@ function onContextChange({objID,event}){
                 const newObj = Engine.ClipboardManager.paste();
                 const envObj = Engine.ObjectManager.getObjectByName('Stage');
                 newObj.setPosition(
-                    event.clientX+envObj.getValue('x'),
-                    event.clientY+envObj.getValue('y')
+                    event.offsetX+envObj.getValue('x'),
+                    event.offsetY+envObj.getValue('y')
                 );
                 bg.click();    
                 bb.fastSet('events','showFeedback',`${newObj.name} Created`);
@@ -147,10 +147,10 @@ function onContextChange({objID,event}){
 
     
     if(cMenu.offsetTop + cMenu.offsetHeight > window.innerHeight){
-        cMenu.style.top = event.clientY - cMenu.offsetHeight + 'px';
+        cMenu.style.top = event.offsetY - cMenu.offsetHeight + 'px';
     }
     if(cMenu.offsetLeft + cMenu.offsetWidth > window.innerWidth){
-        cMenu.style.left = event.clientX - cMenu.offsetWidth + 'px';
+        cMenu.style.left = event.offsetX - cMenu.offsetWidth + 'px';
     }
 
     bb.installWatch('events','contextMenu',onContextChange);

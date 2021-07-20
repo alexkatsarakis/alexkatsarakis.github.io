@@ -33,9 +33,9 @@ export default class Rectangle extends Object {
         
         const [drawX,drawY] = this.getMapCoords();
         if(drawX + this._width <= 0
-        || drawX > 1920
+        || drawX > this._stage._windowWidth
         || drawY + this._height <= 0
-        || drawY > 1080) return;
+        || drawY > this._stage._windowHeightd) return;
         if(!film){
             ctx.fillStyle = this._color;
             ctx.fillRect(drawX, drawY, this._width, this._height);

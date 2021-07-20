@@ -9,6 +9,8 @@ export default class ObjectDom extends Object{
     div
     _x
     _y
+    _width
+    _height
 
     constructor(name,id,extra){
         super(name,id);
@@ -37,6 +39,25 @@ export default class ObjectDom extends Object{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this._y = value;},
             getValue: () => {return this._y;}//return this.getMapCoords()[1]}
+        });
+
+        
+        this.data.valueHandler.registerValue('width',{
+            tag: "positional",
+            onChange: (value) => {
+                this._width = value;
+                this.div.style.width = (this._width/scene._aspectRatio)+'px';
+            },
+            getValue: () => {return Number.parseFloat(this._width);}
+        });
+
+        this.data.valueHandler.registerValue('height',{
+            tag: "positional",
+            onChange: (value) => {
+                this._height = value;
+                this.div.style.height = (this._height/scene._aspectRatio)+'px';
+            },
+            getValue: () => {return Number.parseFloat(this._height);}
         });
 
         this.data.valueHandler.registerValue('rotation',{

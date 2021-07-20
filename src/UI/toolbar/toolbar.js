@@ -309,5 +309,5 @@ function onToolbarLoaded(){
 
     document.getElementById('toolbar-dummyButton').onclick = ()=>{
         console.log(Engine.SaveManager.getGameProjection());
-    }
+    };
 }

@@ -20,10 +20,13 @@ class EnvironmentObject extends Object {
         this._width = 15000;
         this._height = 1080;
 
-        this._windowWidth = window.innerWidth;
-        this._windowHeight = window.innerHeight;
-
+        
         this._aspectRatio = 1920/window.innerWidth;
+        
+        this._windowWidth = window.innerWidth*this._aspectRatio;
+
+        const windowHeight = window.innerHeight*this._aspectRatio;
+        this._windowHeight = (windowHeight > this._height)?this._height:windowHeight;
 
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
@@ -91,10 +94,11 @@ class EnvironmentObject extends Object {
         this.data.valueHandler.registerValue('background',{
             tag: "texture",
             onChange: (value) => {
+                const scene = document.getElementById('scene');
                 if(value === '')
-                    document.body.style.backgroundImage = '';    
+                    scene.style.backgroundImage = '';    
                 else
-                    document.body.style.backgroundImage = `url('../assets/textures/${value}')`;
+                    scene.style.backgroundImage = `url('../assets/textures/${value}')`;
             }
         });
 

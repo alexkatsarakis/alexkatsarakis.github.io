@@ -1,3 +1,5 @@
+import stage from '../../EnvironmentObject.js'
+
 class Scene {
     _items;
     _aspectRatio;
@@ -8,9 +10,10 @@ class Scene {
         this._items = {};
 
         this.div.style.position = "absolute";
-        this.div.id = 'scene';     
-        this.div.style.width  = window.innerWidth+'px';
-        this.div.style.height = window.innerHeight+'px';
+        this.div.id = 'scene';
+        this.div.style.width = (stage._windowWidth/stage._aspectRatio) + 'px';
+        this.div.style.height = (stage._windowHeight/stage._aspectRatio) + 'px';
+        this.div.style.top = ((window.innerHeight - (stage._windowHeight/stage._aspectRatio) )/2) + 'px';
 
         this._aspectRatio = 1920/window.innerWidth;
 

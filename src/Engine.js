@@ -132,14 +132,6 @@ app.addLoadFunction(()=>{
         Engine._managers[i].onLoad();
     }
 
-    Engine.AnimationManager.requiredAssets().forEach((asset)=>{
-        if(!bb.fastGet('assets',asset)){
-            let img = new Image();
-            img.src = asset;
-            bb.fastInstall('assets',asset,img);
-        }
-    });
-
     installWatches();
 });
 

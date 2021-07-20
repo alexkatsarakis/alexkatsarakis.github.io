@@ -13,7 +13,8 @@ const UIs = [
     'contextMenu',
     'promptWindow',
     'actionFeedback',
-    'dummyGameUI'
+    'tutorial',
+    'dummyGameUI',
 ];
 
 const notDefaultUIs = [

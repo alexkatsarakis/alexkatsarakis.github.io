@@ -1,3 +1,5 @@
+import stage from '../../EnvironmentObject.js'
+
 class Scene {
 
     _items = [];
@@ -10,14 +12,15 @@ class Scene {
         this._canvas = document.createElement('canvas');
         this._canvas.id = '454Scene';
         this._canvas.style.position = 'absolute';
-        this._canvas.style.width  = window.innerWidth+'px';
-        this._canvas.style.height = window.innerHeight+'px';
+        this._canvas.style.width = (window.innerWidth) + 'px';
+        this._canvas.style.height = (window.innerHeight) + 'px';
+        this._canvas.style.top = ((window.innerHeight - (stage._windowHeight/stage._aspectRatio))/2) + 'px';
         this._canvasCTX = this._canvas.getContext("2d");
 
-        this._aspectRatio = 1920/window.innerWidth;
+        this._aspectRatio = stage._aspectRatio;
 
-        this._canvasCTX.canvas.width  = 1920;
-        this._canvasCTX.canvas.height = window.innerHeight*this._aspectRatio;
+        this._canvasCTX.canvas.width  = (window.innerWidth*stage._aspectRatio);
+        this._canvasCTX.canvas.height = (window.innerHeight*stage._aspectRatio);
         document.body.appendChild(this._canvas);
 
     }

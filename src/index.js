@@ -1,3 +1,5 @@
+'use strict';
+
 import './utils/initializationManager.js'
 
 import Engine from './Engine.js'

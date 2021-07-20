@@ -177,12 +177,12 @@ function createAttributesView(attrs){
             inp.value = focusedObj.getValue(i);
             inp.onchange = (ev) => {
                 const val = ev.target.value;
+                bb.fastSet('events','showFeedback',`${focusedObj.name} attribute ${i} changed to ${val}`);
                 if(isNaN(val) || val === '')
                     focusedObj.setValue(i, val);
                 else
                     focusedObj.setValue(i, Number.parseFloat(val));
 
-                bb.fastSet('events','showFeedback',`${focusedObj.name} attribute ${i} changed to ${val}`);
             }
             text.appendChild(inp);
         });
