@@ -5,7 +5,7 @@ export default {
     link: './src/UI/tutorial/tutorial.ahtml',
     cb: onTutorialLoaded,
     removable: true, 
-    loadOnInstall: true
+    loadOnInstall: false
 };
 
 function TutorialAPI(){
@@ -28,7 +28,7 @@ function TutorialAPI(){
     }
 
     closeDom.onclick = ()=>{
-        bb.installSet('events','finishTutorial','closed');
+        bb.fastSet('events','finishTutorial','closed');
     }
 
     return {
@@ -42,4 +42,5 @@ function onTutorialLoaded(){
     const API = new TutorialAPI();
     bb.installWatch('events','newContent',API.setContent);
     bb.installWatch('events','finishTutorial',API.finishTutorial);
+    bb.fastSet('events','startTutorial',1);
 }

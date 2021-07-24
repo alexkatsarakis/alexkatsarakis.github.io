@@ -30,8 +30,6 @@ export default class Object {
 
         this._state = ObjectState.ALIVE;
 
-        this._isPrototype = false;
-
         this.data.eventHandler     = new EventManager(true, this.id);
         this.data.stateHandler     = new StateManager(this.id);
         this.data.valueHandler     = new ValueManager(this.id);

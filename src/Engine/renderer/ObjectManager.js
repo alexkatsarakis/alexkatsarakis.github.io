@@ -27,14 +27,6 @@ class ObjectManager extends Manager{
         this._renderManagers = [];
     }
 
-    addRenderManager(manager){
-        this._renderManagers.push(manager);
-    }
-
-    getRenderManagers(){
-        return this._renderManagers;
-    }
-
     addConstructor(name,cons){
         this._constructors[name] = cons;
     }
@@ -149,8 +141,8 @@ for(let i in domConst){
     objectManager.addConstructor(i,domConst[i]);
 }
 
-objectManager.addRenderManager(O454Manager);
-objectManager.addRenderManager(ODomManager);
+objectManager._renderManagers.push(O454Manager);
+objectManager._renderManagers.push(ODomManager);
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(keyObj);
@@ -168,7 +160,7 @@ const clickWrapper = document.createElement('div');
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
-const managers = objectManager.getRenderManagers();
+const managers = objectManager._renderManagers;
 clickWrapper.onclick = (ev)=>{
     const objects = objectManager.objects;
     for(let i in objects){

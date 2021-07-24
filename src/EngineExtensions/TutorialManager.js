@@ -40,11 +40,8 @@ export default class TutorialManager extends Manager{
 
     onLoad(){
         if(this._steps.length === 0)return;
-
-        Engine.ClockManager.callIn(()=>{
-            this.showStep(0);
-        },[],1000,false);
         
+        bb.installWatch('events','startTutorial',()=>this.showStep(0));
     }
 
     showStep(index){

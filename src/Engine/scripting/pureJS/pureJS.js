@@ -7,7 +7,7 @@ const inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
 inputArea.style.height = "100%";
 inputArea.style.resize = "none";
-inputArea.spellcheck = "false";
+inputArea.spellcheck = false;
 
 function currentScriptAsText(){
     return inputArea.value;
