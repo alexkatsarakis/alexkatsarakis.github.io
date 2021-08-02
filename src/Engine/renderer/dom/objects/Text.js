@@ -14,7 +14,7 @@ export default class Text extends Object {
             getValue: () => {return this.div.innerHTML;}
         });
 
-        this.data.valueHandler.registerValue('colour',{
+        this.data.valueHandler.registerValue('color',{
             tag: "texture",
             onChange: (value) => this.div.style.color = value,
             getValue: () => {return this.div.style.color;}

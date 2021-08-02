@@ -132,7 +132,7 @@ function objCreationDropdown(){
                 bb.fastGet('actions','createObject')({
                     category:item,
                     name:'unnamed'+'('+Math.floor(Math.random() * 1000000)+')',
-                    colour: 'white',
+                    color: 'white',
                     position:{
                         x:700,
                         y:700

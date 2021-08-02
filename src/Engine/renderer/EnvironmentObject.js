@@ -102,6 +102,7 @@ class EnvironmentObject extends Object {
             }
         });
 
+        this.data.valueHandler.setValue('color','grey');
 
         // this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');

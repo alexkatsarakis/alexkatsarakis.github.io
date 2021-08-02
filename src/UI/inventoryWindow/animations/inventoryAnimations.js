@@ -65,9 +65,10 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
         const previewCtx = preview.getContext('2d');
         previewCtx.canvas.width = width;
         previewCtx.canvas.height = width;
+        const endW = width*(box.width/box.height)
         previewCtx.drawImage(bb.fastGet('assets',film.bitmap),
         box.x,box.y,box.width,box.height,
-        0, 0, width*(box.width/box.height), width);
+        (preview.width - endW)/2, 0, endW, width);
 
 
         filmArea.appendChild(preview);
@@ -376,9 +377,10 @@ function showAnimations(objWrapper){
         animator.onAction = (th)=>{
             const firstBox = film.getFrameBox(th.currentFrame);
             ctx.clearRect(0,0,anim.width,anim.height);
+            const endH = anim.height*(firstBox.width/firstBox.height);
             ctx.drawImage(bb.fastGet('assets',film.bitmap),
                 firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
+                (anim.width - endH)/2,0, endH, anim.height);
         };
 
         

@@ -45,7 +45,7 @@ export default class Object454 extends Object{
             getValue: () => {return this._height;}
         });
 
-        this.data.valueHandler.registerValue('colour',{
+        this.data.valueHandler.registerValue('color',{
             tag: "texture",
             onChange: (value) => this._color = value,
             getValue: () => {return this._color;}
@@ -97,7 +97,7 @@ export default class Object454 extends Object{
     }
 
     setColor(col){
-        this.setValue('colour',col);
+        this.setValue('color',col);
     }
 
     getObject(){

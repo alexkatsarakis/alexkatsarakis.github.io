@@ -97,7 +97,7 @@ export default class Humanoid extends Object {
         }
 
 
-        this.data.valueHandler.registerValue('colour',{
+        this.data.valueHandler.registerValue('color',{
             tag: "texture",
             onChange: (value) => this.setColor(value),
             getValue: () => {return this.div.children[0].style.backgroundColor;}
