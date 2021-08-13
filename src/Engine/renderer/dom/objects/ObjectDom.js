@@ -27,6 +27,9 @@ export default class ObjectDom extends Object{
         }
         else this.createElement({name,...extra});
 
+        this._width = this.div.style.width;
+        this._height = this.div.style.height;
+
 
         this.renderer = 'dom';
         this.data.valueHandler.registerValue('x',{
@@ -69,7 +72,7 @@ export default class ObjectDom extends Object{
             }
         });
 
-        this.data.valueHandler.registerValue('colour',{
+        this.data.valueHandler.registerValue('color',{
             tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}

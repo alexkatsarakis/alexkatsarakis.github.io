@@ -76,7 +76,7 @@ function RenderManager(objWrapper,items){
             const newItem = item.getObject().cloneNode(true);
             body.appendChild(newItem);
             newItem.id = newItem.id+'_objectMenu_inventory';
-            newItem.style.color = item.getValue('colour');
+            newItem.style.color = item.getValue('color');
             newItem.classList = '';
             newItem.style.top = '';
             newItem.style.left = '';

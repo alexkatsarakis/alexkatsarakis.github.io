@@ -9,6 +9,7 @@ import './saveToDatabase.js'
 import './copyPaste.js'
 import './objectSnapshot.js'
 import './inputAutomation.js'
+import './removeFocus.js'
 
 
 import './dummyAction.js'

@@ -548,7 +548,7 @@
                     "val": 100,
                     "tag": "positional"
                 },
-                "colour": {
+                "color": {
                     "val": "#ff00ff",
                     "tag": "texture"
                 },
@@ -668,7 +668,7 @@
                     "val": 1000,
                     "tag": "positional"
                 },
-                "colour": {
+                "color": {
                     "val": "#00ff70",
                     "tag": "texture"
                 },
@@ -788,7 +788,7 @@
                     "val": 1000,
                     "tag": "positional"
                 },
-                "colour": {
+                "color": {
                     "val": "#00ff70",
                     "tag": "texture"
                 },
@@ -919,7 +919,7 @@
                     "val": "",
                     "tag": "positional"
                 },
-                "colour": {
+                "color": {
                     "val": "white",
                     "tag": "texture"
                 },
@@ -1059,7 +1059,7 @@
                     "val": 187,
                     "tag": "positional"
                 },
-                "colour": {
+                "color": {
                     "val": "#ff00ff",
                     "tag": "texture"
                 },

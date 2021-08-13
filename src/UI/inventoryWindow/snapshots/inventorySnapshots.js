@@ -17,7 +17,7 @@ function previewObject(parent,item){
         temp.innerHTML = item.extra.div;
         const newItem = temp.firstChild;
         newItem.id = Number.parseInt(Math.random()*100000)+'_objectMenu_inventory';
-        newItem.style.color = item.values.colour.val;
+        newItem.style.color = item.values.color.val;
         newItem.classList = '';
         newItem.style.top = '';
         newItem.style.left = '';

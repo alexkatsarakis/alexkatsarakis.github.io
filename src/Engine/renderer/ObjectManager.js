@@ -174,13 +174,13 @@ clickWrapper.onclick = (ev)=>{
         if(managers[i].mouseEvents.leftClick){
             const obj = managers[i].mouseEvents.leftClick(ev);
             if(obj){
-                changeFocus(obj.id);
+                if(bb.fastGet('settings','Focus Object On Click'))changeFocus(obj.id);
                 obj.triggerEvent('onClick');
                 return;
             }
         }
     }
-    changeFocus(undefined);
+    if(bb.fastGet('settings','Focus Object On Click'))changeFocus(undefined);
 };
 
 clickWrapper.ontouchstart = (ev)=>{

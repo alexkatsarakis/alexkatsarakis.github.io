@@ -5,6 +5,8 @@ import Engine from '../../Engine.js'
 import uiFactory from '../../utils/UIFactory.js'
 import tr from '../../utils/translator.js'
 
+import changeFocus from '../../utils/focusedObject.js'
+
 export default {
     name:'contextMenu',
     link: './src/UI/contextMenu/contextMenu.ahtml',
@@ -61,6 +63,18 @@ function onContextChange({objID,event}){
         innerHTML: obj.name
     });
 
+    
+    if(!bb.fastGet('settings','Focus Object On Click')){
+        const but = uiFactory.createElement({
+            parent: cMenu,
+            classList: 'contextMenu-item',
+            innerHTML: tr.get('Focus Object')
+        });
+        but.onclick = ()=>{
+            changeFocus(obj.id);
+            bg.click();
+        }
+    }
 
     if(Engine.hasManager('ClipboardManager')){
         if(!Engine.ObjectManager.isSystemObject(objID)){

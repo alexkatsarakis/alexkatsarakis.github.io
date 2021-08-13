@@ -16,7 +16,8 @@ class InputManager extends Manager{
     keyCombos = {
         'Copy Object': ['ControlLeft', 'KeyC'],
         'Paste Object': ['ControlLeft', 'KeyV'],
-        'Pause/Resume Toggle': ['Escape'],
+        'Save(locally)': ['ControlLeft', 'KeyS'],
+        'Pause/Resume Toggle': ['KeyP'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }
 
@@ -83,6 +84,7 @@ class InputManager extends Manager{
             this.onKeyPress[i](key);
         }
 
+        let hasTriggeredCombo = false;
         for(let combo in this.keyCombos){
             let isCombo = true;
             const keysForCombo = this.keyCombos[combo];
@@ -90,9 +92,13 @@ class InputManager extends Manager{
                 if(!this.currentlyPressed[keysForCombo[key]])
                     isCombo = false;
             }
-            if(isCombo === true) /// === true so it doesn't try to convert isCombo from bool
+            if(isCombo === true){ /// === true so it doesn't try to convert isCombo from bool
                 this.currentlyPressed[combo] = InputState.TOTRIGGER;
+                hasTriggeredCombo = true;
+            }
         }
+
+        return hasTriggeredCombo;
     }
     
     keyReleased(key){
@@ -244,9 +250,9 @@ let gamep = new GamepadController();
 
 
 document.onkeydown = (ev)=>{
-    if(ev.target.type === 'text')return;
+    if(ev.target.type === 'text' || ev.target.type === 'textarea' || ev.target.tagName === 'svg')return;
     if(!inputManager.isPressed(ev.code))
-        inputManager.keyPressed(ev.code);
+        if(inputManager.keyPressed(ev.code))ev.preventDefault();
 }
 document.onkeyup = (ev)=>{
     if(inputManager.isPressed(ev.code))
