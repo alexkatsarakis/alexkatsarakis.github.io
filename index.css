@@ -80,3 +80,33 @@ canvas {
 div { 
 	user-select: none; 
 } */
+
+#loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--main-color);
+    z-index: 100000;
+}
+
+#loading-screen-name {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    color: var(--main-color-text);
+    font-size: xx-large;
+}
+
+#loading-screen-logo {
+    position: absolute;
+    top: 40%;
+    left: calc(50% - 80px);
+    height: 20vh;
+    width: 160px;
+    background-image: url('./assets/favicon.ico');
+    background-repeat: no-repeat;
+    background-size: contain;
+}

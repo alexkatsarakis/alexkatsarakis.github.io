@@ -4,6 +4,9 @@ import './utils/initializationManager.js'
 
 import Engine from './Engine.js'
 
-Engine.SaveManager.setEngine(()=>{
-    Engine.start();
-});
+setTimeout(()=>{ 
+    Engine.SaveManager.setEngine(()=>{
+        Engine.start();
+    });
+    document.getElementById('loading-screen').remove();
+},1000);

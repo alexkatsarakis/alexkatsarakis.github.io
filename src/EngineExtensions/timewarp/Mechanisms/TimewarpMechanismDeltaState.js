@@ -56,7 +56,6 @@ export default class TimewarpMechanism {
     }
 
     stopRecording(){
-        this._objectState['onEnd'] = Engine.SaveManager.saveObjectsLocal(); 
         Engine.ClockManager.cancelCallBack(this._inter);
         this._inter = undefined;
         Engine.PauseManager.pause();
@@ -204,6 +203,8 @@ export default class TimewarpMechanism {
 
         });
         Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
+        this._timeWarping = {};
+        delete this._objectState['onStart'];
     }
 
     log(arg) {

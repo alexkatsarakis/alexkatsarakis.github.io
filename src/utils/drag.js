@@ -2,6 +2,7 @@ import env from '../Engine/renderer/EnvironmentObject.js'
 
 export default function dragElement(elmnt,ev) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  const target = ev.target;
   dragMouseDown(ev);
 
   const ratio = env._aspectRatio;
@@ -26,6 +27,7 @@ export default function dragElement(elmnt,ev) {
 
   function elementDrag(e) {
     e = e || window.event;
+    if(target !== e.target)return;
     if(e instanceof TouchEvent){    
       e.offsetX = e.touches[0].offsetX;
       e.offsetY = e.touches[0].offsetY;
@@ -37,7 +39,6 @@ export default function dragElement(elmnt,ev) {
     pos2 = pos4 - e.offsetY;
     pos3 = e.offsetX;
     pos4 = e.offsetY;
-
     if(e.ctrlKey){
       elmnt.move(0,-pos2*ratio);
     } else if(e.shiftKey) {

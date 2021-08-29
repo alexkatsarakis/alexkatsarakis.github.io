@@ -15,6 +15,7 @@ export default {
 };
 
 let firstTime;
+let recordedTimes;
 
 function getClosestFrame(array,number){
     for(let i = 1; i < array.length; ++i){
@@ -34,6 +35,8 @@ function changeTimewarpState(newState){
     const idleState = document.getElementById('timewarp-idle');
     const recordingState = document.getElementById('timewarp-recording');
     const activeState = document.getElementById('timewarp-active');
+    recordedTimes = undefined;
+    clearPlaybackUI();
     if(newState === 'recording'){
         idleState.style.display = 'none';
         recordingState.style.display = 'block';
@@ -147,8 +150,20 @@ function showFocusedObjectHistory(){
     bb.installWatch('state','focusedObject',showFocusedObjectHistory);
 }
 
+function clearPlaybackUI(){
+    document.getElementById('timewarp-showRecords').onchange = undefined;
+    document.getElementById('timewarp-showBackward').onclick = undefined;
+    document.getElementById('timewarp-showBackwardSingle').onclick = undefined;
+    document.getElementById('timewarp-pause').onclick = undefined;
+    document.getElementById('timewarp-resume').onclick = undefined;
+    document.getElementById('timewarp-showForwardSingle').onclick = undefined;
+    document.getElementById('timewarp-showForward').onclick = undefined;
+    document.getElementById('timewarp-rerecord').onclick = undefined;
+    document.getElementById('timewarp-timelines-wrapper').onchange = undefined;
+}
+
 function renderPlaybackUI(){
-    let recordedTimes = Engine.TimewarpManager.getRecordedTimestamps();
+    recordedTimes = Engine.TimewarpManager.getRecordedTimestamps();
     if(!recordedTimes) throw Error('No recorded times on stop');
 
     
@@ -197,29 +212,29 @@ function renderPlaybackUI(){
     const resumeBut = document.getElementById('timewarp-resume');
         resumeBut.style.width = '20%';
         resumeBut.onclick = ()=>{
-            if(bb.fastGet('settings','Show Prompt On Actions')){
-                bb.fastSet('events','openPrompt',{
-                    title: tr.get('Continue From Recording'),
-                    description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('every')} ${tr.get('recording')} ${tr.get('and')} ${tr.get('continue from stop point')}`,
-                    onAccept: ()=>{
-                        changeTimewarpState('idle'); 
-                        const number = Number.parseInt(range.value);
-                        const realNumber = getLowerNumber(recordedTimes,number);
-                        Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
-                        if(Engine.TimewarpManager.isReoccuring()){
-                            Engine.TimewarpManager.clearTimelines();
-                        }
-                    }
-                });
-            }else{
-                changeTimewarpState('idle'); 
+            // if(bb.fastGet('settings','Show Prompt On Actions')){
+            //     bb.fastSet('events','openPrompt',{
+            //         title: tr.get('Continue From Recording'),
+            //         description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('every')} ${tr.get('recording')} ${tr.get('and')} ${tr.get('continue from stop point')}`,
+            //         onAccept: ()=>{
+            //             const number = Number.parseInt(range.value);
+            //             const realNumber = getLowerNumber(recordedTimes,number);
+            //             Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
+            //             if(Engine.TimewarpManager.isReoccuring()){
+            //                 Engine.TimewarpManager.clearTimelines();
+            //             }   
+            //             changeTimewarpState('idle'); 
+            //         }
+            //     });
+            // }else{
                 const number = Number.parseInt(range.value);
                 const realNumber = getLowerNumber(recordedTimes,number);
                 Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
                 if(Engine.TimewarpManager.isReoccuring()){
                     Engine.TimewarpManager.clearTimelines();
                 }
-            }
+                changeTimewarpState('idle'); 
+            // }
         }
 
     const showForwardSingle = document.getElementById('timewarp-showForwardSingle');
@@ -287,26 +302,26 @@ function renderPlaybackUI(){
     }
     const reRecord = document.getElementById('timewarp-rerecord');
     reRecord.onclick = () => {
-        const currTimeline = (Number.parseInt(timelinesWrapper.value)+1);
-        if(currTimeline < timelines.length && bb.fastGet('settings','Show Prompt On Actions')){
-            bb.fastSet('events','openPrompt',{
-                title: tr.get('New Recording'),
-                description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('all the recordings')} ${tr.get("after timeline")} #${currTimeline}`,
-                onAccept: ()=>{
-                    Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
-                    Engine.PauseManager.resume();
-                    changeTimewarpState('recording');
-                    Engine.TimewarpManager.startRecording(0);
-                    renderRecordingUI();
-                }
-            });
-        } else {
+        // const currTimeline = (Number.parseInt(timelinesWrapper.value)+1);
+        // if(currTimeline < timelines.length && bb.fastGet('settings','Show Prompt On Actions')){
+        //     bb.fastSet('events','openPrompt',{
+        //         title: tr.get('New Recording'),
+        //         description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('all the recordings')} ${tr.get("after timeline")} #${currTimeline}`,
+        //         onAccept: ()=>{
+        //             Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
+        //             Engine.PauseManager.resume();
+        //             changeTimewarpState('recording');
+        //             Engine.TimewarpManager.startRecording(0);
+        //             renderRecordingUI();
+        //         }
+        //     });
+        // } else {
             Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
             Engine.PauseManager.resume();
             changeTimewarpState('recording');
             Engine.TimewarpManager.startRecording(0);
             renderRecordingUI();
-        }
+        // }
     }
         
 }

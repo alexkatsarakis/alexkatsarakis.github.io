@@ -20,19 +20,25 @@ function onContextChange({objID,event}){
     
     const wrapper = document.getElementById('contextMenu-wrapper');
 
-    wrapper.innerHTML = ''
+    const clicker = document.getElementById('clickWrapper');
+
+    wrapper.innerHTML = '';
 
     const bg = uiFactory.createElement({
         parent: wrapper,
         id: 'contextMenu-background'
     });
+    bg.style.position = 'absolute';
+    bg.style.width = clicker.offsetWidth + 'px';
+    bg.style.height = clicker.offsetHeight + 'px';
+    bg.style.top = clicker.offsetTop + 'px';
 
     const cMenu = uiFactory.createElement({
         parent: wrapper,
         id: 'contextMenu-window'
     });
 
-    cMenu.style.top =  event.offsetY+'px';
+    cMenu.style.top =  (clicker.offsetTop + event.offsetY) + 'px';
     cMenu.style.left = event.offsetX+'px';
 
     bg.onclick = ()=>{
@@ -49,11 +55,9 @@ function onContextChange({objID,event}){
         e.preventDefault();
         bg.remove();
         cMenu.remove();
-        const mEvent = new MouseEvent('contextmenu', {
-            offsetX: e.offsetX,
-            offsetY: e.offsetY
-        });
-        document.getElementById('clickWrapper').dispatchEvent(mEvent);
+        
+        const mEvent = new MouseEvent('contextmenu', e);
+        clicker.dispatchEvent(mEvent);
     }
 
 
@@ -161,7 +165,7 @@ function onContextChange({objID,event}){
 
     
     if(cMenu.offsetTop + cMenu.offsetHeight > window.innerHeight){
-        cMenu.style.top = event.offsetY - cMenu.offsetHeight + 'px';
+        cMenu.style.top = (clicker.offsetTop + event.offsetY) - cMenu.offsetHeight + 'px';
     }
     if(cMenu.offsetLeft + cMenu.offsetWidth > window.innerWidth){
         cMenu.style.left = event.offsetX - cMenu.offsetWidth + 'px';

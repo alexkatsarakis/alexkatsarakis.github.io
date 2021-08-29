@@ -178,6 +178,8 @@ export default class TimewarpMechanism {
 
         });
         Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
+        this._timeWarping = {};
+        this._timelines = {};
     }
 
     get isReoccuring(){

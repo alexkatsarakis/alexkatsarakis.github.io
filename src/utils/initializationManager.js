@@ -13,12 +13,12 @@ urlParams.forEach((val,key)=>{
     bb.fastSet('urlParams', key, val);
 });
 
-bb.fastSet('settings', 'Dragging Objects', !urlParams.get('play'));
-bb.fastSet('settings', 'Clicking Through Objects',false);
-bb.fastSet('settings', 'Move UI with Control',true);
+bb.fastSet('settings', 'Dragging Objects', false); // !urlParams.get('play'));
+bb.fastSet('settings', 'Clicking Through Objects', true);
+bb.fastSet('settings', 'Move UI with Control', true);
 bb.fastSet('settings', 'Only show objects in search', false);
 bb.fastSet('settings', 'Show Prompt On Actions', false);
-bb.fastSet('settings', 'Focus Object On Click', true);
+bb.fastSet('settings', 'Focus Object On Click', false);
 // <Engine>
 import '../Engine.js'
     // <EngineExtra>
