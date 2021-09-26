@@ -22,7 +22,7 @@ export default class Square extends Object {
                 this.div.style.top = this._y;
                 this.addDivToScene();
             },
-            getValue: () => {return ''}
+            getValue: () => { return '<html>'}
         });
 
         this._category = 'Square';
@@ -32,8 +32,8 @@ export default class Square extends Object {
     createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
-        const X = (dim&&dim.width)?dim.width:50;
-        const Y = (dim&&dim.height)?dim.height:50;
+        const X = (dim&&dim.width)?dim.width:100;
+        const Y = (dim&&dim.height)?dim.height:100;
         this.div.style.width = X+"px";
         this.div.style.height = Y+"px";
         this.div.style.position = "absolute";

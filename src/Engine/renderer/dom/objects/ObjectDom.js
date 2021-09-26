@@ -34,13 +34,13 @@ export default class ObjectDom extends Object{
         this.renderer = 'dom';
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
-            onChange: (value) => {if(this.getOption('isMovable'))this._x = value;},
+            onChange: (value) => {this._x = value;},
             getValue: () => {return this._x;}//return this.getMapCoords()[0];}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
-            onChange: (value) => {if(this.getOption('isMovable'))this._y = value;},
+            onChange: (value) => {this._y = value;},
             getValue: () => {return this._y;}//return this.getMapCoords()[1]}
         });
 
@@ -76,6 +76,12 @@ export default class ObjectDom extends Object{
             tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
+        });
+
+        this.data.valueHandler.registerValue('zIndex',{
+            tag: "texture",
+            onChange: (value) => this.div.style.zIndex = value,
+            getValue: () => {return this.div.style.zIndex;}
         });
 
         this.data.optionHandler.registerOption('moveThroughGrid', 'user', true);

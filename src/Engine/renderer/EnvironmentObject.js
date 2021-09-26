@@ -87,7 +87,8 @@ class EnvironmentObject extends Object {
             tag: "texture",
             value: '#ffffff',
             onChange: (value) => {
-                document.body.style.backgroundColor = value;
+                const scene = document.getElementById('scene');
+                if(scene)scene.style.backgroundColor = value;
             }
         });
 

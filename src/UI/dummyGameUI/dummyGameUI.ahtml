@@ -5,8 +5,7 @@
 
 
 
-<!-- <img id="vid" category="Square" style="width: 1920px; height: 1080px; position: absolute; left:0; top:0; border:0" src="./present/Slide2.JPG">
-</img>
+<!-- <img category="Square" src="./present/Slide2.JPG"></img>
 <img id="vid2" category="Square" style="width: 1920px; height: 1080px; position: absolute; left:1920px; top:0; border:0" src="./presentation_1.jpg">
 </img>
 <img id="vid3" category="Square" style="width: 1920px; height: 1080px; position: absolute; left:3840px; top:0; border:0" src="./presentation_2.jpg">
@@ -16,11 +15,8 @@
 <!-- <iframe id="testststs" category="Square" style="width: 1920px; height: 108a0px; position: absolute; left:0; top:0; border:0" src="demo_iframe.htm">
 </iframe>  -->
 
-<!-- <iframe 
-    category="Square"
-    src="https://github1s.com/alexkatsarakis/GameEnvironment"
-    >
-</iframe>  -->
+<!-- <iframe src="https://alexkatsarakis.github.io/editor.html?game=savedState" style="z-index:2"></iframe>  -->
+<!-- <iframe src="http://127.0.0.1:5502/editor.html?game=MortalKombat" style="z-index:2"></iframe>  -->
 
 <iframe 
     id="mySite" 

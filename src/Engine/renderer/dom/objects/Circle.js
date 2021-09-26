@@ -18,7 +18,7 @@ export default class Circle extends Object {
     createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
-        const X = (dim&&dim.width)?dim.width:50;
+        const X = (dim&&dim.width)?dim.width:100;
         // const Y = (dim&&dim.height)?dim.height: 5;
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";

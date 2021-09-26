@@ -129,13 +129,16 @@ function objCreationDropdown(){
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = tr.get(item);
             ddItem.addEventListener('click',()=>{
+                
+                const stage = Engine.ObjectManager.getObjectByName('Stage');
+                
                 bb.fastGet('actions','createObject')({
                     category:item,
                     name:'unnamed'+'('+Math.floor(Math.random() * 1000000)+')',
                     color: 'white',
                     position:{
-                        x:700,
-                        y:700
+                        x: stage.getValue('x') + stage.getValue('windowWidth')/2 - 50,
+                        y: stage.getValue('y') + stage.getValue('windowHeight')/2 - 50
                     }
                 });
                 toggleDropdown();

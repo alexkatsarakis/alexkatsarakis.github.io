@@ -48,6 +48,10 @@ export default class Text extends Object {
     createElement({name,texture,dim,defaultText}){
         this.div = document.createElement('div');
         this.div.id = name;
+        if(!dim){
+            this.div.style.width = '100px';
+            this.div.style.height = '100px';
+        }
         this.div.innerHTML = defaultText || name;
         this.div.style.position = "absolute";
         this.div.style.fontSize = "16px";

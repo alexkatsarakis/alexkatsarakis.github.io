@@ -93,6 +93,7 @@ class ObjectManager extends Manager{
             }
         };
         Engine.CollisionManager.updateObjectName(obj.name,newName);
+        delete this._objectByName[obj.name];
         obj.name = newName;
         this._objectByName[newName] = obj;
         bb.fastSet('events','last',event);
