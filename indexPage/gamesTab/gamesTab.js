@@ -37,6 +37,12 @@ const games = [
         displayName: 'Empty (Mortal Films)',
         defaultParameters: {
         }
+    },
+    {
+        id: 'presentation',
+        displayName: 'Presentation',
+        defaultParameters: {
+        }
     }
 ];
 
