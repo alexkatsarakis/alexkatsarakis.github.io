@@ -150,8 +150,8 @@
 
 #hudToggle {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
     bottom: 20px;
     right: 20px;
     background-image: url(../../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
