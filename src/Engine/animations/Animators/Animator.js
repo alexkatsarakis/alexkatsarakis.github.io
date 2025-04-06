@@ -1,76 +1,75 @@
-import animatorManager from './AnimatorManager.js'
+import animatorManager from "./AnimatorManager.js";
 
 export default class Animator {
-    animatorStates = {
-        RUNNING: 0,
-        FINISHED: 1,
-        STOPPED: 2
+  animatorStates = {
+    RUNNING: 0,
+    FINISHED: 1,
+    STOPPED: 2,
+  };
+  _onStart;
+  _onFinish;
+  _onAction;
+
+  _lastTime;
+  _state;
+
+  _name;
+  _anim;
+
+  _finish() {
+    if (!this.hasFinished()) {
+      this.notifyStopped();
     }
-    _onStart;
-    _onFinish;
-    _onAction;
+  }
 
-    _lastTime;
-    _state;
+  constructor() {
+    this._name = "Animator";
+    this._lastTime = 0;
+    this._state = this.animatorStates.FINISHED;
+    animatorManager.register(this);
+  }
 
-    _name;
-    _anim;
+  destroy() {
+    animatorManager.markAsSuspended(this);
+    this._state = this.animatorStates.STOPPED;
+  }
 
-    _finish(){
-        if (!this.hasFinished()) {
-            this.notifyStopped();
-        }
-    }
+  stop() {
+    this._finish();
+    this._state = this.animatorStates.STOPPED;
+  }
 
-    constructor(){
-        this._name = 'Animator';
-        this._lastTime = 0;
-        this._state = this.animatorStates.FINISHED;
-        animatorManager.register(this);
-    }
+  timeShift(offset) {
+    this._lastTime += offset;
+  }
 
-    destroy(){
-        animatorManager.markAsSuspended(this);
-        this._state = this.animatorStates.STOPPED;
-    }
+  hasFinished() {
+    return !(this._state === this.animatorStates.RUNNING);
+  }
 
-    stop(){
-        this._finish();
-        this._state = this.animatorStates.STOPPED;
-    }
+  set onStart(f) {
+    this._onStart = f;
+  }
 
-    timeShift(offset){
-        this._lastTime += offset;
-    }
+  set onFinish(f) {
+    this._onFinish = f;
+  }
 
-    hasFinished(){
-        return !(this._state === this.animatorStates.RUNNING);
-    }
+  set onAction(f) {
+    this._onAction = f;
+  }
 
-    set onStart(f){
-        this._onStart = f;
-    }
+  notifyAction() {
+    if (this._onAction) this._onAction(this, this._anim);
+  }
 
-    set onFinish(f){
-        this._onFinish = f;
-    }
+  notifyStopped() {
+    animatorManager.markAsSuspended(this);
+    if (this._onFinish) this._onFinish(this, this._anim);
+  }
 
-    set onAction(f){
-        this._onAction = f;
-    }
-
-    notifyAction(){
-        if(this._onAction)this._onAction(this, this._anim);
-    }
-
-    notifyStopped(){
-        animatorManager.markAsSuspended(this);
-        if(this._onFinish)this._onFinish(this, this._anim);
-    }
-
-    notifyStarted(){
-        animatorManager.markAsRunning(this);
-        if(this._onStart)this._onStart(this, this._anim);
-    }
-
+  notifyStarted() {
+    animatorManager.markAsRunning(this);
+    if (this._onStart) this._onStart(this, this._anim);
+  }
 }

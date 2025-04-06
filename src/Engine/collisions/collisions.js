@@ -1,45 +1,44 @@
-import collisionHolder from './collisionHolder.js'
+import collisionHolder from "./collisionHolder.js";
 
-import Engine from '../../Engine.js'
+import Engine from "../../Engine.js";
 
-import Manager from '../Manager.js'
+import Manager from "../Manager.js";
 
-export default class CollisionManager extends Manager{
-    updateObjectName(objName,newName){
-        collisionHolder.updateObjectName(objName,newName);
-    }
-    
-    installCollision(obj1, obj2,codeAsText){
-        collisionHolder.installCollision(obj1, obj2, codeAsText);
-    }
-    
-    removeCollision(obj1ID, obj2ID){
-        return collisionHolder.removeCollision(obj1ID, obj2ID);
-    }
+export default class CollisionManager extends Manager {
+  updateObjectName(objName, newName) {
+    collisionHolder.updateObjectName(objName, newName);
+  }
 
-    checkAndInvoke(){
-        collisionHolder.checkAndInvoke(
-            Engine.ObjectManager.objects, 
-            (codes,currObj)=>{
-                Engine.ScriptingManager.executeCode(codes,currObj);
-            }
-        );
-    }
+  installCollision(obj1, obj2, codeAsText) {
+    collisionHolder.installCollision(obj1, obj2, codeAsText);
+  }
 
-    getAllCollisions(){
-        return collisionHolder.getAllCollisions();
-    }
+  removeCollision(obj1ID, obj2ID) {
+    return collisionHolder.removeCollision(obj1ID, obj2ID);
+  }
 
-    getCollisions(objID){
-        return collisionHolder.getCollisions(objID);
-    }
+  checkAndInvoke() {
+    collisionHolder.checkAndInvoke(
+      Engine.ObjectManager.objects,
+      (codes, currObj) => {
+        Engine.ScriptingManager.executeCode(codes, currObj);
+      }
+    );
+  }
 
-    getCollision(obj1ID, obj2ID){
-        return collisionHolder.getCollision(obj1ID, obj2ID);
-    }
+  getAllCollisions() {
+    return collisionHolder.getAllCollisions();
+  }
 
-    setCollision(obj1ID, obj2ID, codeAsText){
-        return collisionHolder.setCollision(obj1ID, obj2ID, codeAsText);
-    }
+  getCollisions(objID) {
+    return collisionHolder.getCollisions(objID);
+  }
 
+  getCollision(obj1ID, obj2ID) {
+    return collisionHolder.getCollision(obj1ID, obj2ID);
+  }
+
+  setCollision(obj1ID, obj2ID, codeAsText) {
+    return collisionHolder.setCollision(obj1ID, obj2ID, codeAsText);
+  }
 }

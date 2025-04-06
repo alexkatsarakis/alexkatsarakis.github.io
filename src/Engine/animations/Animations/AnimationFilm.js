@@ -1,36 +1,36 @@
 export default class AnimationFilm {
-    _boxes;
-    _bitmap;
-    _id;
-    _currentFrame;
+  _boxes;
+  _bitmap;
+  _id;
+  _currentFrame;
 
-    constructor({id, bitmap = "", boxes = []}){
-        this._id = id;
-        this._bitmap = bitmap;
-        this._boxes = boxes; 
-    }
+  constructor({ id, bitmap = "", boxes = [] }) {
+    this._id = id;
+    this._bitmap = bitmap;
+    this._boxes = boxes;
+  }
 
-    get totalFrames(){
-        return this._boxes.length;
-    }
-    
-    get bitmap(){
-        return this._bitmap;
-    }
+  get totalFrames() {
+    return this._boxes.length;
+  }
 
-    get id(){
-        return this._id;
-    }
+  get bitmap() {
+    return this._bitmap;
+  }
 
-    set bitmap(bmap){
-        this._bitmap = bmap;
-    }
+  get id() {
+    return this._id;
+  }
 
-    append(rect){
-        this._boxes.push(rect);
-    }
+  set bitmap(bmap) {
+    this._bitmap = bmap;
+  }
 
-    getFrameBox(frameNo){
-        return this._boxes[frameNo];
-    }
-};
+  append(rect) {
+    this._boxes.push(rect);
+  }
+
+  getFrameBox(frameNo) {
+    return this._boxes[frameNo];
+  }
+}

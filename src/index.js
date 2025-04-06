@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-import './utils/initializationManager.js'
+import "./utils/initializationManager.js";
 
-import Engine from './Engine.js'
+import Engine from "./Engine.js";
 
-setTimeout(()=>{ 
-    Engine.SaveManager.setEngine(()=>{
-        Engine.start();
-    });
-    document.getElementById('loading-screen').remove();
-},1000);
+setTimeout(() => {
+  Engine.SaveManager.setEngine(() => {
+    Engine.start();
+  });
+  document.getElementById("loading-screen").remove();
+}, 1000);

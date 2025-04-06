@@ -1,222 +1,221 @@
 #mainInfoBox {
-    position: absolute;
-    right:0;
-    top: 60px;
-    z-index: 2;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  z-index: 2;
 }
 
 #mainInfoBox-cover {
+  background-color: var(--main-color);
+  color: var(--main-color-text);
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 250px;
+  height: 700px;
+}
+
+.mainInfoBox-body-title-text {
+  float: left;
+}
+
+.mainInfoBox-shard {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 2px solid var(--main-color-text);
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.mainInfoBox-shard-icon {
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin-left: 20px;
+  margin-right: 10px;
+  fill: var(--main-color-text);
+}
+
+.mainInfoBox-shard-title {
+  margin-left: 45px;
+  width: calc(100% - 45px);
+}
+
+.mainInfoBox-shard-text {
+  padding: 0;
+  border: 0;
+  width: 0;
+  transition: linear 0.3s;
+}
+
+.mainInfoBox-shard-close {
+  display: none;
+  width: 15px;
+  float: right;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: monospace;
+  color: red;
+}
+
+.mainInfoBox-shard-add {
+  float: right;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.mainInfoBox-shard-add2 {
+  display: none;
+  float: right;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: green;
+}
+
+.mainInfoBox-shard-main {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.mainInfoBox-body-states-main-wrap {
+  margin-top: 5px;
+}
+
+.mainInfoBox-body-attributes-main-wrap {
+  margin-top: 5px;
+}
+
+.mainInfoBox-body-events-main-wrap {
+  margin-top: 5px;
+}
+
+.mainInfoBox-body-flags-main-wrap {
+  margin-top: 5px;
+}
+
+.mainInfoBox-shard-main-text {
+  font-size: 14px;
+  line-height: 16px;
+  width: 60%;
+  overflow: hidden;
+}
+
+.mainInfoBox-shard-main-edit {
+  float: right;
+  fill: var(--main-color-text);
+  height: 15px;
+  width: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.mainInfoBox-shard-main-remove {
+  float: right;
+  fill: grey;
+  height: 15px;
+  width: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 5px;
+}
+
+.mainInfoBox-shard-input-text {
+  /* padding: 0; */
+  border: 0;
+  width: 60px;
+}
+
+.mainInfoBox-shard-input-dropdown {
+  /* padding: 0; */
+  border: 0;
+  height: 15px;
+  width: 48px;
+}
+
+#mainInfoBox-head-preview {
+  width: 30px;
+  height: 60px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: red;
+  float: left;
+}
+
+#mainInfoBox-head-name {
+  font-style: normal;
+  font-weight: normal;
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 20px;
+  width: 201px;
+  overflow: hidden;
+}
+
+#mainInfoBox-head-categ {
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: normal;
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+#mainInfoBox-head-id {
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: normal;
+  margin-left: 20px;
+  font-size: 18px;
+  line-height: 21px;
+  overflow: hidden;
+}
+
+#mainInfoBox-options {
+  position: absolute;
+  top: 0;
+  left: -25px;
+  width: 24px;
+  height: auto;
+  background-color: var(--main-color);
+  color: var(--main-color-text);
+  border-right: 1px solid var(--main-color-hover);
+}
+
+.mainInfoBox-options-item {
+  padding: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  fill: var(--main-color-text);
+}
+
+@media only screen and (max-height: 700px) {
+  #mainInfoBox {
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    z-index: 2;
+  }
+  #mainInfoBox-cover {
     background-color: var(--main-color);
     color: var(--main-color-text);
     overflow-x: hidden;
     overflow-y: auto;
     width: 250px;
-    height: 700px;
-}
-
-.mainInfoBox-body-title-text{
-    float:left;
-}
-
-.mainInfoBox-shard {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-bottom: 2px solid var(--main-color-text);
-    font-size: 14px;
-    line-height: 16px;
-}
-
-.mainInfoBox-shard-icon {
-    float: left;
-    width: 15px;
-    height: 15px;
-    margin-left: 20px;
-    margin-right: 10px;
-    fill: var(--main-color-text);
-}
-
-.mainInfoBox-shard-title {
-    margin-left: 45px;
-    width: calc(100% - 45px);
-}
-
-.mainInfoBox-shard-text {
-    padding: 0;
-    border: 0;
-    width: 0;
-    transition: linear 0.3s;
-}
-
-.mainInfoBox-shard-close {
-    display: none;
-    width: 15px;
-    float: right;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: monospace;
-    color: red;
-}
-
-.mainInfoBox-shard-add {
-    float: right;
-    font-size: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.mainInfoBox-shard-add2 {
-    display: none;
-    float: right;
-    font-size: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    color: green;
-}
-
-.mainInfoBox-shard-main {
-    margin-top: 10px;
-    margin-left: 20px;
-}
-
-
-.mainInfoBox-body-states-main-wrap {
-    margin-top: 5px;
-}
-
-.mainInfoBox-body-attributes-main-wrap {
-    margin-top: 5px;
-}
-
-.mainInfoBox-body-events-main-wrap {
-    margin-top: 5px;
-}
-
-.mainInfoBox-body-flags-main-wrap {
-    margin-top: 5px;
-}
-
-.mainInfoBox-shard-main-text {
-    font-size: 14px;
-    line-height: 16px;
-    width: 60%;
-    overflow: hidden;
-}
-
-.mainInfoBox-shard-main-edit {
-    float: right;
-    fill: var(--main-color-text);
-    height: 15px;
-    width: 15px;
-    padding-right: 5px;
-    padding-left: 5px;
-    margin-right: 5px;
-    cursor: pointer;
-}
-.mainInfoBox-shard-main-remove {
-    float: right;
-    fill: grey;
-    height: 15px;
-    width: 15px;
-    padding-right: 5px;
-    padding-left: 5px;
-    margin-right: 5px;
-}
-
-.mainInfoBox-shard-input-text {
-    /* padding: 0; */
-    border: 0;
-    width: 60px;
-}
-
-.mainInfoBox-shard-input-dropdown {
-    /* padding: 0; */
-    border: 0;
-    height: 15px;
-    width: 48px;
-}
-
-#mainInfoBox-head-preview {
-    width: 30px;
-    height: 60px;
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color: red;
-    float:left;
-}
-
-#mainInfoBox-head-name {
-    font-style: normal;
-    font-weight: normal;
-    margin-left: 20px;
-    font-size: 18px;
-    line-height: 20px;
-    width: 201px;
-    overflow: hidden;
-}
-
-#mainInfoBox-head-categ {
-    margin-top: 10px;
-    font-style: normal;
-    font-weight: normal;
-    margin-left: 20px;
-    font-size: 18px;
-    line-height: 21px;
-}
-
-#mainInfoBox-head-id {
-    margin-top: 10px;
-    font-style: normal;
-    font-weight: normal;
-    margin-left: 20px;
-    font-size: 18px;
-    line-height: 21px;
-    overflow: hidden;
-}
-
-#mainInfoBox-options {
+    height: calc(100vh - 30px);
+  }
+  #mainInfoBox-options {
     position: absolute;
     top: 0;
-    left: -25px;
-    width: 24px;
+    left: 250px;
+    width: 25px;
     height: auto;
     background-color: var(--main-color);
     color: var(--main-color-text);
     border-right: 1px solid var(--main-color-hover);
-}
-
-.mainInfoBox-options-item {
-    padding: 2px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    fill: var(--main-color-text);
-}
-
-@media only screen and (max-height: 700px) {
-    #mainInfoBox {
-        position: absolute;
-        right: 25px;
-        top: 30px;
-        z-index: 2;
-    }
-    #mainInfoBox-cover {
-        background-color: var(--main-color);
-        color: var(--main-color-text);
-        overflow-x: hidden;
-        overflow-y: auto;
-        width: 250px;
-        height: calc(100vh - 30px);
-    }
-    #mainInfoBox-options {
-        position: absolute;
-        top: 0;
-        left: 250px;
-        width: 25px;
-        height: auto;
-        background-color: var(--main-color);
-        color: var(--main-color-text);
-        border-right: 1px solid var(--main-color-hover);
-    }
+  }
 }

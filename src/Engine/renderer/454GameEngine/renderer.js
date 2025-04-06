@@ -1,30 +1,30 @@
-import Rect from './objects/Rectangle.js'
+import Rect from "./objects/Rectangle.js";
 
-import scene from './objects/Scene.js'
-import mouseEvents from './mouseEvents.js'
+import scene from "./objects/Scene.js";
+import mouseEvents from "./mouseEvents.js";
 
 class Object454Manager {
-    _constructors;
-    _mouseEvents;
+  _constructors;
+  _mouseEvents;
 
-    constructor(){
-        this._constructors = {
-            'Rectangle': Rect
-        }
-        this._mouseEvents = mouseEvents;
-    }
+  constructor() {
+    this._constructors = {
+      Rectangle: Rect,
+    };
+    this._mouseEvents = mouseEvents;
+  }
 
-    render(){
-        scene.renderObjects();
-    }
+  render() {
+    scene.renderObjects();
+  }
 
-    get constructors() {
-        return this._constructors;
-    }
+  get constructors() {
+    return this._constructors;
+  }
 
-    get mouseEvents() {
-        return this._mouseEvents;
-    }
+  get mouseEvents() {
+    return this._mouseEvents;
+  }
 }
 
 const object454Manager = new Object454Manager();

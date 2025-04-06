@@ -1,206 +1,205 @@
 #focusedObjText {
-    position: absolute;
-    top: 30px;
-    font-size: 24px;
-    color: white;
-    width: 50%;
-    left: 25%;
-    text-align: center;
-    overflow: hidden;
+  position: absolute;
+  top: 30px;
+  font-size: 24px;
+  color: white;
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  overflow: hidden;
 }
 
 #codingArea {
-    position: absolute;
-    top: 60px;
-    left: 0;
+  position: absolute;
+  top: 60px;
+  left: 0;
 }
 
 #fpsCounter {
-    position: absolute;
-    color:white;
-    top:30px;
-    right:20px;
+  position: absolute;
+  color: white;
+  top: 30px;
+  right: 20px;
 }
 
 #objMenuButton {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background-image: url(../../../assets/images/settings.png); /* hide.png from 'www.flaticon.com' from user Freepik */
-    background-position: center;
-    background-size: contain;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-image: url(../../../assets/images/settings.png); /* hide.png from 'www.flaticon.com' from user Freepik */
+  background-position: center;
+  background-size: contain;
 }
 
 #languageDiv {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 750px;
-    height: 500px;
-    top: 20px;
-    left: 150px;
-    overflow: hidden;
+  /* visibility: hidden; */
+  position: absolute;
+  width: 750px;
+  height: 500px;
+  top: 20px;
+  left: 150px;
+  overflow: hidden;
 }
 
 #infoBar {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 900px;
-    height: 20px;
-    background-color: var(--main-color);
-    color: var(--main-color-text);
-    border-bottom: 2px solid var(--main-color-text);
+  /* visibility: hidden; */
+  position: absolute;
+  width: 900px;
+  height: 20px;
+  background-color: var(--main-color);
+  color: var(--main-color-text);
+  border-bottom: 2px solid var(--main-color-text);
 }
 
 #eventsTab {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 150px;
-    height: 500px;
-    top: 20px;
-    background-color: var(--main-color);
-    color: var(--main-buttons-text-color);
-    overflow-x: hidden;
-    overflow-y: scroll;
+  /* visibility: hidden; */
+  position: absolute;
+  width: 150px;
+  height: 500px;
+  top: 20px;
+  background-color: var(--main-color);
+  color: var(--main-buttons-text-color);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .eventTab {
-    width: auto;
-    margin-top: 5px;
-    /* margin-left: 5px;
+  width: auto;
+  margin-top: 5px;
+  /* margin-left: 5px;
     margin-right: 5px; */
-    padding-left: 5px;
-    padding-right: 5px;
-    float: left;
-    cursor: pointer;
-    color: var(--main-buttons-text-color);
-    border-right: 2px solid darkgray;
-    border-radius: 5px;
-    background-color: var(--main-buttons-background-color);
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+  cursor: pointer;
+  color: var(--main-buttons-text-color);
+  border-right: 2px solid darkgray;
+  border-radius: 5px;
+  background-color: var(--main-buttons-background-color);
 }
 
 .tabSplitter {
-    width: 100%;
-    border-top: 2px solid white;
-    margin-top: 10px;
-    /* margin-left: 5px;
+  width: 100%;
+  border-top: 2px solid white;
+  margin-top: 10px;
+  /* margin-left: 5px;
     margin-right: 5px; */
-    padding-left: 5px;
-    padding-right: 5px;
-    float: left;
-    color: var(--main-color-text);
-    border-right: 2px solid darkgray;
-    border-radius: 5px;
-    cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+  color: var(--main-color-text);
+  border-right: 2px solid darkgray;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .eventTab:hover {
-    background-color: var(--main-buttons-background-color-hover);
+  background-color: var(--main-buttons-background-color-hover);
 }
 
 #openTab {
-    position: absolute;
-    color:black;
-    width: 350px;
-    overflow: hidden;
-    top: 30px;
-    left: 520px;
-    text-align: right;
-    font-size: 20px;
-    pointer-events: none;
+  position: absolute;
+  color: black;
+  width: 350px;
+  overflow: hidden;
+  top: 30px;
+  left: 520px;
+  text-align: right;
+  font-size: 20px;
+  pointer-events: none;
 }
 
 #playScriptButton {
-    opacity: 0 !important; 
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 120px;
-    left: 920px;
-    background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
-    background-position: center;
-    background-size: contain;
+  opacity: 0 !important;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 120px;
+  left: 920px;
+  background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
+  background-position: center;
+  background-size: contain;
 }
 
 #showScriptButton {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 70px;
-    left: 920px;
-    background-image: url(../../../assets/images/code.png); /* save.png from 'www.flaticon.com' from user FreePik */
-    background-position: center;
-    background-size: contain;
+  /* visibility: hidden; */
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 70px;
+  left: 920px;
+  background-image: url(../../../assets/images/code.png); /* save.png from 'www.flaticon.com' from user FreePik */
+  background-position: center;
+  background-size: contain;
 }
 
 #saveScriptButton {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 20px;
-    left: 920px;
-    background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
-    background-position: center;
-    background-size: contain;
+  /* visibility: hidden; */
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 20px;
+  left: 920px;
+  background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
+  background-position: center;
+  background-size: contain;
 }
 
 #hudToggle {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    bottom: 20px;
-    right: 20px;
-    background-image: url(../../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
-    background-position: center;
-    background-size: contain;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  bottom: 20px;
+  right: 20px;
+  background-image: url(../../../assets/images/hide.png); /* hide.png from 'www.flaticon.com' from user Pixel Perfect */
+  background-position: center;
+  background-size: contain;
 }
 
 .hudChild {
-    visibility: visible;
-    opacity: 0.9;
-    transition: visibility 0s, opacity 1s linear;
+  visibility: visible;
+  opacity: 0.9;
+  transition: visibility 0s, opacity 1s linear;
 }
 
 .button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
 @media only screen and (max-height: 700px) {
-    #codingArea {
-        top: 30px;
-    }
-    
-    #languageDiv {
-        height: calc(100vh - 50px);
-    }
+  #codingArea {
+    top: 30px;
+  }
+
+  #languageDiv {
+    height: calc(100vh - 50px);
+  }
 }
 
 @media screen and (max-width: 1250px) {
-    #openTab {
-        left: calc(100vw - 720px);
-    }
-    
-    #playScriptButton {
-        top: 130px;
-        left: calc(100vw - 330px);
-    }
-    
-    #showScriptButton {
-        top: 80px;
-        left: calc(100vw - 330px);
-    }
-    
-    #saveScriptButton {
-        top: 30px;
-        left: calc(100vw - 330px);
-    }
+  #openTab {
+    left: calc(100vw - 720px);
+  }
 
-    #eventsTab {
-        height: calc(100%-60px);
-    }
+  #playScriptButton {
+    top: 130px;
+    left: calc(100vw - 330px);
+  }
+
+  #showScriptButton {
+    top: 80px;
+    left: calc(100vw - 330px);
+  }
+
+  #saveScriptButton {
+    top: 30px;
+    left: calc(100vw - 330px);
+  }
+
+  #eventsTab {
+    height: calc(100%-60px);
+  }
 }

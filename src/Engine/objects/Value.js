@@ -1,108 +1,111 @@
-import log from '../../utils/logs.js'
+import log from "../../utils/logs.js";
 
-import Engine from '../../Engine.js'
+import Engine from "../../Engine.js";
 
-import bb from '../../utils/blackboard.js'
+import bb from "../../utils/blackboard.js";
 
 class Value {
-    val
-    tag
-    constructor({tag,value,onChange,getValue}){
-        this.tag = tag;
-        this.val = value;
-        this.onChange = onChange;
-        this.getValue = getValue;
-    }
+  val;
+  tag;
+  constructor({ tag, value, onChange, getValue }) {
+    this.tag = tag;
+    this.val = value;
+    this.onChange = onChange;
+    this.getValue = getValue;
+  }
 }
 
-export default class ValueManager{
-    _regValues = {}
+export default class ValueManager {
+  _regValues = {};
 
-    _parent;
+  _parent;
 
-    constructor(parent){
-        this._parent = parent;
+  constructor(parent) {
+    this._parent = parent;
+  }
+
+  getValues() {
+    return this._regValues;
+  }
+
+  registerValue(
+    val,
+    { tag = "user", value = "", onChange = { text: "", code: "" }, getValue }
+  ) {
+    this._regValues[val] = new Value({
+      tag: tag,
+      value: value,
+      onChange: onChange,
+      getValue: getValue,
+    });
+  }
+
+  setValue(val, v, extra) {
+    if (!this._regValues[val]) {
+      this.registerValue(val, { value: v });
+      return;
     }
+    const oldVal = this._regValues[val].val;
+    if (oldVal + "" === v + "") return;
+    const event = {
+      type: "setValue",
+      objectID: this._parent,
+      data: {
+        type: val,
+        value: v,
+        oldVal: oldVal,
+      },
+    };
+    if (extra?.explanation) event.data.explanation = extra.explanation;
+    this._regValues[val].val = v;
+    if (typeof this._regValues[val].onChange === "function")
+      this._regValues[val].onChange(v);
+    if (typeof this._regValues[val].onChange === "object")
+      Engine.ScriptingManager.executeCode(
+        this._regValues[val].onChange,
+        this._parent
+      );
 
-    getValues() {
-        return this._regValues;
-    }
+    // if(bb.fastGet('state','mode') !== 'paused'){
+    // }
+    bb.fastSet("events", "last", event);
+    bb.fastSet("events", "setValue_" + val, event);
+  }
 
-    registerValue(val, {tag = 'user',value = '',onChange = {text: "", code: ""},getValue}) {
-        this._regValues[val] = new Value({
-            tag: tag,
-            value: value,
-            onChange: onChange,
-            getValue: getValue
-        });
-    }
+  setValueCode(val, code) {
+    if (this._regValues[val]) this._regValues[val].onChange = code;
+  }
 
-    setValue(val, v, extra) {
-        if (!this._regValues[val]) {
-            this.registerValue(val, {value:v});
-            return;
-        }
-        const oldVal = this._regValues[val].val;
-        if(oldVal+'' === v+'')return;
-        const event = {
-            type: 'setValue',
-            objectID: this._parent,
-            data: {
-                type: val,
-                value: v,
-                oldVal: oldVal
-            }
-        };
-        if(extra?.explanation)event.data.explanation = extra.explanation;
-        this._regValues[val].val = v;
-        if (typeof this._regValues[val].onChange === 'function') 
-        this._regValues[val].onChange(v);
-        if (typeof this._regValues[val].onChange === 'object')
-        Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent);
-        
-        // if(bb.fastGet('state','mode') !== 'paused'){
-        // }
-        bb.fastSet('events', 'last', event);
-        bb.fastSet('events','setValue_'+val,event);
-    }
+  getValueCode(val) {
+    let value = this._regValues[val];
+    if (value) return value.onChange;
+    return { text: "", code: "" };
+  }
 
-    setValueCode(val, code) {
-        if(this._regValues[val])
-            this._regValues[val].onChange = code;
-    }
+  getValue(val) {
+    let value = this._regValues[val];
 
-    getValueCode(val) {
-        let value = this._regValues[val];
-        if(value)
-            return value.onChange;
-        return {text: "", code: ""}
+    if (!value) {
+      // log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
+      return;
     }
+    if (value.getValue) return value.getValue();
 
-    getValue(val) {
-        let value = this._regValues[val];
-        
-        if (!value) { 
-            // log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
-            return;
-        }
-        if (value.getValue) 
-            return value.getValue();
-        
-        return value.val;
-    }
+    return value.val;
+  }
 
-    removeValue(val){
-        let value = this._regValues[val];
-        if(!value){
-            log.logError('Tried to remove unregistered value '+val);
-            return;
-        }
-        delete this._regValues[val];
+  removeValue(val) {
+    let value = this._regValues[val];
+    if (!value) {
+      log.logError("Tried to remove unregistered value " + val);
+      return;
     }
+    delete this._regValues[val];
+  }
 
-    getValueTag(val){
-        let value = this._regValues[val];
-        if(!value) throw Error('Tried to get value tag from unregistered');
-        return value.tag;
-    }
+  getValueTag(val) {
+    let value = this._regValues[val];
+    if (!value) throw Error("Tried to get value tag from unregistered");
+    return value.tag;
+  }
 }

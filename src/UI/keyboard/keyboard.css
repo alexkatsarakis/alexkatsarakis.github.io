@@ -1,42 +1,42 @@
 #keyboard {
-    position: absolute;
-    right: 0;
-    top: 80%;
-    width: auto;
-    height: auto;
+  position: absolute;
+  right: 0;
+  top: 80%;
+  width: auto;
+  height: auto;
 }
 
 .keyboardRow {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .keyboardKey {
-    width:50px;
-    height: 30px;
-    color:var(--main-color-text);
-    float:left;
-    text-align: center;
-    border: 1px solid var(--main-color-text);
-    background-color: var(--main-color);
-    cursor: pointer;
+  width: 50px;
+  height: 30px;
+  color: var(--main-color-text);
+  float: left;
+  text-align: center;
+  border: 1px solid var(--main-color-text);
+  background-color: var(--main-color);
+  cursor: pointer;
 }
 
 .keyboardKey:hover {
-    background-color: var(--main-color-hover);
+  background-color: var(--main-color-hover);
 }
 
 .keyboardHalfSpace {
-    width:25px;
-    height: 30px;
-    float:left;
-    border: 1px solid var(--main-color-text);
-    background-color: darkgray;
+  width: 25px;
+  height: 30px;
+  float: left;
+  border: 1px solid var(--main-color-text);
+  background-color: darkgray;
 }
 .keyboardFullSpace {
-    width:50px;
-    height: 30px;
-    float:left;
-    border: 1px solid var(--main-color-text);
-    background-color: darkgray;
+  width: 50px;
+  height: 30px;
+  float: left;
+  border: 1px solid var(--main-color-text);
+  background-color: darkgray;
 }

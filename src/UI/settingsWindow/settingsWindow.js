@@ -1,230 +1,254 @@
-import bb from '../../utils/blackboard.js'
-import Engine from '../../Engine.js'
-import tr from '../../utils/translator.js'
-import uiFactory from '../../utils/UIFactory.js'
+import bb from "../../utils/blackboard.js";
+import Engine from "../../Engine.js";
+import tr from "../../utils/translator.js";
+import uiFactory from "../../utils/UIFactory.js";
 
 export default {
-    name:'settingsWindow',
-    link: './src/UI/settingsWindow/settingsWindow.ahtml',
-    cb:onSettingsWindowLoaded,
-    removable: true, 
-    loadOnInstall: true
+  name: "settingsWindow",
+  link: "./src/UI/settingsWindow/settingsWindow.ahtml",
+  cb: onSettingsWindowLoaded,
+  removable: true,
+  loadOnInstall: true,
 };
 
 let lastGameState;
 
-function closeSettingsWindow(){
-    bb.fastGet('UI','hideUI')('settingsWindow');
-    bb.fastGet('UI','removeUI')('settingsWindow');
-    
-    if(lastGameState){
-        bb.fastSet('state','mode',lastGameState);
-    }
+function closeSettingsWindow() {
+  bb.fastGet("UI", "hideUI")("settingsWindow");
+  bb.fastGet("UI", "removeUI")("settingsWindow");
+
+  if (lastGameState) {
+    bb.fastSet("state", "mode", lastGameState);
+  }
 }
 
 const computedStyle = getComputedStyle(document.documentElement);
 
 const settings = {
-    Colors: {
-        mainColor: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--main-color', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--main-color').substring(1),
-            name: 'Main color',
-            inputType:'color'
-        },
-        mainColorHover: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--main-color-hover', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--main-color-hover').substring(1),
-            name: 'Main color (hover)',
-            inputType:'color'
-        },
-        mainColorText: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--main-color-text', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--main-color-text').substring(1),
-            name: 'Main color (text)',
-            inputType:'color'
-        },
-        secondaryColor: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--secondary-color', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--secondary-color').substring(1),
-            name: 'Secondary color',
-            inputType:'color'
-        },
-        secondaryColorHover: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--secondary-color-hover', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--secondary-color-hover').substring(1),
-            name: 'Secondary color (hover)',
-            inputType:'color'
-        },
-        secondaryColorText: {
-            onChange: (ev)=>{
-                document.documentElement.style.setProperty('--secondary-color-text', ev.target.value);
-            },
-            initValue: computedStyle.getPropertyValue('--secondary-color-text').substring(1),
-            name: 'Secondary color (text)',
-            inputType:'color'
-        }
+  Colors: {
+    mainColor: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--main-color",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle.getPropertyValue("--main-color").substring(1),
+      name: "Main color",
+      inputType: "color",
     },
-    AddOns: {
-        
+    mainColorHover: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--main-color-hover",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle
+        .getPropertyValue("--main-color-hover")
+        .substring(1),
+      name: "Main color (hover)",
+      inputType: "color",
     },
-    KeyBinds: {
+    mainColorText: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--main-color-text",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle
+        .getPropertyValue("--main-color-text")
+        .substring(1),
+      name: "Main color (text)",
+      inputType: "color",
     },
-    Options: {
-        language: {
-            onChange: (ev)=>{
-                const successful = tr.setCurrentLanguage(ev.target.value);
-                if(successful)bb.fastGet('UI','reloadUI')();
-            },
-            initValue: '',
-            name: 'System Language',
-            inputType:'text'
-        }
-    }
+    secondaryColor: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--secondary-color",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle
+        .getPropertyValue("--secondary-color")
+        .substring(1),
+      name: "Secondary color",
+      inputType: "color",
+    },
+    secondaryColorHover: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--secondary-color-hover",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle
+        .getPropertyValue("--secondary-color-hover")
+        .substring(1),
+      name: "Secondary color (hover)",
+      inputType: "color",
+    },
+    secondaryColorText: {
+      onChange: (ev) => {
+        document.documentElement.style.setProperty(
+          "--secondary-color-text",
+          ev.target.value
+        );
+      },
+      initValue: computedStyle
+        .getPropertyValue("--secondary-color-text")
+        .substring(1),
+      name: "Secondary color (text)",
+      inputType: "color",
+    },
+  },
+  AddOns: {},
+  KeyBinds: {},
+  Options: {
+    language: {
+      onChange: (ev) => {
+        const successful = tr.setCurrentLanguage(ev.target.value);
+        if (successful) bb.fastGet("UI", "reloadUI")();
+      },
+      initValue: "",
+      name: "System Language",
+      inputType: "text",
+    },
+  },
+};
+
+function fillSettings() {
+  const set = bb.getComponent("settings").itemMap;
+  for (let i in set) {
+    settings.Options[i] = {
+      onChange: (ev) => {
+        bb.fastSet("settings", i, ev.target.checked);
+      },
+      initValue: set[i],
+      name: i,
+      inputType: "checkbox",
+    };
+  }
 }
 
-function fillSettings(){
-    const set = bb.getComponent('settings').itemMap;
-    for(let i in set){
-        settings.Options[i] = {
-            onChange: (ev)=>{
-                bb.fastSet('settings', i, ev.target.checked);
-            },
-            initValue: set[i],
-            name: i,
-            inputType:'checkbox'
-        }
+function fillUIsSettings() {
+  const UIs = bb.fastGet("UI", "getUIs")();
 
-    }
+  const loaded = bb.fastGet("UI", "getLoadedUIs")();
+
+  UIs.forEach((item) => {
+    if (item === "settingsWindow") return;
+    settings.AddOns[item] = {
+      onChange: (ev) => {
+        bb.fastGet("UI", ev.target.checked ? "loadUI" : "hideUI")(item);
+      },
+      initValue: loaded.indexOf(item) !== -1,
+      name: item,
+      inputType: "checkbox",
+    };
+  });
 }
 
-function fillUIsSettings(){
-    const UIs = bb.fastGet('UI','getUIs')();
+function fillKeyBindsSettings() {
+  const actions = bb.getComponent("actions").itemMap;
+  const filtered = [];
+  for (let i in actions) {
+    if (actions[i].length === 0) filtered.push(i);
+  }
 
-    const loaded = bb.fastGet('UI','getLoadedUIs')();
+  filtered.forEach((combo) => {
+    const inps = Engine.InputManager.getCombo(combo);
+    settings.KeyBinds[combo] = {
+      onChange: (ev) => {
+        Engine.InputManager.setCombo(combo, ev.target.value.split(","));
+      },
+      initValue: inps?.join(",") || "",
+      name: combo,
+      inputType: "text",
+    };
+  });
+}
 
-    UIs.forEach((item)=>{
-        if(item === 'settingsWindow')return;
-        settings.AddOns[item] = {
-            onChange: (ev)=>{
-                bb.fastGet('UI',(ev.target.checked)?'loadUI':'hideUI')(item);
-            },
-            initValue: (loaded.indexOf(item) !== -1),
-            name: item,
-            inputType:'checkbox'
-        }
+function showCategorySettings(wrapper, catItems) {
+  for (let item in catItems) {
+    const setting = catItems[item];
+
+    const itemWrapper = uiFactory.createElement({
+      parent: wrapper,
+      classList: "settings-window-category-item-wrap",
     });
+
+    uiFactory.createElement({
+      parent: itemWrapper,
+      classList: "settings-window-category-item-name",
+      innerHTML: tr.get(setting.name),
+    });
+
+    const itemInput = uiFactory.createElement({
+      parent: itemWrapper,
+      classList: "settings-window-category-item-input",
+      type: "input",
+      onChange: settings.onChange,
+    });
+    itemInput.type = setting.inputType;
+    if (setting.inputType === "checkbox") {
+      itemInput.checked = setting.initValue;
+    }
+    itemInput.value = setting.initValue;
+    itemInput.onchange = setting.onChange;
+
+    uiFactory.createElement({
+      parent: itemWrapper,
+      classList: "settings-window-category-item-description",
+      innerHTML: tr.get(setting.description || "No description provided"),
+    });
+  }
 }
 
-function fillKeyBindsSettings(){
-    
-    const actions = bb.getComponent('actions').itemMap;
-    const filtered = [];
-    for(let i in actions){
-        if(actions[i].length === 0)filtered.push(i);
-    }
+function onSettingsWindowLoaded() {
+  document
+    .getElementById("settings-window-background")
+    .addEventListener("click", closeSettingsWindow);
 
-    filtered.forEach((combo)=>{
-        const inps = Engine.InputManager.getCombo(combo);
-        settings.KeyBinds[combo] = {
-            onChange: (ev)=>{
-                Engine.InputManager.setCombo(combo,ev.target.value.split(','));
-            },
-            initValue: inps?.join(',') || '',
-            name: combo,
-            inputType:'text'
-        }
-    })
-}
+  lastGameState = bb.fastGet("state", "mode");
+  bb.fastSet("state", "mode", "popUpOpen");
 
-function showCategorySettings(wrapper,catItems){
+  const catWindow = document.getElementById("settings-window-categories-list");
+  const panel = document.getElementById("settings-window-settings-panel");
+  fillSettings();
+  fillUIsSettings();
+  fillKeyBindsSettings();
 
-    for(let item in catItems){   
-        const setting = catItems[item];
+  for (let cat in settings) {
+    const catItems = settings[cat];
 
-        const itemWrapper = uiFactory.createElement({
-            parent: wrapper,
-            classList: 'settings-window-category-item-wrap'
-        });
-        
-        uiFactory.createElement({
-            parent: itemWrapper,
-            classList: 'settings-window-category-item-name',
-            innerHTML: tr.get(setting.name)
-        });
+    const catBut = uiFactory.createElement({
+      parent: catWindow,
+      classList: "settings-window-category",
+      innerHTML: tr.get(cat),
+    });
 
-        const itemInput = uiFactory.createElement({
-            parent: itemWrapper,
-            classList: 'settings-window-category-item-input',
-            type: 'input',
-            onChange: settings.onChange
-        });
-        itemInput.type = setting.inputType;
-        if(setting.inputType === 'checkbox'){
-            itemInput.checked = setting.initValue;
-        }
-        itemInput.value = setting.initValue;
-        itemInput.onchange = setting.onChange;
+    const catPanel = uiFactory.createElement({
+      parent: panel,
+      classList: "settings-window-category-panel",
+      id: "settings-window-category-panel-" + cat,
+      innerHTML: tr.get(cat),
+    });
 
-        uiFactory.createElement({
-            parent: itemWrapper,
-            classList: 'settings-window-category-item-description',
-            innerHTML: tr.get(setting.description || 'No description provided')
-        });
-    }
-}
+    catBut.onclick = () => {
+      panel.scrollTo({
+        top: catPanel.offsetTop,
+        left: 0,
+        behavior: "smooth",
+      });
+    };
 
-function onSettingsWindowLoaded(){
-    document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
+    showCategorySettings(panel, catItems);
 
-    lastGameState = bb.fastGet('state','mode');
-    bb.fastSet('state','mode','popUpOpen');
-
-    const catWindow = document.getElementById('settings-window-categories-list');
-    const panel = document.getElementById('settings-window-settings-panel');
-    fillSettings();
-    fillUIsSettings();
-    fillKeyBindsSettings();
-
-    for(let cat in settings){
-        const catItems = settings[cat];
-
-        const catBut = uiFactory.createElement({
-            parent: catWindow,
-            classList: 'settings-window-category',
-            innerHTML: tr.get(cat)
-        });
-
-        const catPanel = uiFactory.createElement({
-            parent: panel,
-            classList: 'settings-window-category-panel',
-            id: 'settings-window-category-panel-'+cat,
-            innerHTML: tr.get(cat)
-        });
-
-        catBut.onclick = () => {
-            panel.scrollTo({
-                top: catPanel.offsetTop,
-                left:0,
-                behavior: 'smooth'
-            });
-        };
-
-        showCategorySettings(panel,catItems);
-
-        uiFactory.createElement({
-            parent: panel,
-            classList: 'settings-window-category-splitter'
-        });
-    }
+    uiFactory.createElement({
+      parent: panel,
+      classList: "settings-window-category-splitter",
+    });
+  }
 }

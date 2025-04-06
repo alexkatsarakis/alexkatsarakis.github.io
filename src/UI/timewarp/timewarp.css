@@ -1,216 +1,215 @@
 #timewarp-wrapper {
-    position: absolute;
-    /* display: flex; */
-    bottom: 0;
-    right: 150px;
-    width: 300px;
-    height: auto;
-    background-color: var(--main-color);
+  position: absolute;
+  /* display: flex; */
+  bottom: 0;
+  right: 150px;
+  width: 300px;
+  height: auto;
+  background-color: var(--main-color);
 }
 
 .timewarp-record-prompt {
-    float: left; 
-    color: var(--main-color-text);
-    line-height: 25px;
-    height: 25px;
+  float: left;
+  color: var(--main-color-text);
+  line-height: 25px;
+  height: 25px;
 }
 
 #timewarp-record {
-    background-color: red;
-    width: 15px;
-    height: 15px;
-    margin: 5px;
-    border-radius: 50px;
-    float: left;
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border-radius: 50px;
+  float: left;
 }
 #timewarp-record2 {
-    background-color: red;
-    width: 15px;
-    height: 15px;
-    margin: 5px;
-    border-radius: 50px;
-    float: left;
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border-radius: 50px;
+  float: left;
 }
 
 #timewarp-showRecords {
-    width: calc(100% - 30px);
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 5px;    
-    -webkit-appearance: none;
-    background: var(--canvas-default-bg-color);
-    outline: none;
-    transition: opacity .2s;
+  width: calc(100% - 30px);
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  -webkit-appearance: none;
+  background: var(--canvas-default-bg-color);
+  outline: none;
+  transition: opacity 0.2s;
 }
 
 #timewarp-showRecords::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--secondary-color);
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--secondary-color);
+  cursor: pointer;
 }
 
 #timewarp-showRecords::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--secondary-color);
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: var(--secondary-color);
+  cursor: pointer;
 }
 
 #timewarp-showBackward {
-    background-color: var(--main-color);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../../../assets/images/dropdown_toggle_double.png);
-    transform: rotate(90deg);
+  background-color: var(--main-color);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../../assets/images/dropdown_toggle_double.png);
+  transform: rotate(90deg);
 }
 
 #timewarp-showBackwardSingle {
-    background-color: var(--main-color);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../../../assets/images/dropdown_toggle.png);
-    transform: rotate(90deg);
+  background-color: var(--main-color);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../../assets/images/dropdown_toggle.png);
+  transform: rotate(90deg);
 }
 
 #timewarp-showForward {
-    background-color: var(--main-color);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../../../assets/images/dropdown_toggle_double.png);
-    transform: rotate(-90deg);
+  background-color: var(--main-color);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../../assets/images/dropdown_toggle_double.png);
+  transform: rotate(-90deg);
 }
 
 #timewarp-showForwardSingle {
-    background-color: var(--main-color);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../../../assets/images/dropdown_toggle.png);
-    transform: rotate(-90deg);
+  background-color: var(--main-color);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../../assets/images/dropdown_toggle.png);
+  transform: rotate(-90deg);
 }
 
 .timewarp-showManipulation {
-    float: left;
+  float: left;
 }
 
 .timewarp-button {
-    height: 25px;
-    width: 25px;
-    margin-right: 5px;
-    margin-left: 5px;
-    background-color: black;
-    cursor: pointer;
+  height: 25px;
+  width: 25px;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color: black;
+  cursor: pointer;
 }
 
-
 .timewarp-text {
-    height: 25px;
-    line-height: 25px;
-    text-align: center;
-    margin-right: 5px;
-    margin-left: 5px;
-    color: var(--main-color-text);
-    cursor: pointer;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  color: var(--main-color-text);
+  cursor: pointer;
 }
 
 .timewarp-text-simple {
-    height: 25px;
-    line-height: 25px;
-    text-align: center;
-    color: var(--main-color-text);
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: var(--main-color-text);
 }
 
 #timewarp-playbackControl {
-    width: 100%;
-    height: 25px;
-    margin-top: 15px;
+  width: 100%;
+  height: 25px;
+  margin-top: 15px;
 }
 
 #timewarp-inputWrapper {
-    width: calc(100% - 20px);
-    height: 25px;
-    margin: 20px;
+  width: calc(100% - 20px);
+  height: 25px;
+  margin: 20px;
 }
 
 #timewarp-infoWrapper {
-    width: calc(100% - 20px);
-    margin: 20px;
-    /* margin-top: 15px;
+  width: calc(100% - 20px);
+  margin: 20px;
+  /* margin-top: 15px;
     margin-bottom: 15px; */
 }
 
 #timewarp-rerecord {
-    width: auto;
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 5px;
-    color: var(--main-color);
-    border-radius: 20px;
-    background-color: var(--secondary-color);
-    cursor: pointer;
-    float: left;
+  width: auto;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  color: var(--main-color);
+  border-radius: 20px;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  float: left;
 }
 
 #timewarp-timelines-wrapper-label {
-    color: var(--main-color-text);
-    margin-left: 20px;
+  color: var(--main-color-text);
+  margin-left: 20px;
 }
 
 #timewarp-timelines-wrapper {
-    width: 40px;
-    color: var(--main-color);
+  width: 40px;
+  color: var(--main-color);
 }
 
 #timewarp-pause {
-    fill: var(--main-color-text);
+  fill: var(--main-color-text);
 }
 
 #timewarp-current-recording {
-    color: var(--main-color-text);
-    margin-left: 20px;
-    text-align: left;
+  color: var(--main-color-text);
+  margin-left: 20px;
+  text-align: left;
 }
 
 #timewarp-resume {
-    fill: var(--main-color-text);
+  fill: var(--main-color-text);
 }
 
 #timewarp-object-history {
-    position: absolute;
-    bottom: 0;
-    right: 305px;
-    width: 300px;
-    height: 300px;
-    overflow: auto;
-    background-color: var(--main-color);
+  position: absolute;
+  bottom: 0;
+  right: 305px;
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+  background-color: var(--main-color);
 }
 
 #timewarp-object-history-head {
-    color: var(--main-color-text);
-    width: 100%;
-    text-align: center;
-    font-size: large;
-    border-bottom: 2px solid var(--main-color-text);
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+  color: var(--main-color-text);
+  width: 100%;
+  text-align: center;
+  font-size: large;
+  border-bottom: 2px solid var(--main-color-text);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .timewarp-object-history-item {
-    color: var(--main-color-text);
-    padding: 5px;
-    width: calc(100% - 10px);
-    cursor: pointer;
-    border-bottom: 1s solid var(--main-color-text);
+  color: var(--main-color-text);
+  padding: 5px;
+  width: calc(100% - 10px);
+  cursor: pointer;
+  border-bottom: 1s solid var(--main-color-text);
 }
 
 .timewarp-object-history-item:hover {
-    background-color: var(--main-color-hover);
+  background-color: var(--main-color-hover);
 }

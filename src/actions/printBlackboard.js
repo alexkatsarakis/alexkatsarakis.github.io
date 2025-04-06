@@ -1,3 +1,5 @@
-import bb from '../utils/blackboard.js'
+import bb from "../utils/blackboard.js";
 
-bb.fastInstall('actions',"printBlackboard",()=>{bb.print()});
+bb.fastInstall("actions", "printBlackboard", () => {
+  bb.print();
+});

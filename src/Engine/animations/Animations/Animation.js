@@ -1,15 +1,15 @@
 export default class Animation {
-    _id;
+  _id;
 
-    constructor(id){
-        this._id = id;
-    }
+  constructor(id) {
+    this._id = id;
+  }
 
-    get id(){
-        return this._id;
-    }
+  get id() {
+    return this._id;
+  }
 
-    set id(newId){
-        this._id = newId;
-    }
+  set id(newId) {
+    this._id = newId;
+  }
 }
